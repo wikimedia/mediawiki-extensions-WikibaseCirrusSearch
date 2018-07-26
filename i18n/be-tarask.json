@@ -1,0 +1,22 @@
+{
+    "@metadata": {
+        "authors": [
+            "Renessaince",
+            "Wizardist",
+            "Red Winged Duck",
+            "Macofe",
+            "Kareyac",
+            "Ladsgroup"
+        ]
+    },
+    "wikibase-rescore-profile-prefix": "Профіль rescore па змоўчаньні для запаўняльнага пошуку",
+    "wikibase-rescore-profile-prefix-boost": "Профіль rescore для запаўняльнага пошуку з падтрымкай сьцьверджаньняў",
+    "wikibase-rescore-profile-fulltext": "Профіль rescore па змоўчаньні для паўнатэкставага пошуку",
+    "wikibase-rescore-profile-fulltext-phrase": "Профіль rescore для паўнатэкставага пошуку з ацэнкай фразаў",
+    "wikibase-search-bad-entity-type": "Кепскі тып элемэнту: $1",
+    "wikibase-search-bad-profile-name": "Кепская назва профілю пошуку: $1",
+    "wikibase-search-namespace-mix": "Адначасовае выкарыстаньне прастораў назваў элемэнтаў і артыкулаў у цяперашні час не падтрымліваецца. Пошук будзе адбывацца толькі ў прасторы назваў элемэнтаў.",
+    "wikibase-search-config-notfound": "Канфігурацыя паўнатэкставага пошуку ня знойдзеная: $1",
+    "wikibase-search-config-badclass": "Кепская кляса пабудовы запыту: $1",
+    "wikibase-haswbstatement-feature-no-valid-statements": "ключавое слова haswbstatement ня ўтрымлівае слушных сьцьверджаньняў"
+}

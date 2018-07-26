@@ -1,0 +1,52 @@
+{
+	"name": "WikibaseCirrusSearch",
+	"version": "0.1.0",
+	"author": [
+		"The Wikidata team",
+		"Stas Malyshev"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:WikibaseCirrusSearch",
+	"descriptionmsg": "wikibasecirrus-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "wikibase",
+	"requires": {
+		"MediaWiki": ">= 1.33.0"
+	},
+	"AutoloadNamespaces": {
+		"Wikibase\\Search\\Elastic\\": "src/",
+		"Wikibase\\Search\\Elastic\\Tests\\": "tests/phpunit/"
+	},
+	"config": {
+		"WikibaseCirrusSearchEnable": {
+			"value": false,
+			"description": "Whether the search functionality in this extrnsion is enabled",
+			"public": false
+		}
+	},
+	"Hooks": {
+		"SetupAfterCache": [
+			"Wikibase\\Search\\Elastic\\Hooks::onSetupAfterCache"
+		],
+		"CirrusSearchAnalysisConfig": [
+			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchAnalysisConfig"
+		],
+		"CirrusSearchProfileService": [
+			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchProfileService"
+		],
+		"CirrusSearchFulltextQueryBuilderComplete": [
+			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchFulltextQueryBuilderComplete"
+		],
+		"CirrusSearchAddQueryFeatures": [
+			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchAddQueryFeatures"
+		],
+		"WikibaseRepoEntityTypes": [
+			"Wikibase\\Search\\Elastic\\Hooks::onWikibaseRepoEntityTypes"
+		]
+	},
+	"MessagesDirs": {
+		"WikibaseCirrusSearch": [
+			"i18n"
+		]
+	},
+	"manifest_version": 2
+}

@@ -1,0 +1,32 @@
+{
+    "@metadata": {
+        "authors": [
+            "Hamilton Abreu",
+            "Helder.wiki",
+            "Imperadeiro98",
+            "Malafaya",
+            "MisterSanderson",
+            "Ntunzine",
+            "SandroHc",
+            "Sarilho1",
+            "Vitorvicentevalente",
+            "Vivaelcelta",
+            "He7d3r",
+            "Macofe",
+            "Imperadeiro90",
+            "Jkb8",
+            "Fúlvio",
+            "Athena in Wonderland"
+        ]
+    },
+    "wikibase-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
+    "wikibase-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
+    "wikibase-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",
+    "wikibase-rescore-profile-fulltext-phrase": "Perfil de reavaliação para pesquisa completa de texto com avaliação de frases",
+    "wikibase-search-bad-entity-type": "Tipo de entidade inválido: $1",
+    "wikibase-search-bad-profile-name": "Nome de perfil de pesquisa inválido: $1",
+    "wikibase-search-namespace-mix": "Neste momento a pesquisa não suporta a mistura dos espaços nominais de entidades e de artigos. Só serão pesquisados os espaços nominais de entidades.",
+    "wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
+    "wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
+    "wikibase-haswbstatement-feature-no-valid-statements": "A palavra-chave haswbstatement não contém nenhuma declaração válida"
+}

@@ -1,0 +1,36 @@
+{
+    "@metadata": {
+        "authors": [
+            "Cainamarques",
+            "Helder.wiki",
+            "Jaideraf",
+            "MisterSanderson",
+            "Vivaelcelta",
+            "555",
+            "Jefersonmoraes",
+            "He7d3r",
+            "Luckas",
+            "Mordecool",
+            "Fasouzafreitas",
+            "Macofe",
+            "TheEduGobi",
+            "Almondega",
+            "Peter Fernando",
+            "Hamilton Abreu",
+            "Felipe L. Ewald",
+            "Ladsgroup",
+            "Eduardo Addad de Oliveira",
+            "Trigonometria87"
+        ]
+    },
+    "wikibase-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
+    "wikibase-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
+    "wikibase-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",
+    "wikibase-rescore-profile-fulltext-phrase": "Perfil Rescore para pesquisa de texto completo com pontuação de frase",
+    "wikibase-search-bad-entity-type": "Tipo da entidade incorreto: $1",
+    "wikibase-search-bad-profile-name": "Nome do perfil de pesquisa ruim: $1",
+    "wikibase-search-namespace-mix": "No momento, não há suporte para a mistura de namespaces de entidades e artigos na pesquisa. Apenas namespaces de entidade serão pesquisados.",
+    "wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
+    "wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
+    "wikibase-haswbstatement-feature-no-valid-statements": "A senha haswbstatement não contém nenhuma declaração válida"
+}

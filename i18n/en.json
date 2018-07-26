@@ -1,0 +1,27 @@
+{
+    "@metadata": {
+        "authors": [
+            "Daniel Kinzler",
+            "Tobias Gritschacher",
+            "John Erling Blad",
+            "Jens Ohlig",
+            "Anja Jentzsch",
+            "Daniel Werner",
+            "Micha\u0142 \u0141azowik",
+            "Addshore",
+            "Bene*",
+            "Lucie-Aim\u00e9e Kaffee"
+        ]
+    },
+    "wikibasecirrus-desc": "Wikibase extension for using CirrusSearch functionality",
+    "wikibase-rescore-profile-prefix": "Default rescore profile for completion search",
+    "wikibase-rescore-profile-prefix-boost": "Rescore profile for completion search with statement boosting",
+    "wikibase-rescore-profile-fulltext": "Default rescore profile for fulltext search",
+    "wikibase-rescore-profile-fulltext-phrase": "Rescore profile for fulltext search with phrase scoring",
+    "wikibase-search-bad-entity-type": "Bad entity type: $1",
+    "wikibase-search-bad-profile-name": "Bad search profile name: $1",
+    "wikibase-search-namespace-mix": "Mixing entity and article namespaces in search is currently not supported. Only entity namespaces will be searched.",
+    "wikibase-search-config-notfound": "Fulltext search configuration not found: $1",
+    "wikibase-search-config-badclass": "Bad query builder class: $1",
+    "wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement keyword contains no valid statements"
+}

@@ -1,0 +1,42 @@
+{
+    "@metadata": {
+        "authors": [
+            "Byfserag",
+            "Dimension",
+            "Hydra",
+            "Hzy980512",
+            "Li3939108",
+            "Linforest",
+            "Liuxinyu970226",
+            "Qiyue2001",
+            "Shirayuki",
+            "Shizhao",
+            "Stevenliuyi",
+            "TianyinLee",
+            "Xiaomingyan",
+            "Yfdyh000",
+            "Zhuyifei1999",
+            "Zolo",
+            "乌拉跨氪",
+            "Hudafu",
+            "Mywood",
+            "Impersonator 1",
+            "NigelSoft",
+            "王庭茂",
+            "Duolaimi",
+            "凡人丶",
+            "Wxyveronica",
+            "Hanyanbo98",
+            "夢蝶葬花",
+            "A Chinese Wikipedian"
+        ]
+    },
+    "wikibase-rescore-profile-prefix": "默认用于完成搜索的重新计分详情",
+    "wikibase-rescore-profile-prefix-boost": "语句增强的完成搜索重评分配置文件",
+    "wikibase-rescore-profile-fulltext": "默认用于全文搜索的重新计分详情",
+    "wikibase-rescore-profile-fulltext-phrase": "短语评分全文检索的Rescore简介",
+    "wikibase-search-bad-entity-type": "错误实体类型：$1",
+    "wikibase-search-bad-profile-name": "错误搜索配置名称：$1",
+    "wikibase-search-namespace-mix": "目前不支持搜索混合实体和条目的名字空间。将只会搜索实体名字空间。",
+    "wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement 关键字不包含有效语句"
+}

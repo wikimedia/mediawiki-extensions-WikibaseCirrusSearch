@@ -1,0 +1,28 @@
+{
+    "@metadata": {
+        "authors": [
+            "AS",
+            "Aced",
+            "Ahonc",
+            "Andriykopanytsia",
+            "Base",
+            "Shirayuki",
+            "Sodmy",
+            "Steve.rusyn",
+            "SteveR",
+            "Zolo",
+            "Ата",
+            "Ypryima",
+            "Piramidion",
+            "Капитан Джон Шепард",
+            "Максим Підліснюк",
+            "Alex Blokha",
+            "Dars",
+            "Macofe",
+            "Ladsgroup",
+            "Movses"
+        ]
+    },
+    "wikibase-search-bad-entity-type": "Хибний тип сутності: $1",
+    "wikibase-search-bad-profile-name": "Хибна назва пошукового профілю: $1"
+}

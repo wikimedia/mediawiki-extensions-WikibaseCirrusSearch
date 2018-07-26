@@ -1,0 +1,43 @@
+{
+    "@metadata": {
+        "authors": [
+            "Asaifm",
+            "Aude",
+            "Calak",
+            "Gagnabil",
+            "Kaganer",
+            "Majid KSA",
+            "Meno25",
+            "OsamaK",
+            "Tarawneh",
+            "زكريا",
+            "محمد أحمد عبد الفتاح",
+            "أحمد المحمودي",
+            "Abanima",
+            "Sonic N800",
+            "Bibas",
+            "Yahya Sakhnini",
+            "Mervat Salman",
+            "Shbib Al-Subaie",
+            "Maroen1990",
+            "بدارين",
+            "Moud hosny",
+            "Mr. Ibrahem",
+            "BAB ZAA",
+            "Mido",
+            "Ladsgroup",
+            "أحمد",
+            "ديفيد"
+        ]
+    },
+    "wikibase-rescore-profile-prefix": "ملف التعريف الافتراضي للبحث عن الإكمال",
+    "wikibase-rescore-profile-prefix-boost": "الملف الشخصي للبحث عن الانتهاء مع زيادة البيان",
+    "wikibase-rescore-profile-fulltext": "ملف التعريف الافتراضي للبحث في النص الكامل",
+    "wikibase-rescore-profile-fulltext-phrase": "ملف النتيجة للبحث عن النص الكامل مع نتيجة العبارات",
+    "wikibase-search-bad-entity-type": "نوع كيان غير صالح: $1",
+    "wikibase-search-bad-profile-name": "اسم بحث غير صالح: $1",
+    "wikibase-search-namespace-mix": "لا يتم حاليا دعم كيان خلط الكيان والمادة في البحث، سيتم البحث عن نطاقات الكيانات فقط.",
+    "wikibase-search-config-notfound": "لم يتم العثور على تكوين بحث النص الكامل: $1",
+    "wikibase-search-config-badclass": "فئة باني الاستعلام سيئة: $1",
+    "wikibase-haswbstatement-feature-no-valid-statements": "الكلمة الأساسية haswbstatement لا تحتوي على بيانات صالحة"
+}

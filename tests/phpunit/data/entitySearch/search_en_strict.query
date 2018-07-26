@@ -1,0 +1,8 @@
+{
+	"search": "Duck",
+	"language": "en",
+	"userLang": "en",
+	"type": "item",
+	"limit": 15,
+	"strictlanguage": true
+}

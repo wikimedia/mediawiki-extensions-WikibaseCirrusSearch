@@ -2,6 +2,7 @@
 namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
+use Config;
 
 /**
  * Utility class to build analyzer configs for ElasticSearch
@@ -17,16 +18,16 @@ class ConfigBuilder {
 	 */
 	private $languageList;
 	/**
-	 * @var array
+	 * @var Config
 	 */
 	private $searchSettings;
 
 	/**
 	 * @param string[] $languageList
-	 * @param array $searchSettings
+	 * @param Config $searchSettings
 	 * @param AnalysisConfigBuilder $builder
 	 */
-	public function __construct( array $languageList, array $searchSettings, AnalysisConfigBuilder $builder ) {
+	public function __construct( array $languageList, Config $searchSettings, AnalysisConfigBuilder $builder ) {
 		$this->builder = $builder;
 		$this->languageList = $languageList;
 		$this->searchSettings = $searchSettings;
@@ -39,9 +40,13 @@ class ConfigBuilder {
 	 * @param array[] &$config Existing config which will be modified with new analyzers
 	 */
 	public function buildConfig( array &$config ) {
-		$stemmedLanguages = array_filter( $this->languageList, function ( $lang ) {
-			return !empty( $this->searchSettings['useStemming'][$lang]['index'] );
-		} );
+		$stemmingSettings = $this->searchSettings->get( 'UseStemming' );
+
+		$stemmedLanguages = array_filter( $this->languageList,
+			function ( $lang ) use ( $stemmingSettings ) {
+				return !empty( $stemmingSettings[$lang]['index'] );
+			}
+		);
 		$nonStemmedLanguages = array_diff( $this->languageList, $stemmedLanguages );
 		$this->builder->buildLanguageConfigs( $config, $stemmedLanguages,
 			[ 'plain', 'plain_search', 'text', 'text_search' ] );

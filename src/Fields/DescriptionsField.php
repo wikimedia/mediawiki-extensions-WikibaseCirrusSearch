@@ -28,16 +28,16 @@ class DescriptionsField extends TermIndexField {
 	/**
 	 * @var array
 	 */
-	private $searchSettings;
+	private $stemmingSettings;
 
 	/**
 	 * @param string[] $languages Available languages list.
-	 * @param array $searchSettings Search config
+	 * @param array $stemmingSettings Stemming config
 	 */
-	public function __construct( array $languages, array $searchSettings ) {
+	public function __construct( array $languages, array $stemmingSettings ) {
 		$this->languages = $languages;
 		parent::__construct( static::NAME, \SearchIndexField::INDEX_TYPE_NESTED );
-		$this->searchSettings = $searchSettings;
+		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	/**
@@ -58,7 +58,7 @@ class DescriptionsField extends TermIndexField {
 		];
 		foreach ( $this->languages as $language ) {
 			// TODO: here we probably will need better language-specific analyzers
-			if ( empty( $this->searchSettings['useStemming'][$language]['index'] ) ) {
+			if ( empty( $this->stemmingSettings[$language]['index'] ) ) {
 				$langConfig = [ 'type' => 'text', 'index' => 'no' ];
 			} else {
 				$langConfig = $this->getTokenizedSubfield( $engine->getConfig(),

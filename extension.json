@@ -16,12 +16,56 @@
 		"Wikibase\\Search\\Elastic\\": "src/",
 		"Wikibase\\Search\\Elastic\\Tests\\": "tests/phpunit/"
 	},
+	"config_prefix": "wgWBCS",
+	"@note": "The values below are mirrors of old Wikibase values. TODO: once Wikibase values are gone, put proper defaults here.",
 	"config": {
-		"WikibaseCirrusSearchEnable": {
-			"value": false,
-			"description": "Whether the search functionality in this extrnsion is enabled",
-			"public": false
+		"UseCirrus": {
+			"value": null,
+			"description": "Use CirrusSearch (ElasticSearch) for searching"
+		},
+		"PrefixSearchProfile": {
+			"value": null,
+			"description": "Default label scoring profile name, for prefix search. See profiles in config/EntityPrefixSearchProfiles.php"
+		},
+		"PrefixSearchProfiles": {
+			"value": null,
+			"description": "Field weight profiles. These profiles specify relative weights of label fields for different languages, e.g. exact language match vs. fallback language match."
+		},
+		"FulltextSearchProfile": {
+			"value": null,
+			"description": "Default profile name for fulltext search. See profiles in config/EntitySearchProfiles.php"
+		},
+		"FulltextSearchProfiles": {
+			"value": null,
+			"description": "Profile definitions for fulltext search."
+		},
+		"DefaultPrefixRescoreProfile": {
+			"value": null,
+			"description": "Default rescore profile for prefix search."
+		},
+		"DefaultFulltextRescoreProfile": {
+			"value": null,
+			"description": "Default rescore profile for prefix search."
+		},
+		"RescoreProfiles": {
+			"value": null,
+			"description": "Rescore profile definitions holder."
+		},
+		"RescoreFunctionChains": {
+			"value": null,
+			"description": "Rescore function chain definitions holder."
+		},
+		"StatementBoost": {
+			"value": null,
+			"description": "Type (de)boosts for rescoring functions."
+		},
+		"UseStemming": {
+			"value": null,
+			"description": "List of languages that we want to have stemming analyzers."
 		}
+	},
+	"ConfigRegistry": {
+		"WikibaseCirrusSearch": "Wikibase\\Search\\Elastic\\WikibaseSearchConfig::newFromGlobals"
 	},
 	"Hooks": {
 		"SetupAfterCache": [

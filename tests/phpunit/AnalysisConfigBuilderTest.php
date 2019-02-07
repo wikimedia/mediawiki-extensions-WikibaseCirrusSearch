@@ -15,7 +15,7 @@ class AnalysisConfigBuilderTest extends MediaWikiTestCase {
 
 	public function testAnalysisConfig() {
 		$langSettings = [];
-		$langSettings['useStemming'] = [
+		$langSettings['UseStemming'] = [
 			'en' => [ 'index' => true, 'query' => true ],
 			'ru' => [ 'index' => true, 'query' => false ],
 			'uk' => [ 'index' => false, 'query' => true ],
@@ -40,7 +40,8 @@ class AnalysisConfigBuilderTest extends MediaWikiTestCase {
 			->willReturn( [] );
 
 		$oldConfig = [];
-		$builder = new ConfigBuilder( [ 'en', 'ru', 'uk', 'he', 'zh' ], $langSettings, $upstreamBuilder );
+		$builder = new ConfigBuilder( [ 'en', 'ru', 'uk', 'he', 'zh' ], new \HashConfig( $langSettings ),
+				$upstreamBuilder );
 
 		$builder->buildConfig( $oldConfig );
 	}

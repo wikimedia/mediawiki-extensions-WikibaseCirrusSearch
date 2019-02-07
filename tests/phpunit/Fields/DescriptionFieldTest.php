@@ -67,12 +67,10 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ],
-			[ 'useStemming' =>
-				  [
-					'en' => [ 'index' => true, 'search' => true ],
-					'es' => [ 'index' => true, 'search' => false ],
-					'ru' => [ 'index' => false, 'search' => true ],
-				  ]
+			[
+				'en' => [ 'index' => true, 'search' => true ],
+				'es' => [ 'index' => true, 'search' => false ],
+				'ru' => [ 'index' => false, 'search' => true ],
 			]
 		);
 		$searchEngine = $this->getSearchEngineMock();

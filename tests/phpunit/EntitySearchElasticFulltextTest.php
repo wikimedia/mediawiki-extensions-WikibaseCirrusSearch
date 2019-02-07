@@ -15,6 +15,7 @@ use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\EntityFullTextQueryBuilder;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 use Wikibase\Search\Elastic\Hooks;
+use Wikibase\Search\Elastic\WikibaseSearchConfig;
 
 /**
  * @covers \Wikibase\Search\Elastic\EntityFullTextQueryBuilder
@@ -42,11 +43,14 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
 		$this->disableWikibaseNative();
+		$config = new WikibaseSearchConfig( self::$ENTITY_SEARCH_CONFIG );
 		// Override the profile service hooks so that we can test that the rescore profiles
 		// are properly initialized
-		parent::setTemporaryHook( 'CirrusSearchProfileService', function ( SearchProfileService $service ) {
-			Hooks::registerSearchProfiles( $service, self::$ENTITY_SEARCH_CONFIG );
-		} );
+		parent::setTemporaryHook( 'CirrusSearchProfileService',
+			function ( SearchProfileService $service ) use ( $config ) {
+				Hooks::registerSearchProfiles( $service, $config );
+			}
+		);
 	}
 
 	public function searchDataProvider() {
@@ -93,7 +97,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$config = new SearchConfig();
 
 		$builder = new EntityFullTextQueryBuilder(
-			self::$ENTITY_SEARCH_CONFIG,
+			self::$ENTITY_SEARCH_CONFIG['useStemming'],
 			$this->getConfigSettings(),
 			new LanguageFallbackChainFactory(),
 			new ItemIdParser(),
@@ -155,7 +159,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$config = new SearchConfig();
 
 		$builder = new EntityFullTextQueryBuilder(
-			self::$ENTITY_SEARCH_CONFIG,
+			self::$ENTITY_SEARCH_CONFIG['useStemming'],
 			$this->getConfigSettings(),
 			new LanguageFallbackChainFactory(),
 			new ItemIdParser(),

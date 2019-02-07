@@ -20,15 +20,15 @@ class DescriptionsProviderFieldDefinitions implements FieldDefinitions {
 	/**
 	 * @var array
 	 */
-	private $searchSettings;
+	private $stemmingSettings;
 
 	/**
 	 * @param string[] $languageCodes
-	 * @param array $searchSettings
+	 * @param array $stemmingSettings
 	 */
-	public function __construct( array $languageCodes, array $searchSettings ) {
+	public function __construct( array $languageCodes, array $stemmingSettings ) {
 		$this->languageCodes = $languageCodes;
-		$this->searchSettings = $searchSettings;
+		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	/**
@@ -36,7 +36,7 @@ class DescriptionsProviderFieldDefinitions implements FieldDefinitions {
 	 */
 	public function getFields() {
 		return [
-			DescriptionsField::NAME => new DescriptionsField( $this->languageCodes, $this->searchSettings ),
+			DescriptionsField::NAME => new DescriptionsField( $this->languageCodes, $this->stemmingSettings ),
 		];
 	}
 

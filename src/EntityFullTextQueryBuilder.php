@@ -12,6 +12,7 @@ use Elastica\Query\Match;
 use Elastica\Query\MatchNone;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Term;
+use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Repo\WikibaseRepo;
@@ -29,7 +30,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * Repository 'entitySearch' settings
 	 * @var array
 	 */
-	private $searchSettings;
+	private $stemmingSettings;
 	/**
 	 * @var LanguageFallbackChainFactory
 	 */
@@ -44,20 +45,20 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	private $userLanguage;
 
 	/**
-	 * @param array $searchSettings Settings from entitySearch config entry
+	 * @param array $stemmingSettings Stemming settings from UseStemming config entry
 	 * @param array $settings Settings from EntitySearchProfiles.php
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param EntityIdParser $entityIdParser
 	 * @param string $userLanguage User's language code
 	 */
 	public function __construct(
-		array $searchSettings,
+		array $stemmingSettings,
 		array $settings,
 		LanguageFallbackChainFactory $languageFallbackChainFactory,
 		EntityIdParser $entityIdParser,
 		$userLanguage
 	) {
-		$this->searchSettings = $searchSettings;
+		$this->stemmingSettings = $stemmingSettings;
 		$this->settings = $settings;
 		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
 		$this->entityIdParser = $entityIdParser;
@@ -72,8 +73,9 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 */
 	public static function newFromGlobals( array $settings ) {
 		$repo = WikibaseRepo::getDefaultInstance();
+		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 		return new static(
-			$repo->getSettings()->getSetting( 'entitySearch' ),
+			$config->get( 'UseStemming' ),
 			$settings,
 			$repo->getLanguageFallbackChainFactory(),
 			$repo->getEntityIdParser(),
@@ -145,7 +147,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			[ "labels.{$this->userLanguage}.near_match_folded", $profile['lang-folded'] ],
 		];
 
-		if ( empty( $this->searchSettings['useStemming'][$this->userLanguage]['query'] ) ) {
+		if ( empty( $this->stemmingSettings[$this->userLanguage]['query'] ) ) {
 			$fieldsTokenized = [
 				[ "labels.{$this->userLanguage}.plain", $profile['lang-partial'] ],
 				[ "descriptions.{$this->userLanguage}.plain", $profile['lang-partial'] ],
@@ -165,7 +167,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 		$stemFilterFields = [];
 
 		foreach ( $searchLanguageCodes as $fallbackCode ) {
-			if ( empty( $this->searchSettings['useStemming'][$fallbackCode]['query'] ) ) {
+			if ( empty( $this->stemmingSettings[$fallbackCode]['query'] ) ) {
 				$stemFilterFields[] = "descriptions.{$fallbackCode}.plain";
 			} else {
 				$stemFilterFields[] = "descriptions.{$fallbackCode}";
@@ -183,7 +185,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 
 			$weight = $profile['fallback-partial'] * $discount;
 			$fieldsTokenized[] = [ "labels.{$fallbackCode}.plain", $weight ];
-			if ( empty( $this->searchSettings['useStemming'][$fallbackCode]['query'] ) ) {
+			if ( empty( $this->stemmingSettings[$fallbackCode]['query'] ) ) {
 				$fieldsTokenized[] = [ "descriptions.{$fallbackCode}.plain", $weight ];
 			} else {
 				$fieldsTokenized[] = [ "descriptions.{$fallbackCode}", $weight ];

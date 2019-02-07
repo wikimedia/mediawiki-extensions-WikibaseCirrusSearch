@@ -85,12 +85,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 	private $searchLanguageCodes = [];
 
 	/**
-	 * Wikibase configuration settings for entity search
-	 * @var array
-	 */
-	private $settings;
-
-	/**
 	 * @var Language User language for display.
 	 */
 	private $userLang;
@@ -105,7 +99,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 	 * @param EntityIdParser $idParser
 	 * @param Language $userLang
 	 * @param array $contentModelMap Maps entity type => content model name
-	 * @param array $settings Search settings, see Wikibase.default.php under 'entitySearch'
 	 * @param WebRequest|null $request Web request context
 	 * @param CirrusDebugOptions|null $options
 	 * @throws \MWException
@@ -115,7 +108,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 		EntityIdParser $idParser,
 		Language $userLang,
 		array $contentModelMap,
-		array $settings,
 		WebRequest $request = null,
 		CirrusDebugOptions $options = null
 	) {
@@ -123,7 +115,6 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$this->idParser = $idParser;
 		$this->userLang = $userLang;
 		$this->contentModelMap = $contentModelMap;
-		$this->settings = $settings;
 		$this->request = $request ?: new \FauxRequest();
 		$this->debugOptions = $options ?: CirrusDebugOptions::fromRequest( $this->request );
 	}

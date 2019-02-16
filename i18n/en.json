@@ -23,5 +23,8 @@
 	"wikibase-search-namespace-mix": "Mixing entity and article namespaces in search is currently not supported. Only entity namespaces will be searched.",
 	"wikibase-search-config-notfound": "Fulltext search configuration not found: $1",
 	"wikibase-search-config-badclass": "Bad query builder class: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement keyword contains no valid statements"
+	"wikibase-haswbstatement-feature-no-valid-statements": "haswbstatement keyword contains no valid statements",
+	"wikibaescirrussearch-inlabel-unknown-language-code": "inlabel keyword contains unknown language code: $1",
+	"wikibasecirrussearch-inlabel-too-many-language-codes": "inlabel keyword provided too many language codes. Searching $1 of the $2 provided languages",
+	"wikibasecirrussearch-inlabel-no-query-provided": "inlabel keyword was provided an empty search string"
 }

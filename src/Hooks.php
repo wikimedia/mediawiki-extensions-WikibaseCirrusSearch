@@ -12,7 +12,9 @@ use RequestContext;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
+use Wikibase\Search\Elastic\Query\InLabelFeature;
 use Wikibase\Search\Elastic\Query\WbStatementQuantityFeature;
+use Wikibase\Lib\WikibaseContentLanguages;
 
 /**
  * Hooks for Wikibase search.
@@ -265,7 +267,8 @@ class Hooks {
 			return;
 		}
 		$foreignRepoNames = [];
-		$foreignRepos = WikibaseRepo::getDefaultInstance()->getSettings()->getSetting(
+		$repo = WikibaseRepo::getDefaultInstance();
+		$foreignRepos = $repo->getSettings()->getSetting(
 			'foreignRepositories'
 		);
 		if ( !empty( $foreignRepos ) ) {
@@ -273,6 +276,11 @@ class Hooks {
 		}
 		$extraFeatures[] = new HasWbStatementFeature( $foreignRepoNames );
 		$extraFeatures[] = new WbStatementQuantityFeature( $foreignRepoNames );
+
+		$languageCodes = WikibaseContentLanguages::getDefaultInstance()
+			->getContentLanguages( 'term' );
+		$languageChainFactory = $repo->getLanguageFallbackChainFactory();
+		$extraFeatures[] = new InLabelFeature( $languageChainFactory, $languageCodes );
 	}
 
 }

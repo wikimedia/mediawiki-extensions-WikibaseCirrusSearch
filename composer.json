@@ -11,9 +11,9 @@
 		"wikidata"
 	],
 	"authors": [
-			{
-					"name": "WMF Search Platform Team"
-			}
+		{
+			"name": "WMF Search Platform Team"
+		}
 	],
 	"license": "GPL-2.0-or-later",
 	"require": {
@@ -21,8 +21,8 @@
 		"composer/installers": ">=1.0.1"
 	},
 	"support": {
-			  "issues": "https://phabricator.wikimedia.org/",
-			  "irc": "irc://irc.freenode.net/wikimedia-discovery"
+		"issues": "https://phabricator.wikimedia.org/",
+		"irc": "irc://irc.freenode.net/wikimedia-discovery"
 	},
 	"require-dev": {
 		"jakub-onderka/php-console-highlighter": "0.3.2",

@@ -1,29 +1,29 @@
 {
-    "@metadata": {
-        "authors": [
-            "Emperyan",
-            "Incelemeelemani",
-            "Rapsar",
-            "Marmase",
-            "Sayginer",
-            "Sucsuzz",
-            "Violetanka",
-            "Ozerk",
-            "Aşilleus",
-            "Macofe",
-            "Ömer Berkay",
-            "Arystanbek",
-            "Meelo",
-            "Stultiwikia",
-            "Tpt",
-            "McAang",
-            "Nemo bis",
-            "HakanIST",
-            "Vito Genovese",
-            "Botansahin",
-            "Chansey"
-        ]
-    },
-    "wikibase-search-bad-entity-type": "Bozuk varlık türü: $1",
-    "wikibase-search-bad-profile-name": "Aramada bozuk profil adı: $1"
+	"@metadata": {
+		"authors": [
+			"Emperyan",
+			"Incelemeelemani",
+			"Rapsar",
+			"Marmase",
+			"Sayginer",
+			"Sucsuzz",
+			"Violetanka",
+			"Ozerk",
+			"Aşilleus",
+			"Macofe",
+			"Ömer Berkay",
+			"Arystanbek",
+			"Meelo",
+			"Stultiwikia",
+			"Tpt",
+			"McAang",
+			"Nemo bis",
+			"HakanIST",
+			"Vito Genovese",
+			"Botansahin",
+			"Chansey"
+		]
+	},
+	"wikibase-search-bad-entity-type": "Bozuk varlık türü: $1",
+	"wikibase-search-bad-profile-name": "Aramada bozuk profil adı: $1"
 }

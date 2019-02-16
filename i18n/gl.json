@@ -1,19 +1,19 @@
 {
-    "@metadata": {
-        "authors": [
-            "Toliño",
-            "Vivaelcelta",
-            "아라",
-            "Elisardojm",
-            "Fisterraeomar",
-            "Banjo",
-            "Amire80",
-            "Macofe",
-            "Ladsgroup",
-            "Athena in Wonderland",
-            "Navhy"
-        ]
-    },
-    "wikibase-search-bad-entity-type": "Tipo de entidade incorrectaː $1",
-    "wikibase-search-bad-profile-name": "Nome de perfil de procura non válido: $1"
+	"@metadata": {
+		"authors": [
+			"Toliño",
+			"Vivaelcelta",
+			"아라",
+			"Elisardojm",
+			"Fisterraeomar",
+			"Banjo",
+			"Amire80",
+			"Macofe",
+			"Ladsgroup",
+			"Athena in Wonderland",
+			"Navhy"
+		]
+	},
+	"wikibase-search-bad-entity-type": "Tipo de entidade incorrectaː $1",
+	"wikibase-search-bad-profile-name": "Nome de perfil de procura non válido: $1"
 }

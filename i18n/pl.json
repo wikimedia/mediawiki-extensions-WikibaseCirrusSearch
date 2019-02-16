@@ -1,26 +1,26 @@
 {
-    "@metadata": {
-        "authors": [
-            "BeginaFelicysym",
-            "Chrumps",
-            "Lazowik",
-            "Mateuszek045",
-            "Matma Rex",
-            "Maćko",
-            "Odie2",
-            "Rzuwig",
-            "Vivaelcelta",
-            "WTM",
-            "Wizardist",
-            "Alan ffm",
-            "Darellur",
-            "Devwebtel",
-            "PiotrAntosz",
-            "Woytecr",
-            "Pawel Niemczuk",
-            "InternerowyGołąb",
-            "CiaPan"
-        ]
-    },
-    "wikibase-search-config-notfound": "Nie znaleziono konfiguracji wyszukiwania pełnotekstowego: $1"
+	"@metadata": {
+		"authors": [
+			"BeginaFelicysym",
+			"Chrumps",
+			"Lazowik",
+			"Mateuszek045",
+			"Matma Rex",
+			"Maćko",
+			"Odie2",
+			"Rzuwig",
+			"Vivaelcelta",
+			"WTM",
+			"Wizardist",
+			"Alan ffm",
+			"Darellur",
+			"Devwebtel",
+			"PiotrAntosz",
+			"Woytecr",
+			"Pawel Niemczuk",
+			"InternerowyGołąb",
+			"CiaPan"
+		]
+	},
+	"wikibase-search-config-notfound": "Nie znaleziono konfiguracji wyszukiwania pełnotekstowego: $1"
 }

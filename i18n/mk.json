@@ -1,12 +1,12 @@
 {
-    "@metadata": {
-        "authors": [
-            "Bjankuloski06",
-            "Macofe",
-            "Ladsgroup",
-            "Stryn"
-        ]
-    },
-    "wikibase-search-bad-entity-type": "Неисправен тип на единица: $1",
-    "wikibase-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1"
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06",
+			"Macofe",
+			"Ladsgroup",
+			"Stryn"
+		]
+	},
+	"wikibase-search-bad-entity-type": "Неисправен тип на единица: $1",
+	"wikibase-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1"
 }

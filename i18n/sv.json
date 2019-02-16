@@ -1,31 +1,31 @@
 {
-    "@metadata": {
-        "authors": [
-            "Ainali",
-            "Jopparn",
-            "Littledogboy",
-            "Lokal Profil",
-            "Rippitippi",
-            "Vivaelcelta",
-            "WikiPhoenix",
-            "Warrakkk",
-            "Peki01",
-            "Jenniesarina",
-            "Rockyfelle",
-            "Macofe",
-            "Frisko",
-            "Skalman",
-            "McDutchie"
-        ]
-    },
-    "wikibase-rescore-profile-prefix": "Omvärderingsstandardprofil för kompletterande sökning",
-    "wikibase-rescore-profile-prefix-boost": "Omvärderingsprofil för kompletterande sökning med uttalandeförstärkning",
-    "wikibase-rescore-profile-fulltext": "Omvärderingsstandardprofil för fulltextsökning",
-    "wikibase-rescore-profile-fulltext-phrase": "Omvärderingsprofil för fulltextsökning med fraspoäng",
-    "wikibase-search-bad-entity-type": "Trasig entitetstyp: $1",
-    "wikibase-search-bad-profile-name": "Trasig sökning av profilnamn: $1",
-    "wikibase-search-namespace-mix": "Det finns för tillfället inget stöd för att blanda entitet- och artikelnamnrymder i sökningen. Endast entitetsnamnrymder kommer att sökas igenom.",
-    "wikibase-search-config-notfound": "Konfigurationen för heltextsökning hittades inte: $1",
-    "wikibase-search-config-badclass": "Dålig byggklass för frågor: $1",
-    "wikibase-haswbstatement-feature-no-valid-statements": "Nyckelordet haswbstatement innehåller inte några giltiga uttalanden"
+	"@metadata": {
+		"authors": [
+			"Ainali",
+			"Jopparn",
+			"Littledogboy",
+			"Lokal Profil",
+			"Rippitippi",
+			"Vivaelcelta",
+			"WikiPhoenix",
+			"Warrakkk",
+			"Peki01",
+			"Jenniesarina",
+			"Rockyfelle",
+			"Macofe",
+			"Frisko",
+			"Skalman",
+			"McDutchie"
+		]
+	},
+	"wikibase-rescore-profile-prefix": "Omvärderingsstandardprofil för kompletterande sökning",
+	"wikibase-rescore-profile-prefix-boost": "Omvärderingsprofil för kompletterande sökning med uttalandeförstärkning",
+	"wikibase-rescore-profile-fulltext": "Omvärderingsstandardprofil för fulltextsökning",
+	"wikibase-rescore-profile-fulltext-phrase": "Omvärderingsprofil för fulltextsökning med fraspoäng",
+	"wikibase-search-bad-entity-type": "Trasig entitetstyp: $1",
+	"wikibase-search-bad-profile-name": "Trasig sökning av profilnamn: $1",
+	"wikibase-search-namespace-mix": "Det finns för tillfället inget stöd för att blanda entitet- och artikelnamnrymder i sökningen. Endast entitetsnamnrymder kommer att sökas igenom.",
+	"wikibase-search-config-notfound": "Konfigurationen för heltextsökning hittades inte: $1",
+	"wikibase-search-config-badclass": "Dålig byggklass för frågor: $1",
+	"wikibase-haswbstatement-feature-no-valid-statements": "Nyckelordet haswbstatement innehåller inte några giltiga uttalanden"
 }

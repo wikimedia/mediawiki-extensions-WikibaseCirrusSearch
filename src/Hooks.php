@@ -55,9 +55,9 @@ class Hooks {
 		if ( empty( $GLOBALS['wgWikibaseCirrusSearchEnable'] ) ) {
 			return;
 		}
-		$entityTypeDefinitions = array_merge_recursive(
-			$entityTypeDefinitions,
-			require __DIR__ . '/../WikibaseSearch.entitytypes.php'
+		$entityTypeDefinitions = wfArrayPlus2d(
+			require __DIR__ . '/../WikibaseSearch.entitytypes.php',
+			$entityTypeDefinitions
 		);
 	}
 

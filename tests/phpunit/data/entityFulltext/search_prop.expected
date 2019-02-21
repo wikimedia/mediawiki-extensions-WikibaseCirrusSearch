@@ -17,7 +17,7 @@
                                         {
                                             "match": {
                                                 "all": {
-                                                    "query": "\tp42",
+                                                    "query": "p42",
                                                     "operator": "AND"
                                                 }
                                             }
@@ -25,7 +25,7 @@
                                         {
                                             "match": {
                                                 "all.plain": {
-                                                    "query": "\tp42",
+                                                    "query": "p42",
                                                     "operator": "AND"
                                                 }
                                             }
@@ -33,7 +33,7 @@
                                         {
                                             "match": {
                                                 "descriptions.en": {
-                                                    "query": "\tp42",
+                                                    "query": "p42",
                                                     "operator": "AND"
                                                 }
                                             }
@@ -51,7 +51,7 @@
                                             "constant_score": {
                                                 "filter": {
                                                     "match": {
-                                                        "labels.en.near_match": "\tp42"
+                                                        "labels.en.near_match": "p42"
                                                     }
                                                 },
                                                 "boost": 0.78
@@ -61,7 +61,7 @@
                                             "constant_score": {
                                                 "filter": {
                                                     "match": {
-                                                        "labels.en.near_match_folded": "\tp42"
+                                                        "labels.en.near_match_folded": "p42"
                                                     }
                                                 },
                                                 "boost": 0.01
@@ -76,7 +76,7 @@
                                         {
                                             "match": {
                                                 "all": {
-                                                    "query": "\tp42",
+                                                    "query": "p42",
                                                     "operator": "OR",
                                                     "boost": 0.04
                                                 }
@@ -85,7 +85,7 @@
                                         {
                                             "match": {
                                                 "all.plain": {
-                                                    "query": "\tp42",
+                                                    "query": "p42",
                                                     "operator": "OR",
                                                     "boost": 0.04
                                                 }
@@ -98,7 +98,7 @@
                                                     {
                                                         "match": {
                                                             "descriptions.en": {
-                                                                "query": "\tp42",
+                                                                "query": "p42",
                                                                 "boost": 0.07
                                                             }
                                                         }
@@ -106,7 +106,7 @@
                                                     {
                                                         "match": {
                                                             "labels.en.plain": {
-                                                                "query": "\tp42",
+                                                                "query": "p42",
                                                                 "boost": 0.07
                                                             }
                                                         }
@@ -114,7 +114,7 @@
                                                     {
                                                         "match": {
                                                             "descriptions.en.plain": {
-                                                                "query": "\tp42",
+                                                                "query": "p42",
                                                                 "boost": 0.07
                                                             }
                                                         }
@@ -134,7 +134,7 @@
                 {
                     "terms": {
                         "namespace": [
-                            2
+                            120
                         ]
                     }
                 }

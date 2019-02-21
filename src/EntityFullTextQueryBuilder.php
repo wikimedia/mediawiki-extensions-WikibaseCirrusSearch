@@ -92,11 +92,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @throws \MWException
 	 */
 	public function build( SearchContext $searchContext, $term ) {
-		if ( $searchContext->areResultsPossible() && !$searchContext->isSpecialKeywordUsed() ) {
-			// We use entity search query if we did not find any advanced syntax
-			// and the base builder did not reject the query
-			$this->buildEntitySearchQuery( $searchContext, $term );
-		}
+		$this->buildEntitySearchQuery( $searchContext, $term );
 		// if we did find advanced query, we keep the old setup but change the result type
 		// FIXME: make it dispatch by content model
 		$searchContext->setResultsType( new EntityResultType( $this->userLanguage,
@@ -118,7 +114,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @param string $term Search term
 	 */
 	protected function buildEntitySearchQuery( SearchContext $searchContext, $term ) {
-		$searchContext->setProfileContext( EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT );
 		$searchContext->addSyntaxUsed( self::ENTITY_FULL_TEXT_MARKER, 10 );
 		/*
 		 * Overall query structure is as follows:

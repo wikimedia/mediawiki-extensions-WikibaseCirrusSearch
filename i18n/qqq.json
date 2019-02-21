@@ -58,8 +58,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Default rescore profile for fulltext search with phrase rescoring. (See [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html Rescoring] in the Elastic documentation for explanation.)",
 	"wikibasecirrus-search-bad-entity-type": "Error message displayed when user supplies bad entity type to wbsearchentities",
 	"wikibasecirrus-search-bad-profile-name": "Error message displayed when user supplies bad search profile name",
-	"wikibasecirrus-search-namespace-mix": "Warning when using mixed namespaces in fulltext search",
-	"wikibasecirrus-search-config-notfound": "Error message displayed when configured search profile can not be loaded",
-	"wikibasecirrus-search-config-badclass": "Error message displayed when configured query builder can not be found or has wrong type",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Error message when haswbstatement keyword has no valid arguments"
 }

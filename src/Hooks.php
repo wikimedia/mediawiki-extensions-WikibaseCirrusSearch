@@ -3,11 +3,10 @@
 namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
+use CirrusSearch\Parser\BasicQueryClassifier;
 use CirrusSearch\Profile\ArrayProfileRepository;
 use CirrusSearch\Profile\SearchProfileRepositoryTransformer;
 use CirrusSearch\Profile\SearchProfileService;
-use CirrusSearch\Query\FullTextQueryBuilder;
-use CirrusSearch\Search\SearchContext;
 use Language;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
@@ -19,6 +18,7 @@ use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
 use Wikibase\Search\Elastic\Query\WbStatementQuantityFeature;
 use Wikibase\Lib\WikibaseContentLanguages;
+use Wikimedia\Assert\Assert;
 
 /**
  * Hooks for Wikibase search.
@@ -35,11 +35,7 @@ class Hooks {
 		if ( $useCirrus !== null ) {
 			$GLOBALS['wgWBCSUseCirrus'] = wfStringToBool( $useCirrus );
 		}
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
-		/**
-		 * @var WikibaseSearchConfig $config
-		 */
-		/* @phan-suppress-next-line PhanUndeclaredMethod */
+		$config = self::getWBCSConfig();
 		if ( $config->enabled() ) {
 			global $wgCirrusSearchExtraIndexSettings;
 			// Bump max fields so that labels/descriptions fields fit in.
@@ -55,11 +51,7 @@ class Hooks {
 	 * @param array[] $entityTypeDefinitions
 	 */
 	public static function onWikibaseRepoEntityTypes( array &$entityTypeDefinitions ) {
-		$wbcsConfig = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
-		/**
-		 * @var WikibaseSearchConfig $wbcsConfig
-		 */
-		/* @phan-suppress-next-line PhanUndeclaredMethod */
+		$wbcsConfig = self::getWBCSConfig();
 		if ( !$wbcsConfig->enabled() ) {
 			return;
 		}
@@ -78,11 +70,7 @@ class Hooks {
 		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 			return;
 		}
-		$wbcsConfig = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
-		/**
-		 * @var WikibaseSearchConfig $wbcsConfig
-		 */
-		/* @phan-suppress-next-line PhanUndeclaredMethod */
+		$wbcsConfig = self::getWBCSConfig();
 		if ( !$wbcsConfig->enabled() ) {
 			return;
 		}
@@ -122,7 +110,7 @@ class Hooks {
 		// Language analyzers for descriptions
 		$repo = WikibaseRepo::getDefaultInstance();
 		$wbBuilder = new ConfigBuilder( $repo->getTermsLanguages()->getLanguages(),
-			MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' ),
+			self::getWBCSConfig(),
 			$builder
 		);
 		$inHook = true;
@@ -139,18 +127,23 @@ class Hooks {
 	 * @param SearchProfileService $service
 	 */
 	public static function onCirrusSearchProfileService( SearchProfileService $service ) {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()
-			->makeConfig( 'WikibaseCirrusSearch' );
-		/**
-		 * @var WikibaseSearchConfig $config
-		 */
-		/* @phan-suppress-next-line PhanUndeclaredMethod */
+		$config = self::getWBCSConfig();
 		if ( !defined( 'MW_PHPUNIT_TEST' ) && !$config->enabled() ) {
 			return;
 		}
 
-		/* @phan-suppress-next-line PhanTypeMismatchArgument */
-		self::registerSearchProfiles( $service, $config );
+		$repo = WikibaseRepo::getDefaultInstance();
+		$namespacesForContexts = [];
+		$entityNsLookup = $repo->getEntityNamespaceLookup();
+		foreach ( $repo->getFulltextSearchTypes() as $type => $profileContext ) {
+			$namespace = $entityNsLookup->getEntityNamespace( $type );
+			if ( $namespace === null ) {
+				continue;
+			}
+			$namespacesForContexts[$profileContext][] = $namespace;
+		}
+
+		self::registerSearchProfiles( $service, $config, $namespacesForContexts );
 	}
 
 	/**
@@ -173,11 +166,20 @@ class Hooks {
 	}
 
 	/**
-	 * Register cirrus profiles .
+	 * Register cirrus profiles.
+	 * (Visible for testing purposes)
 	 * @param SearchProfileService $service
 	 * @param WikibaseSearchConfig $entitySearchConfig
+	 * @param int[][] $namespacesForContexts list of namespaces indexed by profile context name
+	 * @see SearchProfileService
+	 * @see WikibaseRepo::getFulltextSearchTypes()
+	 * @throws \ConfigException
 	 */
-	public static function registerSearchProfiles( SearchProfileService $service, WikibaseSearchConfig $entitySearchConfig ) {
+	public static function registerSearchProfiles(
+		SearchProfileService $service,
+		WikibaseSearchConfig $entitySearchConfig,
+		array $namespacesForContexts
+	) {
 		$stmtBoost = $entitySearchConfig->get( 'StatementBoost' );
 		// register base profiles available on all wikibase installs
 		$service->registerFileRepository( SearchProfileService::RESCORE,
@@ -236,7 +238,7 @@ class Hooks {
 
 		// Determine query builder profile for fulltext search
 		$defaultFQB = $entitySearchConfig->get( 'FulltextSearchProfile',
-			EntitySearchElastic::DEFAULT_QUERY_BUILDER_PROFILE );
+			EntitySearchElastic::DEFAULT_FULL_TEXT_QUERY_BUILDER_PROFILE );
 
 		$service->registerDefaultProfile( SearchProfileService::FT_QUERY_BUILDER,
 			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, $defaultFQB );
@@ -252,50 +254,29 @@ class Hooks {
 		// add the possibility to override the profile by setting the URI param cirrusRescoreProfile
 		$service->registerUriParamOverride( SearchProfileService::RESCORE,
 			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, 'cirrusRescoreProfile' );
-	}
 
-	/**
-	 * @param FullTextQueryBuilder $builder
-	 * @param string $term
-	 * @param SearchContext $context
-	 */
-	public static function onCirrusSearchFulltextQueryBuilderComplete(
-		FullTextQueryBuilder $builder,
-		$term,
-		SearchContext $context
-	) {
-		if ( !$context->getConfig()->isLocalWiki() ) {
-			// don't mess with interwiki searches
-			return;
+		// Declare "search routes" for wikibase full text search types
+		// Source of the routes is $namespacesForContexts which is a "reversed view"
+		// of WikibaseRepo::getFulltextSearchTypes().
+		// It maps the namespaces to a profile context (e.g. EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT)
+		// and will tell cirrus to use the various components we declare in the SearchProfileService
+		// above.
+		// In this case since wikibase owns these namespaces we score the routes at 1.0 which discards
+		// any other routes and eventually fails if another extension
+		// tries to own our namespace.
+		// For now we only accept simple bag of words queries but this will change in the future
+		// when query builders will manipulate the parsed query.
+		foreach ( $namespacesForContexts as $profileContext => $namespaces ) {
+			Assert::precondition( is_string( $profileContext ),
+				'$namespacesForContexts keys must be strings and refer to the profile context to use' );
+			$service->registerFTSearchQueryRoute(
+				$profileContext,
+				1.0,
+				$namespaces,
+				// The wikibase builders only supports simple queries for now
+				[ BasicQueryClassifier::SIMPLE_BAG_OF_WORDS ]
+			);
 		}
-
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
-		/**
-		 * @var WikibaseSearchConfig $config
-		 */
-		/* @phan-suppress-next-line PhanUndeclaredMethod */
-		if ( !$config->enabled() ) {
-			// Right now our specialized search is Cirrus, so no point in
-			// calling dispatcher if Cirrus is disabled.
-			return;
-		}
-
-		if ( !$config->get( 'EnableDispatchingQueryBuilder' ) ) {
-			// When the DispatchingQueryBuilder is enabled multi-namespace
-			// searches that include an entity namespace are not fully
-			// supported, instead overriding the main search with the entity
-			// search.
-			// Without the dispatching query builder enabled there will be no
-			// specialized entity full text search. Instead full text search
-			// will operate on whatever content was indexed into the standard
-			// CirrusSearch fields.
-			return;
-		}
-
-		$repo = WikibaseRepo::getDefaultInstance();
-		$wbBuilder = new DispatchingQueryBuilder( $repo->getFulltextSearchTypes(),
-			$repo->getEntityNamespaceLookup() );
-		$wbBuilder->build( $context, $term );
 	}
 
 	/**
@@ -305,11 +286,7 @@ class Hooks {
 	 * @param array $extraFeatures
 	 */
 	public static function onCirrusSearchAddQueryFeatures( $config, array &$extraFeatures ) {
-		$searchConfig = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
-		/**
-		 * @var WikibaseSearchConfig $searchConfig
-		 */
-		/* @phan-suppress-next-line PhanUndeclaredMethod */
+		$searchConfig = self::getWBCSConfig();
 		if ( !$searchConfig->enabled() ) {
 			return;
 		}
@@ -390,6 +367,15 @@ class Hooks {
 		}
 		$repo = WikibaseRepo::getDefaultInstance();
 		self::amendSearchResults( $repo, $repo->getUserLanguage(), $results );
+	}
+
+	/**
+	 * @return WikibaseSearchConfig
+	 */
+	private static function getWBCSConfig(): WikibaseSearchConfig {
+		return MediaWikiServices::getInstance()
+			->getConfigFactory()
+			->makeConfig( 'WikibaseCirrusSearch' );
 	}
 
 }

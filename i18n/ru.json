@@ -36,5 +36,5 @@
 			"Nk88"
 		]
 	},
-	"wikibase-search-bad-entity-type": "Некорректный тип сущности: $1"
+	"wikibasecirrus-search-bad-entity-type": "Некорректный тип сущности: $1"
 }

@@ -13,6 +13,6 @@
 			"Ladsgroup"
 		]
 	},
-	"wikibase-search-bad-entity-type": "Entitate mota txarra: $1",
-	"wikibase-search-bad-profile-name": "Profilaren izenaren bilaketa txarra: $1"
+	"wikibasecirrus-search-bad-entity-type": "Entitate mota txarra: $1",
+	"wikibasecirrus-search-bad-profile-name": "Profilaren izenaren bilaketa txarra: $1"
 }

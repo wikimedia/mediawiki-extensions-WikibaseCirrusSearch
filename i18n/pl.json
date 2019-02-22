@@ -22,5 +22,5 @@
 			"CiaPan"
 		]
 	},
-	"wikibase-search-config-notfound": "Nie znaleziono konfiguracji wyszukiwania pełnotekstowego: $1"
+	"wikibasecirrus-search-config-notfound": "Nie znaleziono konfiguracji wyszukiwania pełnotekstowego: $1"
 }

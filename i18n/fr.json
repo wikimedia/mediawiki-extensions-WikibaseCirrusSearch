@@ -57,14 +57,14 @@
 			"Pamputt"
 		]
 	},
-	"wikibase-rescore-profile-prefix": "Profil de nouvelle notation par défaut pour la recherche de complétude",
-	"wikibase-rescore-profile-prefix-boost": "Profil de nouvelle notation pour la recherche de complétude avec amélioration de déclaration",
-	"wikibase-rescore-profile-fulltext": "Profil de nouvelle notation par défaut pour la recherche en plein texte",
-	"wikibase-rescore-profile-fulltext-phrase": "Marquer à nouveau le profil pour la recherche en plein texte avec notation de phrase",
-	"wikibase-search-bad-entity-type": "Type invalide d'entité: $1",
-	"wikibase-search-bad-profile-name": "Nom de profil recherché invalide: $1",
-	"wikibase-search-namespace-mix": "Il n'est actuellement pas autorisé pour une recherche, d'utiliser les espaces de noms des entités avec ceux des articles. La recherche ne sera faite que sur l'espace de noms des entités.",
-	"wikibase-search-config-notfound": "Configuration de recherche en plein texte non trouvée : $1",
-	"wikibase-search-config-badclass": "Mauvaise classe de constructeur de requête : $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "Le mot clé haswbstatement ne contient pas d'instructions valides"
+	"wikibasecirrus-rescore-profile-prefix": "Profil de nouvelle notation par défaut pour la recherche de complétude",
+	"wikibasecirrus-rescore-profile-prefix-boost": "Profil de nouvelle notation pour la recherche de complétude avec amélioration de déclaration",
+	"wikibasecirrus-rescore-profile-fulltext": "Profil de nouvelle notation par défaut pour la recherche en plein texte",
+	"wikibasecirrus-rescore-profile-fulltext-phrase": "Marquer à nouveau le profil pour la recherche en plein texte avec notation de phrase",
+	"wikibasecirrus-search-bad-entity-type": "Type invalide d'entité: $1",
+	"wikibasecirrus-search-bad-profile-name": "Nom de profil recherché invalide: $1",
+	"wikibasecirrus-search-namespace-mix": "Il n'est actuellement pas autorisé pour une recherche, d'utiliser les espaces de noms des entités avec ceux des articles. La recherche ne sera faite que sur l'espace de noms des entités.",
+	"wikibasecirrus-search-config-notfound": "Configuration de recherche en plein texte non trouvée : $1",
+	"wikibasecirrus-search-config-badclass": "Mauvaise classe de constructeur de requête : $1",
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Le mot clé haswbstatement ne contient pas d'instructions valides"
 }

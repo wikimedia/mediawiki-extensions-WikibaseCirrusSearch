@@ -24,6 +24,6 @@
 			"Chansey"
 		]
 	},
-	"wikibase-search-bad-entity-type": "Bozuk varlık türü: $1",
-	"wikibase-search-bad-profile-name": "Aramada bozuk profil adı: $1"
+	"wikibasecirrus-search-bad-entity-type": "Bozuk varlık türü: $1",
+	"wikibasecirrus-search-bad-profile-name": "Aramada bozuk profil adı: $1"
 }

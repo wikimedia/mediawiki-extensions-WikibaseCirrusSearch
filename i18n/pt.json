@@ -19,14 +19,14 @@
 			"Athena in Wonderland"
 		]
 	},
-	"wikibase-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
-	"wikibase-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
-	"wikibase-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",
-	"wikibase-rescore-profile-fulltext-phrase": "Perfil de reavaliação para pesquisa completa de texto com avaliação de frases",
-	"wikibase-search-bad-entity-type": "Tipo de entidade inválido: $1",
-	"wikibase-search-bad-profile-name": "Nome de perfil de pesquisa inválido: $1",
-	"wikibase-search-namespace-mix": "Neste momento a pesquisa não suporta a mistura dos espaços nominais de entidades e de artigos. Só serão pesquisados os espaços nominais de entidades.",
-	"wikibase-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
-	"wikibase-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "A palavra-chave haswbstatement não contém nenhuma declaração válida"
+	"wikibasecirrus-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
+	"wikibasecirrus-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
+	"wikibasecirrus-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",
+	"wikibasecirrus-rescore-profile-fulltext-phrase": "Perfil de reavaliação para pesquisa completa de texto com avaliação de frases",
+	"wikibasecirrus-search-bad-entity-type": "Tipo de entidade inválido: $1",
+	"wikibasecirrus-search-bad-profile-name": "Nome de perfil de pesquisa inválido: $1",
+	"wikibasecirrus-search-namespace-mix": "Neste momento a pesquisa não suporta a mistura dos espaços nominais de entidades e de artigos. Só serão pesquisados os espaços nominais de entidades.",
+	"wikibasecirrus-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
+	"wikibasecirrus-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "A palavra-chave haswbstatement não contém nenhuma declaração válida"
 }

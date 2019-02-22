@@ -23,6 +23,6 @@
 			"Movses"
 		]
 	},
-	"wikibase-search-bad-entity-type": "Хибний тип сутності: $1",
-	"wikibase-search-bad-profile-name": "Хибна назва пошукового профілю: $1"
+	"wikibasecirrus-search-bad-entity-type": "Хибний тип сутності: $1",
+	"wikibasecirrus-search-bad-profile-name": "Хибна назва пошукового профілю: $1"
 }

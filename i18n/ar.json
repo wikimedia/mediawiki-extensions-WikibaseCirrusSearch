@@ -30,14 +30,14 @@
 			"ديفيد"
 		]
 	},
-	"wikibase-rescore-profile-prefix": "ملف التعريف الافتراضي للبحث عن الإكمال",
-	"wikibase-rescore-profile-prefix-boost": "الملف الشخصي للبحث عن الانتهاء مع زيادة البيان",
-	"wikibase-rescore-profile-fulltext": "ملف التعريف الافتراضي للبحث في النص الكامل",
-	"wikibase-rescore-profile-fulltext-phrase": "ملف النتيجة للبحث عن النص الكامل مع نتيجة العبارات",
-	"wikibase-search-bad-entity-type": "نوع كيان غير صالح: $1",
-	"wikibase-search-bad-profile-name": "اسم بحث غير صالح: $1",
-	"wikibase-search-namespace-mix": "لا يتم حاليا دعم كيان خلط الكيان والمادة في البحث، سيتم البحث عن نطاقات الكيانات فقط.",
-	"wikibase-search-config-notfound": "لم يتم العثور على تكوين بحث النص الكامل: $1",
-	"wikibase-search-config-badclass": "فئة باني الاستعلام سيئة: $1",
-	"wikibase-haswbstatement-feature-no-valid-statements": "الكلمة الأساسية haswbstatement لا تحتوي على بيانات صالحة"
+	"wikibasecirrus-rescore-profile-prefix": "ملف التعريف الافتراضي للبحث عن الإكمال",
+	"wikibasecirrus-rescore-profile-prefix-boost": "الملف الشخصي للبحث عن الانتهاء مع زيادة البيان",
+	"wikibasecirrus-rescore-profile-fulltext": "ملف التعريف الافتراضي للبحث في النص الكامل",
+	"wikibasecirrus-rescore-profile-fulltext-phrase": "ملف النتيجة للبحث عن النص الكامل مع نتيجة العبارات",
+	"wikibasecirrus-search-bad-entity-type": "نوع كيان غير صالح: $1",
+	"wikibasecirrus-search-bad-profile-name": "اسم بحث غير صالح: $1",
+	"wikibasecirrus-search-namespace-mix": "لا يتم حاليا دعم كيان خلط الكيان والمادة في البحث، سيتم البحث عن نطاقات الكيانات فقط.",
+	"wikibasecirrus-search-config-notfound": "لم يتم العثور على تكوين بحث النص الكامل: $1",
+	"wikibasecirrus-search-config-badclass": "فئة باني الاستعلام سيئة: $1",
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "الكلمة الأساسية haswbstatement لا تحتوي على بيانات صالحة"
 }

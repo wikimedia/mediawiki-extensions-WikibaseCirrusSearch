@@ -14,6 +14,6 @@
 			"Navhy"
 		]
 	},
-	"wikibase-search-bad-entity-type": "Tipo de entidade incorrectaː $1",
-	"wikibase-search-bad-profile-name": "Nome de perfil de procura non válido: $1"
+	"wikibasecirrus-search-bad-entity-type": "Tipo de entidade incorrectaː $1",
+	"wikibasecirrus-search-bad-profile-name": "Nome de perfil de procura non válido: $1"
 }

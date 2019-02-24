@@ -4,6 +4,7 @@ namespace Wikibase\Search\Elastic\Fields;
 
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
+use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 use Wikibase\SettingsArray;
 
 /**

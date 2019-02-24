@@ -286,7 +286,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * Create phrase rescore query for "all" fields
 	 * @param string $queryText
 	 * @param SearchContext $context
-	 * @param float[] $profile
+	 * @param float[][] $profile Must contain $profile['phrase'] with keys 'all', 'slop', 'all.plain'
 	 * @return AbstractQuery
 	 */
 	private function buildPhraseRescore( $queryText, SearchContext $context, array $profile ) {

@@ -157,7 +157,10 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
 			return null;
 		}
-
+		/**
+		 * @var PropertyValueSnak $snak
+		 */
+		/* @phan-suppress-next-line PhanUndeclaredMethod */
 		$dataValue = $snak->getDataValue();
 		$definitionKey = 'VT:' . $dataValue->getType();
 

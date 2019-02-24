@@ -89,7 +89,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 	 * search terms must exist wholly within a single field.
 	 *
 	 * @param array $parsedValue
-	 * @return \Elastica\Query\BoolQuery
+	 * @return \Elastica\Query\AbstractQuery
 	 */
 	private function makeQuery( array $parsedValue ) {
 		$query = ( new MultiMatch() )
@@ -106,7 +106,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 
 	/**
 	 * @param string $languageString
-	 * @param WarningColletor $warningCollector
+	 * @param WarningCollector $warningCollector
 	 * @return string[]
 	 */
 	private function parseLanguages( $languageString, WarningCollector $warningCollector ): array {

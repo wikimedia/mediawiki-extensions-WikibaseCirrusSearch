@@ -105,7 +105,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	/**
 	 * Builds an OR between many statements about the wikibase item
 	 *
-	 * @param string[] $queries queries to combine
+	 * @param string[][] $queries queries to combine. See parseValue() for fields.
 	 * @return \Elastica\Query\BoolQuery
 	 */
 	private function combineQueries( array $queries ) {

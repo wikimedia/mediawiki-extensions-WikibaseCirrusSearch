@@ -49,7 +49,7 @@ class EntityResult extends Result {
 	/**
 	 * Extra display field for match.
 	 * ['language' => LANG, 'value' => TEXT]
-	 * @var string[]
+	 * @var array
 	 */
 	private $extraDisplay;
 	/**
@@ -122,13 +122,14 @@ class EntityResult extends Result {
 			}
 		}
 
-		if ( $this->extraDisplay ) {
-			// Add extra snippet to extension data
-			$this->extensionData[self::WIKIBASE_EXTRA_DATA] = [
-				'extrasnippet' => HtmlArmor::getHtml( $this->extraDisplay['value'] ),
-				'extrasnippet-language' => $this->extraDisplay['language'],
-			];
-		}
+// FIXME: this needs to be migrated to SearchResultsAugment hook
+//		if ( $this->extraDisplay ) {
+//			// Add extra snippet to extension data
+//			$this->extensionData[self::WIKIBASE_EXTRA_DATA] = [
+//				'extrasnippet' => HtmlArmor::getHtml( $this->extraDisplay['value'] ),
+//				'extrasnippet-language' => $this->extraDisplay['language'],
+//			];
+//		}
 	}
 
 	/**

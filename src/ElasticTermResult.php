@@ -187,7 +187,7 @@ class ElasticTermResult implements ResultsType {
 	 * Extract term, language and type from highlighter results.
 	 * @param array $highlight Data from highlighter
 	 * @param array[] $sourceData Data from _source
-	 * @return array( string $termType, string $languageCode, string $term )
+	 * @return array Array of: [string $termType, string $languageCode, string $term]
 	 */
 	private function extractTermFromHighlight( array $highlight, array $sourceData ) {
 		/**

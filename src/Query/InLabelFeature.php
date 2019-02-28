@@ -134,7 +134,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 				continue;
 			}
 
-			$fields[LabelsField::NAME . '.' . $languageCode] = true;
+			$fields[LabelsField::NAME . '.' . $languageCode . '.plain'] = true;
 			$langCodeFields = [ LabelsField::NAME . '.' . $languageCode ];
 			if ( $withFallbacks ) {
 				$fallbacks = $this->languageChainFactory
@@ -144,7 +144,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 					if ( $withoutEnFallback && $fallbackCode == 'en' ) {
 						continue;
 					}
-					$fields[LabelsField::NAME . '.' . $fallbackCode] = true;
+					$fields[LabelsField::NAME . '.' . $fallbackCode . '.plain'] = true;
 				}
 			}
 		}
@@ -185,7 +185,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		$atPos = strrpos( $value, '@' );
 		if ( $atPos === false ) {
 			return [
-				'fields' => [ AllLabelsField::NAME ],
+				'fields' => [ AllLabelsField::NAME . '.plain' ],
 				'string' => $value,
 				'phrase' => $isPhrase,
 			];
@@ -206,7 +206,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		// will return false and php7 will return ''
 		if ( $languages === false || $languages === '' || $languages === '*' ) {
 			return [
-				'fields' => [ AllLabelsField::NAME ],
+				'fields' => [ AllLabelsField::NAME . '.plain' ],
 				'string' => $search,
 				'phrase' => $isPhrase,
 			];

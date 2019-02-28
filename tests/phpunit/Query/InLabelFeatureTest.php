@@ -30,7 +30,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'gift',
-						'fields' => [ 'labels_all' ],
+						'fields' => [ 'labels_all.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -40,7 +40,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'gift',
-						'fields' => [ 'labels_all' ],
+						'fields' => [ 'labels_all.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -50,7 +50,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'gift',
-						'fields' => [ 'labels_all' ],
+						'fields' => [ 'labels_all.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -60,7 +60,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'gift',
-						'fields' => [ 'labels.en' ],
+						'fields' => [ 'labels.en.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -73,7 +73,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'gift wrap',
-						'fields' => [ 'labels.en' ],
+						'fields' => [ 'labels.en.plain' ],
 						'operator' => 'and',
 						'type' => 'phrase',
 					],
@@ -84,7 +84,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'manifesto futurista',
-						'fields' => [ 'labels.pt-br', 'labels.pt' ],
+						'fields' => [ 'labels.pt-br.plain', 'labels.pt.plain' ],
 						'operator' => 'and',
 						'type' => 'phrase',
 					],
@@ -95,7 +95,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'gift',
-						'fields' => [ 'labels.zh' ],
+						'fields' => [ 'labels.zh.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -105,7 +105,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'colaborativa',
-						'fields' => [ 'labels.pt-br', 'labels.pt' ],
+						'fields' => [ 'labels.pt-br.plain', 'labels.pt.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -115,7 +115,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'colaborativa',
-						'fields' => [ 'labels.pt-br', 'labels.pt', 'labels.en' ],
+						'fields' => [ 'labels.pt-br.plain', 'labels.pt.plain', 'labels.en.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -125,7 +125,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'gift',
-						'fields' => [ 'labels.en' ],
+						'fields' => [ 'labels.en.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -138,7 +138,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'colaborativa@pt-br',
-						'fields' => [ 'labels.pt' ],
+						'fields' => [ 'labels.pt.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -148,7 +148,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'colaborativa',
-						'fields' => [ 'labels.pt' ],
+						'fields' => [ 'labels.pt.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -158,7 +158,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'colaborativa',
-						'fields' => [ 'labels.pt-br', 'labels.pt', 'labels.en' ],
+						'fields' => [ 'labels.pt-br.plain', 'labels.pt.plain', 'labels.en.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -168,7 +168,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'colaborativa',
-						'fields' => [ 'labels.pt-br', 'labels.pt' ],
+						'fields' => [ 'labels.pt-br.plain', 'labels.pt.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -231,8 +231,8 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 			'multi_match' => [
 				'query' => 'himom',
 				'fields' => array_merge(
-					$this->letterRange( 'labels.aa', 'labels.az' ),
-					$this->letterRange( 'labels.bb', 'labels.be' ) ),
+					$this->letterRange( 'labels.aa', 'labels.az', '.plain' ),
+					$this->letterRange( 'labels.bb', 'labels.be', '.plain' ) ),
 				'operator' => 'and',
 			],
 		];
@@ -311,13 +311,13 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 	 * @param string $a
 	 * @param string $b
 	 */
-	private function letterRange( $a, $b ) {
+	private function letterRange( $a, $b, $suffix = '' ) {
 		if ( $a > $b ) {
 			list( $a, $b ) = [ $b, $a ];
 		}
 		$range = [];
 		while ( $a <= $b ) {
-			$range[] = $a;
+			$range[] = $a . $suffix;
 			$a++;
 		}
 		return $range;

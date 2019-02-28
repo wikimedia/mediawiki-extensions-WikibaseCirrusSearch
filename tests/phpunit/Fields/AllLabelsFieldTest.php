@@ -59,10 +59,13 @@ class AllLabelsFieldTest extends MediaWikiTestCase {
 
 		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
+		$config = new \CirrusSearch\SearchConfig();
+		$searchEngine->expects( $this->any() )->method( 'getConfig' )
+			->will( $this->returnValue( $config ) );
 
 		$mapping = $labels->getMapping( $searchEngine );
 		$this->assertArrayHasKey( 'fields', $mapping );
-		$this->assertCount( 2, $mapping['fields'] );
+		$this->assertCount( 3, $mapping['fields'] );
 		$this->assertEquals( 'text', $mapping['type'] );
 		$this->assertEquals( 'false', $mapping['index'] );
 	}

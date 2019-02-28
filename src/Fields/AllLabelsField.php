@@ -38,6 +38,8 @@ class AllLabelsField extends TermIndexField {
 		$config['fields']['prefix'] =
 			$this->getSubfield( 'prefix_asciifolding', 'near_match_asciifolding' );
 		$config['fields']['near_match_folded'] = $this->getSubfield( 'near_match_asciifolding' );
+		$config['fields']['plain'] = $this->getTokenizedSubfield( $engine->getConfig(),
+			'plain', 'plain_search' );
 
 		return $config;
 	}

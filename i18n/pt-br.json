@@ -23,6 +23,7 @@
 			"Trigonometria87"
 		]
 	},
+	"wikibasecirrus-desc": "Extensão Wikibase para usar a funcionalidade CirrusSearch",
 	"wikibasecirrus-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
 	"wikibasecirrus-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",

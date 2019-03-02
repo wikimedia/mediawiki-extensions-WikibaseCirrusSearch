@@ -29,6 +29,10 @@
 			"Kly"
 		]
 	},
+	"wikibasecirrus-desc": "用於使用 CirrusSearch 功能的 Wikibase 擴充套件",
+	"wikibasecirrus-inlabel-unknown-language-code": "inlabel 關鍵字包含未知語言代碼：$1",
+	"wikibasecirrus-inlabel-too-many-language-codes": "提供給 inlabel 關鍵字太多語言代碼。搜尋所提供$2個語言中的$1個",
+	"wikibasecirrus-inlabel-no-query-provided": "提供給 inlabel 關鍵字空的搜尋字串",
 	"wikibasecirrus-rescore-profile-prefix": "用於完整搜尋的預設重新計分配置",
 	"wikibasecirrus-rescore-profile-prefix-boost": "用於陳述推進完整搜尋的重新計分配置",
 	"wikibasecirrus-rescore-profile-fulltext": "用於全文搜尋的預設重新計分配置",

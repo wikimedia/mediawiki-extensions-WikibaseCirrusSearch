@@ -30,6 +30,10 @@
 			"ديفيد"
 		]
 	},
+	"wikibasecirrus-desc": "ملحق قاعدة ويكي لاستخدام وظيفة CirrusSearch",
+	"wikibasecirrus-inlabel-unknown-language-code": "الكلمة الأساسية inlabel تحتوي على رمز لغة غير معروف: $1",
+	"wikibasecirrus-inlabel-too-many-language-codes": "قدمت الكلمة الرئيسية في inlabel عددا كبيرا من رموز اللغات، جارٍ البحث عن $1 من اللغات المتوفرة الـ$2",
+	"wikibasecirrus-inlabel-no-query-provided": "تم توفير الكلمة المفتاحية inlabel في سلسلة بحث فارغة",
 	"wikibasecirrus-rescore-profile-prefix": "ملف التعريف الافتراضي للبحث عن الإكمال",
 	"wikibasecirrus-rescore-profile-prefix-boost": "الملف الشخصي للبحث عن الانتهاء مع زيادة البيان",
 	"wikibasecirrus-rescore-profile-fulltext": "ملف التعريف الافتراضي للبحث في النص الكامل",

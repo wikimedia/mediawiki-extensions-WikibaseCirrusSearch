@@ -57,6 +57,10 @@
 			"Pamputt"
 		]
 	},
+	"wikibasecirrus-desc": "Extension de Wikibase pour utiliser la fonctionnalité CirrusSearch",
+	"wikibasecirrus-inlabel-unknown-language-code": "le mot-clé dans le libellé contient un code de langue inconnu : $1",
+	"wikibasecirrus-inlabel-too-many-language-codes": "le mot-clé dans le libellé a fourni trop de codes de langue. Recherche de $1 sur $2 langues fournies",
+	"wikibasecirrus-inlabel-no-query-provided": "le mot-clé dans le libellé a été fourni avec une chaîne de recherche vide",
 	"wikibasecirrus-rescore-profile-prefix": "Profil de nouvelle notation par défaut pour la recherche de complétude",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Profil de nouvelle notation pour la recherche de complétude avec amélioration de déclaration",
 	"wikibasecirrus-rescore-profile-fulltext": "Profil de nouvelle notation par défaut pour la recherche en plein texte",

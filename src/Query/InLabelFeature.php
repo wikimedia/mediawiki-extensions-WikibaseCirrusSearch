@@ -49,7 +49,10 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 	 * @return string[]
 	 */
 	protected function getKeywords() {
-		return [ 'inlabel' ];
+		// When using WikibaseMediaInfo extension the labels are referred to
+		// more concretely as captions. While perhaps slightly messy, there
+		// doesn't seem to be much downside to allowing `incaption` everywhere.
+		return [ 'inlabel', 'incaption' ];
 	}
 
 	/**

@@ -36,6 +36,16 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				],
 				'search string' => 'inlabel:gift',
 			],
+			'incaption alias for WikibaseMediaInfo' => [
+				'expected' => [
+					'multi_match' => [
+						'query' => 'gift',
+						'fields' => [ 'labels_all.plain' ],
+						'operator' => 'and',
+					],
+				],
+				'search string' => 'incaption:gift',
+			],
 			'has @ but no language specified' => [
 				'expected' => [
 					'multi_match' => [

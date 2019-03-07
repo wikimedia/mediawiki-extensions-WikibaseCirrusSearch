@@ -20,9 +20,11 @@
 			"Dars",
 			"Macofe",
 			"Ladsgroup",
-			"Movses"
+			"Movses",
+			"Vlad5250"
 		]
 	},
+	"wikibasecirrus-desc": "Wikibase-розширення для використання функціональності CirrusSearch",
 	"wikibasecirrus-rescore-profile-prefix": "Стандартний профіль переоцінювання для доповнення пошуку",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Профіль переоцінювання для доповнення пошуку з підсиленням тверджень",
 	"wikibasecirrus-rescore-profile-fulltext": "Стандартний профіль переоцінювання для повнотекстового пошуку",

@@ -83,6 +83,12 @@
 		"CirrusSearchAddQueryFeatures": [
 			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchAddQueryFeatures"
 		],
+		"ShowSearchHit": [
+			"Wikibase\\Search\\Elastic\\CirrusShowSearchHitHandler::onShowSearchHit"
+		],
+		"ShowSearchHitTitle": [
+			"Wikibase\\Search\\Elastic\\CirrusShowSearchHitHandler::onShowSearchHitTitle"
+		],
 		"WikibaseRepoEntityTypes": [
 			"Wikibase\\Search\\Elastic\\Hooks::onWikibaseRepoEntityTypes"
 		]

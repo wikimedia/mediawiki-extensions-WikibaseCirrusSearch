@@ -59,7 +59,7 @@ class DescriptionsField extends TermIndexField {
 		foreach ( $this->languages as $language ) {
 			// TODO: here we probably will need better language-specific analyzers
 			if ( empty( $this->stemmingSettings[$language]['index'] ) ) {
-				$langConfig = [ 'type' => 'text', 'index' => 'no' ];
+				$langConfig = [ 'type' => 'text', 'index' => false ];
 			} else {
 				$langConfig = $this->getTokenizedSubfield( $engine->getConfig(),
 					$language . '_text',

@@ -19,6 +19,10 @@
 			"Athena in Wonderland"
 		]
 	},
+	"wikibasecirrus-desc": "Extensão Wikibase para usar a funcionalidade CirrusSearch",
+	"wikibasecirrus-inlabel-unknown-language-code": "A palavra-chave de pesquisa ''inlabel'' contém um código de língua desconhecido: $1",
+	"wikibasecirrus-inlabel-too-many-language-codes": "A palavra-chave de pesquisa ''inlabel'' contém demasiados códigos de língua. A pesquisar $1 das $2 línguas fornecidas",
+	"wikibasecirrus-inlabel-no-query-provided": "A palavra-chave de pesquisa ''inlabel'' contém um texto de pesquisa vazio",
 	"wikibasecirrus-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
 	"wikibasecirrus-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",
@@ -28,5 +32,5 @@
 	"wikibasecirrus-search-namespace-mix": "Neste momento a pesquisa não suporta a mistura dos espaços nominais de entidades e de artigos. Só serão pesquisados os espaços nominais de entidades.",
 	"wikibasecirrus-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
 	"wikibasecirrus-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
-	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "A palavra-chave haswbstatement não contém nenhuma declaração válida"
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "A palavra-chave ''haswbstatement'' não contém nenhuma declaração válida"
 }

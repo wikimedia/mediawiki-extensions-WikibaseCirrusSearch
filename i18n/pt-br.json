@@ -24,6 +24,7 @@
 		]
 	},
 	"wikibasecirrus-desc": "Extensão Wikibase para usar a funcionalidade CirrusSearch",
+	"wikibasecirrus-inlabel-too-many-language-codes": "A palavra-chave inlabel forneceu muitos códigos de idioma. Pesquisando $1 dos $2 fornecidos {{PLURAL:$2|idioma|idiomas}}",
 	"wikibasecirrus-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",
 	"wikibasecirrus-rescore-profile-fulltext": "Perfil padrão de reavaliação para pesquisa completa de texto",

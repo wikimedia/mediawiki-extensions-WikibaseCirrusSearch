@@ -5,11 +5,12 @@ use CirrusSearch\Search\Result;
 use CirrusSearch\Searcher;
 use HtmlArmor;
 use Wikibase\LanguageFallbackChain;
+use Wikibase\Repo\Search\ExtendedResult;
 
 /**
  * Single result for entity search.
  */
-class EntityResult extends Result {
+class EntityResult extends Result implements ExtendedResult {
 	/**
 	 * Key which holds wikibase data for result extra data.
 	 */

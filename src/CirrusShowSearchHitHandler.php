@@ -73,7 +73,6 @@ class CirrusShowSearchHitHandler {
 		if ( $result instanceof EntityResult ) {
 			$self->showEntityResultHit( $searchPage, $result, $terms,
 				$link, $redirect, $section, $extract, $score, $size, $date, $related, $html );
-			return false;
 		}
 	}
 
@@ -131,7 +130,6 @@ class CirrusShowSearchHitHandler {
 		if ( $result instanceof EntityResult ) {
 			$self->getEntityLink( $result, $title, $titleSnippet, $attributes,
 				$specialSearch->getLanguage()->getCode() );
-			return false;
 		}
 	}
 

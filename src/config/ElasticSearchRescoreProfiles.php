@@ -6,7 +6,7 @@
 // prefixing with 'wikibase' is recommended.
 return [
 	'wikibase_prefix' => [
-		'i18n_msg' => 'wikibase-rescore-profile-prefix',
+		'i18n_msg' => 'wikibasecirrus-rescore-profile-prefix',
 		'supported_namespaces' => 'all',
 		'rescore' => [
 			[
@@ -22,7 +22,7 @@ return [
 	],
 	// Profile that uses both entity weight end statement-based boosts
 	'wikibase_prefix_boost' => [
-		'i18n_msg' => 'wikibase-rescore-profile-prefix-boost',
+		'i18n_msg' => 'wikibasecirrus-rescore-profile-prefix-boost',
 		'supported_namespaces' => 'all',
 		'rescore' => [
 			[
@@ -38,7 +38,7 @@ return [
 	],
 	// Fulltext profile
 	'wikibase' => [
-		'i18n_msg' => 'wikibase-rescore-profile-fulltext',
+		'i18n_msg' => 'wikibasecirrus-rescore-profile-fulltext',
 		'supported_namespaces' => 'all',
 		'rescore' => [
 			[
@@ -54,7 +54,7 @@ return [
 	],
 	// Fulltext profile with phrase scoring
 	'wikibase_phrase' => [
-		'i18n_msg' => 'wikibase-rescore-profile-fulltext-phrase',
+		'i18n_msg' => 'wikibasecirrus-rescore-profile-fulltext-phrase',
 		'supported_namespaces' => 'all',
 		'rescore' => [
 			// phrase rescore

@@ -132,7 +132,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 
 			if ( !isset( $this->languages[$languageCode] ) ) {
 				$warningCollector->addWarning(
-					'wikibasecirrussearch-inlabel-unknown-language-code',
+					'wikibasecirrus-inlabel-unknown-language-code',
 					$languageCode );
 				continue;
 			}
@@ -178,7 +178,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		$isPhrase = $quotedValue !== $value;
 		if ( strlen( $value ) === 0 ) {
 			$warningCollector->addWarning(
-				'wikibasecirrussearch-inlabel-no-query-provided' );
+				'wikibasecirrus-inlabel-no-query-provided' );
 			return [
 				'fields' => [],
 				'string' => $value,
@@ -196,7 +196,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		$search = substr( $value, 0, $atPos );
 		if ( strlen( $search ) === 0 ) {
 			$warningCollector->addWarning(
-				'wikibasecirrussearch-inlabel-no-query-provided' );
+				'wikibasecirrus-inlabel-no-query-provided' );
 			return [
 				'fields' => [],
 				'string' => $search,
@@ -217,7 +217,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		$fields = $this->parseLanguages( $languages, $warningCollector );
 		if ( count( $fields ) > self::MAX_FIELDS ) {
 			$warningCollector->addWarning(
-					'wikibasecirrussearch-inlabel-too-many-language-codes',
+					'wikibasecirrus-inlabel-too-many-language-codes',
 					self::MAX_FIELDS, count( $fields ) );
 			$fields = array_slice( $fields, 0, self::MAX_FIELDS );
 		}

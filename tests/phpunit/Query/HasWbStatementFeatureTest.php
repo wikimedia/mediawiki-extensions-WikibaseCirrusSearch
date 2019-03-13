@@ -170,7 +170,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	public function testApply( array $expected = null, $term, $foreignRepoNames ) {
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
 		$kwAssertions = $this->getKWAssertions();
-		$expectedWarnings = $expected === null ? [ [ 'wikibase-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$expectedWarnings = $expected === null ? [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
 		$kwAssertions->assertFilter( $feature, $term, $expected, $expectedWarnings );
 		$kwAssertions->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
 		if ( $expected === null ) {
@@ -199,7 +199,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 
 	public function testInvalidStatementWarning() {
 		$feature = new HasWbStatementFeature( [ 'P999' ] );
-		$expectedWarnings = [ [ 'wikibase-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ];
+		$expectedWarnings = [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue( $feature, 'haswbstatement:INVALID', [], $expectedWarnings );
 		$kwAssertions->assertExpandedData( $feature, 'haswbstatement:INVALID', [], [] );
@@ -212,7 +212,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	 */
 	public function testParseValue( $foreignRepoNames, $value, $expected, $warningExpected ) {
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
-		$expectedWarnings = $warningExpected ? [ [ 'wikibase-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$expectedWarnings = $warningExpected ? [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue( $feature, "haswbstatement:\"$value\"", $expected, $expectedWarnings );
 	}

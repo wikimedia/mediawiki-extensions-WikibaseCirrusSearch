@@ -192,7 +192,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$text = trim( $text );
 		if ( empty( $this->contentModelMap[$entityType] ) ) {
 			$context->setResultsPossible( false );
-			$context->addWarning( 'wikibase-search-bad-entity-type', $entityType );
+			$context->addWarning( 'wikibasecirrus-search-bad-entity-type', $entityType );
 			return $query;
 		}
 

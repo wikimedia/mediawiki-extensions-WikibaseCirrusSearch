@@ -182,7 +182,7 @@ class DispatchingQueryBuilderTest extends MediaWikiTestCase {
 				[ 0 ],
 				[],
 				[
-					[ 'wikibase-search-config-badclass', 'stdClass' ]
+					[ 'wikibasecirrus-search-config-badclass', 'stdClass' ]
 				]
 			],
 			"bad profile" => [
@@ -192,7 +192,7 @@ class DispatchingQueryBuilderTest extends MediaWikiTestCase {
 				[ 0 ],
 				[],
 				[
-					[ 'wikibase-search-config-notfound', 'profile4' ]
+					[ 'wikibasecirrus-search-config-notfound', 'profile4' ]
 				]
 			],
 			"mixed handlers" => [
@@ -210,7 +210,7 @@ class DispatchingQueryBuilderTest extends MediaWikiTestCase {
 				[ 0, 11 ],
 				[ 'profile1' ],
 				[
-					[ 'wikibase-search-namespace-mix' ]
+					[ 'wikibasecirrus-search-namespace-mix' ]
 				]
 			],
 			"two defs with non-entity" => [
@@ -228,7 +228,7 @@ class DispatchingQueryBuilderTest extends MediaWikiTestCase {
 				[ 0, 1 ],
 				[ 'profile1' ],
 				[
-					[ 'wikibase-search-namespace-mix' ]
+					[ 'wikibasecirrus-search-namespace-mix' ]
 				]
 			],
 			"null namespaces" => [

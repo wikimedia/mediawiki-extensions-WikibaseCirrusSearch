@@ -76,7 +76,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				],
 				'search string' => 'inlabel:gift@*,en',
 				'warnings' => [
-					[ 'wikibasecirrussearch-inlabel-unknown-language-code', '*' ],
+					[ 'wikibasecirrus-inlabel-unknown-language-code', '*' ],
 				],
 			],
 			'quoted values make a phrase query' => [
@@ -141,7 +141,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				],
 				'search string' => 'inlabel:gift@en,unk',
 				'warnings' => [
-					[ 'wikibasecirrussearch-inlabel-unknown-language-code', 'unk' ],
+					[ 'wikibasecirrus-inlabel-unknown-language-code', 'unk' ],
 				],
 			],
 			'only the last @ is consumed' => [
@@ -205,19 +205,19 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 			'all invalid languages prevents results' => [
 				'term' => 'inlabel:foo@unk',
 				'warnings' => [
-					[ 'wikibasecirrussearch-inlabel-unknown-language-code', 'unk' ],
+					[ 'wikibasecirrus-inlabel-unknown-language-code', 'unk' ],
 				]
 			],
 			'only language specified' => [
 				'term' => 'inlabel:@en',
 				'warnings' => [
-					[ 'wikibasecirrussearch-inlabel-no-query-provided' ],
+					[ 'wikibasecirrus-inlabel-no-query-provided' ],
 				],
 			],
 			'value contains only @' => [
 				'term' => 'inlabel:@',
 				'warnings' => [
-					[ 'wikibasecirrussearch-inlabel-no-query-provided' ],
+					[ 'wikibasecirrus-inlabel-no-query-provided' ],
 				],
 			],
 		];
@@ -247,7 +247,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 			],
 		];
 		$expectedWarnings = [
-			[ 'wikibasecirrussearch-inlabel-too-many-language-codes', InLabelFeature::MAX_FIELDS, 26 * 2 - 1 ],
+			[ 'wikibasecirrus-inlabel-too-many-language-codes', InLabelFeature::MAX_FIELDS, 26 * 2 - 1 ],
 		];
 		$this->getKWAssertions()->assertFilter( $feature, $term, $expected, $expectedWarnings );
 	}

@@ -184,7 +184,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		}
 		if ( count( $queries ) == 0 ) {
 			$warningCollector->addWarning(
-				'wikibase-haswbstatement-feature-no-valid-statements',
+				'wikibasecirrus-haswbstatement-feature-no-valid-statements',
 				$key
 			);
 		}

@@ -68,7 +68,7 @@ class DispatchingQueryBuilder implements FullTextQueryBuilder {
 		// very well here. Right now we're just forcing it to entity space. We may want to look
 		// for a better solution.
 		if ( !empty( $articleNs ) ) {
-			$searchContext->addWarning( 'wikibase-search-namespace-mix' );
+			$searchContext->addWarning( 'wikibasecirrus-search-namespace-mix' );
 		}
 		reset( $entityNs );
 		$searchType = key( $entityNs );
@@ -76,19 +76,19 @@ class DispatchingQueryBuilder implements FullTextQueryBuilder {
 		$qbSettings = $searchContext->getConfig()->getProfileService()
 			->loadProfile( SearchProfileService::FT_QUERY_BUILDER, $searchType );
 		if ( !$qbSettings ) {
-			$searchContext->addWarning( 'wikibase-search-config-notfound', $searchType );
+			$searchContext->addWarning( 'wikibasecirrus-search-config-notfound', $searchType );
 			return;
 		}
 		$builderClass = $qbSettings['builder_class'];
 
 		if ( !is_callable( [ $builderClass, 'newFromGlobals' ] ) ) {
-			$searchContext->addWarning( 'wikibase-search-config-badclass', $builderClass );
+			$searchContext->addWarning( 'wikibasecirrus-search-config-badclass', $builderClass );
 			return;
 		}
 
 		$builder = $builderClass::newFromGlobals( $qbSettings['settings'] );
 		if ( !( $builder instanceof FullTextQueryBuilder ) ) {
-			$searchContext->addWarning( 'wikibase-search-config-badclass', $builderClass );
+			$searchContext->addWarning( 'wikibasecirrus-search-config-badclass', $builderClass );
 			return;
 		}
 

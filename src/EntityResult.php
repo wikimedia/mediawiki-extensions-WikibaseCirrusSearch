@@ -122,15 +122,6 @@ class EntityResult extends Result implements ExtendedResult {
 				];
 			}
 		}
-
-// FIXME: this needs to be migrated to SearchResultsAugment hook
-//		if ( $this->extraDisplay ) {
-//			// Add extra snippet to extension data
-//			$this->extensionData[self::WIKIBASE_EXTRA_DATA] = [
-//				'extrasnippet' => HtmlArmor::getHtml( $this->extraDisplay['value'] ),
-//				'extrasnippet-language' => $this->extraDisplay['language'],
-//			];
-//		}
 	}
 
 	/**
@@ -277,6 +268,21 @@ class EntityResult extends Result implements ExtendedResult {
 			return 0;
 		}
 		return (int)$this->sourceData['sitelink_count'];
+	}
+
+	/**
+	 * Augment extension data with extraDisplay data.
+	 * @return array[]
+	 */
+	public function getExtensionData() {
+		$data = parent::getExtensionData();
+		if ( $this->extraDisplay ) {
+			$data[self::WIKIBASE_EXTRA_DATA] = [
+				'extrasnippet' => HtmlArmor::getHtml( $this->extraDisplay['value'] ),
+				'extrasnippet-language' => $this->extraDisplay['language'],
+			];
+		}
+		return $data;
 	}
 
 }

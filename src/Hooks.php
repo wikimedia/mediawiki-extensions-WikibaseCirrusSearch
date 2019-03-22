@@ -272,6 +272,18 @@ class Hooks {
 			return;
 		}
 
+		if ( !$config->get( 'EnableDispatchingQueryBuilder' ) ) {
+			// When the DispatchingQueryBuilder is enabled multi-namespace
+			// searches that include an entity namespace are not fully
+			// supported, instead overriding the main search with the entity
+			// search.
+			// Without the dispatching query builder enabled there will be no
+			// specialized entity full text search. Instead full text search
+			// will operate on whatever content was indexed into the standard
+			// CirrusSearch fields.
+			return;
+		}
+
 		$repo = WikibaseRepo::getDefaultInstance();
 		$wbBuilder = new DispatchingQueryBuilder( $repo->getFulltextSearchTypes(),
 			$repo->getEntityNamespaceLookup() );

@@ -62,6 +62,10 @@
 		"UseStemming": {
 			"value": null,
 			"description": "List of languages that we want to have stemming analyzers."
+		},
+		"EnableDispatchingQueryBuilder": {
+			"value": true,
+			"description": "Turn on specialized entity fulltext search."
 		}
 	},
 	"ConfigRegistry": {

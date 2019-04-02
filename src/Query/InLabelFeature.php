@@ -79,12 +79,18 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 			$context->setResultsPossible( false );
 			return [ null, false ];
 		}
+		$query = $this->makeQuery( $parsedValue );
+		// The query will only be used in the filter context. To enable highlighting
+		// we need to provide the query to the highlighter as well.
+		// TODO: How does this work with the new parser that only calls parseValue / getFilterQuery?
+		//
+		$context->addNonTextHighlightQuery( $query );
 
 		// TODO: This false should be true, but it's not quite right. It will keep
 		// the whole quotedValue, but we want it to only keep the search query
 		// portion. Possibly we want to influence ranking with the language
 		// chain as well?
-		return [ $this->makeQuery( $parsedValue ), false ];
+		return [ $query, false ];
 	}
 
 	/**

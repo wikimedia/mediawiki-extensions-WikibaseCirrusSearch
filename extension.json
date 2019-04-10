@@ -60,7 +60,7 @@
 			"description": "Type (de)boosts for rescoring functions."
 		},
 		"UseStemming": {
-			"value": null,
+			"value": [],
 			"description": "List of languages that we want to have stemming analyzers."
 		},
 		"EnableDispatchingQueryBuilder": {

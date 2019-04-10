@@ -3,7 +3,6 @@
 namespace Wikibase\Search\Elastic;
 
 use Config;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Config class for Wikibase search configs.
@@ -35,32 +34,29 @@ class WikibaseSearchConfig implements Config {
 	 * @return WikibaseSearchConfig
 	 */
 	public static function newFromGlobals() {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$repoSettings = $repo->getSettings();
-		return new static( $repoSettings->getSetting( 'entitySearch' ) );
+		// BC with Wikidata settings
+		return new static( $GLOBALS['wgWBRepoSettings']['entitySearch'] ?? [] );
 	}
 
 	/**
 	 * Get a configuration variable such as "Sitename" or "UploadMaintenance."
-	 * TODO: when Wikibase/repo default values are removed, wikibaseSettings
-	 * should take precedence, since they are set by the user.
 	 * @param string $name Name of configuration option
 	 * @param mixed $default Return if value not found.
 	 * @return mixed Value configured
 	 * @throws \ConfigException
 	 */
 	public function get( $name, $default = null ) {
+		$compat_name = lcfirst( $name );
+		// TODO: deprecate and remove these BC settings
+		if ( array_key_exists( $compat_name, $this->wikibaseSettings ) ) {
+			return $this->wikibaseSettings[$compat_name];
+		}
 		if ( $this->globals->has( $name ) ) {
 			$value = $this->globals->get( $name );
 			if ( !is_null( $value ) ) {
 				return $value;
 			}
 		}
-		$compat_name = lcfirst( $name );
-		if ( !array_key_exists( $compat_name, $this->wikibaseSettings ) ) {
-			return $default;
-		}
-		return $this->wikibaseSettings[$compat_name];
 	}
 
 	/**
@@ -70,22 +66,16 @@ class WikibaseSearchConfig implements Config {
 	 * @return bool
 	 */
 	public function has( $name ) {
-		if ( $this->globals->has( $name ) ) {
-			return true;
-		}
-		return array_key_exists( lcfirst( $name ), $this->wikibaseSettings );
+		return $this->globals->has( $name ) ||
+				array_key_exists( lcfirst( $name ), $this->wikibaseSettings );
 	}
 
 	/**
 	 * Check whether search functionality for this extension is enabled.
 	 */
 	public function enabled() {
-		// This check is temporary for disabling this extension while
-		// Wikibase code is still enabled
-		if ( !$this->globals->get( 'UseCirrus' ) ) {
-			return null;
-		}
-		return $this->get( 'UseCirrus' );
+		// Ignore Wikibase setting, it should not disable this one
+		return $this->globals->get( 'UseCirrus' );
 	}
 
 }

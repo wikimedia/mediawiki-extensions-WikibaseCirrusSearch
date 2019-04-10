@@ -40,7 +40,7 @@ return [
 				)
 			] );
 		},
-		'fulltext-search-context' => \Wikibase\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
+		'fulltext-search-context' => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	],
 	'property' => [
 		'search-field-definitions' => function ( array $languageCodes, SettingsArray $searchSettings ) {
@@ -66,6 +66,6 @@ return [
 				$request
 			);
 		},
-		'fulltext-search-context' => \Wikibase\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
+		'fulltext-search-context' => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	]
 ];

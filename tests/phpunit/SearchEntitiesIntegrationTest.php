@@ -46,6 +46,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	protected function setUp() {
 		parent::setUp();
 
+		$this->setMwGlobals( 'wgWBCSUseCirrus', true );
 		$this->idParser = new BasicEntityIdParser();
 	}
 

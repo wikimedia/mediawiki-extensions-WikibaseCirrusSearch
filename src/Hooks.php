@@ -52,8 +52,12 @@ class Hooks {
 	 * @param array[] $entityTypeDefinitions
 	 */
 	public static function onWikibaseRepoEntityTypes( array &$entityTypeDefinitions ) {
-		if ( empty( $GLOBALS['wgWBCSUseCirrus'] ) ) {
-			// Cannot use config since this is called from configs
+		$wbcsConfig = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
+		/**
+		 * @var WikibaseSearchConfig $wbcsConfig
+		 */
+		/* @phan-suppress-next-line PhanUndeclaredMethod */
+		if ( !$wbcsConfig->enabled() ) {
 			return;
 		}
 		$entityTypeDefinitions = wfArrayPlus2d(
@@ -138,7 +142,12 @@ class Hooks {
 		 * @var WikibaseSearchConfig $config
 		 */
 		/* @phan-suppress-next-line PhanUndeclaredMethod */
-		if ( !$config->enabled() ) {
+		if ( !defined( 'MW_PHPUNIT_TEST' ) && !$config->enabled() ) {
+			return;
+		}
+		if ( array_key_exists( 'wikibase_base',
+			$service->listProfileRepositories( SearchProfileService::RESCORE ) ) ) {
+			// Safeguard for transition period
 			return;
 		}
 		/* @phan-suppress-next-line PhanTypeMismatchArgument */

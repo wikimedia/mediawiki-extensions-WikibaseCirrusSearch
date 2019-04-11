@@ -6,6 +6,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\PropertyContent;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
@@ -63,6 +64,18 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
 		return $this->getWikibaseRepo( $settings )->newPropertyHandler();
+	}
+
+	protected function getEntityTypeDefinitions() {
+		return new EntityTypeDefinitions(
+			wfArrayPlus2d(
+				require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
+				array_merge_recursive(
+					require __DIR__ . '/../../../Wikibase/lib/WikibaseLib.entitytypes.php',
+					require __DIR__ . '/../../../Wikibase/repo/WikibaseRepo.entitytypes.php'
+				)
+			)
+		);
 	}
 
 	protected function getTestContent() {

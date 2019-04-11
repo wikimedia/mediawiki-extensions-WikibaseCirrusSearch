@@ -57,6 +57,7 @@ class WikibaseSearchConfig implements Config {
 				return $value;
 			}
 		}
+		return $default;
 	}
 
 	/**

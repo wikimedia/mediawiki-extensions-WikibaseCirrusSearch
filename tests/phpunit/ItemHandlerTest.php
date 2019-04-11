@@ -11,6 +11,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
 use Wikibase\SettingsArray;
@@ -30,6 +31,7 @@ use Wikibase\SettingsArray;
  * @author Daniel Kinzler
  */
 class ItemHandlerTest extends EntityHandlerTestCase {
+	use WikibaseSearchTestCase;
 
 	/**
 	 * @see EntityHandlerTestCase::getModelId
@@ -75,6 +77,18 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 
 	public function testSupportsRedirects() {
 		$this->assertTrue( $this->getHandler()->supportsRedirects() );
+	}
+
+	protected function getEntityTypeDefinitions() {
+		return new EntityTypeDefinitions(
+			wfArrayPlus2d(
+				require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
+				array_merge_recursive(
+					require __DIR__ . '/../../../Wikibase/lib/WikibaseLib.entitytypes.php',
+					require __DIR__ . '/../../../Wikibase/repo/WikibaseRepo.entitytypes.php'
+				)
+			)
+		);
 	}
 
 	/**

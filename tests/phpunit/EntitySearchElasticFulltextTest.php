@@ -26,15 +26,15 @@ use Wikibase\Search\Elastic\WikibaseSearchConfig;
  * @author  Stas Malyshev
  */
 class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
-	use WikibaseSearchTestCase;
 
 	/**
 	 * @var array search settings for the test
 	 */
 	private static $ENTITY_SEARCH_CONFIG = [
-		'statementBoost' => [ 'P31=Q4167410' => '-10' ],
-		'defaultFulltextRescoreProfile' => 'wikibase_prefix_boost',
-		'useStemming' => [ 'en' => [ 'query' => true ] ]
+		'wgWBCSUseCirrus' => true,
+		'wgWBCSStatementBoost' => [ 'P31=Q4167410' => '-10' ],
+		'wgWBCSDefaultFulltextRescoreProfile' => 'wikibase_prefix_boost',
+		'wgWBCSUseStemming' => [ 'en' => [ 'query' => true ] ]
 	];
 
 	public function setUp() {
@@ -42,8 +42,8 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
-		$this->disableWikibaseNative();
-		$config = new WikibaseSearchConfig( self::$ENTITY_SEARCH_CONFIG );
+		$this->setMwGlobals( self::$ENTITY_SEARCH_CONFIG );
+		$config = new WikibaseSearchConfig( [] );
 		// Override the profile service hooks so that we can test that the rescore profiles
 		// are properly initialized
 		parent::setTemporaryHook( 'CirrusSearchProfileService',
@@ -97,7 +97,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$config = new SearchConfig();
 
 		$builder = new EntityFullTextQueryBuilder(
-			self::$ENTITY_SEARCH_CONFIG['useStemming'],
+			self::$ENTITY_SEARCH_CONFIG['wgWBCSUseStemming'],
 			$this->getConfigSettings(),
 			new LanguageFallbackChainFactory(),
 			new ItemIdParser(),
@@ -159,7 +159,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$config = new SearchConfig();
 
 		$builder = new EntityFullTextQueryBuilder(
-			self::$ENTITY_SEARCH_CONFIG['useStemming'],
+			self::$ENTITY_SEARCH_CONFIG['wgWBCSUseStemming'],
 			$this->getConfigSettings(),
 			new LanguageFallbackChainFactory(),
 			new ItemIdParser(),

@@ -95,6 +95,9 @@
 		],
 		"WikibaseRepoEntityTypes": [
 			"Wikibase\\Search\\Elastic\\Hooks::onWikibaseRepoEntityTypes"
+		],
+		"ApiOpenSearchSuggest": [
+			"Wikibase\\Search\\Elastic\\Hooks::onApiOpenSearchSuggest"
 		]
 	},
 	"MessagesDirs": {

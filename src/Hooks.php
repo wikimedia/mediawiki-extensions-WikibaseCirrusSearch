@@ -8,8 +8,10 @@ use CirrusSearch\Profile\SearchProfileRepositoryTransformer;
 use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Query\FullTextQueryBuilder;
 use CirrusSearch\Search\SearchContext;
+use Language;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
+use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
@@ -324,6 +326,67 @@ class Hooks {
 		$languageCodes = WikibaseContentLanguages::getDefaultInstance()
 			->getContentLanguages( 'term' )->getLanguages();
 		$extraFeatures[] = new InLabelFeature( $repo->getLanguageFallbackChainFactory(), $languageCodes );
+	}
+
+	/**
+	 * Will instantiate descriptions for search results.
+	 * @param WikibaseRepo $repo
+	 * @param Language $lang
+	 * @param array $results
+	 */
+	public static function amendSearchResults( WikibaseRepo $repo, Language $lang, array &$results ) {
+		$lookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
+		$idParser = $repo->getEntityIdParser();
+		$entityIds = [];
+		$namespaceLookup = $repo->getEntityNamespaceLookup();
+
+		foreach ( $results as &$result ) {
+			if ( empty( $result['title'] ) ||
+				!$namespaceLookup->isEntityNamespace( $result['title']->getNamespace() ) ) {
+				continue;
+			}
+			try {
+				$title = $result['title']->getText();
+				$entityId = $idParser->parse( $title );
+				$entityIds[] = $entityId;
+				$result['entityId'] = $entityId;
+			} catch ( EntityIdParsingException $e ) {
+				continue;
+			}
+		}
+		if ( empty( $entityIds ) ) {
+			return;
+		}
+		$lookup = $lookupFactory->newLabelDescriptionLookup( $lang, $entityIds );
+		$formatterFactory = $repo->getEntityLinkFormatterFactory( $lang );
+		foreach ( $results as &$result ) {
+			if ( empty( $result['entityId'] ) ) {
+				continue;
+			}
+			$entityId = $result['entityId'];
+			unset( $result['entityId'] );
+			$label = $lookup->getLabel( $entityId );
+			if ( !$label ) {
+				continue;
+			}
+			$linkFormatter = $formatterFactory->getLinkFormatter( $entityId->getEntityType() );
+			$result['extract'] = strip_tags( $linkFormatter->getHtml( $entityId, [
+				'value' => $label->getText(),
+				'language' => $label->getActualLanguageCode(),
+			] ) );
+		}
+	}
+
+	/**
+	 * Will instantiate descriptions for search results.
+	 * @param array $results
+	 */
+	public static function onApiOpenSearchSuggest( &$results ) {
+		if ( empty( $results ) ) {
+			return;
+		}
+		$repo = WikibaseRepo::getDefaultInstance();
+		self::amendSearchResults( $repo, $repo->getUserLanguage(), $results );
 	}
 
 }

@@ -9,7 +9,6 @@
                             "all.plain^1",
                             "all^0.5"
                         ],
-                        "auto_generate_phrase_queries": true,
                         "phrase_slop": 0,
                         "default_operator": "AND",
                         "allow_leading_wildcard": true,

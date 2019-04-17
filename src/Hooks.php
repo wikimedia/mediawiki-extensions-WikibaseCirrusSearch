@@ -145,11 +145,7 @@ class Hooks {
 		if ( !defined( 'MW_PHPUNIT_TEST' ) && !$config->enabled() ) {
 			return;
 		}
-		if ( array_key_exists( 'wikibase_base',
-			$service->listProfileRepositories( SearchProfileService::RESCORE ) ) ) {
-			// Safeguard for transition period
-			return;
-		}
+
 		/* @phan-suppress-next-line PhanTypeMismatchArgument */
 		self::registerSearchProfiles( $service, $config );
 	}

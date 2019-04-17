@@ -13,7 +13,6 @@ use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\EntityFullTextQueryBuilder;
-use Wikibase\Search\Elastic\EntitySearchElastic;
 use Wikibase\Search\Elastic\Hooks;
 use Wikibase\Search\Elastic\WikibaseSearchConfig;
 
@@ -58,7 +57,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		foreach ( glob( __DIR__ . '/data/entityFulltext/*.query' ) as $queryFile ) {
 			$testName = substr( basename( $queryFile ), 0, - 6 );
 			$query = json_decode( file_get_contents( $queryFile ), true );
-			$expectedFile = "$testName-es" . EntitySearchElastic::getExpectedElasticMajorVersion() . '.expected';
+			$expectedFile = "$testName.expected";
 			$tests[$testName] = [ $query, __DIR__ . '/data/entityFulltext/' . $expectedFile ];
 		}
 

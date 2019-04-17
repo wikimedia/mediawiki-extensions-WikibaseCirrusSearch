@@ -7,6 +7,10 @@
 			"Stryn"
 		]
 	},
+	"wikibasecirrus-desc": "Додаток на Викибазата за употреба на можноста CirrusSearch",
+	"wikibasecirrus-inlabel-unknown-language-code": "клучниот збор во натписот содржи непознат јазичен код: $1",
+	"wikibasecirrus-inlabel-too-many-language-codes": "клучниот збор во натписот има премногу јазични кодови. Пребарувам $1 од {{PLURAL:$2|укажаниот јазик|укажаните $2 јазика}}",
+	"wikibasecirrus-inlabel-no-query-provided": "на клучниот збор во натписот му е укажано празно пребарување",
 	"wikibasecirrus-search-bad-entity-type": "Неисправен тип на единица: $1",
 	"wikibasecirrus-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1"
 }

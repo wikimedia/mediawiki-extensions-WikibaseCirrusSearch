@@ -3,7 +3,6 @@
 namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Search\ResultsType;
-use CirrusSearch\Search\SearchContext;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Term\Term;
@@ -129,11 +128,10 @@ class ElasticTermResult implements ResultsType {
 
 	/**
 	 * Convert search result from ElasticSearch result set to TermSearchResult.
-	 * @param SearchContext $context
 	 * @param \Elastica\ResultSet $result
 	 * @return TermSearchResult[] Set of search results, the types of which vary by implementation.
 	 */
-	public function transformElasticsearchResult( SearchContext $context, \Elastica\ResultSet $result ) {
+	public function transformElasticsearchResult( \Elastica\ResultSet $result ) {
 		$results = [];
 		foreach ( $result->getResults() as $r ) {
 			$sourceData = $r->getSource();

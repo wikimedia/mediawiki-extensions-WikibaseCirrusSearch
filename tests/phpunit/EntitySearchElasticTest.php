@@ -67,6 +67,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 			$params['type'], $limit, $params['strictlanguage']
 		);
 		$decodedQuery = json_decode( $elasticQuery, true );
+		$decodedQuery = $decodedQuery['__main__'] ?? $decodedQuery;
 		unset( $decodedQuery['path'] );
 		// serialize_precision set for T205958
 		$this->setIniSetting( 'serialize_precision', 10 );

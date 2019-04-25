@@ -124,6 +124,9 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			);
 			// comes out as JSON data
 			$resultData = json_decode( $result, true );
+			// Transitional, query dumps will always be wrapped in an array
+
+			$resultData = $resultData['__main__'] ?? $resultData;
 			// FIXME: this is very brittle, but I don't know how to make it better.
 			$matchId = $resultData['query']['query']['bool']['should'][1]['term']['title.keyword'];
 			try {

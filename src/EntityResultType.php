@@ -2,7 +2,6 @@
 namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Search\BaseResultsType;
-use CirrusSearch\Search\SearchContext;
 use CirrusSearch\Searcher;
 use Wikibase\LanguageFallbackChain;
 
@@ -120,11 +119,10 @@ class EntityResultType extends BaseResultsType {
 	}
 
 	/**
-	 * @param SearchContext $context
 	 * @param \Elastica\ResultSet $result
 	 * @return mixed Set of search results, the types of which vary by implementation.
 	 */
-	public function transformElasticsearchResult( SearchContext $context, \Elastica\ResultSet $result ) {
+	public function transformElasticsearchResult( \Elastica\ResultSet $result ) {
 		return new EntityResultSet( $this->displayLanguage, $this->fallbackChain, $result );
 	}
 

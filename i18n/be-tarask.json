@@ -9,6 +9,7 @@
 			"Ladsgroup"
 		]
 	},
+	"wikibasecirrus-desc": "Пашырэньне Вікібазы для выкарыстаньня функцыяналу CirrusSearch",
 	"wikibasecirrus-rescore-profile-prefix": "Профіль rescore па змоўчаньні для запаўняльнага пошуку",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Профіль rescore для запаўняльнага пошуку з падтрымкай сьцьверджаньняў",
 	"wikibasecirrus-rescore-profile-fulltext": "Профіль rescore па змоўчаньні для паўнатэкставага пошуку",

@@ -138,7 +138,8 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 
 			if ( !isset( $this->languages[$languageCode] ) ) {
 				$warningCollector->addWarning(
-					'wikibasecirrus-inlabel-unknown-language-code',
+					'wikibasecirrus-keywordfeature-unknown-language-code',
+					'inlabel',
 					$languageCode );
 				continue;
 			}
@@ -223,8 +224,8 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		$fields = $this->parseLanguages( $languages, $warningCollector );
 		if ( count( $fields ) > self::MAX_FIELDS ) {
 			$warningCollector->addWarning(
-					'wikibasecirrus-inlabel-too-many-language-codes',
-					self::MAX_FIELDS, count( $fields ) );
+					'wikibasecirrus-keywordfeature-too-many-language-codes',
+					'inlabel', self::MAX_FIELDS, count( $fields ) );
 			$fields = array_slice( $fields, 0, self::MAX_FIELDS );
 		}
 

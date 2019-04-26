@@ -12,6 +12,7 @@ use MediaWiki\MediaWikiServices;
 use RequestContext;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\Fields\StatementsField;
+use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
 use Wikibase\Search\Elastic\Query\WbStatementQuantityFeature;
@@ -324,6 +325,8 @@ class Hooks {
 		$languageCodes = WikibaseContentLanguages::getDefaultInstance()
 			->getContentLanguages( 'term' )->getLanguages();
 		$extraFeatures[] = new InLabelFeature( $repo->getLanguageFallbackChainFactory(), $languageCodes );
+
+		$extraFeatures[] = new HasDataForLangFeature( $languageCodes );
 	}
 
 }

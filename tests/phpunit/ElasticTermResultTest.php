@@ -2,8 +2,6 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use CirrusSearch;
-use CirrusSearch\Search\SearchContext;
 use Elastica\Result;
 use Elastica\ResultSet;
 use MediaWikiTestCase;
@@ -353,14 +351,12 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 			$this->getMockFallbackChain( $displayLanguages )
 		);
 
-		$context = $this->getMockBuilder( SearchContext::class )->disableOriginalConstructor()->getMock();
-
 		$result = new Result( $resultData );
 		$resultSet = $this->getMockBuilder( ResultSet::class )
 			->disableOriginalConstructor()->getMock();
 		$resultSet->expects( $this->once() )->method( 'getResults' )->willReturn( [ $result ] );
 
-		$converted = $res->transformElasticsearchResult( $context, $resultSet );
+		$converted = $res->transformElasticsearchResult( $resultSet );
 		$this->assertCount( 1, $converted );
 		$this->assertArrayHasKey( $expected['id'], $converted );
 		$converted = $converted[$expected['id']];

@@ -20,8 +20,8 @@
 		]
 	},
 	"wikibasecirrus-desc": "Extensão Wikibase para usar a funcionalidade CirrusSearch",
-	"wikibasecirrus-inlabel-unknown-language-code": "A palavra-chave de pesquisa ''inlabel'' contém um código de língua desconhecido: $1",
-	"wikibasecirrus-inlabel-too-many-language-codes": "A palavra-chave de pesquisa ''inlabel'' contém demasiados códigos de língua. A pesquisar $1 {{PLURAL:$2|da $2 língua fornecida|das $2 línguas fornecidas}}",
+	"wikibasecirrus-keywordfeature-unknown-language-code": "A palavra-chave $1 contém um código de língua desconhecido: $2",
+	"wikibasecirrus-keywordfeature-too-many-language-codes": "A palavra-chave $1 contém demasiados códigos de língua. A pesquisar $2 {{PLURAL:$2|da $3 língua fornecida|das $3 línguas fornecidas}}",
 	"wikibasecirrus-inlabel-no-query-provided": "A palavra-chave de pesquisa ''inlabel'' contém um texto de pesquisa vazio",
 	"wikibasecirrus-rescore-profile-prefix": "Perfil padrão de reavaliação para pesquisa de preenchimento",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Perfil de reavaliação para pesquisa de preenchimento com reforço de declarações",

@@ -31,8 +31,8 @@
 		]
 	},
 	"wikibasecirrus-desc": "ملحق قاعدة ويكي لاستخدام وظيفة CirrusSearch",
-	"wikibasecirrus-inlabel-unknown-language-code": "الكلمة الأساسية inlabel تحتوي على رمز لغة غير معروف: $1",
-	"wikibasecirrus-inlabel-too-many-language-codes": "قدمت الكلمة الرئيسية في inlabel عددا كبيرا من رموز اللغات، جارٍ البحث عن $1 من $2 {{PLURAL:$2|لغة|لغات}} متوفرة",
+	"wikibasecirrus-keywordfeature-unknown-language-code": "تحتوي الكلمة الأساسية $1 على رمز لغة غير معروف: $2",
+	"wikibasecirrus-keywordfeature-too-many-language-codes": "قدمت الكلمة الرئيسية $1 عددا كبيرا من رموز اللغات، جارٍ البحث عن $2 من $3 {{PLURAL:$2|لغة|لغات}} متوفرة",
 	"wikibasecirrus-inlabel-no-query-provided": "تم توفير الكلمة المفتاحية inlabel في سلسلة بحث فارغة",
 	"wikibasecirrus-rescore-profile-prefix": "ملف التعريف الافتراضي للبحث عن الإكمال",
 	"wikibasecirrus-rescore-profile-prefix-boost": "الملف الشخصي للبحث عن الانتهاء مع زيادة البيان",

@@ -33,8 +33,8 @@
 		]
 	},
 	"wikibasecirrus-desc": "Wikibase-Erweiterung zur Nutzung der CirrusSearch-Funktionalität",
-	"wikibasecirrus-inlabel-unknown-language-code": "Das Schlüsselwort „inlabel“ enthält einen unbekannten Sprachcode: $1",
-	"wikibasecirrus-inlabel-too-many-language-codes": "Beim Schlüsselwort „inlabel“ wurden zu viele Sprachcodes angegeben. Es {{PLURAL:$2|wird eine Sprache|werden $1 der $2 angegebenen Sprachen}} durchsucht.",
+	"wikibasecirrus-keywordfeature-unknown-language-code": "Das Schlüsselwort $1 enthält einen unbekannten Sprachcode: $2",
+	"wikibasecirrus-keywordfeature-too-many-language-codes": "Im Schlüsselwort $1 wurden zu viele Sprachcodes angegeben. Es werden $2 der $3 angegebenen {{PLURAL:$3|Sprache|Sprachen}} durchsucht.",
 	"wikibasecirrus-inlabel-no-query-provided": "Beim Schlüsselwort „inlabel“ wurde eine leere Such-Zeichenfolge angegeben",
 	"wikibasecirrus-rescore-profile-prefix": "Standard-Rescore-Profil für die Vervollständigungssuche",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Rescore-Profil für die Vervollständigungssuche mit Aussagenverstärkung",

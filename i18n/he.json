@@ -16,8 +16,6 @@
 		]
 	},
 	"wikibasecirrus-desc": "הרחבת ויקיבייס לשימוש ב־CirrusSearch",
-	"wikibasecirrus-inlabel-unknown-language-code": "מילת המפתח inlabel מכילה קוד שפה בלתי־ידוע: $1",
-	"wikibasecirrus-inlabel-too-many-language-codes": "מילת המפתח inlabel נתנה יותר מדי קודי שפה. חיפוש $1 מתוך $2 {{PLURAL:$2|השפות}} שניתנו.",
 	"wikibasecirrus-inlabel-no-query-provided": "למילת המפתח inlabel ניתנה מחרוזת חיפוש ריקה",
 	"wikibasecirrus-rescore-profile-prefix": "פרופיל דירוג משני התחלתי לחיפוש השלמה",
 	"wikibasecirrus-rescore-profile-prefix-boost": "פרופיל להשלמת החיפוש עם הצהרה מוגברת",

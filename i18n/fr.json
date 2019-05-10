@@ -58,8 +58,8 @@
 		]
 	},
 	"wikibasecirrus-desc": "Extension de Wikibase pour utiliser la fonctionnalité CirrusSearch",
-	"wikibasecirrus-inlabel-unknown-language-code": "le mot-clé dans le libellé contient un code de langue inconnu : $1",
-	"wikibasecirrus-inlabel-too-many-language-codes": "le mot-clé dans le libellé a fourni trop de codes de langue. Recherche de $1 sur $2 {{PLURAL:$2|langue fournie|langues fournies}}",
+	"wikibasecirrus-keywordfeature-unknown-language-code": "Le mot-clé $1 contient un code de langue inconnu : $2",
+	"wikibasecirrus-keywordfeature-too-many-language-codes": "Le mot-clé $1 fournit trop de codes de langue. Rechercher $2 parmi {{PLURAL:$3|la langue fournie|les $3 langues fournies}}",
 	"wikibasecirrus-inlabel-no-query-provided": "le mot-clé dans le libellé a été fourni avec une chaîne de recherche vide",
 	"wikibasecirrus-rescore-profile-prefix": "Profil de nouvelle notation par défaut pour la recherche de complétude",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Profil de nouvelle notation pour la recherche de complétude avec amélioration de déclaration",

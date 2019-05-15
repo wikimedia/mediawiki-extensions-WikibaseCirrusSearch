@@ -28,9 +28,12 @@
 			"Wxyveronica",
 			"Hanyanbo98",
 			"夢蝶葬花",
-			"A Chinese Wikipedian"
+			"A Chinese Wikipedian",
+			"科劳"
 		]
 	},
+	"wikibasecirrus-keywordfeature-unknown-language-code": "关键词$1包含无法识别的语言代码：$2",
+	"wikibasecirrus-keywordfeature-too-many-language-codes": "关键词$1包含的语言代码个数过多，将搜索$3种语言中的$2种。",
 	"wikibasecirrus-rescore-profile-prefix": "默认用于完成搜索的重新计分详情",
 	"wikibasecirrus-rescore-profile-prefix-boost": "语句增强的完成搜索重评分配置文件",
 	"wikibasecirrus-rescore-profile-fulltext": "默认用于全文搜索的重新计分详情",

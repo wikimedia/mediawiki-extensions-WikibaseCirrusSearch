@@ -2,7 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Fields;
 
-use CirrusSearch;
+use CirrusSearch\CirrusSearch;
 use MWException;
 use SearchEngine;
 use SearchIndexField;

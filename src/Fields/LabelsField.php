@@ -1,7 +1,7 @@
 <?php
 namespace Wikibase\Search\Elastic\Fields;
 
-use CirrusSearch;
+use CirrusSearch\CirrusSearch;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;

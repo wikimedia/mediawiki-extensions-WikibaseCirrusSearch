@@ -6,6 +6,9 @@
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
+use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
+use Wikibase\Repo\Api\CombinedEntitySearchHelper;
+use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 use Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
@@ -19,12 +22,25 @@ return [
 	'item' => [
 		'entity-search-callback' => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
-			return new EntitySearchElastic(
-				$repo->getLanguageFallbackChainFactory(),
-				$repo->getEntityIdParser(),
-				$repo->getUserLanguage(),
-				$repo->getContentModelMappings(),
-				$request
+			return new CombinedEntitySearchHelper(
+				[
+					new EntityIdSearchHelper(
+						$repo->getEntityLookup(),
+						$repo->getEntityIdParser(),
+						new LanguageFallbackLabelDescriptionLookup(
+							$repo->getTermLookup(),
+							$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+						),
+						$repo->getEntityTypeToRepositoryMapping()
+					),
+					new EntitySearchElastic(
+						$repo->getLanguageFallbackChainFactory(),
+						$repo->getEntityIdParser(),
+						$repo->getUserLanguage(),
+						$repo->getContentModelMappings(),
+						$request
+					)
+				]
 			);
 		},
 		'search-field-definitions' => function ( array $languageCodes, SettingsArray $searchSettings ) {
@@ -58,12 +74,25 @@ return [
 		},
 		'entity-search-callback' => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
-			return new EntitySearchElastic(
-				$repo->getLanguageFallbackChainFactory(),
-				$repo->getEntityIdParser(),
-				$repo->getUserLanguage(),
-				$repo->getContentModelMappings(),
-				$request
+			return new CombinedEntitySearchHelper(
+				[
+					new EntityIdSearchHelper(
+						$repo->getEntityLookup(),
+						$repo->getEntityIdParser(),
+						new LanguageFallbackLabelDescriptionLookup(
+							$repo->getTermLookup(),
+							$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+						),
+						$repo->getEntityTypeToRepositoryMapping()
+					),
+					new EntitySearchElastic(
+						$repo->getLanguageFallbackChainFactory(),
+						$repo->getEntityIdParser(),
+						$repo->getUserLanguage(),
+						$repo->getContentModelMappings(),
+						$request
+					)
+				]
 			);
 		},
 		'fulltext-search-context' => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,

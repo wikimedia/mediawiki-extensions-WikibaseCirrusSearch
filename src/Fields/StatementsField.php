@@ -258,9 +258,11 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		}
 
 		$config = [
-			'type' => 'keyword',
-			'ignore_above' => 255,
+			'type' => 'text',
 			'copy_to' => 'all',
+			'analyzer' => 'lowercase_keyword',
+			'norms' => false,
+			'index_options' => 'docs',
 		];
 		// Subfield indexing only property names, so we could do matches
 		// like "property exists" without specifying the value.

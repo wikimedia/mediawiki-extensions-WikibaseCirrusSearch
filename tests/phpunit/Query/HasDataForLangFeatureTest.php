@@ -24,6 +24,20 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 
 	public function applyProvider() {
 		return [
+			'all languages' => [
+				'expected' => [
+					'bool' => [
+						'should' => [
+							[
+								'exists' => [
+									'field' => 'labels_all'
+								]
+							]
+						]
+					]
+				],
+				'search string' => 'haslabel:*',
+			],
 			'(hasdescription) description exists' => [
 				'expected' => [
 					'bool' => [
@@ -227,7 +241,7 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 				'warnings' => [
 					[ 'wikibasecirrus-keywordfeature-too-many-language-codes', 'haslabel', 30, 32 ]
 				]
-			]
+			],
 		];
 	}
 

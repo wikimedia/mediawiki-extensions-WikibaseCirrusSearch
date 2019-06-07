@@ -74,11 +74,16 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 	 * Builds a boolean query requiring the existence of a value in each query language for the
 	 * specified field.
 	 *
+	 * @param string $key the search keywords
 	 * @param array $langCodes valid language codes parsed from the query term
-	 * @return \Elastica\Query\BoolQuery
+	 * @return BoolQuery
 	 */
 	private function makeQuery( $key, array $langCodes ) {
 		$query = new BoolQuery();
+		if ( $langCodes === [ '__all__' ] ) {
+			$query->addShould( new Exists( 'labels_all' ) );
+			return $query;
+		}
 		foreach ( $langCodes as $lang ) {
 			$query->addShould( new Exists( $this->getFieldName( $key ) . '.' . $lang . '.plain' ) );
 		};
@@ -102,6 +107,9 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 		$suffix,
 		WarningCollector $warningCollector
 	) {
+		if ( $key !== 'hasdescription' && $value === '*' ) {
+			return [ '__all__' ];
+		}
 		$langCodes = [];
 
 		$langCodeCandidates = array_unique( array_map( function( $elem ) {

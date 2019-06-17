@@ -193,7 +193,13 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			[ 'item', 'property' ],
 			[ '' => 'conceptBaseUri:' ],
 			new EntitySourceDefinitions( [] ),
-			new DataAccessSettings( 100, false, false, DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION )
+			new DataAccessSettings(
+				100,
+				false,
+				false,
+				DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
+				true // DataAccessSettings::PROPERTY_TERMS_NORMALIZED
+			)
 		);
 
 		$apiModule->execute();

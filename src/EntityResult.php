@@ -237,7 +237,7 @@ class EntityResult extends Result implements ExtendedResult {
 	 * @param array $terms
 	 * @return string
 	 */
-	public function getTextSnippet( $terms ) {
+	public function getTextSnippet( $terms = [] ) {
 		return HtmlArmor::getHtml( $this->descriptionHighlightedData['value'] );
 	}
 

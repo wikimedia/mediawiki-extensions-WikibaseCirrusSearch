@@ -15,7 +15,7 @@ $cfg['exclude_file_list'] = array_merge(
 	$cfg['exclude_file_list'],
 	[
 		'../../extensions/Wikibase/repo/tests/phpunit/includes/Search/Elastic/DispatchingQueryBuilderTest.php',
-		'../../extensions/Wikibase/tests/phan/stubs/cirrussearch.php',
+		'../../extensions/Wikibase/.phan/stubs/cirrussearch.php',
 	]
 );
 

@@ -61,6 +61,12 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 			$tests[$testName] = [ $query, __DIR__ . '/data/entityFulltext/' . $expectedFile ];
 		}
 
+		foreach ( glob( __DIR__ . '/data/entityFulltextIgnored/*.query' ) as $queryFile ) {
+			$testName = substr( basename( $queryFile ), 0, - 6 );
+			$query = json_decode( file_get_contents( $queryFile ), true );
+			$tests[$testName] = [ $query, false ];
+		}
+
 		return $tests;
 	}
 
@@ -85,7 +91,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 	/**
 	 * @dataProvider searchDataProvider
 	 * @param string[] $params
-	 * @param string $expected
+	 * @param string|false $expected
 	 */
 	public function testSearchElastic( $params, $expected ) {
 		$this->setMwGlobals( [
@@ -114,6 +120,10 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		$context = new SearchContext( $config, $params['ns'] );
 		$defaultBuilder->build( $context, $params['search'] );
 		$builder->build( $context, $params['search'] );
+		if ( $expected === false ) {
+			$this->assertNotContains( EntityFullTextQueryBuilder::ENTITY_FULL_TEXT_MARKER, $context->getSyntaxUsed() );
+			return;
+		}
 		$query = $context->getQuery();
 		$rescore = $context->getRescore();
 

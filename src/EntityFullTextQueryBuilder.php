@@ -21,6 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  * Builder for entity fulltext queries
  */
 class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
+	const ENTITY_FULL_TEXT_MARKER = 'entity_full_text';
 
 	/**
 	 * @var array
@@ -118,7 +119,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 */
 	protected function buildEntitySearchQuery( SearchContext $searchContext, $term ) {
 		$searchContext->setProfileContext( EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT );
-		$searchContext->addSyntaxUsed( 'entity_full_text', 10 );
+		$searchContext->addSyntaxUsed( self::ENTITY_FULL_TEXT_MARKER, 10 );
 		/*
 		 * Overall query structure is as follows:
 		 * - Bool with:

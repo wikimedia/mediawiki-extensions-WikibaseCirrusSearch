@@ -99,7 +99,7 @@ class DispatchingQueryBuilderTest extends MediaWikiTestCase {
 		parent::setUpBeforeClass();
 	}
 
-	static private $NS_MAP = [
+	private static $NS_MAP = [
 		0 => 'test-item',
 		1 => 'test-property',
 	];

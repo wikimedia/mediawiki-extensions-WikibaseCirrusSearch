@@ -81,7 +81,7 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 	private function makeQuery( $key, array $langCodes ) {
 		$query = new BoolQuery();
 		if ( $langCodes === [ '__all__' ] ) {
-			$query->addShould( new Exists( 'labels_all' ) );
+			$query->addShould( new Exists( 'labels_all.plain' ) );
 			return $query;
 		}
 		foreach ( $langCodes as $lang ) {

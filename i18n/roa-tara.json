@@ -4,5 +4,18 @@
 			"Joetaras"
 		]
 	},
-	"wikibasecirrus-search-bad-entity-type": "Tipe de endità errate: $1"
+	"wikibasecirrus-desc": "Estenzione Wikibase pe ausà 'a funzione CirrusSearch",
+	"wikibasecirrus-keywordfeature-unknown-language-code": "'A parola chiave $1 tène 'nu codece de lènghe scanusciute: $2",
+	"wikibasecirrus-keywordfeature-too-many-language-codes": "'A parola chiave $1 tène troppe codece de lènghe. Stoche a cerche $2 de le $3 {{PLURAL:$3|lènghe}} mise",
+	"wikibasecirrus-inlabel-no-query-provided": "parole chiave jndr'ò l'etichette tène 'na stringhe de recerche vacande",
+	"wikibasecirrus-rescore-profile-prefix": "Profile de recupere predefinite pa recerche de combletamende",
+	"wikibasecirrus-rescore-profile-prefix-boost": "Recupere 'u profile pa recerche de combletamende cu potenziamende de le 'struziune",
+	"wikibasecirrus-rescore-profile-fulltext": "Profile de recupere predefinite pa recerche fulltext",
+	"wikibasecirrus-rescore-profile-fulltext-phrase": "Recupere 'u profile pa recerche fulltext cu 'u pundegge pe frase",
+	"wikibasecirrus-search-bad-entity-type": "Tipe de endità errate: $1",
+	"wikibasecirrus-search-bad-profile-name": "Recerche d'u nome d'u profile sbagliate: $1",
+	"wikibasecirrus-search-namespace-mix": "'U misckamende de le namespace de endità e vôsce jndr'à recerche pe mò non g'è supportate. Sulamende le namespace de le endità ponne essere cercate.",
+	"wikibasecirrus-search-config-notfound": "Configuraizone d'a recerche fulltext non g'ha state acchiate: $1",
+	"wikibasecirrus-search-config-badclass": "'Nderrogazione d'u costruttore de classe sbagliate: $1",
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "'a parola chiave haswbstatement nò tène nisciuna frase valide"
 }

@@ -4,11 +4,17 @@
 			"Bjankuloski06",
 			"Macofe",
 			"Ladsgroup",
-			"Stryn"
+			"Stryn",
+			"Vlad5250"
 		]
 	},
 	"wikibasecirrus-desc": "Додаток на Викибазата за употреба на можноста CirrusSearch",
+	"wikibasecirrus-keywordfeature-unknown-language-code": "Клучниот збор $1 содржи непознат јазичен код: $2",
 	"wikibasecirrus-inlabel-no-query-provided": "на клучниот збор во натписот му е укажано празно пребарување",
 	"wikibasecirrus-search-bad-entity-type": "Неисправен тип на единица: $1",
-	"wikibasecirrus-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1"
+	"wikibasecirrus-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1",
+	"wikibasecirrus-search-namespace-mix": "Тековно не е поддржано мешањето на именските простори за единица и именски простор во пребарувањата. Ќе се пребараат само единици.",
+	"wikibasecirrus-search-config-notfound": "Не пронајдов поставеност за целотекстно пребарување: $1",
+	"wikibasecirrus-search-config-badclass": "Неисправна срочувачка класа за барето: $1",
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Клучниот збор haswbstatement не содржи важечки искази"
 }

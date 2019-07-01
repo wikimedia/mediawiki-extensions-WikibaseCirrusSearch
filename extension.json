@@ -56,7 +56,7 @@
 			"description": "Rescore function chain definitions holder."
 		},
 		"StatementBoost": {
-			"value": null,
+			"value": [],
 			"description": "Type (de)boosts for rescoring functions."
 		},
 		"UseStemming": {

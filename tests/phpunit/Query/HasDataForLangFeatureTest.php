@@ -30,7 +30,7 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 						'should' => [
 							[
 								'exists' => [
-									'field' => 'labels_all'
+									'field' => 'labels_all.plain'
 								]
 							]
 						]

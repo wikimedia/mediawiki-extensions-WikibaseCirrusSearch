@@ -79,14 +79,21 @@ class DispatchingQueryBuilder implements FullTextQueryBuilder {
 			$searchContext->addWarning( 'wikibasecirrus-search-config-notfound', $searchType );
 			return;
 		}
-		$builderClass = $qbSettings['builder_class'];
 
-		if ( !is_callable( [ $builderClass, 'newFromGlobals' ] ) ) {
-			$searchContext->addWarning( 'wikibasecirrus-search-config-badclass', $builderClass );
+		if ( isset( $qbSettings['builder_factory'] ) ) {
+			$factoryMethod = $qbSettings['builder_factory'];
+		} else {
+			$builderClass = $qbSettings['builder_class'];
+			$factoryMethod = [ $builderClass, 'newFromGlobals' ];
+		}
+
+		if ( !is_callable( $factoryMethod ) ) {
+			$searchContext->addWarning( 'wikibasecirrus-search-config-badclass',
+				is_array( $factoryMethod ) ? implode( '::', $factoryMethod ) : 'function' );
 			return;
 		}
 
-		$builder = $builderClass::newFromGlobals( $qbSettings['settings'] );
+		$builder = $factoryMethod( $qbSettings['settings'] );
 		if ( !( $builder instanceof FullTextQueryBuilder ) ) {
 			$searchContext->addWarning( 'wikibasecirrus-search-config-badclass', $builderClass );
 			return;

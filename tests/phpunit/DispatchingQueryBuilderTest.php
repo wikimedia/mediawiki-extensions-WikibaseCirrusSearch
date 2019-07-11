@@ -87,7 +87,9 @@ class DispatchingQueryBuilderTest extends MediaWikiTestCase {
 				'settings' => []
 			],
 			'profile2' => [
-				'builder_class' => get_class( self::$mockBuilder2 ),
+				'builder_factory' => function( array $settings ) {
+					return self::$mockBuilder2;
+				},
 				'settings' => []
 			],
 			'profile3' => [
@@ -182,7 +184,7 @@ class DispatchingQueryBuilderTest extends MediaWikiTestCase {
 				[ 0 ],
 				[],
 				[
-					[ 'wikibasecirrus-search-config-badclass', 'stdClass' ]
+					[ 'wikibasecirrus-search-config-badclass', 'stdClass::newFromGlobals' ]
 				]
 			],
 			"bad profile" => [
@@ -257,7 +259,13 @@ class DispatchingQueryBuilderTest extends MediaWikiTestCase {
 		$builder->build( $context, "test" );
 
 		$called_classes = array_map( function ( $prof ) {
-			return self::$PROFILES[$prof]['builder_class'] ?? null;
+			if ( isset( self::$PROFILES[$prof]['builder_class'] ) ) {
+				return self::$PROFILES[$prof]['builder_class'];
+			}
+			if ( isset( self::$PROFILES[$prof]['builder_factory'] ) ) {
+				return get_class( ( self::$PROFILES[$prof]['builder_factory'] )( self::$PROFILES[$prof]['settings'] ) );
+			}
+			return null;
 		}, $called );
 
 		$this->assertEquals( $called_classes, self::$buildCalled, "Callers do not match" );

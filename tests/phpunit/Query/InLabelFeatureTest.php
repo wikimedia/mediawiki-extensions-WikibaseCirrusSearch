@@ -40,7 +40,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 				'expected' => [
 					'multi_match' => [
 						'query' => 'gift',
-						'fields' => [ 'labels_all.plain' ],
+						'fields' => [ 'labels_all.plain', 'descriptions.*.plain' ],
 						'operator' => 'and',
 					],
 				],
@@ -130,6 +130,23 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 					],
 				],
 				'search string' => 'inlabel:colaborativa@pt-br*',
+			],
+			'apply language fallbacks with * for incaption' => [
+				'expected' => [
+					'multi_match' => [
+						'query' => 'colaborativa',
+						'fields' => [
+							'labels.pt-br.plain',
+							'descriptions.pt-br.plain',
+							'labels.pt.plain',
+							'descriptions.pt.plain',
+							'labels.en.plain',
+							'descriptions.en.plain',
+						],
+						'operator' => 'and',
+					],
+				],
+				'search string' => 'incaption:colaborativa@pt-br*',
 			],
 			'unknown languages generate warnings' => [
 				'expected' => [

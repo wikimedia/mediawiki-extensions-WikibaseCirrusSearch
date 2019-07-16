@@ -11,8 +11,10 @@ use CirrusSearch\WarningCollector;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MultiMatch;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Search\Elastic\Fields\DescriptionsField;
 use Wikibase\Search\Elastic\Fields\LabelsField;
 use Wikibase\Search\Elastic\Fields\AllLabelsField;
+use Wikimedia\Assert\Assert;
 
 /**
  * Handles the search keyword 'inlabel:'
@@ -32,6 +34,22 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 
 	/** @var true[] Keyed by known language codes for set membership check */
 	private $languages;
+
+	/**
+	 * @var array
+	 */
+	private static $FIELDS_PER_KEYWORD = [
+		// query both label and description time for the sanitizer
+		// to catch up (ref T226722)
+		'incaption' => [
+			'fields' => [ LabelsField::NAME, DescriptionsField::NAME ],
+			'all_fields' => [ AllLabelsField::NAME . '.plain', DescriptionsField::NAME . '.*.plain' ]
+		],
+		'inlabel' => [
+			'fields' => [ LabelsField::NAME ],
+			'all_fields' => [ AllLabelsField::NAME . '.plain' ]
+		]
+	];
 
 	/**
 	 * @param LanguageFallbackChainFactory $languageChainFactory
@@ -114,11 +132,12 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 	}
 
 	/**
+	 * @param array $useFields
 	 * @param string $languageString
 	 * @param WarningCollector $warningCollector
 	 * @return string[]
 	 */
-	private function parseLanguages( $languageString, WarningCollector $warningCollector ): array {
+	private function parseLanguages( array $useFields, $languageString, WarningCollector $warningCollector ): array {
 		$fields = [];
 		foreach ( explode( ',', $languageString ) as $languageCode ) {
 			$languageCode = mb_strtolower( $languageCode );
@@ -144,8 +163,9 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 				continue;
 			}
 
-			$fields[LabelsField::NAME . '.' . $languageCode . '.plain'] = true;
-			$langCodeFields = [ LabelsField::NAME . '.' . $languageCode ];
+			foreach ( $useFields as $field ) {
+				$fields[$field . '.' . $languageCode . '.plain'] = true;
+			}
 			if ( $withFallbacks ) {
 				$fallbacks = $this->languageChainFactory
 					->newFromLanguageCode( $languageCode )
@@ -154,7 +174,9 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 					if ( $withoutEnFallback && $fallbackCode == 'en' ) {
 						continue;
 					}
-					$fields[LabelsField::NAME . '.' . $fallbackCode . '.plain'] = true;
+					foreach ( $useFields as $field ) {
+						$fields[$field . '.' . $fallbackCode . '.plain'] = true;
+					}
 				}
 			}
 		}
@@ -183,6 +205,8 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		WarningCollector $warningCollector
 	) {
 		$isPhrase = $quotedValue !== $value;
+		Assert::precondition( isset( self::$FIELDS_PER_KEYWORD[$key] ), "Must have the list of fields for $key defined" );
+		$allLabelFields = self::$FIELDS_PER_KEYWORD[$key]['all_fields'];
 		if ( strlen( $value ) === 0 ) {
 			$warningCollector->addWarning(
 				'wikibasecirrus-inlabel-no-query-provided' );
@@ -195,7 +219,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		$atPos = strrpos( $value, '@' );
 		if ( $atPos === false ) {
 			return [
-				'fields' => [ AllLabelsField::NAME . '.plain' ],
+				'fields' => $allLabelFields,
 				'string' => $value,
 				'phrase' => $isPhrase,
 			];
@@ -216,12 +240,13 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		// will return false and php7 will return ''
 		if ( $languages === false || $languages === '' || $languages === '*' ) {
 			return [
-				'fields' => [ AllLabelsField::NAME . '.plain' ],
+				'fields' => $allLabelFields,
 				'string' => $search,
 				'phrase' => $isPhrase,
 			];
 		}
-		$fields = $this->parseLanguages( $languages, $warningCollector );
+		$fieldsToUse = self::$FIELDS_PER_KEYWORD[$key]['fields'];
+		$fields = $this->parseLanguages( $fieldsToUse, $languages, $warningCollector );
 		if ( count( $fields ) > self::MAX_FIELDS ) {
 			$warningCollector->addWarning(
 					'wikibasecirrus-keywordfeature-too-many-language-codes',

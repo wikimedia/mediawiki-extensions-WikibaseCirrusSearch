@@ -20,9 +20,7 @@ Development
 The fastest way to get started with WikibaseCirrusSearch development is to use MediaWiki-Vagrant.
 1.  Follow steps here: https://www.mediawiki.org/wiki/MediaWiki-Vagrant#Quick_start
 2.  Now execute the following:
-vagrant enable-role wikibase
-vagrant enable-role cirrussearch
-vagrant enable-role wikibase-cirrussearch
+vagrant enable-role wikibasecirrussearch
 vagrant provision
 
 This can take some time but it produces a clean development environment in a virtual machine

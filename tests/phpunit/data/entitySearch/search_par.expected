@@ -96,6 +96,8 @@
         "_source": [
             "namespace",
             "title",
+            "namespace_text",
+            "wiki",
             "labels.en",
             "descriptions.en"
         ],

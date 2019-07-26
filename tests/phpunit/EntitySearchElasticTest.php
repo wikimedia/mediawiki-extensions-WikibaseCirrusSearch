@@ -4,6 +4,7 @@ namespace Wikibase\Search\Elastic\Tests;
 
 use CirrusSearch;
 use CirrusSearch\CirrusDebugOptions;
+use CirrusSearch\CirrusTestCase;
 use Language;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -71,8 +72,8 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 		unset( $decodedQuery['path'] );
 		// serialize_precision set for T205958
 		$this->setIniSetting( 'serialize_precision', 10 );
-		$encodedData = json_encode( $decodedQuery, JSON_PRETTY_PRINT );
-		$this->assertFileContains( $expected, $encodedData );
+		$encodedData = CirrusTestCase::encodeFixture( $decodedQuery );
+		$this->assertFileContains( $expected, $encodedData, CirrusTestCase::canRebuildFixture() );
 	}
 
 }

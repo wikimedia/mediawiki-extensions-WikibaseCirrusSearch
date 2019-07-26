@@ -176,6 +176,8 @@
         "_source": [
             "namespace",
             "title",
+            "namespace_text",
+            "wiki",
             "labels.de-ch",
             "descriptions.de-ch",
             "labels.de",

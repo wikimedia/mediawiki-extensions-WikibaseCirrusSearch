@@ -2,7 +2,7 @@
 
 namespace Wikibase\Search\Elastic;
 
-use CirrusSearch\Search\ResultsType;
+use CirrusSearch\Search\BaseResultsType;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Term\Term;
@@ -16,7 +16,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class ElasticTermResult implements ResultsType {
+class ElasticTermResult extends BaseResultsType {
 
 	/**
 	 * @var EntityIdParser
@@ -57,7 +57,7 @@ class ElasticTermResult implements ResultsType {
 	 * @return string[]
 	 */
 	public function getSourceFiltering() {
-		$fields = [ 'namespace', 'title' ];
+		$fields = parent::getSourceFiltering();
 		foreach ( $this->fallbackChain->getFetchLanguageCodes() as $code ) {
 			$fields[] = "labels.$code";
 			$fields[] = "descriptions.$code";

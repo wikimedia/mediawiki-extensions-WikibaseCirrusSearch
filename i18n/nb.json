@@ -16,8 +16,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Rescore-profil for fulltekstsøk med fraseskåring",
 	"wikibasecirrus-search-bad-entity-type": "Ugyldig entitetstype: $1",
 	"wikibasecirrus-search-bad-profile-name": "Ugyldig søkeprofilnavn: $1",
-	"wikibasecirrus-search-namespace-mix": "Blanding av entitets- og artikkelnavnerom i søk støttes for tiden ikke. Det vil kun bli søkt i entitetsnavnerom.",
-	"wikibasecirrus-search-config-notfound": "Konfigurasjon for fulltekstsøk ikke funnet: $1",
-	"wikibasecirrus-search-config-badclass": "Ugyldig spørringsbyggerklasse: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Nøkkelordet haswbstatement inneholder ingen gyldige påstander"
 }

@@ -20,6 +20,5 @@
 		]
 	},
 	"wikibasecirrus-search-bad-entity-type": "Chybný typ entity: $1",
-	"wikibasecirrus-search-namespace-mix": "Směšování jmenných prostorů pro entity a články v jednom vyhledávání není zatím podporováno. Bude se hledat jen ve jmenných prostorech pro entity.",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Klíčové slovo haswbstatement neobsahuje žádné platné výroky"
 }

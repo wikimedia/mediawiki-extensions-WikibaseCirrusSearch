@@ -37,8 +37,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "用於詞語計分全文搜尋的重新計分配置",
 	"wikibasecirrus-search-bad-entity-type": "錯誤實體類型：$1",
 	"wikibasecirrus-search-bad-profile-name": "錯誤搜尋配置名稱：$1",
-	"wikibasecirrus-search-namespace-mix": "搜尋裡目前不支援混合實體與條目命名空間。僅會搜尋實體命名空間。",
-	"wikibasecirrus-search-config-notfound": "查無全文搜尋設置：$1",
-	"wikibasecirrus-search-config-badclass": "錯誤查詢生成類別：$1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "haswbstatement 關鍵字不包含有效陳述"
 }

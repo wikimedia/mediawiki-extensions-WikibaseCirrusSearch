@@ -40,8 +40,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "ملف النتيجة للبحث عن النص الكامل مع نتيجة العبارات",
 	"wikibasecirrus-search-bad-entity-type": "نوع كيان غير صالح: $1",
 	"wikibasecirrus-search-bad-profile-name": "اسم بحث غير صالح: $1",
-	"wikibasecirrus-search-namespace-mix": "لا يتم حاليا دعم كيان خلط الكيان والمادة في البحث، سيتم البحث عن نطاقات الكيانات فقط.",
-	"wikibasecirrus-search-config-notfound": "لم يتم العثور على تكوين بحث النص الكامل: $1",
-	"wikibasecirrus-search-config-badclass": "فئة باني الاستعلام سيئة: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "الكلمة الأساسية haswbstatement لا تحتوي على بيانات صالحة"
 }

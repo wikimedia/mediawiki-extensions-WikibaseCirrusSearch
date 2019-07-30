@@ -16,8 +16,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Профіль rescore для паўнатэкставага пошуку з ацэнкай фразаў",
 	"wikibasecirrus-search-bad-entity-type": "Кепскі тып элемэнту: $1",
 	"wikibasecirrus-search-bad-profile-name": "Кепская назва профілю пошуку: $1",
-	"wikibasecirrus-search-namespace-mix": "Адначасовае выкарыстаньне прастораў назваў элемэнтаў і артыкулаў у цяперашні час не падтрымліваецца. Пошук будзе адбывацца толькі ў прасторы назваў элемэнтаў.",
-	"wikibasecirrus-search-config-notfound": "Канфігурацыя паўнатэкставага пошуку ня знойдзеная: $1",
-	"wikibasecirrus-search-config-badclass": "Кепская кляса пабудовы запыту: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "ключавое слова haswbstatement ня ўтрымлівае слушных сьцьверджаньняў"
 }

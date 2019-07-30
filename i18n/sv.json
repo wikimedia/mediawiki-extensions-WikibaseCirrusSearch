@@ -24,8 +24,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Omvärderingsprofil för fulltextsökning med fraspoäng",
 	"wikibasecirrus-search-bad-entity-type": "Trasig entitetstyp: $1",
 	"wikibasecirrus-search-bad-profile-name": "Trasig sökning av profilnamn: $1",
-	"wikibasecirrus-search-namespace-mix": "Det finns för tillfället inget stöd för att blanda entitet- och artikelnamnrymder i sökningen. Endast entitetsnamnrymder kommer att sökas igenom.",
-	"wikibasecirrus-search-config-notfound": "Konfigurationen för heltextsökning hittades inte: $1",
-	"wikibasecirrus-search-config-badclass": "Dålig byggklass för frågor: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Nyckelordet haswbstatement innehåller inte några giltiga uttalanden"
 }

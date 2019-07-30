@@ -33,8 +33,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Perfil Rescore para pesquisa de texto completo com pontuação de frase",
 	"wikibasecirrus-search-bad-entity-type": "Tipo da entidade incorreto: $1",
 	"wikibasecirrus-search-bad-profile-name": "Nome do perfil de pesquisa ruim: $1",
-	"wikibasecirrus-search-namespace-mix": "No momento, não há suporte para a mistura de namespaces de entidades e artigos na pesquisa. Apenas namespaces de entidade serão pesquisados.",
-	"wikibasecirrus-search-config-notfound": "Não foi encontrada a configuração da pesquisa completa de texto: $1",
-	"wikibasecirrus-search-config-badclass": "A classe do criador de consultas está incorreta: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "A senha haswbstatement não contém nenhuma declaração válida"
 }

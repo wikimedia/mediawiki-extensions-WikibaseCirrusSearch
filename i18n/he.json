@@ -25,8 +25,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "פרופיל דירוג משני לחיפוש בטקסט מלא עם דירוג משפטים",
 	"wikibasecirrus-search-bad-entity-type": "סוג ישות רע: $1",
 	"wikibasecirrus-search-bad-profile-name": "שם פרופיל חיפוש רע: $1",
-	"wikibasecirrus-search-namespace-mix": "כרגע לא ניתן לערבב בין מרחב השם של הישות לבין מרחב השם של הערך. יתבצע חיפוש רק עבור מרחבי השם של הישות.",
-	"wikibasecirrus-search-config-notfound": "הגדרות החיפוש המלא לא נמצאו: $1",
-	"wikibasecirrus-search-config-badclass": "מחלקת מבנה שאילתה שגויה: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "מילת המפתח haswbstatement אינה מכילה קביעות תקינות"
 }

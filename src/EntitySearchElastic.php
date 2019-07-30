@@ -45,9 +45,15 @@ class EntitySearchElastic implements EntitySearchHelper {
 	const WIKIBASE_PREFIX_QUERY_BUILDER = 'wikibase_prefix_querybuilder';
 
 	/**
-	 * Default query builder profile
+	 * Default query builder profile for prefix searches
 	 */
 	const DEFAULT_QUERY_BUILDER_PROFILE = 'default';
+
+	/**
+	 * Default query builder profile for fulltext searches
+	 *
+	 */
+	const DEFAULT_FULL_TEXT_QUERY_BUILDER_PROFILE = 'wikibase';
 
 	/**
 	 * Replacement syntax for statement boosting

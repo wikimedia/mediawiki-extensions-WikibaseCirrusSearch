@@ -5,7 +5,7 @@
 // so prefixing with 'wikibase' is recommended.
 return [
 	'wikibase' => [
-		'builder_class' => \Wikibase\Search\Elastic\EntityFullTextQueryBuilder::class,
+		'builder_factory' => [ \Wikibase\Search\Elastic\EntityFullTextQueryBuilder::class, 'newFromGlobals' ],
 		'settings' => [
 			'any'               => 0.04,
 			'lang-exact'        => 0.78,

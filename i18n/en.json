@@ -23,8 +23,5 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Rescore profile for fulltext search with phrase scoring",
 	"wikibasecirrus-search-bad-entity-type": "Bad entity type: $1",
 	"wikibasecirrus-search-bad-profile-name": "Bad search profile name: $1",
-	"wikibasecirrus-search-namespace-mix": "Mixing entity and article namespaces in search is currently not supported. Only entity namespaces will be searched.",
-	"wikibasecirrus-search-config-notfound": "Fulltext search configuration not found: $1",
-	"wikibasecirrus-search-config-badclass": "Bad query builder class: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "haswbstatement keyword contains no valid statements"
 }

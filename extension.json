@@ -62,10 +62,6 @@
 		"UseStemming": {
 			"value": [],
 			"description": "List of languages that we want to have stemming analyzers."
-		},
-		"EnableDispatchingQueryBuilder": {
-			"value": true,
-			"description": "Turn on specialized entity fulltext search."
 		}
 	},
 	"ConfigRegistry": {
@@ -80,9 +76,6 @@
 		],
 		"CirrusSearchProfileService": [
 			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchProfileService"
-		],
-		"CirrusSearchFulltextQueryBuilderComplete": [
-			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchFulltextQueryBuilderComplete"
 		],
 		"CirrusSearchAddQueryFeatures": [
 			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchAddQueryFeatures"

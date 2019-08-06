@@ -25,6 +25,9 @@
 		]
 	},
 	"wikibasecirrus-desc": "Wikibase-розширення для використання функціональності CirrusSearch",
+	"wikibasecirrus-keywordfeature-unknown-language-code": "Ключове слово $1 містить невідомий код мови: $2",
+	"wikibasecirrus-keywordfeature-too-many-language-codes": "Ключове слово $1 містить забагато кодів мов. Пошук $2 із $3 {{PLURAL:$3|введеної мови|введених мов}}",
+	"wikibasecirrus-inlabel-no-query-provided": "рядкове ключове слово отримало порожній пошуковий рядок",
 	"wikibasecirrus-rescore-profile-prefix": "Стандартний профіль переоцінювання для доповнення пошуку",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Профіль переоцінювання для доповнення пошуку з підсиленням тверджень",
 	"wikibasecirrus-rescore-profile-fulltext": "Стандартний профіль переоцінювання для повнотекстового пошуку",

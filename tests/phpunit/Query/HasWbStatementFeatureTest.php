@@ -161,6 +161,24 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'search string' => 'haswbstatement:P999=Q888[P111=*',
 				'foreignRepoNames' => [],
 			],
+			'existence' => [
+				'expected' => [
+					'exists' => [
+						'field' => 'statement_keywords'
+					]
+				],
+				'search_string' => 'haswbstatement:*',
+				'foreignRepoNames' => [],
+			],
+			'existence short circuits the rest of bool query' => [
+				'expected' => [
+					'exists' => [
+						'field' => 'statement_keywords'
+					]
+				],
+				'search_string' => 'haswbstatement:P999=Q888|*',
+				'foreignRepoNames' => [],
+			],
 		];
 	}
 

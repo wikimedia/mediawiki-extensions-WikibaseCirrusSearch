@@ -10,6 +10,7 @@ use CirrusSearch\Search\SearchContext;
 use CirrusSearch\WarningCollector;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
+use Elastica\Query\Exists;
 use Elastica\Query\Match;
 use Elastica\Query\Prefix;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -39,6 +40,8 @@ use Wikibase\Search\Elastic\Fields\StatementsField;
  * ... then both those pages will be found if 'wikidata:P180=wikidata:Q146[wikidata:P462=*' is
  * included in the search query.
  *
+ * A '*' as the statement triggers existence search. Any page containing any statement will
+ * be returned.
  *
  * Statements can be combined using logical OR by separating them with a | character in a single
  * haswbstatement query e.g. 'haswbstatement:P999=Q888|P999=Q777'
@@ -106,12 +109,12 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	 * Builds an OR between many statements about the wikibase item
 	 *
 	 * @param string[][] $queries queries to combine. See parseValue() for fields.
-	 * @return \Elastica\Query\BoolQuery
+	 * @return \Elastica\Query\AbstractQuery
 	 */
 	private function combineQueries( array $queries ) {
 		$return = new BoolQuery();
 		foreach ( $queries as $query ) {
-			if ( $query['class'] == Prefix::class ) {
+			if ( $query['class'] === Prefix::class ) {
 				$return->addShould( new Prefix( [
 					$query['field'] =>
 						[
@@ -119,12 +122,15 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 							'rewrite' => 'top_terms_1024'
 						]
 				] ) );
-			}
-			if ( $query['class'] == Match::class ) {
+			} elseif ( $query['class'] === Match::class ) {
 				$return->addShould( new Match(
 					$query['field'],
 					[ 'query' => $query['string'] ]
 				) );
+			} elseif ( $query['class'] === Exists::class ) {
+				// In a boolean 'OR' having an existence check negates the
+				// need for the remaining queries.
+				return new Exists( $query['field'] );
 			}
 		}
 		return $return;
@@ -154,10 +160,19 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		$suffix,
 		WarningCollector $warningCollector
 	) {
+
 		$queries = [];
 		$statementStrings = explode( '|', $value );
 		foreach ( $statementStrings as $statementString ) {
 			if ( !$this->isStatementStringValid( $statementString ) ) {
+				// TODO: Add warning to avoid unexpected behaviour
+				continue;
+			}
+			if ( $this->statementContainsOnlyWildcard( $statementString ) ) {
+				$queries[] = [
+					'class' => Exists::class,
+					'field' => StatementsField::NAME
+				];
 				continue;
 			}
 			if ( $this->statementContainsPropertyOnly( $statementString ) ) {
@@ -209,6 +224,11 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	 * @return bool
 	 */
 	private function isStatementStringValid( $statementString ) {
+		if ( $this->statementContainsOnlyWildcard( $statementString ) ) {
+			// Simpler than integrating into basically unrelated regex
+			return true;
+		}
+
 		//Strip delimiters, anchors and pattern modifiers from PropertyId::PATTERN
 		$propertyIdPattern = preg_replace(
 			'/([^\sa-zA-Z0-9\\\])(\^|\\\A)?(.*?)(\$|\\\z|\\\Z)?\\1[a-zA-Z]*/',
@@ -239,6 +259,10 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 			return true;
 		}
 		return false;
+	}
+
+	private function statementContainsOnlyWildcard( $statementString ) {
+		return $statementString === '*';
 	}
 
 	/**

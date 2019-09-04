@@ -356,6 +356,8 @@
         "_source": [
             "namespace",
             "title",
+            "namespace_text",
+            "wiki",
             "labels.zh",
             "descriptions.zh",
             "labels.zh-hans",

@@ -289,7 +289,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$link = '<a>link</a>';
 		$extract = '<span>extract</span>';
 		$redirect = $section = $score = $size = $date = $related = $html = '';
-		$searchResult = $this->getMock( SearchResult::class );
+		$searchResult = $this->createMock( SearchResult::class );
 		$searchResult->method( 'getTitle' )->willReturn( Title::newFromText( 'Test', NS_TALK ) );
 		CirrusShowSearchHitHandler::onShowSearchHit(
 			$searchPage,
@@ -387,7 +387,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	 * @return EntityIdLookup
 	 */
 	private function getEntityIdLookup() {
-		$entityIdLookup = $this->getMock( EntityIdLookup::class );
+		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getEntityIdForTitle' )

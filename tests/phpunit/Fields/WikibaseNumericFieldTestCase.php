@@ -4,7 +4,6 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use DummySearchIndexFieldDefinition;
 use MediaWikiTestCase;
-use PHPUnit4And6Compat;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Search\Elastic\Fields\WikibaseNumericField;
@@ -19,12 +18,11 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
  * @author Stas Malyshev
  */
 abstract class WikibaseNumericFieldTestCase extends MediaWikiTestCase {
-	use PHPUnit4And6Compat;
 	use WikibaseSearchTestCase;
 
 	public function testGetMapping() {
 		$field = $this->getFieldObject();
-		$searchEngine = $this->getMock( SearchEngine::class );
+		$searchEngine = $this->createMock( SearchEngine::class );
 
 		$searchEngine->expects( $this->any() )
 			->method( 'makeSearchFieldMapping' )

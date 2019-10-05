@@ -94,7 +94,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	public function testDataForSearchIndex() {
 		$handler = $this->getHandler();
-		$engine = $this->getMock( \SearchEngine::class );
+		$engine = $this->createMock( \SearchEngine::class );
 
 		$page = $this->getMockWikiPage( $handler );
 

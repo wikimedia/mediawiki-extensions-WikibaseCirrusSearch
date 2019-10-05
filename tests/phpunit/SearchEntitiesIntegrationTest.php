@@ -211,7 +211,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @return EntityTitleLookup
 	 */
 	private function newEntityTitleLookup() {
-		$lookup = $this->getMock( EntityTitleLookup::class );
+		$lookup = $this->createMock( EntityTitleLookup::class );
 		$lookup->method( 'getTitleForId' )->willReturn( $this->getMock( Title::class ) );
 
 		return $lookup;
@@ -229,7 +229,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			->method( 'getFetchLanguageCodes' )
 			->willReturn( [ 'phpunit_lang' ] );
 
-		$factory = $this->getMock( LanguageFallbackChainFactory::class );
+		$factory = $this->createMock( LanguageFallbackChainFactory::class );
 		$factory->method( 'newFromLanguage' )->willReturn( $fallbackChain );
 		$factory->method( 'newFromLanguageCode' )->willReturn( $fallbackChain );
 

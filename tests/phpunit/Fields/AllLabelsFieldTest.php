@@ -32,7 +32,7 @@ class AllLabelsFieldTest extends MediaWikiTestCase {
 		$prop = Property::newFromType( 'string' );
 		$prop->getFingerprint()->setLabel( 'en', 'astrological sign' );
 
-		$mock = $this->getMock( EntityDocument::class );
+		$mock = $this->createMock( EntityDocument::class );
 
 		return [
 			[ $item ],

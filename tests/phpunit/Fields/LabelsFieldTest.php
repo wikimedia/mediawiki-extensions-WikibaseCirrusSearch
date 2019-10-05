@@ -35,7 +35,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 		$prop->getFingerprint()->setAliasGroup( 'en', [ 'zodiac sign' ] );
 		$prop->getFingerprint()->setAliasGroup( 'es', [ 'signo zodiacal' ] );
 
-		$mock = $this->getMock( EntityDocument::class );
+		$mock = $this->createMock( EntityDocument::class );
 
 		return [
 			[

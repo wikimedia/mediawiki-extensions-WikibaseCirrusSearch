@@ -31,7 +31,7 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 		$prop->getFingerprint()->setDescription( 'en', 'astrological sign' );
 		$prop->getFingerprint()->setDescription( 'ru', 'знак зодиака' );
 
-		$mock = $this->getMock( EntityDocument::class );
+		$mock = $this->createMock( EntityDocument::class );
 
 		return [
 			[

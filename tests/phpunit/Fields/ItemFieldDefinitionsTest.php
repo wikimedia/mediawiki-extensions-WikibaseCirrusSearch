@@ -2,7 +2,6 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\ItemFieldDefinitions;
@@ -24,7 +23,6 @@ use Wikibase\Search\Elastic\Fields\StatementsField;
  * @author Stas Malyshev
  */
 class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
-	use PHPUnit4And6Compat;
 
 	public function testGetFields() {
 		$languageCodes = [ 'ar', 'es' ];
@@ -32,7 +30,7 @@ class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$fieldDefinitions = new ItemFieldDefinitions( [
 			$this->newLabelsProviderFieldDefinitions( $languageCodes ),
 			$this->newDescriptionsProviderFieldDefinitions( $languageCodes ),
-			new StatementProviderFieldDefinitions( $this->getMock( PropertyDataTypeLookup::class ),
+			new StatementProviderFieldDefinitions( $this->createMock( PropertyDataTypeLookup::class ),
 				[], [], [], [], [] ),
 		] );
 

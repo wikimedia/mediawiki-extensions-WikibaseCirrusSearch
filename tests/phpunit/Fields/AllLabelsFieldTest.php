@@ -4,7 +4,6 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use CirrusSearch;
 use MediaWikiTestCase;
-use PHPUnit4And6Compat;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -22,7 +21,6 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
  * @author Stas Malyshev
  */
 class AllLabelsFieldTest extends MediaWikiTestCase {
-	use PHPUnit4And6Compat;
 	use WikibaseSearchTestCase;
 
 	public function provideFieldData() {

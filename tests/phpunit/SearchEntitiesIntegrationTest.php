@@ -212,7 +212,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 */
 	private function newEntityTitleLookup() {
 		$lookup = $this->createMock( EntityTitleLookup::class );
-		$lookup->method( 'getTitleForId' )->willReturn( $this->getMock( Title::class ) );
+		$lookup->method( 'getTitleForId' )->willReturn( $this->createMock( Title::class ) );
 
 		return $lookup;
 	}

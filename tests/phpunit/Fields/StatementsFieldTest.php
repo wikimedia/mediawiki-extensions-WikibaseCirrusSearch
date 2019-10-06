@@ -7,7 +7,6 @@ use DataValues\BooleanValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWikiTestCase;
-use PHPUnit4And6Compat;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -31,7 +30,6 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
  * @author Stas Malyshev
  */
 class StatementsFieldTest extends MediaWikiTestCase {
-	use PHPUnit4And6Compat;
 	use WikibaseSearchTestCase;
 
 	/**

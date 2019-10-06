@@ -4,7 +4,6 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use CirrusSearch;
 use MediaWikiTestCase;
-use PHPUnit4And6Compat;
 use SearchEngine;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 
@@ -12,7 +11,6 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
  * Helper test class for search field testing.
  */
 class SearchFieldTestCase extends MediaWikiTestCase {
-	use PHPUnit4And6Compat;
 	use WikibaseSearchTestCase;
 
 	/**

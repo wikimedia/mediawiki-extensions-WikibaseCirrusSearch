@@ -14,7 +14,7 @@ use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
  */
 class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		if ( !class_exists( \CirrusSearch::class ) ) {

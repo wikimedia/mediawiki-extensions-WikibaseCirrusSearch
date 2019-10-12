@@ -17,7 +17,7 @@ use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
  */
 class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		if ( !class_exists( \CirrusSearch::class ) ) {

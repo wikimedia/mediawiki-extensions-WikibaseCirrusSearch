@@ -16,7 +16,7 @@ use Wikibase\Search\Elastic\Query\InLabelFeature;
  */
 class InLabelFeatureTest extends \MediaWikiTestCase {
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 
 		if ( !class_exists( \CirrusSearch::class ) ) {

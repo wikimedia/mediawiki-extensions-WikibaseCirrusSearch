@@ -40,7 +40,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT => [ NS_MAIN, 120 ]
 	];
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );

@@ -13,8 +13,8 @@ use Elastica\Query\Exists;
 
 /**
  * Abstract class supporting querying for the existence or nonexistence of term values by language.
- * Currently supports descriptions (via 'hasdescription:') and labels (via 'haslabel:' or
- * 'hascaption:').
+ * Currently supports descriptions (via 'hasdescription:' or 'hascaption:') and labels (via
+ * 'haslabel:').
  * @see https://phabricator.wikimedia.org/T220282
  */
 class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryFeature {
@@ -81,7 +81,12 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 	private function makeQuery( $key, array $langCodes ) {
 		$query = new BoolQuery();
 		if ( $langCodes === [ '__all__' ] ) {
-			$query->addShould( new Exists( 'labels_all.plain' ) );
+			if ( $key === 'haslabel' ) {
+				$field = 'labels_all.plain';
+			} else {
+				$field = $this->getFieldName( $key ) . '.*.plain';
+			}
+			$query->addShould( new Exists( $field ) );
 			return $query;
 		}
 		foreach ( $langCodes as $lang ) {
@@ -107,7 +112,7 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 		$suffix,
 		WarningCollector $warningCollector
 	) {
-		if ( $key !== 'hasdescription' && $value === '*' ) {
+		if ( $value === '*' ) {
 			return [ '__all__' ];
 		}
 		$langCodes = [];
@@ -155,7 +160,7 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 	 * @return string field name to search
 	 */
 	private function getFieldName( $key ) {
-		return $key === 'hasdescription' ? 'descriptions' : 'labels';
+		return $key === 'haslabel' ? 'labels' : 'descriptions';
 	}
 
 }

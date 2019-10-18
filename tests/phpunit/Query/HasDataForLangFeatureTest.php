@@ -71,6 +71,20 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 				],
 				'search string' => 'hasdescription:zh,ru'
 			],
+			'(hasdescription) all languages' => [
+				'expected' => [
+					'bool' => [
+						'should' => [
+							[
+								'exists' => [
+									'field' => 'descriptions.*.plain'
+								]
+							]
+						]
+					]
+				],
+				'search string' => 'hasdescription:*',
+			],
 			'(hasdescription) language is case insensitive' => [
 				'expected' => [
 					'bool' => [
@@ -166,7 +180,7 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 						'should' => [
 							[
 								'exists' => [
-									'field' => 'labels.en.plain'
+									'field' => 'descriptions.en.plain'
 								]
 							]
 						]
@@ -180,12 +194,12 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 						'should' => [
 							[
 								'exists' => [
-									'field' => 'labels.zh.plain',
+									'field' => 'descriptions.zh.plain',
 								],
 							],
 							[
 								'exists' => [
-									'field' => 'labels.ru.plain',
+									'field' => 'descriptions.ru.plain',
 								],
 							]
 						]
@@ -199,7 +213,7 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 						'should' => [
 							[
 								'exists' => [
-									'field' => 'labels.en.plain'
+									'field' => 'descriptions.en.plain'
 								]
 							]
 						]
@@ -213,7 +227,7 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 						'should' => [
 							[
 								'exists' => [
-									'field' => 'labels.de.plain'
+									'field' => 'descriptions.de.plain'
 								]
 							]
 						]

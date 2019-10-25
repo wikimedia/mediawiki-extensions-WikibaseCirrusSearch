@@ -207,7 +207,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider applyProvider
 	 */
-	public function testApply( array $expected = null, $term, array $expectedWarnings = [], $languageChains = null ) {
+	public function testApply( ?array $expected, $term, array $expectedWarnings = [], $languageChains = null ) {
 		$feature = $this->featureWithMocks( $languageChains );
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertFilter( $feature, $term, $expected, $expectedWarnings );

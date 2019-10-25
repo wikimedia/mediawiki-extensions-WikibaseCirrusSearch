@@ -262,7 +262,7 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider applyProvider
 	 */
-	public function testApply( array $expected = null, $term, array $expectedWarnings = [] ) {
+	public function testApply( ?array $expected, $term, array $expectedWarnings = [] ) {
 		$feature = new HasDataForLangFeature( [ 'aa', 'ab', 'ace', 'ady', 'af', 'ak', 'als', 'am',
 												'an', 'ang', 'ar', 'arc', 'arz', 'as', 'ast', 'atj',
 												'av', 'ay', 'az', 'azb', 'ba', 'bar', 'bcl', 'be',

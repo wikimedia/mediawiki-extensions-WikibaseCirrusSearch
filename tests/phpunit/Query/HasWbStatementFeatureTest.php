@@ -185,7 +185,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider applyProvider
 	 */
-	public function testApply( array $expected = null, $term, $foreignRepoNames ) {
+	public function testApply( ?array $expected, $term, $foreignRepoNames ) {
 		$feature = new HasWbStatementFeature( $foreignRepoNames );
 		$kwAssertions = $this->getKWAssertions();
 		$expectedWarnings = $expected === null ? [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];

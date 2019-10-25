@@ -19,7 +19,7 @@ trait WikibaseSearchTestCase {
 	// Declare dependency on setMwGlobals
 	abstract public function setMwGlobals( $pairs, $value = null );
 
-	public function setUp() {
+	public function setUp() : void {
 		parent::setUp();
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );

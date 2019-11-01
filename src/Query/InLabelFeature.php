@@ -236,8 +236,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		}
 
 		$languages = substr( $value, $atPos + 1 );
-		// when $atPos + 1 === strlen( $value ) hhvm
-		// will return false and php7 will return ''
+		// when $atPos + 1 === strlen( $value ) then php will return ''
 		if ( $languages === false || $languages === '' || $languages === '*' ) {
 			return [
 				'fields' => $allLabelFields,

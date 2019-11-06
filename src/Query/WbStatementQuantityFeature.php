@@ -197,7 +197,7 @@ class WbStatementQuantityFeature extends SimpleKeywordFeature implements FilterQ
 	 */
 	public function getFilterQuery( KeywordFeatureNode $node, QueryBuildingContext $context ) {
 		$params = $node->getParsedValue();
-		if ( count( $params['statements'] ) == 0 ) {
+		if ( $params === null || $params['statements'] === [] ) {
 			return null;
 		}
 		return $this->createFilters( $params );

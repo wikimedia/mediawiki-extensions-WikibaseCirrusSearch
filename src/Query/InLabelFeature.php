@@ -267,7 +267,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 	 */
 	public function getFilterQuery( KeywordFeatureNode $node, QueryBuildingContext $context ) {
 		$parsedValue = $node->getParsedValue();
-		if ( $parsedValue['fields'] === [] ) {
+		if ( $parsedValue === null || $parsedValue['fields'] === [] ) {
 			return null;
 		}
 		return $this->makeQuery( $parsedValue );

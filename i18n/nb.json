@@ -10,6 +10,10 @@
 			"Kjetil r"
 		]
 	},
+	"wikibasecirrus-desc": "Wikibase-utvidelse for å bruke CirrusSearch-funksjonalitet",
+	"wikibasecirrus-keywordfeature-unknown-language-code": "Nøkkelordet $1 inneholder ukjent språkkode: $2",
+	"wikibasecirrus-keywordfeature-too-many-language-codes": "Nøkkelordet $1 ga for mange språkkoder. Søker i $2 av de $3 angitte {{PLURAL:$3|språkene}}",
+	"wikibasecirrus-inlabel-no-query-provided": "Nøkkelordet inlabel ble gitt en tom søkestreng",
 	"wikibasecirrus-rescore-profile-prefix": "Standard rescore-profil for fullføringssøk",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Rescore-profil for fullføringssøk med påstandsforsterkning",
 	"wikibasecirrus-rescore-profile-fulltext": "Standard rescore-profil for fulltekstsøk",

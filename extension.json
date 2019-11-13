@@ -89,9 +89,15 @@
 		"WikibaseRepoEntityTypes": [
 			"Wikibase\\Search\\Elastic\\Hooks::onWikibaseRepoEntityTypes"
 		],
+		"SpecialPage_initList": [
+			"Wikibase\\Search\\Elastic\\Hooks::onSpecialPageInitList"
+		],
 		"ApiOpenSearchSuggest": [
 			"Wikibase\\Search\\Elastic\\Hooks::onApiOpenSearchSuggest"
 		]
+	},
+	"ExtensionMessagesFiles": {
+		"WikibaseCirrusSearchAlias": "WikibaseCirrusSearch.alias.php"
 	},
 	"MessagesDirs": {
 		"WikibaseCirrusSearch": [

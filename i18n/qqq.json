@@ -58,5 +58,14 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Default rescore profile for fulltext search with phrase rescoring. (See [https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html Rescoring] in the Elastic documentation for explanation.)",
 	"wikibasecirrus-search-bad-entity-type": "Error message displayed when user supplies bad entity type to wbsearchentities",
 	"wikibasecirrus-search-bad-profile-name": "Error message displayed when user supplies bad search profile name",
-	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Error message when haswbstatement keyword has no valid arguments"
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Error message when haswbstatement keyword has no valid arguments",
+	"special-entitieswithoutdescription": "{{doc-special|EntitiesWithoutDescription}}\nThis special page returns a list of entities without description for a given language",
+	"wikibase-entitieswithoutdescription-legend": "Legend of the form that allow to change the language.",
+	"special-entitieswithoutlabel": "{{doc-special|EntitiesWithoutLabel}}\nThis special page returns a list of entities without label for a given language",
+	"wikibase-entitieswithoutlabel-legend": "Legend of the form that allow to change the language.",
+	"wikibase-entitieswithoutlabel-label-language": "Label for the input field to change the language code.\n{{Identical|Language code}}",
+	"wikibase-entitieswithoutlabel-label-type": "Label of the entity type selector that allows to restrict the request to one type.\n{{Identical|Type}}",
+	"wikibase-entitieswithoutlabel-submit": "Label for the button that activate the action.\n{{Identical|Find}}",
+	"wikibase-entitieswithoutlabel-invalid-language": "Error message shown when the language code passed in parameter is invalid.\n\nParameters:\n* $1 - language code\nSee also:\n* {{msg-mw|Wikibase-unconnectedpages-invalid-language}}",
+	"wikibase-entitieswithoutlabel-invalid-type": "Parameters:\n* $1 - an invalid entity type. Valid entity types are: item, property and query."
 }

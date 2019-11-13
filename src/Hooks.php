@@ -370,6 +370,23 @@ class Hooks {
 	}
 
 	/**
+	 * Register special pages.
+	 *
+	 * @param array &$list
+	 */
+	public static function onSpecialPageInitList( &$list ) {
+		$list['EntitiesWithoutLabel'] = [
+			SpecialEntitiesWithoutPageFactory::class,
+			'newSpecialEntitiesWithoutLabel'
+		];
+
+		$list['EntitiesWithoutDescription'] = [
+			SpecialEntitiesWithoutPageFactory::class,
+			'newSpecialEntitiesWithoutDescription'
+		];
+	}
+
+	/**
 	 * @return WikibaseSearchConfig
 	 */
 	private static function getWBCSConfig(): WikibaseSearchConfig {

@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lam-ang",
+			"Macofe"
+		]
+	},
+	"special-entitieswithoutdescription": "Dagiti entidad nga awan ti deskripsion",
+	"wikibase-entitieswithoutdescription-legend": "Agaka kadagiti entidad nga awan ti deskripsion",
+	"special-entitieswithoutlabel": "Dagiti entidad nga awan ti etiketana",
+	"wikibase-entitieswithoutlabel-legend": "Agala kadagiti entidad nga awan ti etiketana",
+	"wikibase-entitieswithoutlabel-label-language": "Kodigo ti pagsasao:",
+	"wikibase-entitieswithoutlabel-label-type": "Kita:",
+	"wikibase-entitieswithoutlabel-submit": "Biruken",
+	"wikibase-entitieswithoutlabel-invalid-language": "Ti \"$1\" ket saan nga umiso a kodigo ti pagsasao.",
+	"wikibase-entitieswithoutlabel-invalid-type": "Ti \"$1\" ket saan nga husto a kita ti entidad."
+}

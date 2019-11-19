@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Candalua",
+			"Macofe"
+		]
+	},
+	"special-entitieswithoutlabel": "Entità sensa eticheta",
+	"wikibase-entitieswithoutlabel-legend": "Recuperar la lista de le entità sensa eticheta",
+	"wikibase-entitieswithoutlabel-label-language": "Còdese lengoa:",
+	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
+	"wikibase-entitieswithoutlabel-submit": "Serca",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" no xe un còdese de lengua valido.",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" no'l xe un tipo de entità valido"
+}

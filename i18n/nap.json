@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"C.R.",
+			"Candalua",
+			"Ruthven"
+		]
+	},
+	"special-entitieswithoutdescription": "Entità senza descriziona",
+	"wikibase-entitieswithoutdescription-legend": "Piglia l'elenco 'entità c' 'a descrizione abbacante",
+	"special-entitieswithoutlabel": "Entità senza etichetta",
+	"wikibase-entitieswithoutlabel-legend": "Premmettesse 'uttenè l'elenco 'entità cu ll'etichetta abbacante",
+	"wikibase-entitieswithoutlabel-label-language": "Codece lengua:",
+	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
+	"wikibase-entitieswithoutlabel-submit": "Ascia",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" nun è nu codece 'e lengua valido.",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" nun è nu tipo 'e trasuta buona."
+}

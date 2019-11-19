@@ -33,8 +33,18 @@
 			"Jack who built the house",
 			"Stjn",
 			"Vlad5250",
-			"Nk88"
+			"Nk88",
+			"Movses"
 		]
 	},
-	"wikibasecirrus-search-bad-entity-type": "Некорректный тип сущности: $1"
+	"wikibasecirrus-search-bad-entity-type": "Некорректный тип сущности: $1",
+	"special-entitieswithoutdescription": "Сущности без описаний",
+	"wikibase-entitieswithoutdescription-legend": "Получить список сущностей, у которых нет описаний",
+	"special-entitieswithoutlabel": "Сущности без названий",
+	"wikibase-entitieswithoutlabel-legend": "Получить список сущностей без названий",
+	"wikibase-entitieswithoutlabel-label-language": "Код языка:",
+	"wikibase-entitieswithoutlabel-label-type": "Тип:",
+	"wikibase-entitieswithoutlabel-submit": "Поиск",
+	"wikibase-entitieswithoutlabel-invalid-language": "«$1» — некорректный код языка.",
+	"wikibase-entitieswithoutlabel-invalid-type": "«$1» — это недопустимый тип сущности."
 }

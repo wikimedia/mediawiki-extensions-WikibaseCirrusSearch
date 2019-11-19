@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Macofe",
+			"Умар"
+		]
+	},
+	"wikibase-entitieswithoutlabel-label-language": "Метта код:",
+	"wikibase-entitieswithoutlabel-label-type": "Тайп:",
+	"wikibase-entitieswithoutlabel-submit": "Лахар",
+	"wikibase-entitieswithoutlabel-invalid-language": "«$1» — меттан код нийса яц."
+}

@@ -22,5 +22,13 @@
 			"CiaPan"
 		]
 	},
-	"wikibasecirrus-search-config-notfound": "Nie znaleziono konfiguracji wyszukiwania pełnotekstowego: $1"
+	"special-entitieswithoutdescription": "Encje bez opisu",
+	"wikibase-entitieswithoutdescription-legend": "Wyświetl listę encji bez opisu",
+	"special-entitieswithoutlabel": "Encje bez etykiety",
+	"wikibase-entitieswithoutlabel-legend": "Wyświetl listę encji bez etykiety",
+	"wikibase-entitieswithoutlabel-label-language": "Kod języka:",
+	"wikibase-entitieswithoutlabel-label-type": "Typ:",
+	"wikibase-entitieswithoutlabel-submit": "Znajdź",
+	"wikibase-entitieswithoutlabel-invalid-language": "„$1” jest nie prawidłowym kodem języka.",
+	"wikibase-entitieswithoutlabel-invalid-type": "„$1” jest nie prawidłowym typem encji."
 }

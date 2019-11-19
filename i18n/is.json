@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Snævar"
+		]
+	},
+	"special-entitieswithoutdescription": "Einingar án lýsingar",
+	"wikibase-entitieswithoutdescription-legend": "Fá lista yfir einingar án lýsingar",
+	"special-entitieswithoutlabel": "Færslur án merkimiða",
+	"wikibase-entitieswithoutlabel-legend": "Fá lista yfir færslur án merkimiða",
+	"wikibase-entitieswithoutlabel-label-language": "Tungumálakóði:",
+	"wikibase-entitieswithoutlabel-label-type": "Gerð:",
+	"wikibase-entitieswithoutlabel-submit": "Finna",
+	"wikibase-entitieswithoutlabel-invalid-language": "„$1” er ógildur tungumálakóði.",
+	"wikibase-entitieswithoutlabel-invalid-type": "„$1” er ógild gerð einingar."
+}

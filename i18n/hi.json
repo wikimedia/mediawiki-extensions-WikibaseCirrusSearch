@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"NehalDaveND",
+			"Sfic"
+		]
+	},
+	"wikibase-entitieswithoutlabel-label-language": "भाषा कोड:",
+	"wikibase-entitieswithoutlabel-label-type": "प्रकार:",
+	"wikibase-entitieswithoutlabel-submit": "खोजें",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" मान्य भाषा कोड नहीं है।"
+}

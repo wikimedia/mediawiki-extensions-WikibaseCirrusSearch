@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Macofe",
+			"Чаховіч Уладзіслаў"
+		]
+	},
+	"special-entitieswithoutlabel": "Спіс сутнасцяў без назваў",
+	"wikibase-entitieswithoutlabel-legend": "Атрымаць спіс сутнасцяў без назваў",
+	"wikibase-entitieswithoutlabel-label-language": "Код мовы:",
+	"wikibase-entitieswithoutlabel-label-type": "Тып:",
+	"wikibase-entitieswithoutlabel-submit": "Пошук",
+	"wikibase-entitieswithoutlabel-invalid-language": "«$1» — некарэктны код мовы."
+}

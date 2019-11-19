@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cedric31"
+		]
+	},
+	"special-entitieswithoutdescription": "Entitats sens descripcion",
+	"wikibase-entitieswithoutdescription-legend": "Obténer una lista de las entitats sens descripcion",
+	"special-entitieswithoutlabel": "Entitats sens libellat",
+	"wikibase-entitieswithoutlabel-legend": "Recuperar la lista de las entitats sens libellat",
+	"wikibase-entitieswithoutlabel-label-language": "Còdi de lenga :",
+	"wikibase-entitieswithoutlabel-label-type": "Tipe :",
+	"wikibase-entitieswithoutlabel-submit": "Recercar",
+	"wikibase-entitieswithoutlabel-invalid-language": "« $1 » es pas un còdi de lenga valid.",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" es pas un tipe d’entitat valid."
+}

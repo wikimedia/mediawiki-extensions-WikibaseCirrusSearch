@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Srdjan m"
+		]
+	},
+	"wikibase-entitieswithoutlabel-submit": "Pronađi",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" nije ispravni jezički kod."
+}

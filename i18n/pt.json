@@ -29,5 +29,14 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Perfil de reavaliação para pesquisa completa de texto com avaliação de frases",
 	"wikibasecirrus-search-bad-entity-type": "Tipo de entidade inválido: $1",
 	"wikibasecirrus-search-bad-profile-name": "Nome de perfil de pesquisa inválido: $1",
-	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "A palavra-chave ''haswbstatement'' não contém nenhuma declaração válida"
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "A palavra-chave ''haswbstatement'' não contém nenhuma declaração válida",
+	"special-entitieswithoutdescription": "Entidades sem descrição",
+	"wikibase-entitieswithoutdescription-legend": "Obter a lista de entidades sem descrição",
+	"special-entitieswithoutlabel": "Entidades sem rótulo",
+	"wikibase-entitieswithoutlabel-legend": "Obter a lista de entidades sem rótulo",
+	"wikibase-entitieswithoutlabel-label-language": "Código de língua:",
+	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
+	"wikibase-entitieswithoutlabel-submit": "Procurar",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" não é um código de língua válido.",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" não é um tipo de entidade válido."
 }

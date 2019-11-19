@@ -24,5 +24,14 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Omvärderingsprofil för fulltextsökning med fraspoäng",
 	"wikibasecirrus-search-bad-entity-type": "Trasig entitetstyp: $1",
 	"wikibasecirrus-search-bad-profile-name": "Trasig sökning av profilnamn: $1",
-	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Nyckelordet haswbstatement innehåller inte några giltiga uttalanden"
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Nyckelordet haswbstatement innehåller inte några giltiga uttalanden",
+	"special-entitieswithoutdescription": "Entiteter utan beskrivning",
+	"wikibase-entitieswithoutdescription-legend": "Få en lista av entiteter utan beskrivning",
+	"special-entitieswithoutlabel": "Enheter utan etikett",
+	"wikibase-entitieswithoutlabel-legend": "Hämta listan över enheter utan etikett",
+	"wikibase-entitieswithoutlabel-label-language": "Språkkod:",
+	"wikibase-entitieswithoutlabel-label-type": "Typ:",
+	"wikibase-entitieswithoutlabel-submit": "Hitta",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" är inte en giltig språkkod.",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" är inte en giltig entitetstyp."
 }

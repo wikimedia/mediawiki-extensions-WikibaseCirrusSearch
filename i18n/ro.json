@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Macofe",
+			"Minisarm"
+		]
+	},
+	"special-entitieswithoutdescription": "Entități fără descriere",
+	"wikibase-entitieswithoutdescription-legend": "Obțineți lista entităților fără descriere",
+	"special-entitieswithoutlabel": "Entități fără etichetă",
+	"wikibase-entitieswithoutlabel-legend": "Obțineți lista entităților fără etichetă",
+	"wikibase-entitieswithoutlabel-label-language": "Codul limbii:",
+	"wikibase-entitieswithoutlabel-label-type": "Tip:",
+	"wikibase-entitieswithoutlabel-submit": "Găsește",
+	"wikibase-entitieswithoutlabel-invalid-language": "„$1” nu este un cod de limbă valid.",
+	"wikibase-entitieswithoutlabel-invalid-type": "„$1” nu este un tip de entitate valid."
+}

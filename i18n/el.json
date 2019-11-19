@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Macofe",
+			"Nikosguard",
+			"Protnet"
+		]
+	},
+	"wikibase-entitieswithoutlabel-label-language": "Κωδικός γλώσσας:",
+	"wikibase-entitieswithoutlabel-label-type": "Τύπος:",
+	"wikibase-entitieswithoutlabel-submit": "Εύρεση",
+	"wikibase-entitieswithoutlabel-invalid-language": "Το \"$1\" δεν είναι έγκυρος κώδικας γλώσσας."
+}

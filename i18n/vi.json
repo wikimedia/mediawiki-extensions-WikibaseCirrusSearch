@@ -13,5 +13,14 @@
 		]
 	},
 	"wikibasecirrus-search-bad-entity-type": "Kiểu thực thể hỏng: $1",
-	"wikibasecirrus-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1"
+	"wikibasecirrus-search-bad-profile-name": "Tên kiểu tìm kiếm hỏng: $1",
+	"special-entitieswithoutdescription": "Thực thể không có miêu tả",
+	"wikibase-entitieswithoutdescription-legend": "Lấy danh sách các thực thể không có miêu tả",
+	"special-entitieswithoutlabel": "Thực thể không có nhãn",
+	"wikibase-entitieswithoutlabel-legend": "Lấy danh sách thực thể không có nhãn",
+	"wikibase-entitieswithoutlabel-label-language": "Mã ngôn ngữ:",
+	"wikibase-entitieswithoutlabel-label-type": "Kiểu:",
+	"wikibase-entitieswithoutlabel-submit": "Tìm",
+	"wikibase-entitieswithoutlabel-invalid-language": "“$1” không phải là mã ngôn ngữ hợp lệ.",
+	"wikibase-entitieswithoutlabel-invalid-type": "“$1” không phải là kiểu thực thể hợp lệ."
 }

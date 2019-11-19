@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Avjoska",
+			"Pikne"
+		]
+	},
+	"special-entitieswithoutdescription": "Kirjelduseta olemid",
+	"wikibase-entitieswithoutdescription-legend": "Kirjelduseta olemite loendi hankimine",
+	"special-entitieswithoutlabel": "Sildita olemid",
+	"wikibase-entitieswithoutlabel-legend": "Sildita olemite loendi hankimine",
+	"wikibase-entitieswithoutlabel-label-language": "Keelekood:",
+	"wikibase-entitieswithoutlabel-label-type": "Tüüp:",
+	"wikibase-entitieswithoutlabel-submit": "Otsi",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" pole sobiv keelekood.",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" pole sobiv olemi tüüp."
+}

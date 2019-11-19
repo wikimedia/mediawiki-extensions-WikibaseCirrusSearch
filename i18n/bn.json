@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"Leemon2010",
+			"আফতাবুজ্জামান"
+		]
+	},
+	"special-entitieswithoutdescription": "বিবরণ ছাড়া সত্তা",
+	"wikibase-entitieswithoutdescription-legend": "বিবরণ ছাড়া সত্তার তালিকা দেয়",
+	"special-entitieswithoutlabel": "লেবেল বিহীন ভুক্তি",
+	"wikibase-entitieswithoutlabel-legend": "লেবেল ছাড়া ভুক্তি তালিকা পান",
+	"wikibase-entitieswithoutlabel-label-language": "ভাষার কোড:",
+	"wikibase-entitieswithoutlabel-label-type": "ধরন:",
+	"wikibase-entitieswithoutlabel-submit": "অনুসন্ধান করুন",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" বৈধ ভাষা কোড নয়।",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" কোন বৈধ সত্তা নয়।"
+}

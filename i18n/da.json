@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Byrial",
+			"Christian List",
+			"Hede2000",
+			"Macofe",
+			"Poul G"
+		]
+	},
+	"special-entitieswithoutdescription": "Entiteter uden beskrivelse",
+	"wikibase-entitieswithoutdescription-legend": "Få en liste af entiteter uden beskrivelse",
+	"special-entitieswithoutlabel": "Entiteter uden etiket",
+	"wikibase-entitieswithoutlabel-legend": "Få en liste over entiteter uden etiket",
+	"wikibase-entitieswithoutlabel-label-language": "Sprogkode:",
+	"wikibase-entitieswithoutlabel-label-type": "Type:",
+	"wikibase-entitieswithoutlabel-submit": "Søg",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" er ikke en gyldig sprogkode.",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" er ikke en gyldig entitetstype."
+}

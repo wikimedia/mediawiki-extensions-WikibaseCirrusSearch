@@ -67,5 +67,14 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Marquer à nouveau le profil pour la recherche en plein texte avec notation de phrase",
 	"wikibasecirrus-search-bad-entity-type": "Type invalide d'entité: $1",
 	"wikibasecirrus-search-bad-profile-name": "Nom de profil recherché invalide: $1",
-	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Le mot clé haswbstatement ne contient pas d'instructions valides"
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Le mot clé haswbstatement ne contient pas d'instructions valides",
+	"special-entitieswithoutdescription": "Entités sans description",
+	"wikibase-entitieswithoutdescription-legend": "Obtenir une liste des entités sans description",
+	"special-entitieswithoutlabel": "Entités sans libellé",
+	"wikibase-entitieswithoutlabel-legend": "Récupérer la liste des entités sans libellé",
+	"wikibase-entitieswithoutlabel-label-language": "Code de langue :",
+	"wikibase-entitieswithoutlabel-label-type": "Type :",
+	"wikibase-entitieswithoutlabel-submit": "Rechercher",
+	"wikibase-entitieswithoutlabel-invalid-language": "« $1 » n'est pas un code de langue valide.",
+	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" n’est pas un type d’entité valide."
 }

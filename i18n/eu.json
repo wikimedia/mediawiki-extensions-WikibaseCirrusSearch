@@ -14,5 +14,7 @@
 		]
 	},
 	"wikibasecirrus-search-bad-entity-type": "Entitate mota txarra: $1",
-	"wikibasecirrus-search-bad-profile-name": "Profilaren izenaren bilaketa txarra: $1"
+	"wikibasecirrus-search-bad-profile-name": "Profilaren izenaren bilaketa txarra: $1",
+	"wikibase-entitieswithoutlabel-label-language": "Hizkuntza kodea:",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" ez da hizkuntza kode erabilgarria."
 }

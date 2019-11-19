@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Macofe",
+			"Marmase",
+			"Mirzali"
+		]
+	},
+	"wikibase-entitieswithoutlabel-label-language": "Kodê zıwani:",
+	"wikibase-entitieswithoutlabel-label-type": "Babet:",
+	"wikibase-entitieswithoutlabel-submit": "Bıvêne",
+	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\"  raveyrdi qoda zıwani niya."
+}

@@ -20,5 +20,14 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Rescore-profil for fulltekstsøk med fraseskåring",
 	"wikibasecirrus-search-bad-entity-type": "Ugyldig entitetstype: $1",
 	"wikibasecirrus-search-bad-profile-name": "Ugyldig søkeprofilnavn: $1",
-	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Nøkkelordet haswbstatement inneholder ingen gyldige påstander"
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Nøkkelordet haswbstatement inneholder ingen gyldige påstander",
+	"special-entitieswithoutdescription": "Elementer uten beskrivelse",
+	"wikibase-entitieswithoutdescription-legend": "Hent liste over elementer uten beskrivelse",
+	"special-entitieswithoutlabel": "Entiteter uten etikett",
+	"wikibase-entitieswithoutlabel-legend": "Hent en liste over entiteter uten etikett",
+	"wikibase-entitieswithoutlabel-label-language": "Språkkode:",
+	"wikibase-entitieswithoutlabel-label-type": "Type:",
+	"wikibase-entitieswithoutlabel-submit": "Søk",
+	"wikibase-entitieswithoutlabel-invalid-language": "«$1» er ikke en gyldig språkkode.",
+	"wikibase-entitieswithoutlabel-invalid-type": "«$1» er en ugyldig entitetstype"
 }

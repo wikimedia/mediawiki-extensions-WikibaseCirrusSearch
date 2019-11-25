@@ -31,7 +31,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
 			TermIndexEntry::TYPE_LABEL,
-			'wikibase-entitieswithoutlabel-legend',
+			'wikibasecirrus-entitieswithoutlabel-legend',
 			[ 'item', 'property' ],
 			new StaticContentLanguages( [ 'acceptedlanguage' ] ),
 			new LanguageNameLookup(),
@@ -42,18 +42,18 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	public function testForm() {
 		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
 
-		$this->assertContains( '(wikibase-entitieswithoutlabel-label-language)', $html );
+		$this->assertContains( '(wikibasecirrus-entitieswithoutlabel-label-language)', $html );
 		$this->assertContains( 'name=\'language\'', $html );
 		$this->assertContains( 'id=\'wb-entitieswithoutpage-language\'', $html );
 		$this->assertContains( 'wb-language-suggester', $html );
 
-		$this->assertContains( '(wikibase-entitieswithoutlabel-label-type)', $html );
+		$this->assertContains( '(wikibasecirrus-entitieswithoutlabel-label-type)', $html );
 		$this->assertContains( 'name=\'type\'', $html );
 		$this->assertContains( 'id=\'wb-entitieswithoutpage-type\'', $html );
-		$this->assertContains( '(wikibase-entity-item)', $html );
+		$this->assertContains( '(wikibasecirrus-entity-item)', $html );
 
-		$this->assertContains( '(wikibase-entitieswithoutlabel-submit)', $html );
-		$this->assertContains( 'id=\'wikibase-entitieswithoutpage-submit\'', $html );
+		$this->assertContains( '(wikibasecirrus-entitieswithoutlabel-submit)', $html );
+		$this->assertContains( 'id=\'wikibasecirrus-entitieswithoutpage-submit\'', $html );
 	}
 
 	public function testRequestParameters() {
@@ -103,7 +103,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 		list( $html, ) = $this->executeSpecialPage( "''INVALID''", null, 'qqx' );
 
 		$this->assertContains(
-			'(wikibase-entitieswithoutlabel-invalid-language: &#39;&#39;INVALID&#39;&#39;)',
+			'(wikibasecirrus-entitieswithoutlabel-invalid-language: &#39;&#39;INVALID&#39;&#39;)',
 			$html
 		);
 	}
@@ -123,7 +123,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 		list( $html, ) = $this->executeSpecialPage( "acceptedlanguage/''INVALID''", null, 'qqx' );
 
 		$this->assertContains(
-			'(wikibase-entitieswithoutlabel-invalid-type: &#39;&#39;INVALID&#39;&#39;)',
+			'(wikibasecirrus-entitieswithoutlabel-invalid-type: &#39;&#39;INVALID&#39;&#39;)',
 			$html
 		);
 	}

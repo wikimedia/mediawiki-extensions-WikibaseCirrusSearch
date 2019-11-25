@@ -75,7 +75,7 @@ class SpecialEntitiesWithoutPageFactory {
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
 			TermIndexEntry::TYPE_LABEL,
-			'wikibase-entitieswithoutlabel-legend',
+			'wikibasecirrus-entitieswithoutlabel-legend',
 			$supportedEntityTypes,
 			$this->termsLanguages,
 			$this->languageNameLookup,
@@ -93,7 +93,7 @@ class SpecialEntitiesWithoutPageFactory {
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutDescription',
 			TermIndexEntry::TYPE_DESCRIPTION,
-			'wikibase-entitieswithoutdescription-legend',
+			'wikibasecirrus-entitieswithoutdescription-legend',
 			$supportedEntityTypes,
 			$this->termsLanguages,
 			$this->languageNameLookup,

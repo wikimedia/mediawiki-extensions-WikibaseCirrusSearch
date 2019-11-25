@@ -25,12 +25,12 @@
 	"wikibasecirrus-search-bad-profile-name": "Bad search profile name: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "haswbstatement keyword contains no valid statements",
 	"special-entitieswithoutdescription": "Entities without description",
-	"wikibase-entitieswithoutdescription-legend": "Get list of entities without description",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Get list of entities without description",
 	"special-entitieswithoutlabel": "Entities without label",
-	"wikibase-entitieswithoutlabel-legend": "Get list of entities without label",
-	"wikibase-entitieswithoutlabel-label-language": "Language code:",
-	"wikibase-entitieswithoutlabel-label-type": "Type:",
-	"wikibase-entitieswithoutlabel-submit": "Find",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" is not a valid language code.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" is not a valid entity type."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Get list of entities without label",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Language code:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Type:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Find",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" is not a valid language code.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" is not a valid entity type."
 }

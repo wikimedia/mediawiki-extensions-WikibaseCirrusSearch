@@ -131,7 +131,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			&& !$this->termsLanguages->hasLanguage( $this->requestedLanguageCode )
 		) {
 			$this->showErrorHTML( $this->msg(
-				'wikibase-entitieswithoutlabel-invalid-language',
+				'wikibasecirrus-entitieswithoutlabel-invalid-language',
 				wfEscapeWikiText( $this->requestedLanguageCode )
 			)->parse() );
 			$this->requestedLanguageCode = '';
@@ -141,7 +141,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			&& !in_array( $this->requestedEntityType, $this->acceptableEntityTypes )
 		) {
 			$this->showErrorHTML( $this->msg(
-				'wikibase-entitieswithoutlabel-invalid-type',
+				'wikibasecirrus-entitieswithoutlabel-invalid-type',
 				wfEscapeWikiText( $this->requestedEntityType )
 			)->parse() );
 			$this->requestedEntityType = '';
@@ -171,9 +171,9 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$entityTypeOptions = [];
 		foreach ( $this->acceptableEntityTypes as $type ) {
 			// Messages:
-			// wikibase-entity-item
-			// wikibase-entity-property
-			$msg = $this->msg( 'wikibase-entity-' . $type );
+			// wikibasecirrus-entity-item
+			// wikibasecirrus-entity-property
+			$msg = $this->msg( 'wikibasecirrus-entity-' . $type );
 			$text = $msg->isDisabled() ? $type : $msg->text();
 			$entityTypeOptions[$text] = $type;
 		}
@@ -186,7 +186,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				'options' => $this->getLanguageOptions(),
 				'cssclass' => 'wb-language-suggester',
 				'id' => 'wb-entitieswithoutpage-language',
-				'label-message' => 'wikibase-entitieswithoutlabel-label-language'
+				'label-message' => 'wikibasecirrus-entitieswithoutlabel-label-language'
 			],
 			'type' => [
 				'name' => 'type',
@@ -194,13 +194,13 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 				'default' => $this->requestedEntityType ?: reset( $this->acceptableEntityTypes ),
 				'type' => 'select',
 				'id' => 'wb-entitieswithoutpage-type',
-				'label-message' => 'wikibase-entitieswithoutlabel-label-type'
+				'label-message' => 'wikibasecirrus-entitieswithoutlabel-label-type'
 			],
 			'submit' => [
 				'name' => '',
-				'default' => $this->msg( 'wikibase-entitieswithoutlabel-submit' )->text(),
+				'default' => $this->msg( 'wikibasecirrus-entitieswithoutlabel-submit' )->text(),
 				'type' => 'submit',
-				'id' => 'wikibase-entitieswithoutpage-submit',
+				'id' => 'wikibasecirrus-entitieswithoutpage-submit',
 			]
 		];
 

@@ -9,12 +9,12 @@
 		]
 	},
 	"special-entitieswithoutdescription": "Entitats sense descripció",
-	"wikibase-entitieswithoutdescription-legend": "Recupera una llista d'entitats sense descripció",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Recupera una llista d'entitats sense descripció",
 	"special-entitieswithoutlabel": "Entitats sense etiqueta",
-	"wikibase-entitieswithoutlabel-legend": "Obtenir llista d'entitats sense etiqueta",
-	"wikibase-entitieswithoutlabel-label-language": "Codi d'idioma:",
-	"wikibase-entitieswithoutlabel-label-type": "Tipus:",
-	"wikibase-entitieswithoutlabel-submit": "Cerca",
-	"wikibase-entitieswithoutlabel-invalid-language": "«$1» no és un codi d’idioma vàlid.",
-	"wikibase-entitieswithoutlabel-invalid-type": "«$1» no és un tipus d'entitat vàlid."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Obtenir llista d'entitats sense etiqueta",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Codi d'idioma:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Tipus:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Cerca",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» no és un codi d’idioma vàlid.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "«$1» no és un tipus d'entitat vàlid."
 }

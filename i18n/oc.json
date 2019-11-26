@@ -5,12 +5,12 @@
 		]
 	},
 	"special-entitieswithoutdescription": "Entitats sens descripcion",
-	"wikibase-entitieswithoutdescription-legend": "Obténer una lista de las entitats sens descripcion",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Obténer una lista de las entitats sens descripcion",
 	"special-entitieswithoutlabel": "Entitats sens libellat",
-	"wikibase-entitieswithoutlabel-legend": "Recuperar la lista de las entitats sens libellat",
-	"wikibase-entitieswithoutlabel-label-language": "Còdi de lenga :",
-	"wikibase-entitieswithoutlabel-label-type": "Tipe :",
-	"wikibase-entitieswithoutlabel-submit": "Recercar",
-	"wikibase-entitieswithoutlabel-invalid-language": "« $1 » es pas un còdi de lenga valid.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" es pas un tipe d’entitat valid."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Recuperar la lista de las entitats sens libellat",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Còdi de lenga :",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Tipe :",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Recercar",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "« $1 » es pas un còdi de lenga valid.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" es pas un tipe d’entitat valid."
 }

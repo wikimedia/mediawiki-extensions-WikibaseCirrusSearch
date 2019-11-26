@@ -6,12 +6,12 @@
 		]
 	},
 	"special-entitieswithoutdescription": "বিবরণ ছাড়া সত্তা",
-	"wikibase-entitieswithoutdescription-legend": "বিবরণ ছাড়া সত্তার তালিকা দেয়",
+	"wikibasecirrus-entitieswithoutdescription-legend": "বিবরণ ছাড়া সত্তার তালিকা দেয়",
 	"special-entitieswithoutlabel": "লেবেল বিহীন ভুক্তি",
-	"wikibase-entitieswithoutlabel-legend": "লেবেল ছাড়া ভুক্তি তালিকা পান",
-	"wikibase-entitieswithoutlabel-label-language": "ভাষার কোড:",
-	"wikibase-entitieswithoutlabel-label-type": "ধরন:",
-	"wikibase-entitieswithoutlabel-submit": "অনুসন্ধান করুন",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" বৈধ ভাষা কোড নয়।",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" কোন বৈধ সত্তা নয়।"
+	"wikibasecirrus-entitieswithoutlabel-legend": "লেবেল ছাড়া ভুক্তি তালিকা পান",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "ভাষার কোড:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "ধরন:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "অনুসন্ধান করুন",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" বৈধ ভাষা কোড নয়।",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" কোন বৈধ সত্তা নয়।"
 }

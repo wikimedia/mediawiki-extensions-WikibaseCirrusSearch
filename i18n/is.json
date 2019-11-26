@@ -5,12 +5,12 @@
 		]
 	},
 	"special-entitieswithoutdescription": "Einingar án lýsingar",
-	"wikibase-entitieswithoutdescription-legend": "Fá lista yfir einingar án lýsingar",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Fá lista yfir einingar án lýsingar",
 	"special-entitieswithoutlabel": "Færslur án merkimiða",
-	"wikibase-entitieswithoutlabel-legend": "Fá lista yfir færslur án merkimiða",
-	"wikibase-entitieswithoutlabel-label-language": "Tungumálakóði:",
-	"wikibase-entitieswithoutlabel-label-type": "Gerð:",
-	"wikibase-entitieswithoutlabel-submit": "Finna",
-	"wikibase-entitieswithoutlabel-invalid-language": "„$1” er ógildur tungumálakóði.",
-	"wikibase-entitieswithoutlabel-invalid-type": "„$1” er ógild gerð einingar."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Fá lista yfir færslur án merkimiða",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Tungumálakóði:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Gerð:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Finna",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "„$1” er ógildur tungumálakóði.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "„$1” er ógild gerð einingar."
 }

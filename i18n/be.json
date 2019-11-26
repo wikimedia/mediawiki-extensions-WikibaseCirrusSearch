@@ -6,9 +6,9 @@
 		]
 	},
 	"special-entitieswithoutlabel": "Спіс сутнасцяў без назваў",
-	"wikibase-entitieswithoutlabel-legend": "Атрымаць спіс сутнасцяў без назваў",
-	"wikibase-entitieswithoutlabel-label-language": "Код мовы:",
-	"wikibase-entitieswithoutlabel-label-type": "Тып:",
-	"wikibase-entitieswithoutlabel-submit": "Пошук",
-	"wikibase-entitieswithoutlabel-invalid-language": "«$1» — некарэктны код мовы."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Атрымаць спіс сутнасцяў без назваў",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Код мовы:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Тып:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Пошук",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» — некарэктны код мовы."
 }

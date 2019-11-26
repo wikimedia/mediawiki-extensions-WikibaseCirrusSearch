@@ -5,8 +5,8 @@
 			"Macofe"
 		]
 	},
-	"wikibase-entitieswithoutlabel-label-language": "Côd iaith:",
-	"wikibase-entitieswithoutlabel-label-type": "Math:",
-	"wikibase-entitieswithoutlabel-submit": "Chwilier",
-	"wikibase-entitieswithoutlabel-invalid-language": "Nid yw \"$1\" yn god iaith dilys."
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Côd iaith:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Math:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Chwilier",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "Nid yw \"$1\" yn god iaith dilys."
 }

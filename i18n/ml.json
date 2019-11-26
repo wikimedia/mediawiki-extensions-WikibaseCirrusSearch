@@ -5,8 +5,8 @@
 			"Praveenp"
 		]
 	},
-	"wikibase-entitieswithoutlabel-label-language": "ഭാഷയുടെ കോഡ്:",
-	"wikibase-entitieswithoutlabel-label-type": "തരം:",
-	"wikibase-entitieswithoutlabel-submit": "കണ്ടെത്തുക",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" എന്നത് സാധുവായ ഭാഷാ കോഡ് അല്ല."
+	"wikibasecirrus-entitieswithoutlabel-label-language": "ഭാഷയുടെ കോഡ്:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "തരം:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "കണ്ടെത്തുക",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" എന്നത് സാധുവായ ഭാഷാ കോഡ് അല്ല."
 }

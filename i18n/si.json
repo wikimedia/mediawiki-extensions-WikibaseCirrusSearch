@@ -6,8 +6,8 @@
 		]
 	},
 	"special-entitieswithoutlabel": "ලේබලයකින් තොර භූතාර්ථ ලැයිස්තුව",
-	"wikibase-entitieswithoutlabel-legend": "ලේබලයකින් තොර භූතාර්ථ ලැයිස්තුව ලබාගන්න",
-	"wikibase-entitieswithoutlabel-label-language": "භාෂා කේතය:",
-	"wikibase-entitieswithoutlabel-submit": "සොයන්න",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" යනු වලංගු භාෂා කේතයක් නොවේ."
+	"wikibasecirrus-entitieswithoutlabel-legend": "ලේබලයකින් තොර භූතාර්ථ ලැයිස්තුව ලබාගන්න",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "භාෂා කේතය:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "සොයන්න",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" යනු වලංගු භාෂා කේතයක් නොවේ."
 }

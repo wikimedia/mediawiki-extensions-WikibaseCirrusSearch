@@ -6,12 +6,12 @@
 		]
 	},
 	"special-entitieswithoutdescription": "Kirjelduseta olemid",
-	"wikibase-entitieswithoutdescription-legend": "Kirjelduseta olemite loendi hankimine",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Kirjelduseta olemite loendi hankimine",
 	"special-entitieswithoutlabel": "Sildita olemid",
-	"wikibase-entitieswithoutlabel-legend": "Sildita olemite loendi hankimine",
-	"wikibase-entitieswithoutlabel-label-language": "Keelekood:",
-	"wikibase-entitieswithoutlabel-label-type": "Tüüp:",
-	"wikibase-entitieswithoutlabel-submit": "Otsi",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" pole sobiv keelekood.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" pole sobiv olemi tüüp."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Sildita olemite loendi hankimine",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Keelekood:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Tüüp:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Otsi",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" pole sobiv keelekood.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" pole sobiv olemi tüüp."
 }

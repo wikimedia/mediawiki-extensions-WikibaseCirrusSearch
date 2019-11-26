@@ -6,8 +6,8 @@
 			"Mirzali"
 		]
 	},
-	"wikibase-entitieswithoutlabel-label-language": "Kodê zıwani:",
-	"wikibase-entitieswithoutlabel-label-type": "Babet:",
-	"wikibase-entitieswithoutlabel-submit": "Bıvêne",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\"  raveyrdi qoda zıwani niya."
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Kodê zıwani:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Babet:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Bıvêne",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\"  raveyrdi qoda zıwani niya."
 }

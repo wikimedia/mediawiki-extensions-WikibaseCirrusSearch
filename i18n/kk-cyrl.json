@@ -5,9 +5,9 @@
 			"Macofe"
 		]
 	},
-	"wikibase-entitieswithoutlabel-label-language": "Тіл коды:",
-	"wikibase-entitieswithoutlabel-label-type": "Түрі:",
-	"wikibase-entitieswithoutlabel-submit": "Табу",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" жарамсыз тіл коды емес.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" жарамсыз енгізілім түрі."
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Тіл коды:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Түрі:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Табу",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" жарамсыз тіл коды емес.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" жарамсыз енгізілім түрі."
 }

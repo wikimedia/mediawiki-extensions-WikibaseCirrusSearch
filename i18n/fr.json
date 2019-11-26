@@ -69,12 +69,12 @@
 	"wikibasecirrus-search-bad-profile-name": "Nom de profil recherché invalide: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Le mot clé haswbstatement ne contient pas d'instructions valides",
 	"special-entitieswithoutdescription": "Entités sans description",
-	"wikibase-entitieswithoutdescription-legend": "Obtenir une liste des entités sans description",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Obtenir une liste des entités sans description",
 	"special-entitieswithoutlabel": "Entités sans libellé",
-	"wikibase-entitieswithoutlabel-legend": "Récupérer la liste des entités sans libellé",
-	"wikibase-entitieswithoutlabel-label-language": "Code de langue :",
-	"wikibase-entitieswithoutlabel-label-type": "Type :",
-	"wikibase-entitieswithoutlabel-submit": "Rechercher",
-	"wikibase-entitieswithoutlabel-invalid-language": "« $1 » n'est pas un code de langue valide.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" n’est pas un type d’entité valide."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Récupérer la liste des entités sans libellé",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Code de langue :",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Type :",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Rechercher",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "« $1 » n'est pas un code de langue valide.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" n’est pas un type d’entité valide."
 }

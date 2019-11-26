@@ -36,12 +36,12 @@
 	"wikibasecirrus-search-bad-profile-name": "Хибна назва пошукового профілю: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Ключове слово haswbstatement не містить жодних дійсних тверджень",
 	"special-entitieswithoutdescription": "Сутності без опису",
-	"wikibase-entitieswithoutdescription-legend": "Отримати список сутностей без опису",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Отримати список сутностей без опису",
 	"special-entitieswithoutlabel": "Список сутностей без назви",
-	"wikibase-entitieswithoutlabel-legend": "Вивести список сутностей без назви",
-	"wikibase-entitieswithoutlabel-label-language": "Код мови:",
-	"wikibase-entitieswithoutlabel-label-type": "Тип:",
-	"wikibase-entitieswithoutlabel-submit": "Знайти",
-	"wikibase-entitieswithoutlabel-invalid-language": "«$1» неправильний мовний код.",
-	"wikibase-entitieswithoutlabel-invalid-type": "«$1» не є коректним типом сутності."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Вивести список сутностей без назви",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Код мови:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Тип:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Знайти",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» неправильний мовний код.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "«$1» не є коректним типом сутності."
 }

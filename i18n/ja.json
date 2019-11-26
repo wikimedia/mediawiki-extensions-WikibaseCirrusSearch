@@ -27,12 +27,12 @@
 		]
 	},
 	"special-entitieswithoutdescription": "説明がないエンティティ",
-	"wikibase-entitieswithoutdescription-legend": "説明がないエンティティ一覧の取得",
+	"wikibasecirrus-entitieswithoutdescription-legend": "説明がないエンティティ一覧の取得",
 	"special-entitieswithoutlabel": "ラベルがないエンティティ",
-	"wikibase-entitieswithoutlabel-legend": "ラベルがないエンティティ一覧の取得",
-	"wikibase-entitieswithoutlabel-label-language": "言語コード:",
-	"wikibase-entitieswithoutlabel-label-type": "種類:",
-	"wikibase-entitieswithoutlabel-submit": "検索",
-	"wikibase-entitieswithoutlabel-invalid-language": "「$1」は有効な言語コードではありません。",
-	"wikibase-entitieswithoutlabel-invalid-type": "「$1」はエンティティの型として有効なものではありません。"
+	"wikibasecirrus-entitieswithoutlabel-legend": "ラベルがないエンティティ一覧の取得",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "言語コード:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "種類:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "検索",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "「$1」は有効な言語コードではありません。",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "「$1」はエンティティの型として有効なものではありません。"
 }

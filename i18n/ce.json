@@ -5,8 +5,8 @@
 			"Умар"
 		]
 	},
-	"wikibase-entitieswithoutlabel-label-language": "Метта код:",
-	"wikibase-entitieswithoutlabel-label-type": "Тайп:",
-	"wikibase-entitieswithoutlabel-submit": "Лахар",
-	"wikibase-entitieswithoutlabel-invalid-language": "«$1» — меттан код нийса яц."
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Метта код:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Тайп:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Лахар",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» — меттан код нийса яц."
 }

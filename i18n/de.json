@@ -44,12 +44,12 @@
 	"wikibasecirrus-search-bad-profile-name": "Ungültiger Suchprofilname: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Das Schlüsselwort haswbstatement enthält keine gültigen Aussagen",
 	"special-entitieswithoutdescription": "Entitäten ohne Beschreibung",
-	"wikibase-entitieswithoutdescription-legend": "Hole Liste von Entitäten ohne Beschreibung",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Hole Liste von Entitäten ohne Beschreibung",
 	"special-entitieswithoutlabel": "Entitäten ohne Bezeichnung",
-	"wikibase-entitieswithoutlabel-legend": "Hole Liste von Entitäten ohne Bezeichnung",
-	"wikibase-entitieswithoutlabel-label-language": "Sprachcode:",
-	"wikibase-entitieswithoutlabel-label-type": "Typ:",
-	"wikibase-entitieswithoutlabel-submit": "Finden",
-	"wikibase-entitieswithoutlabel-invalid-language": "„$1“ ist kein gültiger Sprachcode.",
-	"wikibase-entitieswithoutlabel-invalid-type": "„$1“ ist kein gültiger Objekttyp."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Hole Liste von Entitäten ohne Bezeichnung",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Sprachcode:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Typ:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Finden",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "„$1“ ist kein gültiger Sprachcode.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "„$1“ ist kein gültiger Objekttyp."
 }

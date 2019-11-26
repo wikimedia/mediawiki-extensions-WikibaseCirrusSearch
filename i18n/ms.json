@@ -6,10 +6,10 @@
 		]
 	},
 	"special-entitieswithoutlabel": "Entiti tanpa label",
-	"wikibase-entitieswithoutlabel-legend": "Dapatkan senarai entiti tanpa label",
-	"wikibase-entitieswithoutlabel-label-language": "Kod bahasa:",
-	"wikibase-entitieswithoutlabel-label-type": "Jenis:",
-	"wikibase-entitieswithoutlabel-submit": "Cari",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" bukan kod bahasa yang sah.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" bukan jenis entiti yang sah."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Dapatkan senarai entiti tanpa label",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Kod bahasa:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Jenis:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Cari",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" bukan kod bahasa yang sah.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" bukan jenis entiti yang sah."
 }

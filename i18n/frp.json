@@ -6,8 +6,8 @@
 		]
 	},
 	"special-entitieswithoutlabel": "Lista de les entitâts sen lambél",
-	"wikibase-entitieswithoutlabel-legend": "Avêr la lista de les entitâts sen lambél",
-	"wikibase-entitieswithoutlabel-label-language": "Code lengoua :",
-	"wikibase-entitieswithoutlabel-submit": "Trovar",
-	"wikibase-entitieswithoutlabel-invalid-language": "« $1 » est pas un code lengoua valido."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Avêr la lista de les entitâts sen lambél",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Code lengoua :",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Trovar",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "« $1 » est pas un code lengoua valido."
 }

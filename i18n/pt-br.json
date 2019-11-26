@@ -35,12 +35,12 @@
 	"wikibasecirrus-search-bad-profile-name": "Nome do perfil de pesquisa ruim: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "A senha haswbstatement não contém nenhuma declaração válida",
 	"special-entitieswithoutdescription": "Entidades sem descrição",
-	"wikibase-entitieswithoutdescription-legend": "Obter lista de entidades sem descrição",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Obter lista de entidades sem descrição",
 	"special-entitieswithoutlabel": "Entidades sem rótulo",
-	"wikibase-entitieswithoutlabel-legend": "Obter lista de entidades sem rótulo",
-	"wikibase-entitieswithoutlabel-label-language": "Código do idioma:",
-	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
-	"wikibase-entitieswithoutlabel-submit": "Buscar",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" não é um código de idioma válido.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" não é um tipo de entidade válido."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Obter lista de entidades sem rótulo",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Código do idioma:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Tipo:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Buscar",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" não é um código de idioma válido.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" não é um tipo de entidade válido."
 }

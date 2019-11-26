@@ -16,12 +16,12 @@
 	"wikibasecirrus-search-bad-profile-name": "Recerche d'u nome d'u profile sbagliate: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "'a parola chiave haswbstatement nò tène nisciuna frase valide",
 	"special-entitieswithoutdescription": "Endità senze descrizione",
-	"wikibase-entitieswithoutdescription-legend": "Pigghie l'elenghe de le endità senze descrizione",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Pigghie l'elenghe de le endità senze descrizione",
 	"special-entitieswithoutlabel": "Endità senze etichette",
-	"wikibase-entitieswithoutlabel-legend": "Pigghie l'elenghe de le endità senze etichette",
-	"wikibase-entitieswithoutlabel-label-language": "Codece d'a lènghe:",
-	"wikibase-entitieswithoutlabel-label-type": "Tipe:",
-	"wikibase-entitieswithoutlabel-submit": "Iacchie",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" non g'è 'nu codece de lènghe valide.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" non g'è 'nu tipe de endità valide."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Pigghie l'elenghe de le endità senze etichette",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Codece d'a lènghe:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Tipe:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Iacchie",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" non g'è 'nu codece de lènghe valide.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" non g'è 'nu tipe de endità valide."
 }

@@ -5,8 +5,8 @@
 			"V.narsikar"
 		]
 	},
-	"wikibase-entitieswithoutlabel-label-language": "भाषा संकेत (कोड):",
-	"wikibase-entitieswithoutlabel-label-type": "प्रकार:",
-	"wikibase-entitieswithoutlabel-submit": "शोधा",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" हा वैध भाषासंकेत नाही."
+	"wikibasecirrus-entitieswithoutlabel-label-language": "भाषा संकेत (कोड):",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "प्रकार:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "शोधा",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" हा वैध भाषासंकेत नाही."
 }

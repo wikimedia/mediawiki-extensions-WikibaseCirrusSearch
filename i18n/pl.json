@@ -23,12 +23,12 @@
 		]
 	},
 	"special-entitieswithoutdescription": "Encje bez opisu",
-	"wikibase-entitieswithoutdescription-legend": "Wyświetl listę encji bez opisu",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Wyświetl listę encji bez opisu",
 	"special-entitieswithoutlabel": "Encje bez etykiety",
-	"wikibase-entitieswithoutlabel-legend": "Wyświetl listę encji bez etykiety",
-	"wikibase-entitieswithoutlabel-label-language": "Kod języka:",
-	"wikibase-entitieswithoutlabel-label-type": "Typ:",
-	"wikibase-entitieswithoutlabel-submit": "Znajdź",
-	"wikibase-entitieswithoutlabel-invalid-language": "„$1” jest nie prawidłowym kodem języka.",
-	"wikibase-entitieswithoutlabel-invalid-type": "„$1” jest nie prawidłowym typem encji."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Wyświetl listę encji bez etykiety",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Kod języka:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Typ:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Znajdź",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "„$1” jest nie prawidłowym kodem języka.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "„$1” jest nie prawidłowym typem encji."
 }

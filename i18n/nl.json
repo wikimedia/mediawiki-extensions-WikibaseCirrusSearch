@@ -7,12 +7,12 @@
 		]
 	},
 	"special-entitieswithoutdescription": "Entiteiten zonder beschrijving",
-	"wikibase-entitieswithoutdescription-legend": "Lijst van entiteiten zonder beschrijving",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Lijst van entiteiten zonder beschrijving",
 	"special-entitieswithoutlabel": "Entiteiten zonder label",
-	"wikibase-entitieswithoutlabel-legend": "Entiteiten zonder label opvragen",
-	"wikibase-entitieswithoutlabel-label-language": "Taalcode:",
-	"wikibase-entitieswithoutlabel-label-type": "Type:",
-	"wikibase-entitieswithoutlabel-submit": "Zoeken",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" is geen geldige taalcode.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" is geen geldig entiteitstype."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Entiteiten zonder label opvragen",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Taalcode:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Type:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Zoeken",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" is geen geldige taalcode.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" is geen geldig entiteitstype."
 }

@@ -7,12 +7,12 @@
 	},
 	"wikibasecirrus-keywordfeature-unknown-language-code": "La parola chiave $1 contiene un codice lingua sconosciuto: $2",
 	"special-entitieswithoutdescription": "Entità senza descrizione",
-	"wikibase-entitieswithoutdescription-legend": "Permette di ottenere l'elenco delle entità senza descrizione",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Permette di ottenere l'elenco delle entità senza descrizione",
 	"special-entitieswithoutlabel": "Entità senza etichetta",
-	"wikibase-entitieswithoutlabel-legend": "Permette di ottenere l'elenco delle entità senza etichetta",
-	"wikibase-entitieswithoutlabel-label-language": "Codice lingua:",
-	"wikibase-entitieswithoutlabel-label-type": "Tipo:",
-	"wikibase-entitieswithoutlabel-submit": "Trova",
-	"wikibase-entitieswithoutlabel-invalid-language": "\"$1\" non è un codice di lingua valido.",
-	"wikibase-entitieswithoutlabel-invalid-type": "\"$1\" non è un tipo di entità valido."
+	"wikibasecirrus-entitieswithoutlabel-legend": "Permette di ottenere l'elenco delle entità senza etichetta",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Codice lingua:",
+	"wikibasecirrus-entitieswithoutlabel-label-type": "Tipo:",
+	"wikibasecirrus-entitieswithoutlabel-submit": "Trova",
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" non è un codice di lingua valido.",
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" non è un tipo di entità valido."
 }

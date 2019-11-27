@@ -46,7 +46,7 @@
 	"wikibasecirrus-entitieswithoutlabel-legend": "取得無標籤的實體的清單",
 	"wikibasecirrus-entitieswithoutlabel-label-language": "語言代碼：",
 	"wikibasecirrus-entitieswithoutlabel-label-type": "類型：",
-	"wikibasecirrus-entitieswithoutlabel-submit": "搜尋",
+	"wikibasecirrus-entitieswithoutlabel-submit": "查找",
 	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" 不是有效的語言代碼。",
 	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" 不是有效的實體類型。"
 }

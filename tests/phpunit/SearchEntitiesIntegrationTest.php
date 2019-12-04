@@ -198,7 +198,8 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 				false,
 				false,
 				DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
-				true // DataAccessSettings::PROPERTY_TERMS_NORMALIZED
+				true, // DataAccessSettings::PROPERTY_TERMS_NORMALIZED,
+				[ 'max' => MIGRATION_NEW ] // Testing with final stage of migration
 			)
 		);
 

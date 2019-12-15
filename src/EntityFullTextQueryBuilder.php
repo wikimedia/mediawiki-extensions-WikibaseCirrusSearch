@@ -285,7 +285,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @param string $queryText
 	 * @param SearchContext $context
 	 * @param float[][] $profile Must contain $profile['phrase'] with keys 'all', 'slop', 'all.plain'
-	 * @return AbstractQuery
+	 * @return AbstractQuery|null
 	 */
 	private function buildPhraseRescore( $queryText, SearchContext $context, array $profile ) {
 		if ( empty( $profile['phrase'] ) ) {

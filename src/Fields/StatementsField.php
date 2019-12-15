@@ -150,7 +150,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * e.g. [ 'propertyId' => 'P180', 'value' => 'Q999' ]
 	 *
 	 * @param Snak $snak
-	 * @return array
+	 * @return array|null
 	 * @throws MWException
 	 */
 	protected function getSnakAsPropertyIdAndValue( Snak $snak ) {

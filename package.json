@@ -7,7 +7,7 @@
 	},
 	"devDependencies": {
 		"grunt": "1.0.4",
-		"grunt-banana-checker": "0.6.0",
+		"grunt-banana-checker": "0.8.1",
 		"wdio-mediawiki": "0.4.0",
 		"wdio-mocha-framework": "0.6.4",
 		"wdio-spec-reporter": "0.1.5",

@@ -13,7 +13,9 @@
 		"MediaWiki": ">= 1.33.0"
 	},
 	"AutoloadNamespaces": {
-		"Wikibase\\Search\\Elastic\\": "src/",
+		"Wikibase\\Search\\Elastic\\": "src/"
+	},
+	"TestAutoloadNamespaces": {
 		"Wikibase\\Search\\Elastic\\Tests\\": "tests/phpunit/"
 	},
 	"config_prefix": "wgWBCS",

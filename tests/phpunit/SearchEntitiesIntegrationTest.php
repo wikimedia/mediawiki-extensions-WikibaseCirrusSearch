@@ -19,6 +19,7 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
@@ -89,8 +90,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @dataProvider provideQueriesForEntityIds
 	 */
 	public function testElasticSearchIntegration( $query, array $expectedIds ) {
-		$this->markTestSkipped( 'Temporarily skipping due to ongoing changes in Wikibase code' );
-
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
@@ -194,7 +193,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			new StaticContentLanguages( [ 'en' ] ),
 			[ 'item', 'property' ],
 			[ '' => 'conceptBaseUri:' ],
-			new EntitySourceDefinitions( [] ),
+			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
 			new DataAccessSettings(
 				100,
 				false,

@@ -97,7 +97,7 @@ class StatementQuantityFieldTest extends MediaWikiTestCase {
 
 		$field = $this->createStatementQuantityField();
 		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
-		$this->assertInternalType( 'array', $field->getMapping( $searchEngine ) );
+		$this->assertIsArray( $field->getMapping( $searchEngine ) );
 	}
 
 	public function testGetMappingNotCirrus() {

@@ -10,7 +10,6 @@ use MediaWikiTestCase;
 use RequestContext;
 use Title;
 use Wikibase\DataAccess\DataAccessSettings;
-use Wikibase\DataAccess\EntitySourceDefinitions;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -19,12 +18,12 @@ use Wikibase\DataModel\Services\Lookup\InMemoryDataTypeLookup;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\LanguageFallbackChain;
 use Wikibase\LanguageFallbackChainFactory;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityTitleLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 
 /**
@@ -33,6 +32,7 @@ use Wikibase\Search\Elastic\EntitySearchElastic;
  * @group API
  * @group Wikibase
  * @group WikibaseAPI
+ * @group Database
  *
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
@@ -46,6 +46,14 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 
 	protected function setUp() : void {
 		parent::setUp();
+
+		global $wgWBRepoSettings;
+
+		// Test as if the default federation type was entity source based.
+		$settings = $wgWBRepoSettings;
+		$settings['useEntitySourceBasedFederation'] = true;
+		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
+		WikibaseRepo::resetClassStatics();
 
 		$this->setMwGlobals( 'wgWBCSUseCirrus', true );
 		$this->idParser = new BasicEntityIdParser();
@@ -184,6 +192,8 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P1' ), '' );
 		$dataTypeLookup->setDataTypeForProperty( new PropertyId( 'P2' ), '' );
 
+		$repo = WikibaseRepo::getDefaultInstance();
+
 		$apiModule = new SearchEntities(
 			new ApiMain( $context ),
 			'',
@@ -192,13 +202,13 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			$dataTypeLookup,
 			new StaticContentLanguages( [ 'en' ] ),
 			[ 'item', 'property' ],
-			[ '' => 'conceptBaseUri:' ],
-			new EntitySourceDefinitions( [], new EntityTypeDefinitions( [] ) ),
+			$repo->getConceptBaseUris(),
+			$repo->getEntitySourceDefinitions(),
 			new DataAccessSettings(
 				100,
 				false,
 				false,
-				DataAccessSettings::USE_REPOSITORY_PREFIX_BASED_FEDERATION,
+				DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION,
 				true, // DataAccessSettings::PROPERTY_TERMS_NORMALIZED,
 				[ 'max' => MIGRATION_NEW ] // Testing with final stage of migration
 			)

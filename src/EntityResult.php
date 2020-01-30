@@ -116,7 +116,6 @@ class EntityResult extends Result implements ExtendedResult {
 			$key = key( $highlightData );
 			if ( $key && preg_match( '/^(\w+)\.([^.]+)\.plain$/', $key, $match ) ) {
 				$this->extraDisplay = [
-					// @phan-suppress-next-line PhanTypePossiblyInvalidDimOffset
 					'language' => $match[2],
 					// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 					'value' => new HtmlArmor( $this->processHighlighting( $highlightData[$key][0],

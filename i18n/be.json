@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Macofe",
-			"Чаховіч Уладзіслаў"
+			"Чаховіч Уладзіслаў",
+			"Maksim L."
 		]
 	},
 	"special-entitieswithoutlabel": "Спіс сутнасцяў без назваў",
@@ -10,5 +11,5 @@
 	"wikibasecirrus-entitieswithoutlabel-label-language": "Код мовы:",
 	"wikibasecirrus-entitieswithoutlabel-label-type": "Тып:",
 	"wikibasecirrus-entitieswithoutlabel-submit": "Пошук",
-	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» — некарэктны код мовы."
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» — недапушчальны код мовы."
 }

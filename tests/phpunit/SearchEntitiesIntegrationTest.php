@@ -9,7 +9,6 @@ use Language;
 use MediaWikiTestCase;
 use RequestContext;
 use Title;
-use Wikibase\DataAccess\DataAccessSettings;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -98,8 +97,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @dataProvider provideQueriesForEntityIds
 	 */
 	public function testElasticSearchIntegration( $query, array $expectedIds ) {
-		$this->markTestSkipped( 'Skipping temporarily due to ongoing changes in Wikibase: T245830' );
-
 		if ( !class_exists( CirrusSearch::class ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
@@ -204,16 +201,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			$dataTypeLookup,
 			new StaticContentLanguages( [ 'en' ] ),
 			[ 'item', 'property' ],
-			$repo->getConceptBaseUris(),
-			$repo->getEntitySourceDefinitions(),
-			new DataAccessSettings(
-				100,
-				false,
-				false,
-				DataAccessSettings::USE_ENTITY_SOURCE_BASED_FEDERATION,
-				true, // DataAccessSettings::PROPERTY_TERMS_NORMALIZED,
-				[ 'max' => MIGRATION_NEW ] // Testing with final stage of migration
-			)
+			$repo->getEntitySourceDefinitions()
 		);
 
 		$apiModule->execute();

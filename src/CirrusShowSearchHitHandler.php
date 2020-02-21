@@ -8,11 +8,11 @@ use IContextSource;
 use SearchResult;
 use SpecialSearch;
 use Title;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatter;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Store\EntityIdLookup;
 
 /**
  * Handler to format entities in the search results

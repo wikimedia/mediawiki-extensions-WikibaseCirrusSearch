@@ -16,10 +16,10 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
 use Wikibase\Search\Elastic\CirrusShowSearchHitHandler;
 use Wikibase\Search\Elastic\EntityResult;
-use Wikibase\Store\EntityIdLookup;
 use Wikimedia\TestingAccessWrapper;
 
 /**

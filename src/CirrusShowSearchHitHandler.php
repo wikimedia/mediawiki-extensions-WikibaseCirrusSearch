@@ -69,8 +69,8 @@ class CirrusShowSearchHitHandler {
 		array $terms, &$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related,
 		&$html
 	) {
-		$self = self::newFromGlobalState( $searchPage->getContext() );
 		if ( $result instanceof EntityResult ) {
+			$self = self::newFromGlobalState( $searchPage->getContext() );
 			$self->showEntityResultHit( $searchPage, $result, $terms,
 				$link, $redirect, $section, $extract, $score, $size, $date, $related, $html );
 		}
@@ -126,8 +126,8 @@ class CirrusShowSearchHitHandler {
 		array &$query,
 		array &$attributes
 	) {
-		$self = self::newFromGlobalState( $specialSearch->getContext() );
 		if ( $result instanceof EntityResult ) {
+			$self = self::newFromGlobalState( $specialSearch->getContext() );
 			$self->getEntityLink( $result, $title, $titleSnippet, $attributes,
 				$specialSearch->getLanguage()->getCode() );
 		}

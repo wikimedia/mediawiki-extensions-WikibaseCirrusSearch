@@ -2,7 +2,7 @@
 namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Search\BaseCirrusSearchResultSet;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 
 /**
  * Result set for entity search

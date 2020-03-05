@@ -6,8 +6,8 @@ use CirrusSearch\Search\BaseResultsType;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Term\Term;
-use Wikibase\LanguageFallbackChain;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\LanguageFallbackChain;
 
 /**
  * This result type implements the result for searching

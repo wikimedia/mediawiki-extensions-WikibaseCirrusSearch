@@ -6,6 +6,7 @@
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
 use Wikibase\Repo\Api\EntityIdSearchHelper;
@@ -16,7 +17,6 @@ use Wikibase\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\PropertyFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\StatementProviderFieldDefinitions;
-use Wikibase\SettingsArray;
 
 return [
 	'item' => [

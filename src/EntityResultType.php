@@ -4,7 +4,7 @@ namespace Wikibase\Search\Elastic;
 use CirrusSearch\Search\BaseCirrusSearchResultSet;
 use CirrusSearch\Search\BaseResultsType;
 use CirrusSearch\Searcher;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 
 /**
  * Result class for fulltext search of entities.

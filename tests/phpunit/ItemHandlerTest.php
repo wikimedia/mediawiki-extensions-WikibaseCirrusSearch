@@ -12,9 +12,9 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\EntityContent;
 use Wikibase\ItemContent;
 use Wikibase\Lib\EntityTypeDefinitions;
+use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
-use Wikibase\SettingsArray;
 
 /**
  * @covers \Wikibase\Repo\Content\ItemHandler

@@ -4,7 +4,7 @@ namespace Wikibase\Search\Elastic;
 use CirrusSearch\Search\Result;
 use CirrusSearch\Searcher;
 use HtmlArmor;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Repo\Search\ExtendedResult;
 
 /**

@@ -10,7 +10,7 @@ use CirrusSearch\Search\SearchContext;
 use CirrusSearch\SearchConfig;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\EntityFullTextQueryBuilder;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 use Wikibase\Search\Elastic\Hooks;

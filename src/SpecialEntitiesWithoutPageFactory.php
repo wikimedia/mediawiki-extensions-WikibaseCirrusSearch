@@ -4,12 +4,12 @@ namespace Wikibase\Search\Elastic;
 
 use Wikibase\DataModel\Term\DescriptionsProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
-use Wikibase\EntityFactory;
 use Wikibase\Lib\ContentLanguages;
+use Wikibase\Lib\EntityFactory;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\TermIndexEntry;
 
 /**
  * Factory to create special pages.

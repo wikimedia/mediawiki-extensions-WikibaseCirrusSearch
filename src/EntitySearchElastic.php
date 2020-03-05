@@ -12,8 +12,8 @@ use Elastica\Query\Term;
 use Language;
 use WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\LanguageFallbackChainFactory;
 use Wikibase\Lib\Interactors\TermSearchResult;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Repo\Api\EntitySearchHelper;
 
 /**

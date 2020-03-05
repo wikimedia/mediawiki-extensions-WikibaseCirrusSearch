@@ -6,7 +6,7 @@ use Elastica\Result;
 use Elastica\ResultSet;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\LanguageFallbackChain;
+use Wikibase\Lib\LanguageFallbackChain;
 use Wikibase\Search\Elastic\ElasticTermResult;
 
 /**

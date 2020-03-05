@@ -7,9 +7,9 @@ use FauxResponse;
 use SpecialPageTestBase;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
+use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\SpecialEntitiesWithoutPage;
-use Wikibase\TermIndexEntry;
 
 /**
  * @covers \Wikibase\Search\Elastic\SpecialEntitiesWithoutPage

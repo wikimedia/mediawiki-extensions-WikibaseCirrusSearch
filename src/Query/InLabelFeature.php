@@ -10,7 +10,7 @@ use CirrusSearch\Search\SearchContext;
 use CirrusSearch\WarningCollector;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\MultiMatch;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\Fields\DescriptionsField;
 use Wikibase\Search\Elastic\Fields\LabelsField;
 use Wikibase\Search\Elastic\Fields\AllLabelsField;

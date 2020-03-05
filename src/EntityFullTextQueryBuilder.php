@@ -14,7 +14,7 @@ use Elastica\Query\MultiMatch;
 use Elastica\Query\Term;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\LanguageFallbackChainFactory;
+use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Repo\WikibaseRepo;
 
 /**

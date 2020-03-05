@@ -74,25 +74,28 @@ return [
 		},
 		'entity-search-callback' => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
-			return new CombinedEntitySearchHelper(
-				[
-					new EntityIdSearchHelper(
-						$repo->getEntityLookup(),
-						$repo->getEntityIdParser(),
-						new LanguageFallbackLabelDescriptionLookup(
-							$repo->getTermLookup(),
-							$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
+				new CombinedEntitySearchHelper(
+					[
+						new EntityIdSearchHelper(
+							$repo->getEntityLookup(),
+							$repo->getEntityIdParser(),
+							new LanguageFallbackLabelDescriptionLookup(
+								$repo->getTermLookup(),
+								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
+							),
+							$repo->getEntityTypeToRepositoryMapping()
 						),
-						$repo->getEntityTypeToRepositoryMapping()
-					),
-					new EntitySearchElastic(
-						$repo->getLanguageFallbackChainFactory(),
-						$repo->getEntityIdParser(),
-						$repo->getUserLanguage(),
-						$repo->getContentModelMappings(),
-						$request
-					)
-				]
+						new EntitySearchElastic(
+							$repo->getLanguageFallbackChainFactory(),
+							$repo->getEntityIdParser(),
+							$repo->getUserLanguage(),
+							$repo->getContentModelMappings(),
+							$request
+						)
+					]
+				),
+				$repo->getPropertyDataTypeLookup()
 			);
 		},
 		'fulltext-search-context' => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,

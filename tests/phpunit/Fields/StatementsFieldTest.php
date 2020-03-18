@@ -14,10 +14,10 @@ use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\StatementList;
-use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Repo\Tests\ChangeOp\StatementListProviderDummy;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 
 /**

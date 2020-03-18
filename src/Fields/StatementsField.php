@@ -127,11 +127,11 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		foreach ( $entity->getStatements() as $statement ) {
 			$snak = $statement->getMainSnak();
 			$mainSnakString = $this->getWhitelistedSnakAsString( $snak, $statement->getGuid() );
-			if ( !is_null( $mainSnakString ) ) {
+			if ( $mainSnakString !== null ) {
 				$data[] = $mainSnakString;
 				foreach ( $statement->getQualifiers() as $qualifier ) {
 					$qualifierString = $this->getSnakAsString( $qualifier );
-					if ( !is_null( $qualifierString ) ) {
+					if ( $qualifierString !== null ) {
 						$data[] = $mainSnakString .
 							self::QUALIFIER_START .
 							$qualifierString .
@@ -188,7 +188,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 
 	protected function getSnakAsString( Snak $snak ) {
 		$snakAsPropertyIdAndValue = $this->getSnakAsPropertyIdAndValue( $snak );
-		if ( is_null( $snakAsPropertyIdAndValue ) ) {
+		if ( $snakAsPropertyIdAndValue === null ) {
 			return null;
 		}
 		return $snakAsPropertyIdAndValue[ 'propertyId' ] . self::STATEMENT_SEPARATOR .

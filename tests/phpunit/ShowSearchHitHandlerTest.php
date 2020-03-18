@@ -391,7 +391,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getEntityIdForTitle' )
-			->willReturnCallback( function( Title $title ) {
+			->willReturnCallback( function ( Title $title ) {
 				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
 					return new ItemId( $m[0] );
 				}

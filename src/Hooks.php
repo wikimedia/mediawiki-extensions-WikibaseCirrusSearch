@@ -11,13 +11,13 @@ use Language;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
 use Wikibase\Search\Elastic\Query\WbStatementQuantityFeature;
-use Wikibase\Lib\WikibaseContentLanguages;
 use Wikimedia\Assert\Assert;
 
 /**
@@ -48,7 +48,7 @@ class Hooks {
 	 *
 	 * @see WikibaseSearch.entitytypes.php
 	 *
-	 * @param array[] $entityTypeDefinitions
+	 * @param array[] &$entityTypeDefinitions
 	 */
 	public static function onWikibaseRepoEntityTypes( array &$entityTypeDefinitions ) {
 		$wbcsConfig = self::getWBCSConfig();
@@ -282,8 +282,8 @@ class Hooks {
 	/**
 	 * Add extra cirrus search query features for wikibase
 	 *
-	 * @param $config (not used, required by hook)
-	 * @param array $extraFeatures
+	 * @param \CirrusSearch\SearchConfig $config (not used, required by hook)
+	 * @param array &$extraFeatures
 	 */
 	public static function onCirrusSearchAddQueryFeatures( $config, array &$extraFeatures ) {
 		$searchConfig = self::getWBCSConfig();
@@ -312,7 +312,7 @@ class Hooks {
 	 * Will instantiate descriptions for search results.
 	 * @param WikibaseRepo $repo
 	 * @param Language $lang
-	 * @param array $results
+	 * @param array &$results
 	 */
 	public static function amendSearchResults( WikibaseRepo $repo, Language $lang, array &$results ) {
 		$lookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
@@ -359,7 +359,7 @@ class Hooks {
 
 	/**
 	 * Will instantiate descriptions for search results.
-	 * @param array $results
+	 * @param array &$results
 	 */
 	public static function onApiOpenSearchSuggest( &$results ) {
 		if ( empty( $results ) ) {

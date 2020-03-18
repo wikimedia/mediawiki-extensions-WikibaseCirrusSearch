@@ -53,7 +53,7 @@ class WikibaseSearchConfig implements Config {
 		}
 		if ( $this->globals->has( $name ) ) {
 			$value = $this->globals->get( $name );
-			if ( !is_null( $value ) ) {
+			if ( $value !== null ) {
 				return $value;
 			}
 		}
@@ -73,6 +73,8 @@ class WikibaseSearchConfig implements Config {
 
 	/**
 	 * Check whether search functionality for this extension is enabled.
+	 *
+	 * @return bool
 	 */
 	public function enabled() {
 		// Ignore Wikibase setting, it should not disable this one

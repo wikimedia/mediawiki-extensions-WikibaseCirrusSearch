@@ -13,10 +13,6 @@
 	<rule ref="MediaWiki.Commenting.PhpunitAnnotations.NotClassTrait">
 		<exclude-pattern>DispatchingQueryBuilderTest\.php</exclude-pattern>
 	</rule>
-	<rule ref="MediaWiki.Commenting.MissingCovers">
-		<!-- FIXME: Add missing @covers -->
-		<exclude-pattern>tests/phpunit/*</exclude-pattern>
-	</rule>
 	<rule ref="Wikibase.Namespaces.FullQualifiedClassName">
 		<!-- FIXME: Add use statements, some class name conflicts -->
 		<exclude-pattern>DescriptionsField\.php</exclude-pattern>
@@ -35,5 +31,4 @@
 	<rule ref="Generic.Metrics.NestingLevel" />
 
 	<file>.</file>
-	<exclude-pattern>vendor/</exclude-pattern>
 </ruleset>

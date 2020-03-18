@@ -83,10 +83,10 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 
 		$this->assertEquals( "en_text", $mapping['properties']['en']['analyzer'] );
 		$this->assertEquals( "es_text_search", $mapping['properties']['es']['search_analyzer'] );
-		$this->assertEquals( false, $mapping['properties']['ru']['index'] );
+		$this->assertFalse( $mapping['properties']['ru']['index'] );
 		$this->assertEquals( "ru_plain",
 			$mapping['properties']['ru']['fields']['plain']['analyzer'] );
-		$this->assertEquals( false, $mapping['properties']['de']['index'] );
+		$this->assertFalse( $mapping['properties']['de']['index'] );
 		$this->assertEquals( "de_plain_search",
 			$mapping['properties']['de']['fields']['plain']['search_analyzer'] );
 	}

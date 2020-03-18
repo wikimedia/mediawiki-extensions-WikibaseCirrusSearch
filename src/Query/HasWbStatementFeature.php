@@ -160,7 +160,6 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		$suffix,
 		WarningCollector $warningCollector
 	) {
-
 		$queries = [];
 		$statementStrings = explode( '|', $value );
 		foreach ( $statementStrings as $statementString ) {

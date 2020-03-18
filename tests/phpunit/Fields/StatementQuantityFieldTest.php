@@ -6,9 +6,9 @@ use CirrusSearch;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
-use Wikibase\Search\Elastic\Fields\StatementQuantityField;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Search\Elastic\Fields\StatementQuantityField;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 
 /**

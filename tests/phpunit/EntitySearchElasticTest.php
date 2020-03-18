@@ -2,7 +2,6 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use CirrusSearch;
 use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\CirrusTestCase;
 use Language;

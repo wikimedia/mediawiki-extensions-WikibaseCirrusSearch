@@ -91,7 +91,7 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 		}
 		foreach ( $langCodes as $lang ) {
 			$query->addShould( new Exists( $this->getFieldName( $key ) . '.' . $lang . '.plain' ) );
-		};
+		}
 		return $query;
 	}
 
@@ -117,7 +117,7 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 		}
 		$langCodes = [];
 
-		$langCodeCandidates = array_unique( array_map( function( $elem ) {
+		$langCodeCandidates = array_unique( array_map( function ( $elem ) {
 			return mb_strtolower( $elem );
 		}, explode( ',', $value ) ) );
 

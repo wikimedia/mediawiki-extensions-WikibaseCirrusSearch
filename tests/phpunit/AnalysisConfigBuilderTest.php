@@ -1,7 +1,7 @@
 <?php
+
 namespace Wikibase\Search\Elastic\Tests;
 
-use CirrusSearch;
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use MediaWikiTestCase;
 use Wikibase\Search\Elastic\ConfigBuilder;

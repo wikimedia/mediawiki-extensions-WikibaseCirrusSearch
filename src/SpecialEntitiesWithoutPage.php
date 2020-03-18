@@ -67,6 +67,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	 * @param string[] $acceptableEntityTypes
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
 		$name,

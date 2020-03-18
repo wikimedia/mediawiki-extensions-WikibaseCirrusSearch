@@ -63,7 +63,6 @@ class CirrusShowSearchHitHandler {
 	 * Format the output when the search result contains entities
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ShowSearchHit
 	 * @see showEntityResultHit
-	 *
 	 */
 	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result,
 		array $terms, &$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related,
@@ -115,7 +114,7 @@ class CirrusShowSearchHitHandler {
 	 * @param string $terms
 	 * @param SpecialSearch $specialSearch
 	 * @param string[] &$query
-	 * @param string[] $attributes
+	 * @param string[] &$attributes
 	 */
 	public static function onShowSearchHitTitle(
 		Title $title,

@@ -50,6 +50,7 @@ class SpecialEntitiesWithoutPageFactory {
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityFactory $entityFactory
+	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
 		array $entityTypes,

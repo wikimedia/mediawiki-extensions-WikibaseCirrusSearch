@@ -77,16 +77,13 @@ class StatementQuantityField extends StatementsField implements WikibaseIndexFie
 		foreach ( $entity->getStatements() as $statement ) {
 			$snak = $statement->getMainSnak();
 			$mainSnakString = $this->getWhitelistedSnakAsString( $snak, $statement->getGuid() );
-			if ( is_null( $mainSnakString ) ) {
+			if ( $mainSnakString === null ) {
 				continue;
 			}
 			foreach ( $statement->getQualifiers() as $qualifier ) {
 				$propertyIdAndValue = $this->getSnakAsPropertyIdAndValue( $qualifier );
-				if (
-					!is_null( $propertyIdAndValue )
-					&&
-					$qualifier->getDataValue() instanceof UnboundedQuantityValue
-					&&
+				if ( $propertyIdAndValue !== null &&
+					$qualifier->getDataValue() instanceof UnboundedQuantityValue &&
 					in_array( $propertyIdAndValue[ 'propertyId' ], $this->allowedQualifierPropertyIds )
 				) {
 						$data[] = $mainSnakString . '|' . $propertyIdAndValue[ 'value' ];

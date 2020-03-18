@@ -3,7 +3,6 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use FauxRequest;
-use FauxResponse;
 use SpecialPageTestBase;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;

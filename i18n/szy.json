@@ -1,5 +1,7 @@
 {
-	"@metadata": [],
+	"@metadata": {
+		"authors": []
+	},
 	"special-entitieswithoutdescription": "inayi’ sapuelac nu masaheciay",
 	"wikibasecirrus-entitieswithoutdescription-legend": "maala inayi’ sapuelac a masaheciay piazihan-tu-sulit",
 	"special-entitieswithoutlabel": "inayi’ aazihen a paya nu masaheciay",

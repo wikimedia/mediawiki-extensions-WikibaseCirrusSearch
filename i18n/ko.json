@@ -1,22 +1,22 @@
 {
 	"@metadata": {
 		"authors": [
-			"ChongDae",
-			"Hym411",
-			"Kwj2772",
-			"Priviet",
-			"아라",
-			"Revi",
-			"Macofe",
-			"SeoJeongHo",
 			"Alex00728",
-			"Hwangjy9",
-			"고솜",
-			"Ykhwong",
-			"Jerrykim306",
+			"ChongDae",
 			"Ellif",
+			"Garam",
+			"Hwangjy9",
+			"Hym411",
+			"Jerrykim306",
+			"Kwj2772",
+			"Macofe",
 			"Nuevo Paso",
-			"Garam"
+			"Priviet",
+			"Revi",
+			"SeoJeongHo",
+			"Ykhwong",
+			"고솜",
+			"아라"
 		]
 	},
 	"wikibasecirrus-search-bad-entity-type": "잘못된 엔티티 유형: $1",

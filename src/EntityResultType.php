@@ -38,6 +38,7 @@ class EntityResultType extends BaseResultsType {
 	 */
 	public function getSourceFiltering() {
 		$fields = parent::getSourceFiltering();
+		$fields[] = 'timestamp';
 		$fields[] = 'sitelink_count';
 		$fields[] = 'statement_count';
 		foreach ( $this->fallbackChain->getFetchLanguageCodes() as $code ) {

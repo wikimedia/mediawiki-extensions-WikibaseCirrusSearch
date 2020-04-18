@@ -8,9 +8,6 @@ use CirrusSearch;
  * After migration is complete, this class will not be necessary anymore.
  */
 trait WikibaseSearchTestCase {
-
-	private $oldDisableCirrus;
-
 	public function enableWBCS() {
 		// Enable WBSearch hooks
 		$this->setMwGlobals( 'wgWBCSUseCirrus', true );

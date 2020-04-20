@@ -1,7 +1,7 @@
 <?php
 namespace Wikibase\Search\Elastic\Tests;
 
-use CirrusSearch;
+use ExtensionRegistry;
 
 /**
  * Mixin for tests that could collide with Wikibase CirrusSearch functionality.
@@ -18,7 +18,7 @@ trait WikibaseSearchTestCase {
 
 	public function setUp() : void {
 		parent::setUp();
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
 		$this->enableWBCS();

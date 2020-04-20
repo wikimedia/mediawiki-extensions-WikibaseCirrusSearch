@@ -2,7 +2,9 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use CirrusSearch;
+use CirrusSearch\CirrusSearch;
+use CirrusSearch\SearchConfig;
+use ExtensionRegistry;
 use MediaWikiTestCase;
 use SearchEngine;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
@@ -18,9 +20,9 @@ class SearchFieldTestCase extends MediaWikiTestCase {
 	 * @return SearchEngine
 	 */
 	protected function getSearchEngineMock() {
-		if ( class_exists( CirrusSearch::class ) ) {
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
-			$searchEngine->method( 'getConfig' )->willReturn( new CirrusSearch\SearchConfig() );
+			$searchEngine->method( 'getConfig' )->willReturn( new SearchConfig() );
 		} else {
 			$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
 		}

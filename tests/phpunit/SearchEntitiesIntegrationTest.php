@@ -3,7 +3,9 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use ApiMain;
-use CirrusSearch;
+use CirrusSearch\CirrusSearch;
+use CirrusSearch\CirrusDebugOptions;
+use ExtensionRegistry;
 use FauxRequest;
 use Language;
 use MediaWikiTestCase;
@@ -96,7 +98,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @dataProvider provideQueriesForEntityIds
 	 */
 	public function testElasticSearchIntegration( $query, array $expectedIds ) {
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 
@@ -156,7 +158,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			$this->getMockBuilder( Language::class )->disableOriginalConstructor()->getMock(),
 			[ 'item' => 'wikibase-item' ],
 			new FauxRequest(),
-			CirrusSearch\CirrusDebugOptions::forDumpingQueriesInUnitTests()
+			CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);
 
 		return $entitySearchElastic;

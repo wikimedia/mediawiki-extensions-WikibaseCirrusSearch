@@ -2,7 +2,8 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use CirrusSearch;
+use CirrusSearch\CirrusSearch;
+use ExtensionRegistry;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -82,7 +83,7 @@ class StatementQuantityFieldTest extends MediaWikiTestCase {
 	 * @dataProvider statementsProvider
 	 */
 	public function testGetFieldData( $entity, array $expected ) {
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 
@@ -91,7 +92,7 @@ class StatementQuantityFieldTest extends MediaWikiTestCase {
 	}
 
 	public function testGetMapping() {
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 

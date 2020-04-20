@@ -2,7 +2,8 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use CirrusSearch;
+use CirrusSearch\CirrusSearch;
+use ExtensionRegistry;
 use MediaWikiTestCase;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
@@ -49,7 +50,7 @@ class AllLabelsFieldTest extends MediaWikiTestCase {
 	}
 
 	public function testGetMapping() {
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 

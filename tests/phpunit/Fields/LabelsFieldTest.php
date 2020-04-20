@@ -2,7 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use CirrusSearch;
+use ExtensionRegistry;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -68,7 +68,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	}
 
 	public function testGetMapping() {
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
@@ -93,7 +93,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	public function testHints() {
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
 		$searchEngine = $this->getSearchEngineMock();
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->assertEquals( [], $labels->getEngineHints( $searchEngine ) );
 		} else {
 			$this->assertEquals( [ 'noop' => 'equals' ], $labels->getEngineHints( $searchEngine ) );

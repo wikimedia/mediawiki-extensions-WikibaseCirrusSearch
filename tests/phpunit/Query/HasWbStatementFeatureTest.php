@@ -4,6 +4,7 @@ namespace Wikibase\Search\Elastic\Tests\Query;
 
 use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
+use ExtensionRegistry;
 use Elastica\Query\Match;
 use Elastica\Query\Prefix;
 use Wikibase\Search\Elastic\Fields\StatementsField;
@@ -20,7 +21,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	public function setUp() : void {
 		parent::setUp();
 
-		if ( !class_exists( \CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 	}

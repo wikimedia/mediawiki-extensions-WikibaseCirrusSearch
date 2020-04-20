@@ -2,7 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use CirrusSearch;
+use ExtensionRegistry;
 use Wikibase\Search\Elastic\Fields\DescriptionsField;
 use Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 
@@ -25,7 +25,7 @@ class DescriptionProviderFieldDefinitionsTest extends SearchFieldTestCase {
 		$this->assertArrayHasKey( 'descriptions', $fields );
 		$this->assertInstanceOf( DescriptionsField::class, $fields['descriptions'] );
 
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 		$searchEngine = $this->getSearchEngineMock();

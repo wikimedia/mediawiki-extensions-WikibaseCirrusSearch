@@ -2,10 +2,10 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use CirrusSearch;
 use DataValues\BooleanValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
+use ExtensionRegistry;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -104,7 +104,7 @@ class StatementsFieldTest extends MediaWikiTestCase {
 	 * @dataProvider statementsProvider
 	 */
 	public function testStatements( EntityDocument $entity, array $expected ) {
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 

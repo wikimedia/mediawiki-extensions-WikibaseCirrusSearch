@@ -2,8 +2,8 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use CirrusSearch;
 use ContextSource;
+use ExtensionRegistry;
 use HtmlArmor;
 use Language;
 use MediaWikiTestCase;
@@ -322,7 +322,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$linkCount,
 		$expected
 	) {
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}
 

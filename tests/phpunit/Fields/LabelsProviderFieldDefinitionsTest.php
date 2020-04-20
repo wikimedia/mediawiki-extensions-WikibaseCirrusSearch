@@ -2,7 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use CirrusSearch;
+use ExtensionRegistry;
 use Wikibase\Search\Elastic\Fields\AllLabelsField;
 use Wikibase\Search\Elastic\Fields\LabelCountField;
 use Wikibase\Search\Elastic\Fields\LabelsField;
@@ -36,7 +36,7 @@ class LabelsProviderFieldDefinitionsTest extends SearchFieldTestCase {
 		$this->assertArrayHasKey( 'labels_all', $fields );
 		$this->assertInstanceOf( AllLabelsField::class, $fields['labels_all'] );
 
-		if ( !class_exists( CirrusSearch::class ) ) {
+		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 		$searchEngine = $this->getSearchEngineMock();

@@ -28,9 +28,9 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 			'single statement with equals' => [
 				'expected' => [
 					'term_freq' => [
-							'term' => 'P999=Q888',
-							'field' => 'statement_quantity',
-							'eq' => 777,
+						'term' => 'P999=Q888',
+						'field' => 'statement_quantity',
+						'eq' => 777,
 					],
 				],
 				'search string' => 'wbstatementquantity:P999=Q888=777',
@@ -96,9 +96,9 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 					'bool' => [
 						'should' => [
 							[ 'term_freq' => [
-									'term' => 'P111=Q222',
-									'field' => 'statement_quantity',
-									'lte' => 333,
+								'term' => 'P111=Q222',
+								'field' => 'statement_quantity',
+								'lte' => 333,
 							] ],
 							[ 'term_freq' => [
 								'term' => 'P999=Q888',

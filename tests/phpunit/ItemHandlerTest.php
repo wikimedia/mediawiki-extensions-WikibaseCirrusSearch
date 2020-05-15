@@ -2,17 +2,17 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use Wikibase\Content\EntityInstanceHolder;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\EntityContent;
-use Wikibase\ItemContent;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\Content\EntityInstanceHolder;
+use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
 

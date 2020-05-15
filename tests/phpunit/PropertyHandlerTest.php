@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\PropertyContent;
+use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
 

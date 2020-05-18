@@ -6,6 +6,7 @@
 
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
+use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
@@ -20,7 +21,7 @@ use Wikibase\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 
 return [
 	'item' => [
-		'entity-search-callback' => function ( WebRequest $request ) {
+		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			return new CombinedEntitySearchHelper(
 				[
@@ -43,7 +44,7 @@ return [
 				]
 			);
 		},
-		'search-field-definitions' => function ( array $languageCodes, SettingsArray $searchSettings ) {
+		Def::SEARCH_FIELD_DEFINITIONS => function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 			return new ItemFieldDefinitions( [
@@ -56,10 +57,10 @@ return [
 				)
 			] );
 		},
-		'fulltext-search-context' => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
+		Def::FULLTEXT_SEARCH_CONTEXT => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	],
 	'property' => [
-		'search-field-definitions' => function ( array $languageCodes, SettingsArray $searchSettings ) {
+		Def::SEARCH_FIELD_DEFINITIONS => function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 			return new PropertyFieldDefinitions( [
@@ -72,7 +73,7 @@ return [
 				)
 			] );
 		},
-		'entity-search-callback' => function ( WebRequest $request ) {
+		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
 			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
 				new CombinedEntitySearchHelper(
@@ -98,6 +99,6 @@ return [
 				$repo->getPropertyDataTypeLookup()
 			);
 		},
-		'fulltext-search-context' => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
+		Def::FULLTEXT_SEARCH_CONTEXT => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	]
 ];

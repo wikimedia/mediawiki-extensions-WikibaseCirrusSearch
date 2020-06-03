@@ -158,7 +158,7 @@ class CirrusShowSearchHitHandler {
 		);
 
 		$attributes['title'] = $this->linkFormatter->getTitleAttribute(
-			$title,
+			$entityId,
 			$result->getLabelData(),
 			$result->getDescriptionData()
 		);

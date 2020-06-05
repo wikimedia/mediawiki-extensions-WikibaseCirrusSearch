@@ -17,7 +17,7 @@ use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Repo\Hooks\Formatters\DefaultEntityLinkFormatter;
+use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\CirrusShowSearchHitHandler;
 use Wikibase\Search\Elastic\EntityResult;
 use Wikimedia\TestingAccessWrapper;
@@ -410,7 +410,8 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	private function getShowSearchHitHandler( array $languages, array $entities ) {
 		return new CirrusShowSearchHitHandler(
 			$this->getEntityIdLookup(),
-			new DefaultEntityLinkFormatter( Language::factory( 'en' ) )
+			WikibaseRepo::getDefaultInstance()->getEntityLinkFormatterFactory( Language::factory( 'en' ) )
+				->getDefaultLinkFormatter()
 		);
 	}
 

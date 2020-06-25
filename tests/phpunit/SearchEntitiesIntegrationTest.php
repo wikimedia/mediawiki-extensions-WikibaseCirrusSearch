@@ -23,6 +23,7 @@ use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 
@@ -199,7 +200,8 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			$repo->getEntitySourceDefinitions(),
 			$this->createMock( EntityTitleTextLookup::class ),
 			$this->createMock( EntityUrlLookup::class ),
-			$this->createMock( EntityArticleIdLookup::class )
+			$this->createMock( EntityArticleIdLookup::class ),
+			$this->createMock( ApiErrorReporter::class )
 		);
 
 		$apiModule->execute();

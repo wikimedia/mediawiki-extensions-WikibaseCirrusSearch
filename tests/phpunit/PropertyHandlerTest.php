@@ -31,7 +31,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	 * @return string
 	 */
 	public function getModelId() {
-		return CONTENT_MODEL_WIKIBASE_PROPERTY;
+		return PropertyContent::CONTENT_MODEL_ID;
 	}
 
 	/**

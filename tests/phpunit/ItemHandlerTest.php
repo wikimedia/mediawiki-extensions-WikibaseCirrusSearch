@@ -38,7 +38,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 * @return string
 	 */
 	public function getModelId() {
-		return CONTENT_MODEL_WIKIBASE_ITEM;
+		return ItemContent::CONTENT_MODEL_ID;
 	}
 
 	/**

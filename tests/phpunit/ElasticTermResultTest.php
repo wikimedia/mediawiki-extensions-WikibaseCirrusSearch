@@ -6,7 +6,7 @@ use Elastica\Result;
 use Elastica\ResultSet;
 use MediaWikiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Search\Elastic\ElasticTermResult;
 
 /**
@@ -322,7 +322,7 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 	}
 
 	private function getMockFallbackChain( array $languages ) {
-		$mock = $this->getMockBuilder( LanguageFallbackChain::class )
+		$mock = $this->getMockBuilder( TermLanguageFallbackChain::class )
 				->disableOriginalConstructor()
 				->getMock();
 		$mock->expects( $this->any() )

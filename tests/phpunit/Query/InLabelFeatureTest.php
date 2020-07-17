@@ -5,7 +5,7 @@ namespace Wikibase\Search\Elastic\Tests\Query;
 use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
 use ExtensionRegistry;
-use Wikibase\Lib\LanguageFallbackChain;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
 
@@ -297,7 +297,7 @@ class InLabelFeatureTest extends \MediaWikiTestCase {
 			->method( 'newFromLanguageCode' )
 			->will( $this->returnCallback( function ( $langCode ) use ( $languageChains ) {
 				$langFallbacks = $languageChains[$langCode] ?? [ 'en' ];
-				$fallbackLanguageChain = $this->getMockBuilder( LanguageFallbackChain::class )
+				$fallbackLanguageChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 					->disableOriginalConstructor()
 					->getMock();
 				$fallbackLanguageChain->expects( $this->any() )

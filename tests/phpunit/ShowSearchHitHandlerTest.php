@@ -380,7 +380,16 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 				$extract . "\n" .
 				$size;
 
-		$this->assertFileContains( $testFile, $output );
+		// TODO: ignore spaces for change Id36bb8f0fb52e16539b63018c466d4bed1893202,
+		// this will be removed in change Id36bb8f0fb52e16539b63018c466d4bed1893202
+		// $this->assertFileContains(
+		// 	$testFile,
+		// 	$output );
+		if ( strlen( $expected ) > 0 ) {
+			$testFileTemporary = file_get_contents( $testFile );
+			$this->assertEquals( str_replace( '&nbsp;', '', $testFileTemporary ), str_replace( '&nbsp;', '', $output ) );
+		}
+		//TODO END
 	}
 
 	/**

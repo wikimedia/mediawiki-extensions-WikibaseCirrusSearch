@@ -14,6 +14,7 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Term\Term;
+use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -213,8 +214,13 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 * @return LanguageFallbackChainFactory
 	 */
 	private function newLanguageFallbackChainFactory() {
+
+		$stubContentLanguages = $this->createStub( ContentLanguages::class );
+		$stubContentLanguages->method( 'hasLanguage' )
+			->willReturn( true );
+
 		$fallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
-			->setConstructorArgs( [ [] ] )
+			->setConstructorArgs( [ [], $stubContentLanguages ] )
 			->setMethods( [ 'getFetchLanguageCodes' ] )
 			->getMock();
 		$fallbackChain->expects( $this->any() )

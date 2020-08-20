@@ -313,14 +313,11 @@ class EntitySearchElastic implements EntitySearchHelper {
 			[ 'language' => $languageCode ] );
 		$result = $searcher->performSearch( $query );
 
-		// FIXME: this is a hack, we need to return Status upstream instead
-		foreach ( $result->getErrors() as $error ) {
-			wfLogWarning( json_encode( $error ) );
-		}
-
 		if ( $result->isOK() ) {
 			$result = $result->getValue();
 		} else {
+			// FIXME: $result->getErrors() contains error messages for the
+			// end user, but we don't have any way to pass them on.
 			$result = [];
 		}
 

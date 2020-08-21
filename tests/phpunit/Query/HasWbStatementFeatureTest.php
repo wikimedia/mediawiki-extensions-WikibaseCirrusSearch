@@ -4,9 +4,9 @@ namespace Wikibase\Search\Elastic\Tests\Query;
 
 use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
-use ExtensionRegistry;
 use Elastica\Query\Match;
 use Elastica\Query\Prefix;
+use ExtensionRegistry;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
 

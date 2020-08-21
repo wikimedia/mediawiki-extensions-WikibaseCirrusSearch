@@ -3,7 +3,6 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use ApiMain;
-use CirrusSearch\CirrusSearch;
 use CirrusSearch\CirrusDebugOptions;
 use ExtensionRegistry;
 use FauxRequest;
@@ -16,15 +15,15 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
-use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\Store\EntityArticleIdLookup;
 use Wikibase\Lib\Store\EntityTitleTextLookup;
 use Wikibase\Lib\Store\EntityUrlLookup;
+use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\Api\EntitySearchHelper;
 use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\Repo\Api\ApiErrorReporter;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 

@@ -5,8 +5,8 @@ namespace Wikibase\Search\Elastic\Tests\Query;
 use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
 use ExtensionRegistry;
-use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Lib\LanguageFallbackChainFactory;
+use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
 
 /**

@@ -21,7 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  * Builder for entity fulltext queries
  */
 class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
-	const ENTITY_FULL_TEXT_MARKER = 'entity_full_text';
+	public const ENTITY_FULL_TEXT_MARKER = 'entity_full_text';
 
 	/**
 	 * @var array

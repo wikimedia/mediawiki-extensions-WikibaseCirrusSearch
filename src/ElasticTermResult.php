@@ -179,7 +179,7 @@ class ElasticTermResult extends BaseResultsType {
 	 * The new highlighter can return offsets as: 1:1-XX:YY|Text Snippet
 	 * or even SNIPPET_START:MATCH1_START-MATCH1_END,MATCH2_START-MATCH2_END,...:SNIPPET_END|Text
 	 */
-	const HIGHLIGHT_PATTERN = '/^\d+:\d+-\d+(?:,\d+-\d+)*:\d+\|(.+)/';
+	public const HIGHLIGHT_PATTERN = '/^\d+:\d+-\d+(?:,\d+-\d+)*:\d+\|(.+)/';
 
 	/**
 	 * Extract term, language and type from highlighter results.

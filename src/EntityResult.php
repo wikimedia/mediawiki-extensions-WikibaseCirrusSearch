@@ -14,7 +14,7 @@ class EntityResult extends Result implements ExtendedResult {
 	/**
 	 * Key which holds wikibase data for result extra data.
 	 */
-	const WIKIBASE_EXTRA_DATA = 'wikibase';
+	private const WIKIBASE_EXTRA_DATA = 'wikibase';
 
 	/**
 	 * Label data with highlighting.

@@ -27,40 +27,40 @@ class EntitySearchElastic implements EntitySearchHelper {
 	/**
 	 * Default rescore profile
 	 */
-	const DEFAULT_RESCORE_PROFILE = 'wikibase_prefix';
+	public const DEFAULT_RESCORE_PROFILE = 'wikibase_prefix';
 
 	/**
 	 * Name of the context for profile name resolution
 	 */
-	const CONTEXT_WIKIBASE_PREFIX = 'wikibase_prefix_search';
+	public const CONTEXT_WIKIBASE_PREFIX = 'wikibase_prefix_search';
 
 	/**
 	 * Name of the context for profile name resolution
 	 */
-	const CONTEXT_WIKIBASE_FULLTEXT = 'wikibase_fulltext_search';
+	public const CONTEXT_WIKIBASE_FULLTEXT = 'wikibase_fulltext_search';
 
 	/**
 	 * Name of the profile type used to build the elastic query
 	 */
-	const WIKIBASE_PREFIX_QUERY_BUILDER = 'wikibase_prefix_querybuilder';
+	public const WIKIBASE_PREFIX_QUERY_BUILDER = 'wikibase_prefix_querybuilder';
 
 	/**
 	 * Default query builder profile for prefix searches
 	 */
-	const DEFAULT_QUERY_BUILDER_PROFILE = 'default';
+	public const DEFAULT_QUERY_BUILDER_PROFILE = 'default';
 
 	/**
 	 * Default query builder profile for fulltext searches
 	 *
 	 */
-	const DEFAULT_FULL_TEXT_QUERY_BUILDER_PROFILE = 'wikibase';
+	public const DEFAULT_FULL_TEXT_QUERY_BUILDER_PROFILE = 'wikibase';
 
 	/**
 	 * Replacement syntax for statement boosting
 	 * @see \CirrusSearch\Profile\SearchProfileRepositoryTransformer
 	 * and repo/config/ElasticSearchRescoreFunctions.php
 	 */
-	const STMT_BOOST_PROFILE_REPL = 'functions.*[type=term_boost].params[statement_keywords=_statementBoost_].statement_keywords';
+	public const STMT_BOOST_PROFILE_REPL = 'functions.*[type=term_boost].params[statement_keywords=_statementBoost_].statement_keywords';
 
 	/**
 	 * @var LanguageFallbackChainFactory

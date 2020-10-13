@@ -186,7 +186,9 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 	 */
 	public function testParseValue( $foreignRepoNames, $value, $expected, $warningExpected ) {
 		$feature = new WbStatementQuantityFeature( $foreignRepoNames );
-		$expectedWarnings = $warningExpected ? [ [ 'cirrussearch-wbstatementquantity-feature-no-valid-statements', 'wbstatementquantity' ] ] : [];
+		$expectedWarnings = $warningExpected ? [
+			[ 'cirrussearch-wbstatementquantity-feature-no-valid-statements', 'wbstatementquantity' ]
+		] : [];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue( $feature, "wbstatementquantity:\"$value\"", $expected, $expectedWarnings );
 	}

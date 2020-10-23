@@ -15,6 +15,7 @@ use Wikibase\Lib\WikibaseContentLanguages;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
+use Wikibase\Search\Elastic\Query\HasLicenseFeature;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
 use Wikibase\Search\Elastic\Query\WbStatementQuantityFeature;
@@ -300,6 +301,7 @@ class Hooks {
 		}
 		$extraFeatures[] = new HasWbStatementFeature( $foreignRepoNames );
 		$extraFeatures[] = new WbStatementQuantityFeature( $foreignRepoNames );
+		$extraFeatures[] = new HasLicenseFeature( $searchConfig->get( 'LicenseMapping' ) );
 
 		$languageCodes = WikibaseContentLanguages::getDefaultInstance()
 			->getContentLanguages( 'term' )->getLanguages();

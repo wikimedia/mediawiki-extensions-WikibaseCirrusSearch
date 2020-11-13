@@ -72,8 +72,7 @@ class StatementQuantityFieldTest extends MediaWikiTestCase {
 			$this->properties,
 			[],
 			[],
-			WikibaseRepo::getDefaultInstance()
-				->getDataTypeDefinitions()
+			WikibaseRepo::getDataTypeDefinitions()
 				->getSearchIndexDataFormatterCallbacks(),
 			$this->propertiesForQuantity
 		);

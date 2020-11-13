@@ -115,7 +115,7 @@ class StatementsFieldTest extends MediaWikiTestCase {
 		] );
 
 		$field = new StatementsField( $lookup, $this->properties, [ 'sometype' ], [ 'P11' ],
-				$repo->getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
+			WikibaseRepo::getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
 

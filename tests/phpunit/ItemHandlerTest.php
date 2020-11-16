@@ -8,7 +8,6 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
-use Wikibase\Lib\EntityTypeDefinitions;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityContent;
 use Wikibase\Repo\Content\EntityInstanceHolder;
@@ -79,15 +78,10 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$this->assertTrue( $this->getHandler()->supportsRedirects() );
 	}
 
-	protected function getEntityTypeDefinitions() {
-		return new EntityTypeDefinitions(
-			wfArrayPlus2d(
-				require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
-				array_merge_recursive(
-					require __DIR__ . '/../../../Wikibase/lib/WikibaseLib.entitytypes.php',
-					require __DIR__ . '/../../../Wikibase/repo/WikibaseRepo.entitytypes.php'
-				)
-			)
+	protected function getEntityTypeDefinitionsConfiguration(): array {
+		return wfArrayPlus2d(
+			require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
+			parent::getEntityTypeDefinitionsConfiguration()
 		);
 	}
 

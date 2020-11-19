@@ -23,11 +23,13 @@ return [
 	'item' => [
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
+			$entityIdParser = WikibaseRepo::getEntityIdParser();
+
 			return new CombinedEntitySearchHelper(
 				[
 					new EntityIdSearchHelper(
 						$repo->getEntityLookup(),
-						$repo->getEntityIdParser(),
+						$entityIdParser,
 						new LanguageFallbackLabelDescriptionLookup(
 							$repo->getTermLookup(),
 							$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
@@ -36,7 +38,7 @@ return [
 					),
 					new EntitySearchElastic(
 						$repo->getLanguageFallbackChainFactory(),
-						$repo->getEntityIdParser(),
+						$entityIdParser,
 						$repo->getUserLanguage(),
 						$repo->getContentModelMappings(),
 						$request
@@ -77,12 +79,14 @@ return [
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
 			$repo = WikibaseRepo::getDefaultInstance();
+			$entityIdParser = WikibaseRepo::getEntityIdParser();
+
 			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
 				new CombinedEntitySearchHelper(
 					[
 						new EntityIdSearchHelper(
 							$repo->getEntityLookup(),
-							$repo->getEntityIdParser(),
+							$entityIdParser,
 							new LanguageFallbackLabelDescriptionLookup(
 								$repo->getTermLookup(),
 								$repo->getLanguageFallbackChainFactory()->newFromLanguage( $repo->getUserLanguage() )
@@ -91,7 +95,7 @@ return [
 						),
 						new EntitySearchElastic(
 							$repo->getLanguageFallbackChainFactory(),
-							$repo->getEntityIdParser(),
+							$entityIdParser,
 							$repo->getUserLanguage(),
 							$repo->getContentModelMappings(),
 							$request

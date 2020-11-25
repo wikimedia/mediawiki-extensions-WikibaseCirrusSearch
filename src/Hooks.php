@@ -318,7 +318,7 @@ class Hooks {
 	 */
 	public static function amendSearchResults( WikibaseRepo $repo, Language $lang, array &$results ) {
 		$lookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
-		$idParser = $repo->getEntityIdParser();
+		$idParser = WikibaseRepo::getEntityIdParser();
 		$entityIds = [];
 		$namespaceLookup = $repo->getEntityNamespaceLookup();
 

@@ -131,8 +131,6 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( Language $language, array $labels ) {
-		$this->markTestSkipped( 'Temporarily skipped until I851a0783d4 is merged' );
-
 		$repo = WikibaseRepo::getDefaultInstance();
 		$mock = $this->getMockBuilder( WikibaseRepo::class )
 			->disableOriginalConstructor()
@@ -150,7 +148,7 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 
 		// Entity ID Parser
 		$parser = new BasicEntityIdParser();
-		$mock->method( 'getEntityIdParser' )->willReturn( $parser );
+		$this->setService( 'WikibaseRepo.EntityIdParser', $parser );
 		// getEntityNamespaceLookup
 		$mock->method( 'getEntityNamespaceLookup' )
 			->willReturn( $this->getMockEntityNamespaceLookup() );

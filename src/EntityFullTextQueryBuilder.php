@@ -79,7 +79,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			$config->get( 'UseStemming' ),
 			$settings,
 			$repo->getLanguageFallbackChainFactory(),
-			$repo->getEntityIdParser(),
+			WikibaseRepo::getEntityIdParser(),
 			$repo->getUserLanguage()->getCode()
 		);
 	}

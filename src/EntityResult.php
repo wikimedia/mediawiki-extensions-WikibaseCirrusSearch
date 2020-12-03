@@ -44,7 +44,7 @@ class EntityResult extends Result implements ExtendedResult {
 	/**
 	 * Did we capture actual match in display of
 	 * label or description?
-	 * @var boolean
+	 * @var bool
 	 */
 	private $haveMatch;
 	/**

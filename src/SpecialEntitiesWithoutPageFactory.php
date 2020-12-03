@@ -39,10 +39,25 @@ class SpecialEntitiesWithoutPageFactory {
 		return self::newFromGlobalState()->createSpecialEntitiesWithoutDescription();
 	}
 
+	/**
+	 * @var string[]
+	 */
 	private $entityTypes;
+	/**
+	 * @var ContentLanguages
+	 */
 	private $termsLanguages;
+	/**
+	 * @var LanguageNameLookup
+	 */
 	private $languageNameLookup;
+	/**
+	 * @var EntityFactory
+	 */
 	private $entityFactory;
+	/**
+	 * @var EntityNamespaceLookup
+	 */
 	private $entityNamespaceLookup;
 
 	/**

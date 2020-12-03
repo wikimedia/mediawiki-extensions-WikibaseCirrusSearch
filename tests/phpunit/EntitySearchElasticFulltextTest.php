@@ -63,14 +63,14 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 	public function searchDataProvider() {
 		$tests = [];
 		foreach ( glob( __DIR__ . '/data/entityFulltext/*.query' ) as $queryFile ) {
-			$testName = substr( basename( $queryFile ), 0, - 6 );
+			$testName = substr( basename( $queryFile ), 0, -6 );
 			$query = json_decode( file_get_contents( $queryFile ), true );
 			$expectedFile = "$testName.expected";
 			$tests[$testName] = [ $query, __DIR__ . '/data/entityFulltext/' . $expectedFile ];
 		}
 
 		foreach ( glob( __DIR__ . '/data/entityFulltextIgnored/*.query' ) as $queryFile ) {
-			$testName = substr( basename( $queryFile ), 0, - 6 );
+			$testName = substr( basename( $queryFile ), 0, -6 );
 			$query = json_decode( file_get_contents( $queryFile ), true );
 			$tests[$testName] = [ $query, false ];
 		}

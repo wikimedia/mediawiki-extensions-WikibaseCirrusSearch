@@ -71,12 +71,6 @@
 
 	<!--  START Copied from wikibase-codesniffer T268828	-->
 
-	<!-- Disallows ?>. See http://www.php-fig.org/psr/psr-2/#files -->
-	<rule ref="PSR2.Files.ClosingTag" />
-
-	<!-- Makes sure control structures like if ( … ), for ( …; …; … ) etc. properly use spaces. -->
-	<rule ref="Squiz.ControlStructures.ControlSignature" />
-
 	<rule ref="Squiz.Functions.GlobalFunction" />
 
 	<!-- NOTE: Do not add the Squiz.Strings.DoubleQuoteUsage sniff. Even if we encourage to prefer

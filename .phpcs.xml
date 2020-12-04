@@ -3,9 +3,6 @@
 	<!--  START Copied from wikibase-codesniffer T268828	-->
 
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<!-- Currently cannot replace Wikibase.Namespaces.UnusedUse because it does not understand
-			/* @var … */ with one asterisk. -->
-		<exclude name="MediaWiki.Classes.UnusedUseStatement" />
 
 		<!-- The function comment sniff is too rigorous about too many details that need
 			exceptions:
@@ -17,17 +14,9 @@
 			* It does not understand "@param <type> [$optional,…]. -->
 		<exclude name="MediaWiki.Commenting.FunctionComment" />
 
-		<!-- We disagree with the idea of certain characters making comments "illegal" and blocking
-			patches from being merged. This behaves especially bad on code examples. -->
-		<exclude name="MediaWiki.Commenting.IllegalSingleLineComment" />
-
 		<!-- Starting a function's body with an empty line can be helpful after a very large header.
 			The code is not guaranteed to be easier to read if this is disallowed. -->
 		<exclude name="MediaWiki.WhiteSpace.DisallowEmptyLineFunctions" />
-
-		<!-- Even if we encourage to use a space in "function ()", we don't think this sniff should
-			block patches from being merged. -->
-		<exclude name="MediaWiki.WhiteSpace.SpaceAfterClosure" />
 
 		<!-- Even if we encourage to use spaces in comments, we don't think this sniff should block
 			patches from being merged. -->

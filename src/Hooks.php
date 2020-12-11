@@ -294,7 +294,7 @@ class Hooks {
 		}
 		$foreignRepoNames = [];
 		$repo = WikibaseRepo::getDefaultInstance();
-		$foreignRepos = $repo->getSettings()->getSetting(
+		$foreignRepos = WikibaseRepo::getSettings()->getSetting(
 			'foreignRepositories'
 		);
 		if ( !empty( $foreignRepos ) ) {

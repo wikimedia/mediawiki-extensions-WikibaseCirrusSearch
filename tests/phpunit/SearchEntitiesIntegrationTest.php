@@ -189,15 +189,13 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			'search' => $query,
 		] ) );
 
-		$repo = WikibaseRepo::getDefaultInstance();
-
 		$apiModule = new SearchEntities(
 			new ApiMain( $context ),
 			'',
 			$entitySearchTermIndex,
 			null,
 			new StaticContentLanguages( [ 'en' ] ),
-			$repo->getEntitySourceDefinitions(),
+			WikibaseRepo::getEntitySourceDefinitions(),
 			$this->createMock( EntityTitleTextLookup::class ),
 			$this->createMock( EntityUrlLookup::class ),
 			$this->createMock( EntityArticleIdLookup::class ),

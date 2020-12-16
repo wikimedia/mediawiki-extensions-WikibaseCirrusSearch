@@ -249,7 +249,7 @@ class HasLicenseFeature extends SimpleKeywordFeature implements FilterQueryFeatu
 			$lines = Util::parseSettingsInMessage( $licenseMessage->plain() );
 			// reformat lines to allow for whitespace in the license config
 			$joined = implode( "\n", $lines );
-			$stripped = preg_replace( '/\n*?([|,])\n?/', '$1', $joined );
+			$stripped = preg_replace( '/\n*?([|,])\n?(?![^\n]+\|)/', '$1', $joined );
 			$lines = explode( "\n", $stripped );
 			// parse message, add to license mapping
 			foreach ( $lines as $line ) {

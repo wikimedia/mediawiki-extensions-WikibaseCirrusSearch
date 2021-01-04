@@ -2,11 +2,14 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\SettingsArray;
+use Wikibase\Repo\Content\EntityContent;
+use Wikibase\Repo\Content\EntityInstanceHolder;
 use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
@@ -63,6 +66,18 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
 		return $this->getWikibaseRepo( $settings )->newPropertyHandler();
+	}
+
+	protected function newEntityContent( EntityDocument $entity = null ): EntityContent {
+		if ( $entity === null ) {
+			$entity = $this->newEntity();
+		}
+
+		return new PropertyContent( new EntityInstanceHolder( $entity ) );
+	}
+
+	protected function newRedirectContent( EntityId $id, EntityId $target ): ?EntityContent {
+		return null;
 	}
 
 	protected function getEntityTypeDefinitionsConfiguration(): array {

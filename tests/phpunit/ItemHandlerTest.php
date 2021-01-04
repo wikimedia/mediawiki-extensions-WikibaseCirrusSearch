@@ -2,8 +2,10 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
+use Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
+use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -52,12 +54,23 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 *
 	 * @return EntityContent
 	 */
-	protected function newEntityContent( EntityDocument $entity = null ) {
+	protected function newEntityContent( EntityDocument $entity = null ): EntityContent {
 		if ( !$entity ) {
 			$entity = new Item( new ItemId( 'Q42' ) );
 		}
 
-		return $this->getHandler()->makeEntityContent( new EntityInstanceHolder( $entity ) );
+		return new ItemContent( new EntityInstanceHolder( $entity ) );
+	}
+
+	protected function newRedirectContent( EntityId $id, EntityId $target ): EntityContent {
+		$redirect = new EntityRedirect( $id, $target );
+
+		$title = Title::makeTitle( 100, $target->getSerialization() );
+		// set content model to avoid db call to look up content model when
+		// constructing ItemContent in the tests, especially in the data providers.
+		$title->setContentModel( ItemContent::CONTENT_MODEL_ID );
+
+		return new ItemContent( null, $redirect, $title );
 	}
 
 	public function entityIdProvider() {

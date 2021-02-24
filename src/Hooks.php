@@ -7,7 +7,6 @@ use CirrusSearch\Parser\BasicQueryClassifier;
 use CirrusSearch\Profile\ArrayProfileRepository;
 use CirrusSearch\Profile\SearchProfileRepositoryTransformer;
 use CirrusSearch\Profile\SearchProfileService;
-use CirrusSearch\Util;
 use Language;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
@@ -303,24 +302,7 @@ class Hooks {
 		$extraFeatures[] = new HasWbStatementFeature( $foreignRepoNames );
 		$extraFeatures[] = new WbStatementQuantityFeature( $foreignRepoNames );
 
-		// license mapping can come a message, allowing wiki-specific config/overrides,
-		// controlled by users, or in code config (which overrides messages)
-		$licenseMapping = $searchConfig->get( 'LicenseMapping' ) ?: [];
-		$licenseMessage = wfMessage( 'wikibasecirrus-license-mapping' )->inContentLanguage();
-		if ( !$licenseMapping && !$licenseMessage->isDisabled() ) {
-			$lines = Util::parseSettingsInMessage( $licenseMessage->plain() );
-			// reformat lines to allow for whitespace in the license config
-			$joined = implode( "\n", $lines );
-			$stripped = preg_replace( '/\n*?([|,])\n?/', '$1', $joined );
-			$lines = explode( "\n", $stripped );
-			// parse message, add to license mapping
-			foreach ( $lines as $line ) {
-				$data = explode( '|', $line );
-				if ( count( $data ) === 2 ) {
-					$licenseMapping[$data[0]] = array_filter( explode( ',', $data[1] ) );
-				}
-			}
-		}
+		$licenseMapping = HasLicenseFeature::getConfiguredLicenseMap( $searchConfig );
 		$extraFeatures[] = new HasLicenseFeature( $licenseMapping );
 
 		$languageCodes = WikibaseContentLanguages::getDefaultInstance()

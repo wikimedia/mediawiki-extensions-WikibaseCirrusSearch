@@ -7,7 +7,9 @@ use CirrusSearch\Query\Builder\QueryBuildingContext;
 use CirrusSearch\Query\FilterQueryFeature;
 use CirrusSearch\Query\SimpleKeywordFeature;
 use CirrusSearch\Search\SearchContext;
+use CirrusSearch\Util;
 use CirrusSearch\WarningCollector;
+use Config;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Match;
@@ -231,4 +233,32 @@ class HasLicenseFeature extends SimpleKeywordFeature implements FilterQueryFeatu
 		return $this->combineQueries( $statements );
 	}
 
+	/**
+	 * License mapping can come a message, allowing wiki-specific config/overrides,
+	 * controlled by users, or in code config (which overrides messages)
+	 *
+	 * @param Config $searchConfig
+	 * @return array
+	 */
+	public static function getConfiguredLicenseMap( Config $searchConfig ) {
+		// license mapping can come a message, allowing wiki-specific config/overrides,
+		// controlled by users, or in code config (which overrides messages)
+		$licenseMapping = $searchConfig->get( 'LicenseMapping' ) ?: [];
+		$licenseMessage = wfMessage( 'wikibasecirrus-license-mapping' )->inContentLanguage();
+		if ( !$licenseMapping && !$licenseMessage->isDisabled() ) {
+			$lines = Util::parseSettingsInMessage( $licenseMessage->plain() );
+			// reformat lines to allow for whitespace in the license config
+			$joined = implode( "\n", $lines );
+			$stripped = preg_replace( '/\n*?([|,])\n?/', '$1', $joined );
+			$lines = explode( "\n", $stripped );
+			// parse message, add to license mapping
+			foreach ( $lines as $line ) {
+				$data = explode( '|', $line );
+				if ( count( $data ) === 2 ) {
+					$licenseMapping[$data[0]] = array_filter( explode( ',', $data[1] ) );
+				}
+			}
+		}
+		return $licenseMapping;
+	}
 }

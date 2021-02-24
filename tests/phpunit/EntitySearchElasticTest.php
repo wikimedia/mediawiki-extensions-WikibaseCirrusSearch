@@ -32,7 +32,7 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 			$repo->getLanguageFallbackChainFactory(),
 			new BasicEntityIdParser(),
 			$userLang,
-			$repo->getContentModelMappings(),
+			WikibaseRepo::getContentModelMappings(),
 			new \FauxRequest(),
 			CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);

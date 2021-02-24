@@ -40,7 +40,7 @@ return [
 						$repo->getLanguageFallbackChainFactory(),
 						$entityIdParser,
 						$repo->getUserLanguage(),
-						$repo->getContentModelMappings(),
+						WikibaseRepo::getContentModelMappings(),
 						$request
 					)
 				]

@@ -26,10 +26,8 @@ class EntitySearchElasticTest extends MediaWikiTestCase {
 	 * @return EntitySearchElastic
 	 */
 	private function newEntitySearch( Language $userLang ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-
 		return new EntitySearchElastic(
-			$repo->getLanguageFallbackChainFactory(),
+			WikibaseRepo::getLanguageFallbackChainFactory(),
 			new BasicEntityIdParser(),
 			$userLang,
 			WikibaseRepo::getContentModelMappings(),

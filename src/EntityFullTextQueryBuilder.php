@@ -73,13 +73,14 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @throws \MWException
 	 */
 	public static function newFromGlobals( array $settings ) {
+		$services = MediaWikiServices::getInstance();
 		$repo = WikibaseRepo::getDefaultInstance();
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
+		$config = $services->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 		return new static(
 			$config->get( 'UseStemming' ),
 			$settings,
-			$repo->getLanguageFallbackChainFactory(),
-			WikibaseRepo::getEntityIdParser(),
+			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
+			WikibaseRepo::getEntityIdParser( $services ),
 			$repo->getUserLanguage()->getCode()
 		);
 	}

@@ -292,7 +292,6 @@ class Hooks {
 			return;
 		}
 		$foreignRepoNames = [];
-		$repo = WikibaseRepo::getDefaultInstance();
 		$foreignRepos = WikibaseRepo::getSettings()->getSetting(
 			'foreignRepositories'
 		);
@@ -307,7 +306,7 @@ class Hooks {
 
 		$languageCodes = WikibaseContentLanguages::getDefaultInstance()
 			->getContentLanguages( 'term' )->getLanguages();
-		$extraFeatures[] = new InLabelFeature( $repo->getLanguageFallbackChainFactory(), $languageCodes );
+		$extraFeatures[] = new InLabelFeature( WikibaseRepo::getLanguageFallbackChainFactory(), $languageCodes );
 
 		$extraFeatures[] = new HasDataForLangFeature( $languageCodes );
 	}

@@ -131,6 +131,8 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( Language $language, array $labels ) {
+		$this->markTestSkipped( 'Temporarily skipped (T278692)' );
+
 		$repo = WikibaseRepo::getDefaultInstance();
 		$mock = $this->getMockBuilder( WikibaseRepo::class )
 			->disableOriginalConstructor()

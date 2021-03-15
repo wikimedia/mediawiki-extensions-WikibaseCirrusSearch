@@ -109,8 +109,7 @@ class Hooks {
 		];
 
 		// Language analyzers for descriptions
-		$repo = WikibaseRepo::getDefaultInstance();
-		$wbBuilder = new ConfigBuilder( $repo->getTermsLanguages()->getLanguages(),
+		$wbBuilder = new ConfigBuilder( WikibaseRepo::getTermsLanguages()->getLanguages(),
 			self::getWBCSConfig(),
 			$builder
 		);

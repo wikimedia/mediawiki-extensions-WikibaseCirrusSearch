@@ -25,8 +25,6 @@ use Wikibase\Search\Elastic\SpecialEntitiesWithoutPage;
 class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 
 	protected function newSpecialPage() {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		return new SpecialEntitiesWithoutPage(
 			'EntitiesWithoutLabel',
 			TermIndexEntry::TYPE_LABEL,
@@ -34,7 +32,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			[ 'item', 'property' ],
 			new StaticContentLanguages( [ 'acceptedlanguage' ] ),
 			new LanguageNameLookup(),
-			$wikibaseRepo->getEntityNamespaceLookup()
+			WikibaseRepo::getEntityNamespaceLookup()
 		);
 	}
 

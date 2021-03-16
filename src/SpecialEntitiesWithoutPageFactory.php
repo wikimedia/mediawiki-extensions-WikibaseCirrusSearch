@@ -27,7 +27,7 @@ class SpecialEntitiesWithoutPageFactory {
 			WikibaseRepo::getTermsLanguages(),
 			new LanguageNameLookup(),
 			$wikibaseRepo->getEntityFactory(),
-			$wikibaseRepo->getEntityNamespaceLookup()
+			WikibaseRepo::getEntityNamespaceLookup()
 		);
 	}
 

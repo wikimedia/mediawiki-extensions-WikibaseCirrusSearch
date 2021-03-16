@@ -134,7 +134,7 @@ class Hooks {
 
 		$repo = WikibaseRepo::getDefaultInstance();
 		$namespacesForContexts = [];
-		$entityNsLookup = $repo->getEntityNamespaceLookup();
+		$entityNsLookup = WikibaseRepo::getEntityNamespaceLookup();
 		foreach ( $repo->getFulltextSearchTypes() as $type => $profileContext ) {
 			$namespace = $entityNsLookup->getEntityNamespace( $type );
 			if ( $namespace === null ) {
@@ -320,7 +320,7 @@ class Hooks {
 		$lookupFactory = $repo->getLanguageFallbackLabelDescriptionLookupFactory();
 		$idParser = WikibaseRepo::getEntityIdParser();
 		$entityIds = [];
-		$namespaceLookup = $repo->getEntityNamespaceLookup();
+		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
 
 		foreach ( $results as &$result ) {
 			if ( empty( $result['title'] ) ||

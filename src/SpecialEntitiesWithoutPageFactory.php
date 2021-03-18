@@ -20,13 +20,11 @@ use Wikibase\Repo\WikibaseRepo;
 class SpecialEntitiesWithoutPageFactory {
 
 	private static function newFromGlobalState(): self {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
-
 		return new self(
 			WikibaseRepo::getLocalEntityTypes(),
 			WikibaseRepo::getTermsLanguages(),
 			new LanguageNameLookup(),
-			$wikibaseRepo->getEntityFactory(),
+			WikibaseRepo::getEntityFactory(),
 			WikibaseRepo::getEntityNamespaceLookup()
 		);
 	}

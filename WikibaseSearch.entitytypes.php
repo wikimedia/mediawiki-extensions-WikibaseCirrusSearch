@@ -32,7 +32,7 @@ return [
 						$repo->getEntityLookup(),
 						$entityIdParser,
 						new LanguageFallbackLabelDescriptionLookup(
-							$repo->getTermLookup(),
+							WikibaseRepo::getTermLookup(),
 							$languageFallbackChainFactory->newFromLanguage( $repo->getUserLanguage() )
 						),
 						$repo->getEntityTypeToRepositoryMapping()
@@ -90,7 +90,7 @@ return [
 							$repo->getEntityLookup(),
 							$entityIdParser,
 							new LanguageFallbackLabelDescriptionLookup(
-								$repo->getTermLookup(),
+								WikibaseRepo::getTermLookup(),
 								$languageFallbackChainFactory->newFromLanguage( $repo->getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()

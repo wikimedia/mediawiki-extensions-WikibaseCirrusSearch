@@ -131,8 +131,6 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 	 * @return WikibaseRepo
 	 */
 	private function getWikibaseRepo( Language $language, array $labels ) {
-		$this->markTestSkipped( 'Temporarily skipped (T278692)' );
-
 		$repo = WikibaseRepo::getDefaultInstance();
 		$mock = $this->getMockBuilder( WikibaseRepo::class )
 			->disableOriginalConstructor()
@@ -145,8 +143,8 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 		$lookupFactory->method( 'newLabelDescriptionLookup' )
 			->with( $language )
 			->willReturn( $this->getLabelDescriptionLookup( $language->getCode(), $labels ) );
-		$mock->method( 'getLanguageFallbackLabelDescriptionLookupFactory' )
-			->willReturn( $lookupFactory );
+		$this->setService( 'WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory',
+			$lookupFactory );
 
 		// Entity ID Parser
 		$parser = new BasicEntityIdParser();

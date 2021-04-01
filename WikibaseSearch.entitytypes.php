@@ -33,14 +33,14 @@ return [
 						$entityIdParser,
 						new LanguageFallbackLabelDescriptionLookup(
 							WikibaseRepo::getTermLookup(),
-							$languageFallbackChainFactory->newFromLanguage( $repo->getUserLanguage() )
+							$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
 						),
 						$repo->getEntityTypeToRepositoryMapping()
 					),
 					new EntitySearchElastic(
 						$languageFallbackChainFactory,
 						$entityIdParser,
-						$repo->getUserLanguage(),
+						WikibaseRepo::getUserLanguage(),
 						WikibaseRepo::getContentModelMappings(),
 						$request
 					)
@@ -91,14 +91,14 @@ return [
 							$entityIdParser,
 							new LanguageFallbackLabelDescriptionLookup(
 								WikibaseRepo::getTermLookup(),
-								$languageFallbackChainFactory->newFromLanguage( $repo->getUserLanguage() )
+								$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
 							),
 							$repo->getEntityTypeToRepositoryMapping()
 						),
 						new EntitySearchElastic(
 							$languageFallbackChainFactory,
 							$entityIdParser,
-							$repo->getUserLanguage(),
+							WikibaseRepo::getUserLanguage(),
 							$repo->getContentModelMappings(),
 							$request
 						)

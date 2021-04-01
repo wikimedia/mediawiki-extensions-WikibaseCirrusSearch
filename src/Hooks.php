@@ -368,7 +368,7 @@ class Hooks {
 			return;
 		}
 		$repo = WikibaseRepo::getDefaultInstance();
-		self::amendSearchResults( $repo, $repo->getUserLanguage(), $results );
+		self::amendSearchResults( $repo, WikibaseRepo::getUserLanguage(), $results );
 	}
 
 	/**

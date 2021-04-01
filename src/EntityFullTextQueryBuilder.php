@@ -81,7 +81,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			$settings,
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
-			$repo->getUserLanguage()->getCode()
+			WikibaseRepo::getUserLanguage( $services )->getCode()
 		);
 	}
 

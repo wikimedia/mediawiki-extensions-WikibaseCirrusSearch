@@ -122,7 +122,7 @@ class Hooks {
 	}
 
 	/**
-	 * Register our cirrus profiles using WikibaseRepo::getDefaultInstance().
+	 * Register our cirrus profiles using WikibaseRepo.
 	 *
 	 * @param SearchProfileService $service
 	 */
@@ -132,10 +132,9 @@ class Hooks {
 			return;
 		}
 
-		$repo = WikibaseRepo::getDefaultInstance();
 		$namespacesForContexts = [];
 		$entityNsLookup = WikibaseRepo::getEntityNamespaceLookup();
-		foreach ( $repo->getFulltextSearchTypes() as $type => $profileContext ) {
+		foreach ( WikibaseRepo::getFulltextSearchTypes() as $type => $profileContext ) {
 			$namespace = $entityNsLookup->getEntityNamespace( $type );
 			if ( $namespace === null ) {
 				continue;

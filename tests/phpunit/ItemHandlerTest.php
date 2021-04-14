@@ -16,6 +16,7 @@ use Wikibase\Repo\Content\EntityInstanceHolder;
 use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @covers \Wikibase\Repo\Content\ItemHandler
@@ -104,7 +105,8 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 * @return ItemHandler
 	 */
 	protected function getHandler( SettingsArray $settings = null ) {
-		return $this->getWikibaseRepo( $settings )->newItemHandler();
+		$this->getWikibaseRepo( $settings ); // updates services as needed
+		return WikibaseRepo::getItemHandler();
 	}
 
 	protected function getTestContent() {

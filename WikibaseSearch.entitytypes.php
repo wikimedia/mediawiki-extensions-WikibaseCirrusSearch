@@ -22,7 +22,6 @@ use Wikibase\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 return [
 	'item' => [
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
-			$repo = WikibaseRepo::getDefaultInstance();
 			$entityIdParser = WikibaseRepo::getEntityIdParser();
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 
@@ -35,7 +34,7 @@ return [
 							WikibaseRepo::getTermLookup(),
 							$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
 						),
-						$repo->getEntityTypeToRepositoryMapping()
+						WikibaseRepo::getEntityTypeToRepositoryMapping()
 					),
 					new EntitySearchElastic(
 						$languageFallbackChainFactory,
@@ -93,7 +92,7 @@ return [
 								WikibaseRepo::getTermLookup(),
 								$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
 							),
-							$repo->getEntityTypeToRepositoryMapping()
+							WikibaseRepo::getEntityTypeToRepositoryMapping()
 						),
 						new EntitySearchElastic(
 							$languageFallbackChainFactory,

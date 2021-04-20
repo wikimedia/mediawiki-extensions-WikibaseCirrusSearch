@@ -54,7 +54,8 @@ class CirrusShowSearchHitHandler {
 
 		return new self(
 			WikibaseRepo::getEntityIdLookup(),
-			$wikibaseRepo->getEntityLinkFormatterFactory( $context->getLanguage() )->getDefaultLinkFormatter()
+			// @phan-suppress-next-line PhanParamTooMany temporary workaround to enable shifting the param from constructor to method
+			$wikibaseRepo->getEntityLinkFormatterFactory( $context->getLanguage() )->getDefaultLinkFormatter( $context->getLanguage() )
 		);
 	}
 

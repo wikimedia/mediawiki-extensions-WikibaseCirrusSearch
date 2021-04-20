@@ -350,7 +350,8 @@ class Hooks {
 			if ( !$label ) {
 				continue;
 			}
-			$linkFormatter = $formatterFactory->getLinkFormatter( $entityId->getEntityType() );
+			// @phan-suppress-next-line PhanParamTooMany temporary workaround to enable shifting the param from constructor to method
+			$linkFormatter = $formatterFactory->getLinkFormatter( $entityId->getEntityType(), $lang );
 			$result['extract'] = strip_tags( $linkFormatter->getHtml( $entityId, [
 				'value' => $label->getText(),
 				'language' => $label->getActualLanguageCode(),

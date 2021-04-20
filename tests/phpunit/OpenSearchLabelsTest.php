@@ -154,7 +154,7 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 		// getEntityLinkFormatterFactory
 		// Use real one here
 		$mock->method( 'getEntityLinkFormatterFactory' )
-			->willReturn( $repo->getEntityLinkFormatterFactory( $language ) );
+			->willReturn( $repo->getEntityLinkFormatterFactory() );
 
 		return $mock;
 	}

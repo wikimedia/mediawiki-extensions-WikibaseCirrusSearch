@@ -339,7 +339,7 @@ class Hooks {
 			return;
 		}
 		$lookup = $lookupFactory->newLabelDescriptionLookup( $lang, $entityIds );
-		$formatterFactory = $repo->getEntityLinkFormatterFactory( $lang );
+		$formatterFactory = $repo->getEntityLinkFormatterFactory();
 		foreach ( $results as &$result ) {
 			if ( empty( $result['entityId'] ) ) {
 				continue;
@@ -350,7 +350,6 @@ class Hooks {
 			if ( !$label ) {
 				continue;
 			}
-			// @phan-suppress-next-line PhanParamTooMany temporary workaround to enable shifting the param from constructor to method
 			$linkFormatter = $formatterFactory->getLinkFormatter( $entityId->getEntityType(), $lang );
 			$result['extract'] = strip_tags( $linkFormatter->getHtml( $entityId, [
 				'value' => $label->getText(),

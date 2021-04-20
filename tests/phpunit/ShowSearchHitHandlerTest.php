@@ -410,7 +410,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 	private function getShowSearchHitHandler( array $languages, array $entities ) {
 		return new CirrusShowSearchHitHandler(
 			$this->getEntityIdLookup(),
-			WikibaseRepo::getDefaultInstance()->getEntityLinkFormatterFactory( Language::factory( 'en' ) )
+			WikibaseRepo::getDefaultInstance()->getEntityLinkFormatterFactory()
 				->getDefaultLinkFormatter( Language::factory( 'en' ) )
 		);
 	}

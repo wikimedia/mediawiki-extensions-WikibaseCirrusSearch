@@ -86,12 +86,10 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 	 * @dataProvider getOpenSearchData
 	 */
 	public function testOpenSearch( $language, $results, $labels, $expected ) {
-		// Temporarily skipping test, in order to migrate EntityLinkFormatterFactory
-		$this->markTestSkipped();
-
 		$lang = Language::factory( $language );
-		$repo = $this->getWikibaseRepo( $lang, $labels );
-		Hooks::amendSearchResults( $repo, $lang, $results );
+
+		$this->mockWikibaseRepoServices( $lang, $labels );
+		Hooks::amendSearchResults( $lang, $results );
 
 		$this->assertEquals( $expected, array_column( $results, 'extract', 'title' ) );
 	}
@@ -133,12 +131,7 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 	 * @param array $labels
 	 * @return WikibaseRepo
 	 */
-	private function getWikibaseRepo( Language $language, array $labels ) {
-		$repo = WikibaseRepo::getDefaultInstance();
-		$mock = $this->getMockBuilder( WikibaseRepo::class )
-			->disableOriginalConstructor()
-			->getMock();
-
+	private function mockWikibaseRepoServices( Language $language, array $labels ) {
 		// Description lookup
 		$lookupFactory = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookupFactory::class )
 			->disableOriginalConstructor()
@@ -154,12 +147,6 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 		$this->setService( 'WikibaseRepo.EntityIdParser', $parser );
 		$this->setService( 'WikibaseRepo.EntityNamespaceLookup',
 			$this->getMockEntityNamespaceLookup() );
-		// getEntityLinkFormatterFactory
-		// Use real one here
-		$mock->method( 'getEntityLinkFormatterFactory' )
-			->willReturn( $repo->getEntityLinkFormatterFactory() );
-
-		return $mock;
 	}
 
 }

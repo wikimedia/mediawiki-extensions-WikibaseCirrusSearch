@@ -311,11 +311,10 @@ class Hooks {
 
 	/**
 	 * Will instantiate descriptions for search results.
-	 * @param WikibaseRepo $repo
 	 * @param Language $lang
 	 * @param array &$results
 	 */
-	public static function amendSearchResults( WikibaseRepo $repo, Language $lang, array &$results ) {
+	public static function amendSearchResults( Language $lang, array &$results ) {
 		$lookupFactory = WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory();
 		$idParser = WikibaseRepo::getEntityIdParser();
 		$entityIds = [];
@@ -339,7 +338,7 @@ class Hooks {
 			return;
 		}
 		$lookup = $lookupFactory->newLabelDescriptionLookup( $lang, $entityIds );
-		$formatterFactory = $repo->getEntityLinkFormatterFactory();
+		$formatterFactory = WikibaseRepo::getEntityLinkFormatterFactory();
 		foreach ( $results as &$result ) {
 			if ( empty( $result['entityId'] ) ) {
 				continue;
@@ -366,8 +365,8 @@ class Hooks {
 		if ( empty( $results ) ) {
 			return;
 		}
-		$repo = WikibaseRepo::getDefaultInstance();
-		self::amendSearchResults( $repo, WikibaseRepo::getUserLanguage(), $results );
+
+		self::amendSearchResults( WikibaseRepo::getUserLanguage(), $results );
 	}
 
 	/**

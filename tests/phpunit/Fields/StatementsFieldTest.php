@@ -108,7 +108,6 @@ class StatementsFieldTest extends MediaWikiTestCase {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
 
-		$repo = WikibaseRepo::getDefaultInstance();
 		$lookup = $this->getPropertyTypeLookup( [
 			'P9' => 'sometype',
 			'P11' => 'sometype',

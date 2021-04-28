@@ -62,7 +62,6 @@ return [
 	],
 	'property' => [
 		Def::SEARCH_FIELD_DEFINITIONS => function ( array $languageCodes, SettingsArray $searchSettings ) {
-			$repo = WikibaseRepo::getDefaultInstance();
 			$services = MediaWikiServices::getInstance();
 			$config = $services->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 			return new PropertyFieldDefinitions( [
@@ -78,7 +77,6 @@ return [
 			] );
 		},
 		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
-			$repo = WikibaseRepo::getDefaultInstance();
 			$entityIdParser = WikibaseRepo::getEntityIdParser();
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 
@@ -98,7 +96,7 @@ return [
 							$languageFallbackChainFactory,
 							$entityIdParser,
 							WikibaseRepo::getUserLanguage(),
-							$repo->getContentModelMappings(),
+							WikibaseRepo::getContentModelMappings(),
 							$request
 						)
 					]

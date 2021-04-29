@@ -54,8 +54,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 		$settings = $wgWBRepoSettings;
 		$settings['useEntitySourceBasedFederation'] = true;
 		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
-		WikibaseRepo::resetClassStatics();
-
 		$this->setMwGlobals( 'wgWBCSUseCirrus', true );
 		$this->idParser = new BasicEntityIdParser();
 	}

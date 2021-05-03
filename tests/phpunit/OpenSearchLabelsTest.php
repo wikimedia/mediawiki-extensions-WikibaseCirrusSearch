@@ -101,7 +101,7 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 		$mockLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$mockLookup->method( 'isEntityNamespace' )->willReturnCallback( function ( $ns ) {
+		$mockLookup->method( 'isEntityNamespace' )->willReturnCallback( static function ( $ns ) {
 			return $ns < 10;
 		} );
 
@@ -114,7 +114,7 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 			->getMock();
 
 		$mock->method( 'getLabel' )->willReturnCallback(
-			function ( EntityId $id ) use ( $labels, $language ) {
+			static function ( EntityId $id ) use ( $labels, $language ) {
 				if ( isset( $labels[$id->getSerialization()] ) ) {
 					return new TermFallback( $language, $labels[$id->getSerialization()], $language,
 						$language );

@@ -21,7 +21,7 @@ use Wikibase\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 
 return [
 	'item' => [
-		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
+		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
 			$entityIdParser = WikibaseRepo::getEntityIdParser();
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 
@@ -46,7 +46,7 @@ return [
 				]
 			);
 		},
-		Def::SEARCH_FIELD_DEFINITIONS => function ( array $languageCodes, SettingsArray $searchSettings ) {
+		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 			return new ItemFieldDefinitions( [
 				new LabelsProviderFieldDefinitions( $languageCodes ),
@@ -61,7 +61,7 @@ return [
 		Def::FULLTEXT_SEARCH_CONTEXT => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	],
 	'property' => [
-		Def::SEARCH_FIELD_DEFINITIONS => function ( array $languageCodes, SettingsArray $searchSettings ) {
+		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$services = MediaWikiServices::getInstance();
 			$config = $services->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 			return new PropertyFieldDefinitions( [
@@ -76,7 +76,7 @@ return [
 				)
 			] );
 		},
-		Def::ENTITY_SEARCH_CALLBACK => function ( WebRequest $request ) {
+		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
 			$entityIdParser = WikibaseRepo::getEntityIdParser();
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 

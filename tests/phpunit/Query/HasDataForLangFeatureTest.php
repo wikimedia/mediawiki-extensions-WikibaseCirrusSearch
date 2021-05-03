@@ -239,7 +239,7 @@ class HasDataForLangFeatureTest extends \MediaWikiTestCase {
 			'too many languages' => [
 				'expected' => [
 					'bool' => [
-						'should' => array_map( function ( $lang ) {
+						'should' => array_map( static function ( $lang ) {
 							return [
 								'exists' => [
 									'field' => 'labels.' . $lang . '.plain'

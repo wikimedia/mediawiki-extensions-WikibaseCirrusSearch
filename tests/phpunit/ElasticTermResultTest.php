@@ -330,7 +330,7 @@ class ElasticTermResultTest extends MediaWikiTestCase {
 			->will( $this->returnValue( $languages ) );
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'extractPreferredValueOrAny' )
-			->will( $this->returnCallback( function ( $sourceData ) use ( $languages ) {
+			->will( $this->returnCallback( static function ( $sourceData ) use ( $languages ) {
 				foreach ( $languages as $language ) {
 					if ( isset( $sourceData[$language] ) ) {
 						return [ 'language' => $language, 'value' => $sourceData[$language] ];

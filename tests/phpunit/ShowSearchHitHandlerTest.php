@@ -230,7 +230,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 		$linkCount
 	) {
 		$result = $this->getMockBuilder( EntityResult::class )
-			->disableOriginalConstructor()->setMethods( [
+			->disableOriginalConstructor()->onlyMethods( [
 				'getExtraDisplay',
 				'getStatementCount',
 				'getSitelinkCount',
@@ -264,7 +264,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 			->getMock();
 		$searchPage->method( 'msg' )
 			->willReturnCallback(
-				function () {
+				static function () {
 					return new RawMessage( implode( ",", func_get_args() ) );
 				}
 			);
@@ -391,7 +391,7 @@ class ShowSearchHitHandlerTest extends MediaWikiTestCase {
 
 		$entityIdLookup->expects( $this->any() )
 			->method( 'getEntityIdForTitle' )
-			->willReturnCallback( function ( Title $title ) {
+			->willReturnCallback( static function ( Title $title ) {
 				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
 					return new ItemId( $m[0] );
 				}

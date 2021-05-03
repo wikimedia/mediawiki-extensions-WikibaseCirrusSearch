@@ -103,7 +103,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 
 		$mockEntitySearchElastic = $this->getMockBuilder( EntitySearchElastic::class )
 				->disableOriginalConstructor()
-				->setMethods( [ 'getRankedSearchResults' ] )
+				->onlyMethods( [ 'getRankedSearchResults' ] )
 				->getMock();
 
 		$mockEntitySearchElastic->method( 'getRankedSearchResults' )
@@ -216,7 +216,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 
 		$fallbackChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 			->setConstructorArgs( [ [], $stubContentLanguages ] )
-			->setMethods( [ 'getFetchLanguageCodes' ] )
+			->onlyMethods( [ 'getFetchLanguageCodes' ] )
 			->getMock();
 		$fallbackChain->expects( $this->any() )
 			->method( 'getFetchLanguageCodes' )

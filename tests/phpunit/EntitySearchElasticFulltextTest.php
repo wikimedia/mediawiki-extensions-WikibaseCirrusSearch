@@ -50,7 +50,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
 		// Override the profile service hooks so that we can test that the rescore profiles
 		// are properly initialized
 		parent::setTemporaryHook( 'CirrusSearchProfileService',
-			function ( SearchProfileService $service ) {
+			static function ( SearchProfileService $service ) {
 				Hooks::registerSearchProfiles(
 					$service,
 					new WikibaseSearchConfig( self::$ENTITY_SEARCH_CONFIG ),

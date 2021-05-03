@@ -90,7 +90,7 @@ class StatementsFieldTest extends MediaWikiTestCase {
 			->getMock();
 
 		$lookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( function ( PropertyId $id ) use ( $map ) {
+			->willReturnCallback( static function ( PropertyId $id ) use ( $map ) {
 				if ( isset( $map[$id->getSerialization()] ) ) {
 					return $map[$id->getSerialization()];
 				}
@@ -120,10 +120,10 @@ class StatementsFieldTest extends MediaWikiTestCase {
 
 	public function testFormatters() {
 		$formatters = [
-			'VT:string' => function ( StringValue $s ) {
+			'VT:string' => static function ( StringValue $s ) {
 				return 'STRING:' . $s->getValue();
 			},
-			'VT:quantity' => function ( UnboundedQuantityValue $v ) {
+			'VT:quantity' => static function ( UnboundedQuantityValue $v ) {
 				return 'VALUE:' . $v->getAmount();
 			},
 		];

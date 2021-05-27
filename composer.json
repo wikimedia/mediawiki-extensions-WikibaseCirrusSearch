@@ -21,7 +21,7 @@
 	},
 	"support": {
 		"issues": "https://phabricator.wikimedia.org/",
-		"irc": "irc://irc.freenode.net/wikimedia-discovery"
+		"irc": "irc://irc.libera.chat/wikimedia-discovery"
 	},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "35.0.0",

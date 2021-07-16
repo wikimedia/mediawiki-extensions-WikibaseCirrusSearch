@@ -39,7 +39,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 					]
 				] ],
 				'search string' => 'haswbstatement:P999=Q888',
-				'foreignRepoNames' => [],
 			],
 			'single statement string' => [
 				'expected' => [ 'bool' => [
@@ -52,27 +51,13 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 					]
 				] ],
 				'search string' => 'haswbstatement:P999=12345',
-				'foreignRepoNames' => [],
-			],
-			'single statement federated' => [
-				'expected' => [ 'bool' => [
-					'should' => [
-						[ 'match' => [
-							'statement_keywords' => [
-								'query' => 'Federated:P999=Federated:Q888',
-							],
-						] ]
-					]
-				] ],
-				'search string' => 'haswbstatement:Federated:P999=Federated:Q888',
-				'foreignRepoNames' => [ 'Federated' ],
 			],
 			'multiple statements' => [
 				'expected' => [ 'bool' => [
 					'should' => [
 						[ 'match' => [
 							'statement_keywords' => [
-								'query' => 'Federated:P999=Q888',
+								'query' => 'P999=Q888',
 							],
 						] ],
 						[ 'match' => [
@@ -82,8 +67,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 						] ]
 					]
 				] ],
-				'search string' => 'haswbstatement:Federated:P999=Q888|P777=someString',
-				'foreignRepoNames' => [ 'Federated' ],
+				'search string' => 'haswbstatement:P999=Q888|P777=someString',
 			],
 			'some data invalid' => [
 				'expected' => [ 'bool' => [
@@ -96,26 +80,10 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 					]
 				] ],
 				'search string' => 'haswbstatement:INVALID|P999=Q888',
-				'foreignRepoNames' => [],
-			],
-			'invalid foreign repo name rejected' => [
-				'expected' => [ 'bool' => [
-					'should' => [
-						[ 'match' => [
-							'statement_keywords' => [
-								'query' => 'Federated:P999=Q888',
-							],
-						] ],
-					]
-				] ],
-				'search string' => 'haswbstatement:INVALID_FOREIGN_REPO:P999=P777|' .
-					'Federated:P999=Q888',
-				'foreignRepoNames' => [ 'Federated' ],
 			],
 			'all data invalid' => [
 				'expected' => null,
 				'search string' => 'haswbstatement:INVALID',
-				'foreignRepoNames' => [],
 			],
 			'property only' => [
 				'expected' => [ 'bool' => [
@@ -128,7 +96,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 					]
 				] ],
 				'search string' => 'haswbstatement:P999',
-				'foreignRepoNames' => [],
 			],
 			'property and value' => [
 				'expected' => [ 'bool' => [
@@ -146,7 +113,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 					]
 				] ],
 				'search string' => 'haswbstatement:P999|P777=someString',
-				'foreignRepoNames' => [],
 			],
 			'prefix' => [
 				'expected' => [ 'bool' => [
@@ -160,7 +126,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 					]
 				] ],
 				'search string' => 'haswbstatement:P999=Q888[P111=*',
-				'foreignRepoNames' => [],
 			],
 			'existence' => [
 				'expected' => [
@@ -169,7 +134,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 					]
 				],
 				'search_string' => 'haswbstatement:*',
-				'foreignRepoNames' => [],
 			],
 			'existence short circuits the rest of bool query' => [
 				'expected' => [
@@ -178,7 +142,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 					]
 				],
 				'search_string' => 'haswbstatement:P999=Q888|*',
-				'foreignRepoNames' => [],
 			],
 		];
 	}
@@ -186,8 +149,8 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider applyProvider
 	 */
-	public function testApply( ?array $expected, $term, $foreignRepoNames ) {
-		$feature = new HasWbStatementFeature( $foreignRepoNames );
+	public function testApply( ?array $expected, $term ) {
+		$feature = new HasWbStatementFeature();
 		$kwAssertions = $this->getKWAssertions();
 		$expectedWarnings = $expected === null ? [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
 		$kwAssertions->assertFilter( $feature, $term, $expected, $expectedWarnings );
@@ -212,12 +175,12 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	 * @dataProvider applyNoDataProvider
 	 */
 	public function testNotConsumed( $term ) {
-		$feature = new HasWbStatementFeature( [ 'P999' ] );
+		$feature = new HasWbStatementFeature();
 		$this->getKWAssertions()->assertNotConsumed( $feature, $term );
 	}
 
 	public function testInvalidStatementWarning() {
-		$feature = new HasWbStatementFeature( [ 'P999' ] );
+		$feature = new HasWbStatementFeature();
 		$expectedWarnings = [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue( $feature, 'haswbstatement:INVALID', [], $expectedWarnings );
@@ -229,8 +192,8 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider parseProvider
 	 */
-	public function testParseValue( $foreignRepoNames, $value, $expected, $warningExpected ) {
-		$feature = new HasWbStatementFeature( $foreignRepoNames );
+	public function testParseValue( $value, $expected, $warningExpected ) {
+		$feature = new HasWbStatementFeature();
 		$expectedWarnings = $warningExpected ? [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue( $feature, "haswbstatement:\"$value\"", $expected, $expectedWarnings );
@@ -239,25 +202,16 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 	public function parseProvider() {
 		return [
 			'empty value' => [
-				'foreignRepoNames' => [],
 				'value' => '',
 				'expected' => [],
 				'warningExpected' => true,
 			],
 			'invalid value' => [
-				'foreignRepoNames' => [],
 				'value' => 'xyz=12345',
 				'expected' => [],
 				'warningExpected' => true,
 			],
-			'invalid federated value' => [
-				'foreignRepoNames' => [ 'Wikidata' ],
-				'value' => 'Wikisource:P123=12345',
-				'expected' => [],
-				'warningExpected' => true,
-			],
 			'single value Q-id' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999=Q888',
 				'expected' => [
 					[
@@ -269,7 +223,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => false,
 			],
 			'single value other id' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999=AB123',
 				'expected' => [
 					[
@@ -280,49 +233,34 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				],
 				'warningExpected' => false,
 			],
-			'single value federated' => [
-				'foreignRepoNames' => [ 'Wikidata' ],
-				'value' => 'Wikidata:P999=Wikidata:Q888',
-				'expected' => [
-					[
-						'class' => Match::class,
-						'field' => StatementsField::NAME,
-						'string' => 'Wikidata:P999=Wikidata:Q888'
-					]
-				],
-				'warningExpected' => false,
-			],
 			'multiple values' => [
-				'foreignRepoNames' => [ 'Wikidata', 'Wikisource' ],
-				'value' => 'Wikidata:P999=Wikidata:Q888|Wikisource:P777=12345',
+				'value' => 'P999=Q888|P777=12345',
 				'expected' => [
 					[
 						'class' => Match::class,
 						'field' => StatementsField::NAME,
-						'string' => 'Wikidata:P999=Wikidata:Q888'
+						'string' => 'P999=Q888'
 					],
 					[
 						'class' => Match::class,
 						'field' => StatementsField::NAME,
-						'string' => 'Wikisource:P777=12345'
+						'string' => 'P777=12345'
 					],
 				],
 				'warningExpected' => false,
 			],
 			'multiple values, not all valid' => [
-				'foreignRepoNames' => [ 'Wikidata' ],
-				'value' => 'Wikidata:P999=Wikidata:Q888|Wikisource:P777=12345',
+				'value' => 'P999=Q888|p=12345',
 				'expected' => [
 					[
 						'class' => Match::class,
 						'field' => StatementsField::NAME,
-						'string' => 'Wikidata:P999=Wikidata:Q888'
+						'string' => 'P999=Q888'
 					],
 				],
 				'warningExpected' => false,
 			],
 			'property-only' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999',
 				'expected' => [
 					[
@@ -333,26 +271,12 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				],
 				'warningExpected' => false,
 			],
-			'federated property-only' => [
-				'foreignRepoNames' => [ 'Wikidata' ],
-				'value' => 'Wikidata:P999',
-				'expected' => [
-					[
-						'class' => Match::class,
-						'field' => StatementsField::NAME . '.property',
-						'string' => 'Wikidata:P999'
-					],
-				],
-				'warningExpected' => false,
-			],
 			'invalid property-only' => [
-				'foreignRepoNames' => [],
 				'value' => 'P123,abc',
 				'expected' => [],
 				'warningExpected' => true,
 			],
 			'invalid and valid property-only' => [
-				'foreignRepoNames' => [],
 				'value' => 'P123,abc|P345',
 				'expected' => [
 					[
@@ -364,7 +288,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => false,
 			],
 			'prefix search' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999=P888[P111*',
 				'expected' => [
 					[
@@ -376,7 +299,6 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => false,
 			],
 			'normal, property-only and prefix search simultaneously' => [
-				'foreignRepoNames' => [],
 				'value' => 'P111=Q222|P333|P444=Q555[P666*',
 				'expected' => [
 					[

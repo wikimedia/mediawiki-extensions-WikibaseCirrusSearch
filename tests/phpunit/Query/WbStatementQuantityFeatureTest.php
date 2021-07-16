@@ -34,7 +34,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 					],
 				],
 				'search string' => 'wbstatementquantity:P999=Q888=777',
-				'foreignRepoNames' => [],
 			],
 			'single statement with >' => [
 				'expected' => [
@@ -45,7 +44,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 					],
 				],
 				'search string' => 'wbstatementquantity:P999=Q888>777',
-				'foreignRepoNames' => [],
 			],
 			'single statement with >=' => [
 				'expected' => [
@@ -56,7 +54,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 					],
 				],
 				'search string' => 'wbstatementquantity:P999=Q888>=777',
-				'foreignRepoNames' => [],
 			],
 			'single statement with <' => [
 				'expected' => [
@@ -67,7 +64,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 					],
 				],
 				'search string' => 'wbstatementquantity:P111=Q222<333',
-				'foreignRepoNames' => [],
 			],
 			'single statement with <=' => [
 				'expected' => [
@@ -78,18 +74,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 					],
 				],
 				'search string' => 'wbstatementquantity:P111=Q222<=333',
-				'foreignRepoNames' => [],
-			],
-			'single statement federated' => [
-				'expected' => [
-					'term_freq' => [
-						'term' => 'Federated:P111=Federated:Q222',
-						'field' => 'statement_quantity',
-						'lte' => 333,
-					],
-				],
-				'search string' => 'wbstatementquantity:Federated:P111=Federated:Q222<=333',
-				'foreignRepoNames' => [ 'Federated' ],
 			],
 			'multiple statements' => [
 				'expected' => [
@@ -109,7 +93,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 					]
 				],
 				'search string' => 'wbstatementquantity:P111=Q222<=333|P999=Q888>1',
-				'foreignRepoNames' => [],
 			],
 			'some data invalid' => [
 				'expected' => [
@@ -120,19 +103,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 					],
 				],
 				'search string' => 'wbstatementquantity:INVALID|P999=Q888>1',
-				'foreignRepoNames' => [],
-			],
-			'invalid foreign repo name rejected' => [
-				'expected' => [
-					'term_freq' => [
-						'term' => 'Federated:P999=Q888',
-						'field' => 'statement_quantity',
-						'eq' => 9,
-					],
-				],
-				'search string' => 'wbstatementquantity:INVALID_FOREIGN_REPO:P999=P777<10|' .
-					'Federated:P999=Q888=9',
-				'foreignRepoNames' => [ 'Federated' ],
 			],
 		];
 	}
@@ -140,8 +110,8 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider applyProvider
 	 */
-	public function testApply( $expected, $term, $foreignRepoNames ) {
-		$feature = new WbStatementQuantityFeature( $foreignRepoNames );
+	public function testApply( $expected, $term ) {
+		$feature = new WbStatementQuantityFeature();
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertFilter( $feature, $term, $expected, [] );
 		$kwAssertions->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
@@ -162,12 +132,12 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 	 * @dataProvider applyNoDataProvider
 	 */
 	public function testNotConsumed( $term ) {
-		$feature = new WbStatementQuantityFeature( [ 'SOME_FOREIGN_REPO' ] );
+		$feature = new WbStatementQuantityFeature();
 		$this->getKWAssertions()->assertNotConsumed( $feature, $term );
 	}
 
 	public function testInvalidStatementWarning() {
-		$feature = new WbStatementQuantityFeature( [ 'P999' ] );
+		$feature = new WbStatementQuantityFeature();
 		$expectedWarnings = [ [ 'cirrussearch-wbstatementquantity-feature-no-valid-statements', 'wbstatementquantity' ] ];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue(
@@ -184,8 +154,8 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider parseProvider
 	 */
-	public function testParseValue( $foreignRepoNames, $value, $expected, $warningExpected ) {
-		$feature = new WbStatementQuantityFeature( $foreignRepoNames );
+	public function testParseValue( $value, $expected, $warningExpected ) {
+		$feature = new WbStatementQuantityFeature();
 		$expectedWarnings = $warningExpected ? [
 			[ 'cirrussearch-wbstatementquantity-feature-no-valid-statements', 'wbstatementquantity' ]
 		] : [];
@@ -196,7 +166,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 	public function parseProvider() {
 		return [
 			'empty value' => [
-				'foreignRepoNames' => [],
 				'value' => '',
 				'expected' => [
 					'statements' => [],
@@ -206,7 +175,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => true,
 			],
 			'invalid property id' => [
-				'foreignRepoNames' => [],
 				'value' => 'xyz=test>1',
 				'expected' => [
 					'statements' => [],
@@ -216,7 +184,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => true,
 			],
 			'invalid operator' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999=test|1',
 				'expected' => [
 					'statements' => [],
@@ -226,7 +193,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => true,
 			],
 			'invalid value' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999=Q888>A',
 				'expected' => [
 					'statements' => [],
@@ -235,18 +201,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				],
 				'warningExpected' => true,
 			],
-			'invalid federated value' => [
-				'foreignRepoNames' => [ 'Wikidata' ],
-				'value' => 'Wikisource:P123=ABC>1',
-				'expected' => [
-					'statements' => [],
-					'operators' => [],
-					'numbers' => [],
-				],
-				'warningExpected' => true,
-			],
 			'single value equals' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999=Q888=1',
 				'expected' => [
 					'statements' => [ 'P999=Q888' ],
@@ -256,7 +211,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => false,
 			],
 			'single value greater than' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999=Q888>1',
 				'expected' => [
 					'statements' => [ 'P999=Q888' ],
@@ -266,7 +220,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => false,
 			],
 			'single value greater than or equals' => [
-				'foreignRepoNames' => [],
 				'value' => 'P999=Q888>=9',
 				'expected' => [
 					'statements' => [ 'P999=Q888' ],
@@ -276,7 +229,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => false,
 			],
 			'single value less than' => [
-				'foreignRepoNames' => [],
 				'value' => 'P333=ABCD<9',
 				'expected' => [
 					'statements' => [ 'P333=ABCD' ],
@@ -286,7 +238,6 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				'warningExpected' => false,
 			],
 			'single value less than or equals' => [
-				'foreignRepoNames' => [],
 				'value' => 'P111=ABCD<=9',
 				'expected' => [
 					'statements' => [ 'P111=ABCD' ],
@@ -295,43 +246,21 @@ class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
 				],
 				'warningExpected' => false,
 			],
-			'single value federated' => [
-				'foreignRepoNames' => [ 'Wikidata' ],
-				'value' => 'Wikidata:P999=Wikidata:Q888<=9',
-				'expected' => [
-					'statements' => [ 'Wikidata:P999=Wikidata:Q888' ],
-					'operators' => [ '<=' ],
-					'numbers' => [ '9' ]
-				],
-				'warningExpected' => false,
-			],
 			'multiple values' => [
-				'foreignRepoNames' => [ 'Wikidata', 'Wikisource' ],
-				'value' => 'Wikidata:P999=ABCD<9|Wikisource:P777=Wikisource:Q111>1',
+				'value' => 'P999=ABCD<9|P777=Q111>1',
 				'expected' => [
-					'statements' => [ 'Wikidata:P999=ABCD', 'Wikisource:P777=Wikisource:Q111' ],
+					'statements' => [ 'P999=ABCD', 'P777=Q111' ],
 					'operators' => [ '<', '>' ],
 					'numbers' => [ '9', '1' ]
 				],
 				'warningExpected' => false,
 			],
 			'multiple values, not all valid' => [
-				'foreignRepoNames' => [ 'Wikidata' ],
-				'value' => 'Wikidata:P999=ABCD=5|Wikisource:P777=WXYZ>12345',
+				'value' => 'P999=ABCD=5|p=WXYZ>12345',
 				'expected' => [
-					'statements' => [ 'Wikidata:P999=ABCD' ],
+					'statements' => [ 'P999=ABCD' ],
 					'operators' => [ '=' ],
 					'numbers' => [ '5' ]
-				],
-				'warningExpected' => false,
-			],
-			'multiple values with pipe character in foreign repo name' => [
-				'foreignRepoNames' => [ 'Wiki|data', 'Wiki|source' ],
-				'value' => 'Wiki|data:P999=ABCD<9|Wiki|source:P777=Wiki|source:Q111>1',
-				'expected' => [
-					'statements' => [ 'Wiki|data:P999=ABCD', 'Wiki|source:P777=Wiki|source:Q111' ],
-					'operators' => [ '<', '>' ],
-					'numbers' => [ '9', '1' ]
 				],
 				'warningExpected' => false,
 			],

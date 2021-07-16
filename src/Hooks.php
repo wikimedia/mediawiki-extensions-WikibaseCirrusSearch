@@ -289,15 +289,8 @@ class Hooks {
 		if ( !$searchConfig->enabled() ) {
 			return;
 		}
-		$foreignRepoNames = [];
-		$foreignRepos = WikibaseRepo::getSettings()->getSetting(
-			'foreignRepositories'
-		);
-		if ( !empty( $foreignRepos ) ) {
-			$foreignRepoNames = array_keys( $foreignRepos );
-		}
-		$extraFeatures[] = new HasWbStatementFeature( $foreignRepoNames );
-		$extraFeatures[] = new WbStatementQuantityFeature( $foreignRepoNames );
+		$extraFeatures[] = new HasWbStatementFeature();
+		$extraFeatures[] = new WbStatementQuantityFeature();
 
 		$licenseMapping = HasLicenseFeature::getConfiguredLicenseMap( $searchConfig );
 		$extraFeatures[] = new HasLicenseFeature( $licenseMapping );

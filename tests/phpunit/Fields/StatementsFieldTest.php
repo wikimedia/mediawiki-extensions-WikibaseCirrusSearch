@@ -65,8 +65,6 @@ class StatementsFieldTest extends MediaWikiTestCase {
 					'P7=string[P7=simplestring]',
 					'P7=string[P9=http://url.acme.test/]',
 					"P7=string[P9= http://url.acme2.test/\n]",
-					'P7=string[foreign:P11=simplestring]',
-					'P7=string[foreign:P12=foreign:Q1234]',
 				]
 			],
 			'Q7' => [

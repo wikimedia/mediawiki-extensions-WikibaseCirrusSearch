@@ -45,7 +45,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 	 */
 	private $idParser;
 
-	protected function setUp() : void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		global $wgWBRepoSettings;

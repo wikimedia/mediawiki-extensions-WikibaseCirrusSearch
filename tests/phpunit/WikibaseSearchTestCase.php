@@ -16,7 +16,7 @@ trait WikibaseSearchTestCase {
 	// Declare dependency on setMwGlobals
 	abstract public function setMwGlobals( $pairs, $value = null );
 
-	public function setUp() : void {
+	public function setUp(): void {
 		parent::setUp();
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );

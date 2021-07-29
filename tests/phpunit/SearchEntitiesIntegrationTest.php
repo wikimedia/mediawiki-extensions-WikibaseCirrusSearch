@@ -9,6 +9,7 @@ use FauxRequest;
 use Language;
 use MediaWikiTestCase;
 use RequestContext;
+use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -187,19 +188,20 @@ class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
 			'search' => $query,
 		] ) );
 
-		$this->markTestSkipped( 'Temporarily skipping for SearchEntities constructor changes' );
-
 		$apiModule = new SearchEntities(
 			new ApiMain( $context ),
 			'',
 			$entitySearchTermIndex,
-			null,
 			new StaticContentLanguages( [ 'en' ] ),
-			WikibaseRepo::getEntitySourceDefinitions(),
+			new EntitySourceLookup(
+				WikibaseRepo::getEntitySourceDefinitions(),
+				WikibaseRepo::getSubEntityTypesMapper()
+			),
 			$this->createMock( EntityTitleTextLookup::class ),
 			$this->createMock( EntityUrlLookup::class ),
 			$this->createMock( EntityArticleIdLookup::class ),
-			$this->createMock( ApiErrorReporter::class )
+			$this->createMock( ApiErrorReporter::class ),
+			[ 'item', 'property' ]
 		);
 
 		$apiModule->execute();

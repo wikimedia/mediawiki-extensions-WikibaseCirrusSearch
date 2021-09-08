@@ -381,6 +381,7 @@ class Hooks {
 
 	/**
 	 * @return WikibaseSearchConfig
+	 * @suppress PhanTypeMismatchReturnSuperType
 	 */
 	private static function getWBCSConfig(): WikibaseSearchConfig {
 		return MediaWikiServices::getInstance()

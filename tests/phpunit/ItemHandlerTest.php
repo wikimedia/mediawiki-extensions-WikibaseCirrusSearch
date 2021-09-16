@@ -8,7 +8,7 @@ use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityRedirect;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Content\EntityContent;
@@ -114,7 +114,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 		$item->getFingerprint()->setLabel( 'en', 'Kitten' );
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
 		$item->getStatements()->addNewStatement(
-			new PropertyNoValueSnak( new PropertyId( 'P1' ) )
+			new PropertyNoValueSnak( new NumericPropertyId( 'P1' ) )
 		);
 
 		return ItemContent::newFromItem( $item );

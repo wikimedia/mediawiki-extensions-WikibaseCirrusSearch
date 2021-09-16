@@ -13,7 +13,7 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Match;
 use Elastica\Query\Prefix;
-use Wikibase\DataModel\Entity\PropertyId;
+use Wikibase\DataModel\Entity\NumericPropertyId;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 
 /**
@@ -215,11 +215,11 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 			return true;
 		}
 
-		//Strip delimiters, anchors and pattern modifiers from PropertyId::PATTERN
+		//Strip delimiters, anchors and pattern modifiers from NumericPropertyId::PATTERN
 		$propertyIdPattern = preg_replace(
 			'/([^\sa-zA-Z0-9\\\])(\^|\\\A)?(.*?)(\$|\\\z|\\\Z)?\\1[a-zA-Z]*/',
 			'$3',
-			PropertyId::PATTERN
+			NumericPropertyId::PATTERN
 		);
 		$validStatementStringPattern = '/^' .
 			$propertyIdPattern .

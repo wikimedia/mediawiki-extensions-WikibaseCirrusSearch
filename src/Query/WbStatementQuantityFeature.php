@@ -124,7 +124,7 @@ class WbStatementQuantityFeature extends SimpleKeywordFeature implements FilterQ
 
 		if ( count( $statements ) == 0 ) {
 			$warningCollector->addWarning(
-				'cirrussearch-wbstatementquantity-feature-no-valid-statements',
+				'wikibasecirrus-wbstatementquantity-feature-no-valid-statements',
 				$key
 			);
 		}

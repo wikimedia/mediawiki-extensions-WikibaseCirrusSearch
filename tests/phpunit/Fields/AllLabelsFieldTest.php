@@ -4,7 +4,7 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use CirrusSearch\CirrusSearch;
 use ExtensionRegistry;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
@@ -21,7 +21,7 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class AllLabelsFieldTest extends MediaWikiTestCase {
+class AllLabelsFieldTest extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
 	public function provideFieldData() {

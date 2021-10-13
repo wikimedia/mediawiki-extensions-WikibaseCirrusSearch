@@ -3,14 +3,14 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\Search\Elastic\ConfigBuilder;
 
 /**
  * @group Wikibase
  * @covers \Wikibase\Search\Elastic\ConfigBuilder
  */
-class AnalysisConfigBuilderTest extends MediaWikiTestCase {
+class AnalysisConfigBuilderTest extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
 	public function testAnalysisConfig() {

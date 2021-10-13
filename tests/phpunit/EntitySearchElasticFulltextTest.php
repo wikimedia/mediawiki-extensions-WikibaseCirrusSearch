@@ -9,7 +9,7 @@ use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\SearchConfig;
 use ExtensionRegistry;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\EntityFullTextQueryBuilder;
@@ -25,7 +25,7 @@ use Wikibase\Search\Elastic\WikibaseSearchConfig;
  * @license GPL-2.0-or-later
  * @author  Stas Malyshev
  */
-class EntitySearchElasticFulltextTest extends MediaWikiTestCase {
+class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var array search settings for the test

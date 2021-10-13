@@ -5,7 +5,7 @@ namespace Wikibase\Search\Elastic\Tests;
 use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\CirrusTestCase;
 use Language;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntitySearchElastic;
@@ -18,7 +18,7 @@ use Wikibase\Search\Elastic\EntitySearchElastic;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class EntitySearchElasticTest extends MediaWikiTestCase {
+class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
 	/**

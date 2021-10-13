@@ -13,7 +13,7 @@ use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
  * @group WikibaseElastic
  * @group Wikibase
  */
-class HasDataForLangFeatureTest extends \MediaWikiTestCase {
+class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 
 	public function setUp(): void {
 		parent::setUp();

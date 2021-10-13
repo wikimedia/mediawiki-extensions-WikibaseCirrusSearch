@@ -13,7 +13,7 @@ use Wikibase\Search\Elastic\Query\WbStatementQuantityFeature;
  * @group WikibaseElastic
  * @group Wikibase
  */
-class WbStatementQuantityFeatureTest extends \MediaWikiTestCase {
+class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 
 	public function setUp(): void {
 		parent::setUp();

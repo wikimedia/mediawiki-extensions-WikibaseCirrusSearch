@@ -7,7 +7,7 @@ use CirrusSearch\CirrusDebugOptions;
 use ExtensionRegistry;
 use FauxRequest;
 use Language;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use RequestContext;
 use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -39,7 +39,7 @@ use Wikibase\Search\Elastic\EntitySearchElastic;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class SearchEntitiesIntegrationTest extends MediaWikiTestCase {
+class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @var EntityIdParser

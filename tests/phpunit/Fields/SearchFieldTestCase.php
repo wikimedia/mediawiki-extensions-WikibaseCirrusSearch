@@ -5,14 +5,14 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 use CirrusSearch\CirrusSearch;
 use CirrusSearch\SearchConfig;
 use ExtensionRegistry;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use SearchEngine;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 
 /**
  * Helper test class for search field testing.
  */
-class SearchFieldTestCase extends MediaWikiTestCase {
+class SearchFieldTestCase extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
 	/**

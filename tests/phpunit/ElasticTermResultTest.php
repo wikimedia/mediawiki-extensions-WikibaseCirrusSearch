@@ -4,7 +4,7 @@ namespace Wikibase\Search\Elastic\Tests;
 
 use Elastica\Result;
 use Elastica\ResultSet;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Search\Elastic\ElasticTermResult;
@@ -17,7 +17,7 @@ use Wikibase\Search\Elastic\ElasticTermResult;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class ElasticTermResultTest extends MediaWikiTestCase {
+class ElasticTermResultTest extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
 	public function termResultsProvider() {

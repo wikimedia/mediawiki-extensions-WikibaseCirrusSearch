@@ -3,7 +3,7 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use Language;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
@@ -17,7 +17,7 @@ use Wikibase\Search\Elastic\Hooks;
 /**
  * @covers \Wikibase\Search\Elastic\Hooks
  */
-class OpenSearchLabelsTest extends MediaWikiTestCase {
+class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 
 	public function getOpenSearchData() {
 		return [

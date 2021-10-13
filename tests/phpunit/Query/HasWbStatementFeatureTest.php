@@ -16,7 +16,7 @@ use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
  * @group WikibaseElastic
  * @group Wikibase
  */
-class HasWbStatementFeatureTest extends \MediaWikiTestCase {
+class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 
 	public function setUp(): void {
 		parent::setUp();

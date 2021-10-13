@@ -3,7 +3,7 @@
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use DummySearchIndexFieldDefinition;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Search\Elastic\Fields\WikibaseNumericField;
@@ -17,7 +17,7 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-abstract class WikibaseNumericFieldTestCase extends MediaWikiTestCase {
+abstract class WikibaseNumericFieldTestCase extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
 	public function testGetMapping() {

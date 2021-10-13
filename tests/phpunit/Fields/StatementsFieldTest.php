@@ -6,7 +6,7 @@ use DataValues\BooleanValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use ExtensionRegistry;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -29,7 +29,7 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class StatementsFieldTest extends MediaWikiTestCase {
+class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
 	/**

@@ -15,7 +15,7 @@ use Wikibase\Search\Elastic\Query\InLabelFeature;
  * @group WikibaseElastic
  * @group Wikibase
  */
-class InLabelFeatureTest extends \MediaWikiTestCase {
+class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 
 	public function setUp(): void {
 		parent::setUp();

@@ -44,6 +44,13 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		return [];
 	}
 
+	/**
+	 * @return PropertyContent
+	 */
+	protected function newEmptyContent() {
+		return new PropertyContent();
+	}
+
 	protected function newEntity( EntityId $id = null ) {
 		if ( !$id ) {
 			$id = new NumericPropertyId( 'P7' );

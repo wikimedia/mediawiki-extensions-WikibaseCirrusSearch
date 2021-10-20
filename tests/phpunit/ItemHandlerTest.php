@@ -51,6 +51,13 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	}
 
 	/**
+	 * @return ItemContent
+	 */
+	protected function newEmptyContent() {
+		return new ItemContent();
+	}
+
+	/**
 	 * @param EntityDocument|null $entity
 	 *
 	 * @return EntityContent

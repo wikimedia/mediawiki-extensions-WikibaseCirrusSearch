@@ -5,7 +5,7 @@ namespace Wikibase\Search\Elastic\Tests\Query;
 use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
 use ExtensionRegistry;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Query\Prefix;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
@@ -261,7 +261,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'P999=Q888',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME,
 						'string' => 'P999=Q888'
 					]
@@ -273,7 +273,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'P999=AB123',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME,
 						'string' => 'P999=AB123'
 					]
@@ -285,7 +285,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'Wikidata:P999=Wikidata:Q888',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME,
 						'string' => 'Wikidata:P999=Wikidata:Q888'
 					]
@@ -297,12 +297,12 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'Wikidata:P999=Wikidata:Q888|Wikisource:P777=12345',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME,
 						'string' => 'Wikidata:P999=Wikidata:Q888'
 					],
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME,
 						'string' => 'Wikisource:P777=12345'
 					],
@@ -314,7 +314,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'Wikidata:P999=Wikidata:Q888|Wikisource:P777=12345',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME,
 						'string' => 'Wikidata:P999=Wikidata:Q888'
 					],
@@ -326,7 +326,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'P999',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME . '.property',
 						'string' => 'P999'
 					],
@@ -338,7 +338,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'Wikidata:P999',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME . '.property',
 						'string' => 'Wikidata:P999'
 					],
@@ -356,7 +356,7 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'P123,abc|P345',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME . '.property',
 						'string' => 'P345'
 					],
@@ -380,12 +380,12 @@ class HasWbStatementFeatureTest extends \MediaWikiTestCase {
 				'value' => 'P111=Q222|P333|P444=Q555[P666*',
 				'expected' => [
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME,
 						'string' => 'P111=Q222'
 					],
 					[
-						'class' => Match::class,
+						'class' => MatchQuery::class,
 						'field' => StatementsField::NAME . '.property',
 						'string' => 'P333'
 					],

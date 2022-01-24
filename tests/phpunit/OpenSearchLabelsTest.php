@@ -90,7 +90,14 @@ class OpenSearchLabelsTest extends MediaWikiTestCase {
 		$repo = $this->getWikibaseRepo( $lang, $labels );
 		Hooks::amendSearchResults( $repo, $lang, $results );
 
-		$this->assertEquals( $expected, array_column( $results, 'extract', 'title' ) );
+		$resultsByTitle = [];
+		foreach ( $results as $result ) {
+			if ( isset( $result['extract'] ) ) {
+				$resultsByTitle[(string)$result['title']] = $result['extract'];
+			}
+		}
+
+		$this->assertEquals( $expected, $resultsByTitle );
 	}
 
 	/**

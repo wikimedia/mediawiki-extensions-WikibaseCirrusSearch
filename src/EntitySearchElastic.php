@@ -7,7 +7,7 @@ use CirrusSearch\Search\SearchContext;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\DisMax;
-use Elastica\Query\Match;
+use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Language;
 use WebRequest;
@@ -202,7 +202,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 			return $query;
 		}
 
-		$labelsFilter = new Match( 'labels_all.prefix', $text );
+		$labelsFilter = new MatchQuery( 'labels_all.prefix', $text );
 
 		$profile = $this->loadProfile( $context, $languageCode );
 		$this->searchLanguageCodes = $profile['language-chain'];

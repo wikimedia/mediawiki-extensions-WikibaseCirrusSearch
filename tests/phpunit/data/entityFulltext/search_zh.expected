@@ -567,10 +567,16 @@
                                 "weight": 0.4
                             },
                             {
-                                "weight": -1,
+                                "weight": 1,
                                 "filter": {
-                                    "term": {
-                                        "statement_keywords": "P31=Q4167410"
+                                    "bool": {
+                                        "must_not": [
+                                            {
+                                                "term": {
+                                                    "statement_keywords": "P31=Q4167410"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             }

@@ -228,7 +228,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 
 		// Main query
 		$query = new BoolQuery();
-		$query->setParam( 'disable_coord', true );
 
 		// Match either labels or exact match to title
 		$query->addShould( $titleMatch );

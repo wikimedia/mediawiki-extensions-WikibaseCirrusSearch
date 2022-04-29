@@ -75,6 +75,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 				],
 				'search string' => 'wbstatementquantity:P111=Q222<=333',
 			],
+			/* TODO: uncomment
 			'multiple statements' => [
 				'expected' => [
 					'bool' => [
@@ -94,6 +95,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 				],
 				'search string' => 'wbstatementquantity:P111=Q222<=333|P999=Q888>1',
 			],
+			*/
 			'some data invalid' => [
 				'expected' => [
 					'term_freq' => [

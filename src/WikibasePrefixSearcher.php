@@ -44,8 +44,8 @@ class WikibasePrefixSearcher extends Searcher {
 	protected function buildSearch() {
 		$this->searchContext->addSyntaxUsed( 'wikibase_prefix', PHP_INT_MAX );
 
-		$indexType = $this->connection->pickIndexTypeForNamespaces( $this->getSearchContext()->getNamespaces() );
-		$index = $this->connection->getPageType( $this->indexBaseName, $indexType )->getIndex();
+		$indexSuffix = $this->connection->pickIndexSuffixForNamespaces( $this->getSearchContext()->getNamespaces() );
+		$index = $this->connection->getIndex( $this->indexBaseName, $indexSuffix );
 
 		$queryOptions = [
 			\Elastica\Search::OPTION_TIMEOUT => $this->config->getElement( 'CirrusSearchSearchShardTimeout',

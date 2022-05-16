@@ -50,6 +50,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 			],
 			'cc-by-sa' => [
 				'expected' => [ 'bool' => [
+					'minimum_should_match' => 1,
 					'should' => [
 						[ 'match' => [
 							'statement_keywords' => [
@@ -67,6 +68,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 			],
 			'cc-by' => [
 				'expected' => [ 'bool' => [
+					'minimum_should_match' => 1,
 					'should' => [
 						[ 'match' => [
 							'statement_keywords' => [
@@ -84,6 +86,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 			],
 			'cc-by-sa OR cc-by' => [
 				'expected' => [ 'bool' => [
+					'minimum_should_match' => 1,
 					'should' => [
 						[ 'match' => [
 							'statement_keywords' => [
@@ -111,6 +114,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 			],
 			'unrestricted' => [
 				'expected' => [ 'bool' => [
+					'minimum_should_match' => 1,
 					'should' => [
 						[ 'match' => [
 							'statement_keywords' => [
@@ -138,6 +142,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 			],
 			'other' => [
 				'expected' => [ 'bool' => [
+					'minimum_should_match' => 1,
 					'should' => [
 						[ 'match' => [
 							'statement_keywords.property' => [

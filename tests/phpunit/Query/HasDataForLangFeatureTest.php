@@ -15,7 +15,7 @@ use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
  */
 class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 
-	public function setUp(): void {
+	protected function setUp(): void {
 		parent::setUp();
 
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {

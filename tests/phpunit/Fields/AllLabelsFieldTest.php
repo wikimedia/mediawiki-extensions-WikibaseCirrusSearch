@@ -42,7 +42,6 @@ class AllLabelsFieldTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider provideFieldData
-	 * @param EntityDocument $entity
 	 */
 	public function testGetFieldData( EntityDocument $entity ) {
 		$labels = new AllLabelsField();

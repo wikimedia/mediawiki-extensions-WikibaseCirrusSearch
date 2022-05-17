@@ -98,10 +98,6 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 
 	/**
 	 * @dataProvider searchDataProvider
-	 * @param string[] $params
-	 * @param string|false $expected
-	 * @throws \MWException
-	 * @throws \ConfigException
 	 */
 	public function testSearchElastic( $params, $expected ) {
 		$this->setMwGlobals( [

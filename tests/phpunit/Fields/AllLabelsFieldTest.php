@@ -59,8 +59,8 @@ class AllLabelsFieldTest extends MediaWikiIntegrationTestCase {
 		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 		$config = new \CirrusSearch\SearchConfig();
-		$searchEngine->expects( $this->any() )->method( 'getConfig' )
-			->will( $this->returnValue( $config ) );
+		$searchEngine->method( 'getConfig' )
+			->willReturn( $config );
 
 		$mapping = $labels->getMapping( $searchEngine );
 		$this->assertArrayHasKey( 'fields', $mapping );

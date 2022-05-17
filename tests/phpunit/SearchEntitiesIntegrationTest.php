@@ -222,13 +222,12 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 			->setConstructorArgs( [ [], $stubContentLanguages ] )
 			->onlyMethods( [ 'getFetchLanguageCodes' ] )
 			->getMock();
-		$fallbackChain->expects( $this->any() )
-			->method( 'getFetchLanguageCodes' )
+		$fallbackChain->method( 'getFetchLanguageCodes' )
 			->willReturn( [ 'phpunit_lang' ] );
 
 		$factory = $this->createMock( LanguageFallbackChainFactory::class );
-		$factory->method( 'newFromLanguage' )->willReturn( $fallbackChain );
-		$factory->method( 'newFromLanguageCode' )->willReturn( $fallbackChain );
+		$factory->method( $this->logicalOr( 'newFromLanguage', 'newFromLanguageCode' ) )
+			->willReturn( $fallbackChain );
 
 		return $factory;
 	}

@@ -293,16 +293,14 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 		$factory = $this->getMockBuilder( LanguageFallbackChainFactory::class )
 			->disableOriginalConstructor()
 			->getMock();
-		$factory->expects( $this->any() )
-			->method( 'newFromLanguageCode' )
+		$factory->method( 'newFromLanguageCode' )
 			->will( $this->returnCallback( function ( $langCode ) use ( $languageChains ) {
 				$langFallbacks = $languageChains[$langCode] ?? [ 'en' ];
 				$fallbackLanguageChain = $this->getMockBuilder( TermLanguageFallbackChain::class )
 					->disableOriginalConstructor()
 					->getMock();
-				$fallbackLanguageChain->expects( $this->any() )
-					->method( 'getFetchLanguageCodes' )
-					->will( $this->returnValue( $langFallbacks ) );
+				$fallbackLanguageChain->method( 'getFetchLanguageCodes' )
+					->willReturn( $langFallbacks );
 				return $fallbackLanguageChain;
 			} ) );
 		return new InLabelFeature( $factory, $validLanguages );

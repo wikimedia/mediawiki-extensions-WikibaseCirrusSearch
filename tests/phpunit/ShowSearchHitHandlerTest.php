@@ -389,8 +389,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	private function getEntityIdLookup() {
 		$entityIdLookup = $this->createMock( EntityIdLookup::class );
 
-		$entityIdLookup->expects( $this->any() )
-			->method( 'getEntityIdForTitle' )
+		$entityIdLookup->method( 'getEntityIdForTitle' )
 			->willReturnCallback( static function ( Title $title ) {
 				if ( preg_match( '/^Q(\d+)$/', $title->getText(), $m ) ) {
 					return new ItemId( $m[0] );

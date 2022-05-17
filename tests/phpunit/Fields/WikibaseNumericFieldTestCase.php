@@ -24,8 +24,7 @@ abstract class WikibaseNumericFieldTestCase extends MediaWikiIntegrationTestCase
 		$field = $this->getFieldObject();
 		$searchEngine = $this->createMock( SearchEngine::class );
 
-		$searchEngine->expects( $this->any() )
-			->method( 'makeSearchFieldMapping' )
+		$searchEngine->method( 'makeSearchFieldMapping' )
 			->will( $this->returnCallback( static function ( $name, $type ) {
 				return new DummySearchIndexFieldDefinition( $name, $type );
 			} ) );

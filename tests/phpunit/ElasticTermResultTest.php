@@ -325,9 +325,8 @@ class ElasticTermResultTest extends MediaWikiIntegrationTestCase {
 		$mock = $this->getMockBuilder( TermLanguageFallbackChain::class )
 				->disableOriginalConstructor()
 				->getMock();
-		$mock->expects( $this->any() )
-			->method( 'getFetchLanguageCodes' )
-			->will( $this->returnValue( $languages ) );
+		$mock->method( 'getFetchLanguageCodes' )
+			->willReturn( $languages );
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'extractPreferredValueOrAny' )
 			->will( $this->returnCallback( static function ( $sourceData ) use ( $languages ) {

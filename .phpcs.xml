@@ -4,6 +4,7 @@
 
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
 		<exclude name="MediaWiki.Commenting.PropertyDocumentation.MissingDocumentationPrivate" />
+		<exclude name="MediaWiki.PHPUnit.AssertEmpty.AssertEmptyUsed" />
 	</rule>
 
 	<!-- The function comment sniff is too rigorous about too many details that need

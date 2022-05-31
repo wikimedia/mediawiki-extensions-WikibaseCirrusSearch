@@ -24,6 +24,7 @@ use Wikimedia\Assert\Assert;
  * Hooks for Wikibase search.
  */
 class Hooks {
+	private const LANGUAGE_SELECTOR_PREFIX = "language_selector_prefix";
 
 	/**
 	 * Setup hook.
@@ -253,6 +254,33 @@ class Hooks {
 		$service->registerUriParamOverride( SearchProfileService::RESCORE,
 			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, 'cirrusRescoreProfile' );
 
+		$config = MediaWikiServices::getInstance()->getMainConfig();
+
+		// create a new search context for the language selector in the Special:NewLexeme
+		$service->registerDefaultProfile( SearchProfileService::RESCORE, self::LANGUAGE_SELECTOR_PREFIX,
+			EntitySearchElastic::DEFAULT_RESCORE_PROFILE );
+		$service->registerConfigOverride( SearchProfileService::RESCORE, self::LANGUAGE_SELECTOR_PREFIX, $config,
+			'LanguageSelectorRescoreProfile' );
+		$service->registerUriParamOverride( SearchProfileService::RESCORE,
+			self::LANGUAGE_SELECTOR_PREFIX, 'cirrusRescoreProfile' );
+		$service->registerDefaultProfile( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER, self::LANGUAGE_SELECTOR_PREFIX,
+			EntitySearchElastic::DEFAULT_QUERY_BUILDER_PROFILE );
+		$service->registerConfigOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER, self::LANGUAGE_SELECTOR_PREFIX, $config,
+			'LanguageSelectorPrefixSearchProfile' );
+		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
+			self::LANGUAGE_SELECTOR_PREFIX, 'cirrusWBProfile' );
+		$languageSelectorChains = $entitySearchConfig->get( 'LanguageSelectorRescoreFunctionChains' );
+
+		if ( $languageSelectorChains ) {
+			$languageSelectorBoosts = $entitySearchConfig->get( 'LanguageSelectorStatementBoosts' );
+			$service->registerRepository( new SearchProfileRepositoryTransformer(
+				ArrayProfileRepository::fromArray(
+					SearchProfileService::RESCORE_FUNCTION_CHAINS,
+					'wikibase_config',
+					$languageSelectorChains ),
+				[ EntitySearchElastic::STMT_BOOST_PROFILE_REPL => $languageSelectorBoosts ]
+			) );
+		}
 		// Declare "search routes" for wikibase full text search types
 		// Source of the routes is $namespacesForContexts which is a "reversed view"
 		// of WikibaseRepo::getFulltextSearchTypes().

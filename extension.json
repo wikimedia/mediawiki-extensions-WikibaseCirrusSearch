@@ -57,6 +57,22 @@
 			"value": null,
 			"description": "Rescore function chain definitions holder."
 		},
+		"LanguageSelectorRescoreProfile": {
+			"value": null,
+			"description": "Default rescore profile to use in the language selector context"
+		},
+		"LanguageSelectorPrefixSearchProfile": {
+			"value": null,
+			"description": "Default query builder profile to use in the language selector context"
+		},
+		"LanguageSelectorStatementBoost": {
+			"value": [],
+			"description": "Type (de)boosts for rescoring functions in the language selector context"
+		},
+		"LanguageSelectorRescoreFunctionChains": {
+			"value": [],
+			"description": "Function chains profiles used by the language selector context"
+		},
 		"StatementBoost": {
 			"value": [],
 			"description": "Type (de)boosts for rescoring functions."

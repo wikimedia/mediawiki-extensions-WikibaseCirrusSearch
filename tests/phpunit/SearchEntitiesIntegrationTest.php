@@ -188,7 +188,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 			'search' => $query,
 		] ) );
 
-		// @phan-suppress-next-line PhanParamTooMany
 		$apiModule = new SearchEntities(
 			new ApiMain( $context ),
 			'',

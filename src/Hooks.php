@@ -276,7 +276,7 @@ class Hooks {
 			$service->registerRepository( new SearchProfileRepositoryTransformer(
 				ArrayProfileRepository::fromArray(
 					SearchProfileService::RESCORE_FUNCTION_CHAINS,
-					'wikibase_config',
+					'wikibase_config_language_selector',
 					$languageSelectorChains ),
 				[ EntitySearchElastic::STMT_BOOST_PROFILE_REPL => $languageSelectorBoosts ]
 			) );

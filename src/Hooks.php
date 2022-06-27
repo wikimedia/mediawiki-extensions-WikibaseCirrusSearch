@@ -270,7 +270,7 @@ class Hooks {
 		$languageSelectorChains = $entitySearchConfig->get( 'LanguageSelectorRescoreFunctionChains' );
 
 		if ( $languageSelectorChains ) {
-			$languageSelectorBoosts = $entitySearchConfig->get( 'LanguageSelectorStatementBoosts' );
+			$languageSelectorBoosts = $entitySearchConfig->get( 'LanguageSelectorStatementBoost' );
 			$service->registerRepository( new SearchProfileRepositoryTransformer(
 				ArrayProfileRepository::fromArray(
 					SearchProfileService::RESCORE_FUNCTION_CHAINS,

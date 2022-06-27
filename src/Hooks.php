@@ -254,19 +254,17 @@ class Hooks {
 		$service->registerUriParamOverride( SearchProfileService::RESCORE,
 			EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT, 'cirrusRescoreProfile' );
 
-		$config = MediaWikiServices::getInstance()->getMainConfig();
-
 		// create a new search context for the language selector in the Special:NewLexeme
 		$service->registerDefaultProfile( SearchProfileService::RESCORE, self::LANGUAGE_SELECTOR_PREFIX,
 			EntitySearchElastic::DEFAULT_RESCORE_PROFILE );
-		$service->registerConfigOverride( SearchProfileService::RESCORE, self::LANGUAGE_SELECTOR_PREFIX, $config,
-			'LanguageSelectorRescoreProfile' );
+		$service->registerConfigOverride( SearchProfileService::RESCORE, self::LANGUAGE_SELECTOR_PREFIX,
+			$entitySearchConfig, 'LanguageSelectorRescoreProfile' );
 		$service->registerUriParamOverride( SearchProfileService::RESCORE,
 			self::LANGUAGE_SELECTOR_PREFIX, 'cirrusRescoreProfile' );
 		$service->registerDefaultProfile( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER, self::LANGUAGE_SELECTOR_PREFIX,
 			EntitySearchElastic::DEFAULT_QUERY_BUILDER_PROFILE );
-		$service->registerConfigOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER, self::LANGUAGE_SELECTOR_PREFIX, $config,
-			'LanguageSelectorPrefixSearchProfile' );
+		$service->registerConfigOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER, self::LANGUAGE_SELECTOR_PREFIX,
+			$entitySearchConfig, 'LanguageSelectorPrefixSearchProfile' );
 		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			self::LANGUAGE_SELECTOR_PREFIX, 'cirrusWBProfile' );
 		$languageSelectorChains = $entitySearchConfig->get( 'LanguageSelectorRescoreFunctionChains' );

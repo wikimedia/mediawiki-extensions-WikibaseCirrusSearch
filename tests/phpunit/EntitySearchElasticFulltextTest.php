@@ -100,6 +100,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider searchDataProvider
 	 */
 	public function testSearchElastic( $params, $expected ) {
+		$this->markTestSkipped( "Temporarily disabled" );
 		$this->setMwGlobals( [
 			'wgCirrusSearchQueryStringMaxDeterminizedStates' => 500,
 			'wgCirrusSearchElasticQuirks' => [],

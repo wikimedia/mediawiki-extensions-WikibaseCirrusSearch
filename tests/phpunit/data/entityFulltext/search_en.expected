@@ -175,7 +175,7 @@
                                     "bool": {
                                         "must_not": [
                                             {
-                                                "term": {
+                                                "match": {
                                                     "statement_keywords": "P31=Q4167410"
                                                 }
                                             }

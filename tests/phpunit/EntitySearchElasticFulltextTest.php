@@ -100,7 +100,6 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider searchDataProvider
 	 */
 	public function testSearchElastic( $params, $expected ) {
-		$this->markTestSkipped( "Temporarily disabled" );
 		$this->setMwGlobals( [
 			'wgCirrusSearchQueryStringMaxDeterminizedStates' => 500,
 			'wgCirrusSearchElasticQuirks' => [],
@@ -143,7 +142,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 		$context = new SearchContext( $config, [ 0 ] );
 		$builder->build( $context, 'test' );
 		$this->assertFileContains( __DIR__ . '/data/entityFulltext/phraseRescore.expected',
-			json_encode( $context->getPhraseRescoreQuery()->toArray(), JSON_PRETTY_PRINT ) );
+			CirrusTestCase::encodeFixture( $context->getPhraseRescoreQuery()->toArray() ), CirrusTestCase::canRebuildFixture() );
 	}
 
 }

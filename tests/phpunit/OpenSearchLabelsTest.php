@@ -9,8 +9,8 @@ use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermFallback;
 use Wikibase\Lib\Store\EntityNamespaceLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookupFactory;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
+use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\Hooks;
 
@@ -116,9 +116,7 @@ class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getLabelDescriptionLookup( $language, array $labels ) {
-		$mock = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mock = $this->createMock( FallbackLabelDescriptionLookup::class );
 
 		$mock->method( 'getLabel' )->willReturnCallback(
 			static function ( EntityId $id ) use ( $labels, $language ) {
@@ -140,13 +138,11 @@ class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 	 */
 	private function mockWikibaseRepoServices( Language $language, array $labels ) {
 		// Description lookup
-		$lookupFactory = $this->getMockBuilder( LanguageFallbackLabelDescriptionLookupFactory::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$lookupFactory = $this->createMock( FallbackLabelDescriptionLookupFactory::class );
 		$lookupFactory->method( 'newLabelDescriptionLookup' )
 			->with( $language )
 			->willReturn( $this->getLabelDescriptionLookup( $language->getCode(), $labels ) );
-		$this->setService( 'WikibaseRepo.LanguageFallbackLabelDescriptionLookupFactory',
+		$this->setService( 'WikibaseRepo.FallbackLabelDescriptionLookupFactory',
 			$lookupFactory );
 
 		// Entity ID Parser

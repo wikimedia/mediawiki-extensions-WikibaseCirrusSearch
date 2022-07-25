@@ -222,6 +222,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 
 		// Main labels/desc query
 		$labelsDescQuery = new BoolQuery();
+		$labelsDescQuery->setMinimumShouldMatch( 0 );
 		$labelsDescQuery->addFilter( $filterQuery );
 		$labelsDescQuery->addShould( $nearMatchQuery );
 		$labelsDescQuery->addShould( $tokenizedQuery );
@@ -248,6 +249,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 */
 	private function buildSimpleAllFilter( $query, $operator = 'AND', $boost = null ) {
 		$filter = new BoolQuery();
+		$filter->setMinimumShouldMatch( 1 );
 		// FIXME: We can't use solely the stem field here
 		// - Depending on languages it may lack stopwords,
 		// A dedicated field used for filtering would be nice

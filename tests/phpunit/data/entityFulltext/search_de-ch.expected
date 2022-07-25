@@ -9,9 +9,11 @@
                 },
                 {
                     "bool": {
+                        "minimum_should_match": 0,
                         "filter": [
                             {
                                 "bool": {
+                                    "minimum_should_match": 1,
                                     "should": [
                                         {
                                             "match": {
@@ -127,6 +129,7 @@
                             },
                             {
                                 "bool": {
+                                    "minimum_should_match": 1,
                                     "should": [
                                         {
                                             "match": {

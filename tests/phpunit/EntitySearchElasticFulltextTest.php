@@ -108,9 +108,9 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$config = new SearchConfig();
-		$cirrus = new CirrusSearch( $config, CirrusDebugOptions::forDumpingQueriesInUnitTests() );
+		$cirrus = new CirrusSearch( $config, CirrusDebugOptions::forDumpingQueriesInUnitTests( false ) );
 		$cirrus->setNamespaces( $params['ns'] );
-		$result = json_decode( $cirrus->searchText( $params['search'] )->getValue(), true );
+		$result = $cirrus->searchText( $params['search'] )->getValue();
 		if ( $expected === false ) {
 			$this->assertStringStartsNotWith( EntityFullTextQueryBuilder::ENTITY_FULL_TEXT_MARKER, $result['__main__']['description'] );
 			return;

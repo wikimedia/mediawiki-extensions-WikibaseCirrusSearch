@@ -156,7 +156,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 			$this->getMockBuilder( Language::class )->disableOriginalConstructor()->getMock(),
 			[ 'item' => 'wikibase-item' ],
 			new FauxRequest(),
-			CirrusDebugOptions::forDumpingQueriesInUnitTests( false )
+			CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);
 
 		return $entitySearchElastic;

@@ -32,7 +32,7 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 			$userLang,
 			WikibaseRepo::getContentModelMappings(),
 			new \FauxRequest(),
-			CirrusDebugOptions::forDumpingQueriesInUnitTests( false )
+			CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);
 	}
 

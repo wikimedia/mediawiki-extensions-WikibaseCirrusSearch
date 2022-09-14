@@ -108,7 +108,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 		] );
 
 		$config = new SearchConfig();
-		$cirrus = new CirrusSearch( $config, CirrusDebugOptions::forDumpingQueriesInUnitTests( false ) );
+		$cirrus = new CirrusSearch( $config, CirrusDebugOptions::forDumpingQueriesInUnitTests() );
 		$cirrus->setNamespaces( $params['ns'] );
 		$result = $cirrus->searchText( $params['search'] )->getValue();
 		if ( $expected === false ) {

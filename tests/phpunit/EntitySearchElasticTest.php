@@ -32,7 +32,7 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 			$userLang,
 			WikibaseRepo::getContentModelMappings(),
 			new \FauxRequest(),
-			CirrusDebugOptions::forDumpingQueriesInUnitTests()
+			CirrusDebugOptions::forDumpingQueriesInUnitTests( false )
 		);
 	}
 
@@ -64,12 +64,11 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 			$params['search'], $params['language'],
 			$params['type'], $limit, $params['strictlanguage']
 		);
-		$decodedQuery = json_decode( $elasticQuery, true );
-		$decodedQuery = $decodedQuery['__main__'] ?? $decodedQuery;
-		unset( $decodedQuery['path'] );
+		$elasticQuery = $elasticQuery['__main__'] ?? $elasticQuery;
+		unset( $elasticQuery['path'] );
 		// serialize_precision set for T205958
 		$this->setIniSetting( 'serialize_precision', 10 );
-		$encodedData = CirrusTestCase::encodeFixture( $decodedQuery );
+		$encodedData = CirrusTestCase::encodeFixture( $elasticQuery );
 		$this->assertFileContains( $expected, $encodedData, CirrusTestCase::canRebuildFixture() );
 	}
 

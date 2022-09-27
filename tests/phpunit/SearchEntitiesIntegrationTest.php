@@ -131,13 +131,11 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 				$limit,
 				$strictLanguage
 			);
-			// comes out as JSON data
-			$resultData = json_decode( $result, true );
 			// Transitional, query dumps will always be wrapped in an array
 
-			$resultData = $resultData['__main__'] ?? $resultData;
+			$result = $result['__main__'] ?? $result;
 			// FIXME: this is very brittle, but I don't know how to make it better.
-			$matchId = $resultData['query']['query']['bool']['should'][1]['term']['title.keyword'];
+			$matchId = $result['query']['query']['bool']['should'][1]['term']['title.keyword'];
 			try {
 				$entityId = $this->idParser->parse( $matchId );
 			} catch ( EntityIdParsingException $ex ) {
@@ -158,7 +156,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 			$this->getMockBuilder( Language::class )->disableOriginalConstructor()->getMock(),
 			[ 'item' => 'wikibase-item' ],
 			new FauxRequest(),
-			CirrusDebugOptions::forDumpingQueriesInUnitTests()
+			CirrusDebugOptions::forDumpingQueriesInUnitTests( false )
 		);
 
 		return $entitySearchElastic;

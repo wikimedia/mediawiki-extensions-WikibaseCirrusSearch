@@ -37,7 +37,7 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 
 		return [
 			'not a StatementListProvider' => [
-				$this->getMockBuilder( EntityDocument::class )->getMock(),
+				$this->createMock( EntityDocument::class ),
 				[]
 			],
 			'entity with no statements' => [
@@ -58,7 +58,7 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getPropertyTypeLookup() {
-		$lookup = $this->getMockBuilder( PropertyDataTypeLookup::class )->getMock();
+		$lookup = $this->createMock( PropertyDataTypeLookup::class );
 
 		$lookup->method( 'getDataTypeIdForProperty' )
 			->willReturn( 'DOES_NOT_MATTER' );
@@ -96,13 +96,13 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 		}
 
 		$field = $this->createStatementQuantityField();
-		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
+		$searchEngine = $this->createMock( CirrusSearch::class );
 		$this->assertIsArray( $field->getMapping( $searchEngine ) );
 	}
 
 	public function testGetMappingNotCirrus() {
 		$field = $this->createStatementQuantityField();
-		$searchEngine = $this->getMockBuilder( \SearchEngine::class )->getMock();
+		$searchEngine = $this->createMock( \SearchEngine::class );
 		$this->assertEmpty( $field->getMapping( $searchEngine ) );
 	}
 

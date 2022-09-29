@@ -83,9 +83,7 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 	 * @return PropertyDataTypeLookup
 	 */
 	private function getPropertyTypeLookup( array $map ) {
-		$lookup = $this->getMockBuilder( PropertyDataTypeLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$lookup = $this->createMock( PropertyDataTypeLookup::class );
 
 		$lookup->method( 'getDataTypeIdForProperty' )
 			->willReturnCallback( static function ( PropertyId $id ) use ( $map ) {
@@ -138,9 +136,7 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 		$statementList->addNewStatement( new PropertyNoValueSnak( 123 ) );
 		$statementList->addNewStatement( new PropertyValueSnak( 123, new BooleanValue( false ) ) );
 
-		$entity = $this->getMockBuilder( StatementListProviderDummy::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$entity = $this->createMock( StatementListProviderDummy::class );
 		$entity->expects( $this->once() )
 			->method( 'getStatements' )
 			->willReturn( $statementList );

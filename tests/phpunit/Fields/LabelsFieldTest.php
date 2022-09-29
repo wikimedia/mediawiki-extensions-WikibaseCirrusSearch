@@ -84,7 +84,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	public function testGetMappingOtherSearchEngine() {
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
 
-		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
+		$searchEngine = $this->createMock( SearchEngine::class );
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 
 		$this->assertSame( [], $labels->getMapping( $searchEngine ) );

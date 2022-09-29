@@ -55,7 +55,7 @@ class AllLabelsFieldTest extends MediaWikiIntegrationTestCase {
 
 		$labels = new AllLabelsField();
 
-		$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
+		$searchEngine = $this->createMock( CirrusSearch::class );
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 		$config = new \CirrusSearch\SearchConfig();
 		$searchEngine->method( 'getConfig' )
@@ -71,7 +71,7 @@ class AllLabelsFieldTest extends MediaWikiIntegrationTestCase {
 	public function testGetMappingOtherSearchEngine() {
 		$labels = new AllLabelsField();
 
-		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
+		$searchEngine = $this->createMock( SearchEngine::class );
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 
 		$this->assertSame( [], $labels->getMapping( $searchEngine ) );

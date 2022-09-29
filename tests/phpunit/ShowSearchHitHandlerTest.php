@@ -259,9 +259,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 * @throws MWException
 	 */
 	private function getSearchPage( $language ) {
-		$searchPage = $this->getMockBuilder( SpecialSearch::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$searchPage = $this->createMock( SpecialSearch::class );
 		$searchPage->method( 'msg' )
 			->willReturnCallback(
 				static function () {
@@ -271,9 +269,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$searchPage->method( 'getLanguage' )
 			->willReturn( Language::factory( $language ) );
 
-		$context = $this->getMockBuilder( ContextSource::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$context = $this->createMock( ContextSource::class );
 		$context->method( 'getLanguage' )
 			->willReturn( Language::factory( $language ) );
 		$context->method( 'getUser' )

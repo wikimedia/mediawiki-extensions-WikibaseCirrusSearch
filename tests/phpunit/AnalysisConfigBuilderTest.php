@@ -21,10 +21,7 @@ class AnalysisConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			'uk' => [ 'index' => false, 'query' => true ],
 			'he' => [ 'index' => false, 'query' => false ],
 		];
-		$upstreamBuilder =
-			$this->getMockBuilder( AnalysisConfigBuilder::class )
-				->disableOriginalConstructor()
-				->getMock();
+		$upstreamBuilder = $this->createMock( AnalysisConfigBuilder::class );
 		// Temporary workaround for the PHPUnit 9 update
 		$equalToCanonicalizing = function ( $val ) {
 			return method_exists( $this, 'equalToCanonicalizing' )

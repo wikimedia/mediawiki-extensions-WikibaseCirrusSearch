@@ -105,9 +105,7 @@ class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 	 * @return EntityNamespaceLookup
 	 */
 	private function getMockEntityNamespaceLookup() {
-		$mockLookup = $this->getMockBuilder( EntityNamespaceLookup::class )
-			->disableOriginalConstructor()
-			->getMock();
+		$mockLookup = $this->createMock( EntityNamespaceLookup::class );
 		$mockLookup->method( 'isEntityNamespace' )->willReturnCallback( static function ( $ns ) {
 			return $ns < 10;
 		} );

@@ -94,7 +94,7 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 	public function testGetMappingOtherSearchEngine() {
 		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ], [] );
 
-		$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
+		$searchEngine = $this->createMock( SearchEngine::class );
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 
 		$this->assertSame( [], $labels->getMapping( $searchEngine ) );

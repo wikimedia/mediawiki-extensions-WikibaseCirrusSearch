@@ -322,9 +322,7 @@ class ElasticTermResultTest extends MediaWikiIntegrationTestCase {
 	}
 
 	private function getMockFallbackChain( array $languages ) {
-		$mock = $this->getMockBuilder( TermLanguageFallbackChain::class )
-				->disableOriginalConstructor()
-				->getMock();
+		$mock = $this->createMock( TermLanguageFallbackChain::class );
 		$mock->method( 'getFetchLanguageCodes' )
 			->willReturn( $languages );
 		$mock->expects( $this->atLeastOnce() )
@@ -351,8 +349,7 @@ class ElasticTermResultTest extends MediaWikiIntegrationTestCase {
 		);
 
 		$result = new Result( $resultData );
-		$resultSet = $this->getMockBuilder( ResultSet::class )
-			->disableOriginalConstructor()->getMock();
+		$resultSet = $this->createMock( ResultSet::class );
 		$resultSet->expects( $this->once() )->method( 'getResults' )->willReturn( [ $result ] );
 
 		$converted = $res->transformElasticsearchResult( $resultSet );

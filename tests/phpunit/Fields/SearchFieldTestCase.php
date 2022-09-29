@@ -21,10 +21,10 @@ class SearchFieldTestCase extends MediaWikiIntegrationTestCase {
 	 */
 	protected function getSearchEngineMock() {
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$searchEngine = $this->getMockBuilder( CirrusSearch::class )->getMock();
+			$searchEngine = $this->createMock( CirrusSearch::class );
 			$searchEngine->method( 'getConfig' )->willReturn( new SearchConfig() );
 		} else {
-			$searchEngine = $this->getMockBuilder( SearchEngine::class )->getMock();
+			$searchEngine = $this->createMock( SearchEngine::class );
 		}
 		return $searchEngine;
 	}

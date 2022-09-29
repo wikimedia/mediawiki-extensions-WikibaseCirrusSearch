@@ -153,7 +153,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		$entitySearchElastic = new EntitySearchElastic(
 			$this->newLanguageFallbackChainFactory(),
 			$this->idParser,
-			$this->getMockBuilder( Language::class )->disableOriginalConstructor()->getMock(),
+			$this->createMock( Language::class ),
 			[ 'item' => 'wikibase-item' ],
 			new FauxRequest(),
 			CirrusDebugOptions::forDumpingQueriesInUnitTests()

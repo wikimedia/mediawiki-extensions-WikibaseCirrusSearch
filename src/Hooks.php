@@ -379,6 +379,11 @@ class Hooks {
 	 * @param array &$results
 	 */
 	public static function onApiOpenSearchSuggest( &$results ) {
+		$wbcsConfig = self::getWBCSConfig();
+		if ( !$wbcsConfig->enabled() ) {
+			return;
+		}
+
 		if ( empty( $results ) ) {
 			return;
 		}

@@ -6,6 +6,10 @@
 			"Janezdrilc"
 		]
 	},
+	"special-entitieswithoutdescription": "Entitete brez opisa",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Pridobi seznam entitet brez opisa",
+	"special-entitieswithoutlabel": "Entitete brez oznake",
+	"wikibasecirrus-entitieswithoutlabel-legend": "Pridobi seznam entitet brez oznake",
 	"wikibasecirrus-entitieswithoutlabel-label-language": "Oznaka jezika:",
 	"wikibasecirrus-entitieswithoutlabel-label-type": "Vrsta:",
 	"wikibasecirrus-entitieswithoutlabel-submit": "Poišči",

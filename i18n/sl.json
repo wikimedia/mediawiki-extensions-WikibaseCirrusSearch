@@ -2,11 +2,16 @@
 	"@metadata": {
 		"authors": [
 			"Dbc334",
-			"Janezdrilc"
+			"Janezdrilc",
+			"Eleassar"
 		]
 	},
-	"wikibasecirrus-entitieswithoutlabel-label-language": "Koda jezika:",
+	"special-entitieswithoutdescription": "Entitete brez opisa",
+	"wikibasecirrus-entitieswithoutdescription-legend": "Pridobi seznam entitet brez opisa",
+	"special-entitieswithoutlabel": "Entitete brez oznake",
+	"wikibasecirrus-entitieswithoutlabel-legend": "Pridobi seznam entitet brez oznake",
+	"wikibasecirrus-entitieswithoutlabel-label-language": "Oznaka jezika:",
 	"wikibasecirrus-entitieswithoutlabel-label-type": "Vrsta:",
 	"wikibasecirrus-entitieswithoutlabel-submit": "Poišči",
-	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" ni veljavna koda jezika."
+	"wikibasecirrus-entitieswithoutlabel-invalid-language": "»$1« ni veljavna oznaka jezika."
 }

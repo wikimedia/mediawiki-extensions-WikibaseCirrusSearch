@@ -25,16 +25,22 @@ class AnalysisConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			$this->getMockBuilder( AnalysisConfigBuilder::class )
 				->disableOriginalConstructor()
 				->getMock();
+		// Temporary workaround for the PHPUnit 9 update
+		$equalToCanonicalizing = function ( $val ) {
+			return method_exists( $this, 'equalToCanonicalizing' )
+				? $this->equalToCanonicalizing( $val )
+				: $this->equalTo( $val, 0, 10, true );
+		};
 		$upstreamBuilder->expects( $this->exactly( 2 ) )
 			->method( 'buildLanguageConfigs' )
 			->withConsecutive(
 				[
 					$this->equalTo( [] ),
-					$this->equalTo( [ 'en', 'ru' ], 0, 1, true ),
+					$equalToCanonicalizing( [ 'en', 'ru' ] ),
 					$this->equalTo( [ 'plain', 'plain_search', 'text', 'text_search' ] )
 				], [
 					$this->equalTo( [] ),
-					$this->equalTo( [ 'uk', 'he', 'zh' ], 0, 1, true ),
+				$equalToCanonicalizing( [ 'uk', 'he', 'zh' ] ),
 					$this->equalTo( [ 'plain', 'plain_search' ] )
 				] )
 			->willReturn( [] );

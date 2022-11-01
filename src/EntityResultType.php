@@ -59,6 +59,16 @@ class EntityResultType extends BaseResultsType {
 	}
 
 	/**
+	 * Get the fields to load.  Most of the time we'll use source filtering instead but
+	 * some fields aren't part of the source.
+	 *
+	 * @return array corresponding to Elasticsearch fields syntax
+	 */
+	public function getFields() {
+		return [];
+	}
+
+	/**
 	 * Get the highlighting configuration.
 	 *
 	 * @param array $highlightSource configuration for how to highlight the source.

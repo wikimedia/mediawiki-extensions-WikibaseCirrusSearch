@@ -54,16 +54,6 @@ class EntityResultType extends BaseResultsType {
 	 *
 	 * @return array corresponding to Elasticsearch fields syntax
 	 */
-	public function getStoredFields() {
-		return [];
-	}
-
-	/**
-	 * Get the fields to load.  Most of the time we'll use source filtering instead but
-	 * some fields aren't part of the source.
-	 *
-	 * @return array corresponding to Elasticsearch fields syntax
-	 */
 	public function getFields() {
 		return [];
 	}

@@ -81,7 +81,7 @@
             "labels.en",
             "descriptions.en"
         ],
-        "stored_fields": [],
+        "fields": [],
         "highlight": {
             "pre_tags": [
                 ""

@@ -80,7 +80,7 @@ class LabelsField extends TermIndexField {
 	 */
 	public function getFieldData( EntityDocument $entity ) {
 		if ( !( $entity instanceof LabelsProvider ) ) {
-			return [];
+			return null;
 		}
 		$data = [];
 		foreach ( $entity->getLabels() as $language => $label ) {
@@ -95,7 +95,10 @@ class LabelsField extends TermIndexField {
 				$data[$language] = array_merge( $data[$language], $aliases->getAliases() );
 			}
 		}
-		return $data;
+		// Shouldn't return empty arrays, that will be encoded to json as an
+		// empty list instead of an empty map. Elastic doesn't mind, but this
+		// allows more consistency working with the resulting cirrus docs
+		return $data ?: null;
 	}
 
 	/**

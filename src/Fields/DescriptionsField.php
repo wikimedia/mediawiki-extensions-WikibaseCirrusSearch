@@ -77,17 +77,20 @@ class DescriptionsField extends TermIndexField {
 	/**
 	 * @param EntityDocument $entity
 	 *
-	 * @return string[] Array of descriptions in available languages.
+	 * @return string[]|null Array of descriptions in available languages.
 	 */
 	public function getFieldData( EntityDocument $entity ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
-			return [];
+			return null;
 		}
 		$data = [];
 		foreach ( $entity->getDescriptions() as $language => $desc ) {
 			$data[$language] = $desc->getText();
 		}
-		return $data;
+		// Shouldn't return empty arrays, that will be encoded to json as an
+		// empty list instead of an empty map. Elastic doesn't mind, but this
+		// allows more consistency working with the resulting cirrus docs
+		return $data ?: null;
 	}
 
 	/**

@@ -34,7 +34,7 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 		$mock = $this->createMock( EntityDocument::class );
 
 		return [
-			[
+			'item descriptions' => [
 				[
 					'es' => 'Gato',
 					'ru' => 'Кошка',
@@ -43,23 +43,31 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 				],
 				$item
 			],
-			[
+			'empty item' => [
+				null,
+				new Item()
+			],
+			'property descriptions' => [
 				[
 					'en' => 'astrological sign',
 					'ru' => 'знак зодиака',
 				],
 				$prop
 			],
-			[ [], $mock ]
+			'empty property' => [
+				null,
+				Property::newFromType( 'string' )
+			],
+			'plain entity document' => [ null, $mock ],
 		];
 	}
 
 	/**
 	 * @dataProvider  getFieldDataProvider
 	 */
-	public function testDescriptions( array $expected, EntityDocument $entity ) {
+	public function testDescriptions( ?array $expected, EntityDocument $entity ) {
 		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ], [] );
-		$this->assertEquals( $expected, $labels->getFieldData( $entity ) );
+		$this->assertSame( $expected, $labels->getFieldData( $entity ) );
 	}
 
 	public function testGetMapping() {

@@ -36,10 +36,10 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 		return [
 			'item descriptions' => [
 				[
-					'es' => 'Gato',
-					'ru' => 'Кошка',
-					'de' => 'Katze',
-					'fr' => 'Chat'
+					'es' => [ 'Gato' ],
+					'ru' => [ 'Кошка' ],
+					'de' => [ 'Katze' ],
+					'fr' => [ 'Chat' ],
 				],
 				$item
 			],
@@ -49,8 +49,8 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 			],
 			'property descriptions' => [
 				[
-					'en' => 'astrological sign',
-					'ru' => 'знак зодиака',
+					'en' => [ 'astrological sign' ],
+					'ru' => [ 'знак зодиака' ],
 				],
 				$prop
 			],

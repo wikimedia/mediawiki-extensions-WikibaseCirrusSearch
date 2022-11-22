@@ -77,7 +77,7 @@ class DescriptionsField extends TermIndexField {
 	/**
 	 * @param EntityDocument $entity
 	 *
-	 * @return string[]|null Array of descriptions in available languages.
+	 * @return array|null Array of descriptions in available languages.
 	 */
 	public function getFieldData( EntityDocument $entity ) {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
@@ -85,7 +85,10 @@ class DescriptionsField extends TermIndexField {
 		}
 		$data = [];
 		foreach ( $entity->getDescriptions() as $language => $desc ) {
-			$data[$language] = $desc->getText();
+			// While wikibase can only have a single description,
+			// WikibaseMediaInfo reports an array of descriptions. To keep the
+			// constructed search docs consistent report an array here as well.
+			$data[$language] = [ $desc->getText() ];
 		}
 		// Shouldn't return empty arrays, that will be encoded to json as an
 		// empty list instead of an empty map. Elastic doesn't mind, but this

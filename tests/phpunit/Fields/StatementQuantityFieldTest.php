@@ -103,7 +103,7 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 	public function testGetMappingNotCirrus() {
 		$field = $this->createStatementQuantityField();
 		$searchEngine = $this->createMock( \SearchEngine::class );
-		$this->assertEmpty( $field->getMapping( $searchEngine ) );
+		$this->assertSame( [], $field->getMapping( $searchEngine ) );
 	}
 
 }

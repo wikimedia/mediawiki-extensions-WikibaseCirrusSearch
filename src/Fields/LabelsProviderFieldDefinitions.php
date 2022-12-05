@@ -19,10 +19,17 @@ class LabelsProviderFieldDefinitions implements FieldDefinitions {
 	private $languageCodes;
 
 	/**
-	 * @param string[] $languageCodes
+	 * @var array
 	 */
-	public function __construct( array $languageCodes ) {
+	private $stemmingSettings;
+
+	/**
+	 * @param string[] $languageCodes
+	 * @param array $stemmingSettings
+	 */
+	public function __construct( array $languageCodes, array $stemmingSettings = [] ) {
 		$this->languageCodes = $languageCodes;
+		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	/**
@@ -31,7 +38,7 @@ class LabelsProviderFieldDefinitions implements FieldDefinitions {
 	public function getFields() {
 		return [
 			LabelCountField::NAME => new LabelCountField(),
-			LabelsField::NAME => new LabelsField( $this->languageCodes ),
+			LabelsField::NAME => new LabelsField( $this->languageCodes, $this->stemmingSettings ),
 			AllLabelsField::NAME => new AllLabelsField(),
 		];
 	}

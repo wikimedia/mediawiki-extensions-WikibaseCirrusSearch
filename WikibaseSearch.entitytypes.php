@@ -49,7 +49,7 @@ return [
 		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 			return new ItemFieldDefinitions( [
-				new LabelsProviderFieldDefinitions( $languageCodes ),
+				new LabelsProviderFieldDefinitions( $languageCodes, $config->get( 'UseStemming' ) ),
 				new DescriptionsProviderFieldDefinitions( $languageCodes, $config->get( 'UseStemming' ) ),
 				StatementProviderFieldDefinitions::newFromSettings(
 					new InProcessCachingDataTypeLookup( WikibaseRepo::getPropertyDataTypeLookup() ),
@@ -65,7 +65,7 @@ return [
 			$services = MediaWikiServices::getInstance();
 			$config = $services->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
 			return new PropertyFieldDefinitions( [
-				new LabelsProviderFieldDefinitions( $languageCodes ),
+				new LabelsProviderFieldDefinitions( $languageCodes, $config->get( 'UseStemming' ) ),
 				new DescriptionsProviderFieldDefinitions( $languageCodes, $config->get( 'UseStemming' ) ),
 				StatementProviderFieldDefinitions::newFromSettings(
 					new InProcessCachingDataTypeLookup(

@@ -71,7 +71,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	 * @dataProvider  getFieldDataProvider
 	 */
 	public function testLabels( ?array $expected, EntityDocument $entity ) {
-		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$this->assertSame( $expected, $labels->getFieldData( $entity ) );
 	}
 
@@ -79,7 +79,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch needed.' );
 		}
-		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$searchEngine = $this->getSearchEngineMock();
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
 
@@ -90,7 +90,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	}
 
 	public function testGetMappingOtherSearchEngine() {
-		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ], [] );
 
 		$searchEngine = $this->createMock( SearchEngine::class );
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );
@@ -99,7 +99,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	}
 
 	public function testHints() {
-		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ] );
+		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$searchEngine = $this->getSearchEngineMock();
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->assertEquals( [], $labels->getEngineHints( $searchEngine ) );

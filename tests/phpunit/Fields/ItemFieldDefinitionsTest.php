@@ -51,7 +51,7 @@ class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 	private function newLabelsProviderFieldDefinitions( array $languageCodes ) {
 		return new LabelsProviderFieldDefinitions(
-			$languageCodes
+			$languageCodes, []
 		);
 	}
 

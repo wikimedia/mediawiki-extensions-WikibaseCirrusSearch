@@ -65,7 +65,7 @@ class AllLabelsFieldTest extends MediaWikiIntegrationTestCase {
 		$this->assertArrayHasKey( 'fields', $mapping );
 		$this->assertCount( 3, $mapping['fields'] );
 		$this->assertEquals( 'text', $mapping['type'] );
-		$this->assertEquals( 'false', $mapping['index'] );
+		$this->assertFalse( $mapping['index'] );
 	}
 
 	public function testGetMappingOtherSearchEngine() {

@@ -25,7 +25,7 @@ class LabelsProviderFieldDefinitionsTest extends SearchFieldTestCase {
 	public function testGetFields() {
 		$languageCodes = [ 'ar', 'es' ];
 		$fieldDefinitions = new LabelsProviderFieldDefinitions(
-			$languageCodes
+			$languageCodes, []
 		);
 
 		$fields = $fieldDefinitions->getFields();

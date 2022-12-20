@@ -318,6 +318,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$linkCount,
 		$expected
 	) {
+		$this->markTestSkipped( 'T291608' );
 		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
 			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
 		}

@@ -55,7 +55,7 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testSearchElastic( $params, $expected ) {
 		$this->setMwGlobals( [ 'wgEntitySearchUseCirrus' => true ] );
-		$search = $this->newEntitySearch( Language::factory( $params['userLang'] ) );
+		$search = $this->newEntitySearch( $this->getServiceContainer()->getLanguageFactory()->getLanguage( $params['userLang'] ) );
 		$limit = 10;
 		if ( isset( $params['limit'] ) ) {
 			$limit = $params['limit'];

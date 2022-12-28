@@ -108,8 +108,8 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 			'wgCirrusSearchQueryStringMaxDeterminizedStates' => 500,
 			'wgCirrusSearchElasticQuirks' => [],
 			'wgCirrusSearchFullTextQueryBuilderProfile' => 'default',
-			'wgLang' => \Language::factory( $params['userLang'] ),
 		] );
+		$this->setUserLang( $params['userLang'] );
 
 		$config = new SearchConfig();
 		$cirrus = new CirrusSearch( $config, CirrusDebugOptions::forDumpingQueriesInUnitTests() );

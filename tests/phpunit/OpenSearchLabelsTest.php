@@ -86,7 +86,7 @@ class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider getOpenSearchData
 	 */
 	public function testOpenSearch( $language, $results, $labels, $expected ) {
-		$lang = Language::factory( $language );
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $language );
 
 		$this->mockWikibaseRepoServices( $lang, $labels );
 		Hooks::amendSearchResults( $lang, $results );

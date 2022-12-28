@@ -5,7 +5,6 @@ namespace Wikibase\Search\Elastic\Tests;
 use ContextSource;
 use ExtensionRegistry;
 use HtmlArmor;
-use Language;
 use MediaWikiIntegrationTestCase;
 use MWException;
 use RawMessage;
@@ -266,12 +265,13 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 					return new RawMessage( implode( ",", func_get_args() ) );
 				}
 			);
+		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $language );
 		$searchPage->method( 'getLanguage' )
-			->willReturn( Language::factory( $language ) );
+			->willReturn( $lang );
 
 		$context = $this->createMock( ContextSource::class );
 		$context->method( 'getLanguage' )
-			->willReturn( Language::factory( $language ) );
+			->willReturn( $lang );
 		$context->method( 'getUser' )
 			->willReturn( MediaWikiIntegrationTestCase::getTestUser()->getUser() );
 
@@ -406,7 +406,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		return new CirrusShowSearchHitHandler(
 			$this->getEntityIdLookup(),
 			WikibaseRepo::getEntityLinkFormatterFactory()
-				->getDefaultLinkFormatter( Language::factory( 'en' ) )
+				->getDefaultLinkFormatter( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) )
 		);
 	}
 

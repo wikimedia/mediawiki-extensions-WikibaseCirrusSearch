@@ -4,7 +4,6 @@ namespace Wikibase\Search\Elastic\Tests;
 
 use FauxRequest;
 use SpecialPageTestBase;
-use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\WikibaseRepo;
@@ -31,7 +30,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			'wikibasecirrus-entitieswithoutlabel-legend',
 			[ 'item', 'property' ],
 			new StaticContentLanguages( [ 'acceptedlanguage' ] ),
-			new LanguageNameLookup(),
+			WikibaseRepo::getLanguageNameLookupFactory()->getForAutonyms(),
 			WikibaseRepo::getEntityNamespaceLookup()
 		);
 	}

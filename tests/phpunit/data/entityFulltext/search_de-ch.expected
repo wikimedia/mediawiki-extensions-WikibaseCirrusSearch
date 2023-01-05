@@ -195,6 +195,14 @@
                                                     },
                                                     {
                                                         "match": {
+                                                            "descriptions.en.plain": {
+                                                                "query": "Wien",
+                                                                "boost": 0.0003
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
                                                             "descriptions.en": {
                                                                 "query": "Wien",
                                                                 "boost": 0.0003
@@ -203,7 +211,7 @@
                                                     },
                                                     {
                                                         "match": {
-                                                            "descriptions.en.plain": {
+                                                            "labels.en": {
                                                                 "query": "Wien",
                                                                 "boost": 0.0003
                                                             }

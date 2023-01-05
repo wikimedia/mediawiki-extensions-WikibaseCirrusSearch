@@ -503,6 +503,14 @@
                                                     },
                                                     {
                                                         "match": {
+                                                            "descriptions.en.plain": {
+                                                                "query": "\u7236\u985e",
+                                                                "boost": 3.0e-11
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
                                                             "descriptions.en": {
                                                                 "query": "\u7236\u985e",
                                                                 "boost": 3.0e-11
@@ -511,7 +519,7 @@
                                                     },
                                                     {
                                                         "match": {
-                                                            "descriptions.en.plain": {
+                                                            "labels.en": {
                                                                 "query": "\u7236\u985e",
                                                                 "boost": 3.0e-11
                                                             }

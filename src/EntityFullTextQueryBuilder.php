@@ -143,17 +143,13 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			[ "labels.{$this->userLanguage}.near_match_folded", $profile['lang-folded'] ],
 		];
 
-		if ( empty( $this->stemmingSettings[$this->userLanguage]['query'] ) ) {
-			$fieldsTokenized = [
-				[ "labels.{$this->userLanguage}.plain", $profile['lang-partial'] ],
-				[ "descriptions.{$this->userLanguage}.plain", $profile['lang-partial'] ],
-			];
-		} else {
-			$fieldsTokenized = [
-				[ "descriptions.{$this->userLanguage}", $profile['lang-partial'] ],
-				[ "labels.{$this->userLanguage}.plain", $profile['lang-partial'] ],
-				[ "descriptions.{$this->userLanguage}.plain", $profile['lang-partial'] ],
-			];
+		$fieldsTokenized = [
+			[ "labels.{$this->userLanguage}.plain", $profile['lang-partial'] ],
+			[ "descriptions.{$this->userLanguage}.plain", $profile['lang-partial'] ],
+		];
+		if ( !empty( $this->stemmingSettings[$this->userLanguage]['query'] ) ) {
+			$fieldsTokenized[] = [ "labels.{$this->userLanguage}", $profile['lang-partial'] ];
+			$fieldsTokenized[] = [ "descriptions.{$this->userLanguage}", $profile['lang-partial'] ];
 		}
 
 		$searchLanguageCodes = $this->languageFallbackChainFactory->newFromLanguageCode( $this->userLanguage )
@@ -181,11 +177,10 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 
 			$weight = $profile['fallback-partial'] * $discount;
 			$fieldsTokenized[] = [ "labels.{$fallbackCode}.plain", $weight ];
-			if ( empty( $this->stemmingSettings[$fallbackCode]['query'] ) ) {
-				$fieldsTokenized[] = [ "descriptions.{$fallbackCode}.plain", $weight ];
-			} else {
+			$fieldsTokenized[] = [ "descriptions.{$fallbackCode}.plain", $weight ];
+			if ( !empty( $this->stemmingSettings[$fallbackCode]['query'] ) ) {
 				$fieldsTokenized[] = [ "descriptions.{$fallbackCode}", $weight ];
-				$fieldsTokenized[] = [ "descriptions.{$fallbackCode}.plain", $weight ];
+				$fieldsTokenized[] = [ "labels.{$fallbackCode}", $weight ];
 			}
 
 			$discount *= $profile['fallback-discount'];

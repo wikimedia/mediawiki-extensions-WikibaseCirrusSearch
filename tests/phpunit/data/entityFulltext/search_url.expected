@@ -99,14 +99,6 @@
                                                 "queries": [
                                                     {
                                                         "match": {
-                                                            "descriptions.en": {
-                                                                "query": "https:\/\/www.wikidata.org\/wiki\/Q56",
-                                                                "boost": 0.07
-                                                            }
-                                                        }
-                                                    },
-                                                    {
-                                                        "match": {
                                                             "labels.en.plain": {
                                                                 "query": "https:\/\/www.wikidata.org\/wiki\/Q56",
                                                                 "boost": 0.07
@@ -116,6 +108,22 @@
                                                     {
                                                         "match": {
                                                             "descriptions.en.plain": {
+                                                                "query": "https:\/\/www.wikidata.org\/wiki\/Q56",
+                                                                "boost": 0.07
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "labels.en": {
+                                                                "query": "https:\/\/www.wikidata.org\/wiki\/Q56",
+                                                                "boost": 0.07
+                                                            }
+                                                        }
+                                                    },
+                                                    {
+                                                        "match": {
+                                                            "descriptions.en": {
                                                                 "query": "https:\/\/www.wikidata.org\/wiki\/Q56",
                                                                 "boost": 0.07
                                                             }

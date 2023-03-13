@@ -163,6 +163,9 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 				$stemFilterFields[] = "descriptions.{$fallbackCode}.plain";
 			} else {
 				$stemFilterFields[] = "descriptions.{$fallbackCode}";
+				// only add the stemmed version in the filter
+				// labels should be copied to the text field and thus be captured by the filter on the all field
+				$stemFilterFields[] = "labels.{$fallbackCode}";
 			}
 
 			if ( $fallbackCode === $this->userLanguage ) {

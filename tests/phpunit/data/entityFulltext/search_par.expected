@@ -38,6 +38,14 @@
                                                     "operator": "AND"
                                                 }
                                             }
+                                        },
+                                        {
+                                            "match": {
+                                                "labels.en": {
+                                                    "query": "(p128)",
+                                                    "operator": "AND"
+                                                }
+                                            }
                                         }
                                     ]
                                 }

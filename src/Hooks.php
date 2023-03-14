@@ -134,7 +134,14 @@ class Hooks {
 
 		$namespacesForContexts = [];
 		$entityNsLookup = WikibaseRepo::getEntityNamespaceLookup();
+		$localEntityTypes = WikibaseRepo::getLocalEntityTypes();
 		foreach ( WikibaseRepo::getFulltextSearchTypes() as $type => $profileContext ) {
+			if ( !in_array( $type, $localEntityTypes ) ) {
+				// Do not enable profiles for entity types that are not local
+				// e.g. when using MediaInfo items and properties are not managed by this wiki
+				// and thus should not enable specific profiles for them.
+				continue;
+			}
 			$namespace = $entityNsLookup->getEntityNamespace( $type );
 			if ( $namespace === null ) {
 				continue;

@@ -54,8 +54,10 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		// Test as if the default federation type was entity source based.
 		$settings = $wgWBRepoSettings;
 		$settings['useEntitySourceBasedFederation'] = true;
-		$this->setMwGlobals( 'wgWBRepoSettings', $settings );
-		$this->setMwGlobals( 'wgWBCSUseCirrus', true );
+		$this->setMwGlobals( [
+			'wgWBRepoSettings' => $settings,
+			'wgWBCSUseCirrus' => true,
+		] );
 		$this->idParser = new BasicEntityIdParser();
 	}
 

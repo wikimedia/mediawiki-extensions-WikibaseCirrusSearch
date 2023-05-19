@@ -2,7 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use FauxRequest;
+use MediaWiki\Request\FauxRequest;
 use SpecialPageTestBase;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\TermIndexEntry;

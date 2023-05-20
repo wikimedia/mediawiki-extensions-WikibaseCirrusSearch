@@ -23,7 +23,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function applyProvider() {
+	public static function applyProvider() {
 		return [
 			'all languages' => [
 				'expected' => [
@@ -276,7 +276,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function noResultsProvider() {
+	public static function noResultsProvider() {
 		return [
 			'unknown language' => [
 				'term' => 'haslabel:unk',
@@ -295,7 +295,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 			new HasDataForLangFeature( [ 'test' ] ), $term, $expectedWarnings );
 	}
 
-	public function applyNoDataProvider() {
+	public static function applyNoDataProvider() {
 		return [
 			'only keyword provided' => [
 				'hasdescription:',

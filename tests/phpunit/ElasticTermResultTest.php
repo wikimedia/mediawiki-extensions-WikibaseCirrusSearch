@@ -20,7 +20,7 @@ use Wikibase\Search\Elastic\ElasticTermResult;
 class ElasticTermResultTest extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
-	public function termResultsProvider() {
+	public static function termResultsProvider() {
 		return [
 			'simple' => [
 				[ 'en' ],

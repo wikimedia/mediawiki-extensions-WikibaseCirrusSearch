@@ -42,7 +42,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function applyProvider() {
+	public static function applyProvider() {
 		return [
 			'invalid' => [
 				'expected' => null,
@@ -250,7 +250,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function applyNoDataProvider() {
+	public static function applyNoDataProvider() {
 		return [
 			'empty data' => [
 				'haslicense:',

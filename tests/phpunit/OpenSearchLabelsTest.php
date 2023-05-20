@@ -19,7 +19,7 @@ use Wikibase\Search\Elastic\Hooks;
  */
 class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 
-	public function getOpenSearchData() {
+	public static function getOpenSearchDataProvider() {
 		return [
 			"one result" => [
 				'en',
@@ -83,7 +83,7 @@ class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 	 * @param array $results
 	 * @param string[] $labels Labels existing in the system, ID => label
 	 * @param string[] $expected Expected terms
-	 * @dataProvider getOpenSearchData
+	 * @dataProvider getOpenSearchDataProvider
 	 */
 	public function testOpenSearch( $language, $results, $labels, $expected ) {
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $language );

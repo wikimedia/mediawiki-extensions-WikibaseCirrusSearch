@@ -26,7 +26,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function applyProvider() {
+	public static function applyProvider() {
 		return [
 			'single statement entity' => [
 				'expected' => [ 'bool' => [
@@ -160,7 +160,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function applyNoDataProvider() {
+	public static function applyNoDataProvider() {
 		return [
 			'empty data' => [
 				'haswbstatement:',
@@ -199,7 +199,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 		$kwAssertions->assertParsedValue( $feature, "haswbstatement:\"$value\"", $expected, $expectedWarnings );
 	}
 
-	public function parseProvider() {
+	public static function parseProvider() {
 		return [
 			'empty value' => [
 				'value' => '',

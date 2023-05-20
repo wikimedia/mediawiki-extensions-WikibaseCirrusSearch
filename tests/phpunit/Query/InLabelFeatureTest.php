@@ -25,7 +25,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function applyProvider() {
+	public static function applyProvider() {
 		return [
 			'simplest usage' => [
 				'expected' => [
@@ -218,7 +218,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function noResultsProvider() {
+	public static function noResultsProvider() {
 		return [
 			'all invalid languages prevents results' => [
 				'term' => 'inlabel:foo@unk',
@@ -302,7 +302,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 		return new InLabelFeature( $factory, $validLanguages );
 	}
 
-	public function applyNoDataProvider() {
+	public static function applyNoDataProvider() {
 		return [
 			'empty data' => [
 				'inlabel:',

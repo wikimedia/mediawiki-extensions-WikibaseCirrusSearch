@@ -42,7 +42,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 * - name + description + extra data in different language
 	 */
 
-	public function showSearchHitProvider() {
+	public static function showSearchHitProvider() {
 		return [
 			'label hit' => [
 				// label

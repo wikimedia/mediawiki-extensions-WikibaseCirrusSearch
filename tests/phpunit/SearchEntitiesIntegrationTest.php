@@ -61,7 +61,7 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		$this->idParser = new BasicEntityIdParser();
 	}
 
-	public function provideQueriesForEntityIds() {
+	public static function provideQueriesForEntityIds() {
 		return [
 			'Exact item ID' => [
 				'Q1',

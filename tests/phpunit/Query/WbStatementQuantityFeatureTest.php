@@ -23,7 +23,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 		}
 	}
 
-	public function applyProvider() {
+	public static function applyProvider() {
 		return [
 			'single statement with equals' => [
 				'expected' => [
@@ -118,7 +118,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 		$kwAssertions->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
 	}
 
-	public function applyNoDataProvider() {
+	public static function applyNoDataProvider() {
 		return [
 			'empty data' => [
 				'wbstatementquantity:',
@@ -164,7 +164,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 		$kwAssertions->assertParsedValue( $feature, "wbstatementquantity:\"$value\"", $expected, $expectedWarnings );
 	}
 
-	public function parseProvider() {
+	public static function parseProvider() {
 		return [
 			'empty value' => [
 				'value' => '',

@@ -310,9 +310,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			// fallback
 			new MatchNone(),
 			// field
-			null,
-			// analyzer
-			'text_search'
+			"text"
 		);
 		$tokCount->addCondition(
 			TokenCountRouter::GT,

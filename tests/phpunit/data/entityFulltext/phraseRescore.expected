@@ -4,7 +4,7 @@
         "fallback": {
             "match_none": {}
         },
-        "analyzer": "text_search",
+        "field": "text",
         "conditions": [
             {
                 "gt": 1,

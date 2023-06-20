@@ -70,7 +70,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * Create fulltext builder from global environment.
 	 * @param array $settings Configuration from config file
 	 * @return EntityFullTextQueryBuilder
-	 * @throws \MWException
 	 */
 	public static function newFromGlobals( array $settings ) {
 		$services = MediaWikiServices::getInstance();
@@ -89,7 +88,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 *
 	 * @param SearchContext $searchContext
 	 * @param string $term term to search
-	 * @throws \MWException
 	 */
 	public function build( SearchContext $searchContext, $term ) {
 		$this->buildEntitySearchQuery( $searchContext, $term );

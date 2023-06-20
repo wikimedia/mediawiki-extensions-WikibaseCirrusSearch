@@ -3,10 +3,10 @@
 namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
-use MWException;
 use SearchEngine;
 use SearchIndexField;
 use SearchIndexFieldDefinition;
+use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
@@ -111,7 +111,6 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	/**
 	 * @param EntityDocument $entity
 	 *
-	 * @throws MWException
 	 * @return mixed Get the value of the field to be indexed when a page/document
 	 *               is indexed. This might be an array with nested data, if the field
 	 *               is defined with nested type or an int or string for simple field types.
@@ -151,7 +150,6 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 *
 	 * @param Snak $snak
 	 * @return array|null
-	 * @throws MWException
 	 */
 	protected function getSnakAsPropertyIdAndValue( Snak $snak ) {
 		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
@@ -173,7 +171,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		$value = $formatter( $dataValue );
 
 		if ( !is_string( $value ) ) {
-			throw new MWException( 'Search index data formatter callback for "' . $definitionKey
+			throw new UnexpectedValueException( 'Search index data formatter callback for "' . $definitionKey
 								   . '" didn\'t return a string' );
 		}
 		if ( $value === '' ) {
@@ -204,7 +202,6 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @param Snak $snak
 	 * @param string $guid Statement GUID to which this snak belongs
 	 * @return null|string
-	 * @throws MWException
 	 */
 	protected function getWhitelistedSnakAsString( Snak $snak, $guid ) {
 		if ( !( $this->snakHasKnownValue( $snak ) ) ) {

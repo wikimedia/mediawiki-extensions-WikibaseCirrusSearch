@@ -34,7 +34,7 @@ return [
 							WikibaseRepo::getTermLookup(),
 							$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
 						),
-						WikibaseRepo::getEntityTypeToRepositoryMapping()
+						WikibaseRepo::getEnabledEntityTypes()
 					),
 					new EntitySearchElastic(
 						$languageFallbackChainFactory,
@@ -90,7 +90,7 @@ return [
 								WikibaseRepo::getTermLookup(),
 								$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
 							),
-							WikibaseRepo::getEntityTypeToRepositoryMapping()
+							WikibaseRepo::getEnabledEntityTypes()
 						),
 						new EntitySearchElastic(
 							$languageFallbackChainFactory,

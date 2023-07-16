@@ -270,8 +270,6 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$context = $this->createMock( ContextSource::class );
 		$context->method( 'getLanguage' )
 			->willReturn( $lang );
-		$context->method( 'getUser' )
-			->willReturn( MediaWikiIntegrationTestCase::getTestUser()->getUser() );
 
 		$searchPage->method( 'getContext' )->willReturn( $context );
 

@@ -3,8 +3,8 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use Language;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Term\TermFallback;

@@ -3,7 +3,7 @@
 namespace Wikibase\Search\Elastic;
 
 use HTMLForm;
-use Title;
+use MediaWiki\Title\Title;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\LanguageNameLookup;
 use Wikibase\Lib\Store\EntityNamespaceLookup;

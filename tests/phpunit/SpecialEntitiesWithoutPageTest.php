@@ -3,6 +3,7 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Request\FauxResponse;
 use SpecialPageTestBase;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\TermIndexEntry;
@@ -107,7 +108,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	public function testValidLanguage() {
 		$request = new FauxRequest( [ 'type' => 'item' ] );
 
-		/** @var \FauxResponse $response */
+		/** @var FauxResponse $response */
 		list( , $response ) = $this->executeSpecialPage( 'acceptedlanguage', $request, 'qqx' );
 		$target = $response->getHeader( 'Location' );
 

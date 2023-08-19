@@ -10,6 +10,7 @@ use Elastica\Query\DisMax;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Language;
+use MediaWiki\Request\FauxRequest;
 use WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -120,7 +121,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$this->idParser = $idParser;
 		$this->userLang = $userLang;
 		$this->contentModelMap = $contentModelMap;
-		$this->request = $request ?: new \FauxRequest();
+		$this->request = $request ?: new FauxRequest();
 		$this->debugOptions = $options ?: CirrusDebugOptions::fromRequest( $this->request );
 	}
 

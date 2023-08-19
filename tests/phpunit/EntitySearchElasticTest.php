@@ -5,6 +5,7 @@ namespace Wikibase\Search\Elastic\Tests;
 use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\CirrusTestCase;
 use Language;
+use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Repo\WikibaseRepo;
@@ -31,7 +32,7 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 			new BasicEntityIdParser(),
 			$userLang,
 			WikibaseRepo::getContentModelMappings(),
-			new \FauxRequest(),
+			new FauxRequest(),
 			CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);
 	}

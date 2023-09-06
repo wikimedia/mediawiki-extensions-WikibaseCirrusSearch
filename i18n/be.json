@@ -6,7 +6,8 @@
 			"Чаховіч Уладзіслаў",
 			"Chadyka",
 			"No Sleep till Krupki",
-			"Plaga med"
+			"Plaga med",
+			"ZlyiLev"
 		]
 	},
 	"wikibasecirrus-desc": "Пашырэнне Wikibase для выкарыстання функцыянальнасцяў CirrusSearch",
@@ -19,7 +20,7 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Профіль пераацэнкі для паўнатэкставага пошуку з ацэнкай фразаў",
 	"wikibasecirrus-search-bad-entity-type": "Благі тып сутнасці: $1",
 	"wikibasecirrus-search-bad-profile-name": "Благая назва профілю пошуку: $1",
-	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "ключавое слова haswbstatement не ўтрымлівае слушных сцверджанняў",
+	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "ключавое слова haswbstatement не змяшчае слушных сцверджанняў",
 	"wikibasecirrus-haslicense-feature-no-valid-arguments": "Ключавое слова haslicense не змяшчае слушных аргументаў",
 	"wikibasecirrus-wbstatementquantity-feature-no-valid-statements": "Ключавое слова wbstatementquantity не змяшчае слушных сцверджанняў",
 	"special-entitieswithoutdescription": "Сутнасці без апісання",

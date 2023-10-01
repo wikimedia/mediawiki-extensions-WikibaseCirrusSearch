@@ -283,7 +283,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$redirect = $section = $score = $size = $date = $related = $html = '';
 		$searchResult = $this->createMock( SearchResult::class );
 		$searchResult->method( 'getTitle' )->willReturn( Title::newFromText( 'Test', NS_TALK ) );
-		CirrusShowSearchHitHandler::onShowSearchHit(
+		CirrusShowSearchHitHandler::newFromGlobalState( $searchPage->getContext() )->onShowSearchHit(
 			$searchPage,
 			$searchResult,
 			[],
@@ -340,9 +340,9 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$title = "TITLE";
 		$attributes = [ 'previous' => 'attrib' ];
 
-		$handler = TestingAccessWrapper::newFromObject( $this->getShowSearchHitHandler( [ 'en' ], [] ) );
+		$handler = $this->getShowSearchHitHandler( [ 'en' ], [] );
 
-		$handler->__call(
+		TestingAccessWrapper::newFromObject( $handler )->__call(
 			'getEntityLink', [
 				$searchResult,
 				Title::newFromText( 'Q1' ),
@@ -352,7 +352,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 			]
 		);
 
-		CirrusShowSearchHitHandler::onShowSearchHit(
+		$handler->onShowSearchHit(
 			$searchPage,
 			$searchResult,
 			[],

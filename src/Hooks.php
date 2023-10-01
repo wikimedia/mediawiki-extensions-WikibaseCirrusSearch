@@ -1,5 +1,7 @@
 <?php
 
+// phpcs:disable MediaWiki.NamingConventions.LowerCamelFunctionsName.FunctionName
+
 namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
@@ -8,7 +10,10 @@ use CirrusSearch\Profile\ArrayProfileRepository;
 use CirrusSearch\Profile\SearchProfileRepositoryTransformer;
 use CirrusSearch\Profile\SearchProfileService;
 use Language;
+use MediaWiki\Api\Hook\ApiOpenSearchSuggestHook;
+use MediaWiki\Hook\SetupAfterCacheHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\SpecialPage\Hook\SpecialPage_initListHook;
 use RequestContext;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\WikibaseRepo;
@@ -23,14 +28,18 @@ use Wikimedia\Assert\Assert;
 /**
  * Hooks for Wikibase search.
  */
-class Hooks {
+class Hooks implements
+	SetupAfterCacheHook,
+	SpecialPage_initListHook,
+	ApiOpenSearchSuggestHook
+{
 	private const LANGUAGE_SELECTOR_PREFIX = "language_selector_prefix";
 
 	/**
 	 * Setup hook.
 	 * Enables/disables CirrusSearch depending on request settings.
 	 */
-	public static function onSetupAfterCache() {
+	public function onSetupAfterCache() {
 		$request = RequestContext::getMain()->getRequest();
 		$useCirrus = $request->getVal( 'useCirrus' );
 		if ( $useCirrus !== null ) {
@@ -385,7 +394,7 @@ class Hooks {
 	 * Will instantiate descriptions for search results.
 	 * @param array &$results
 	 */
-	public static function onApiOpenSearchSuggest( &$results ) {
+	public function onApiOpenSearchSuggest( &$results ) {
 		$wbcsConfig = self::getWBCSConfig();
 		if ( !$wbcsConfig->enabled() ) {
 			return;
@@ -403,7 +412,7 @@ class Hooks {
 	 *
 	 * @param array &$list
 	 */
-	public static function onSpecialPageInitList( &$list ) {
+	public function onSpecialPage_initList( &$list ) {
 		$list['EntitiesWithoutLabel'] = [
 			SpecialEntitiesWithoutPageFactory::class,
 			'newSpecialEntitiesWithoutLabel'

@@ -90,9 +90,7 @@
 		"WikibaseCirrusSearch": "Wikibase\\Search\\Elastic\\WikibaseSearchConfig::newFromGlobals"
 	},
 	"Hooks": {
-		"SetupAfterCache": [
-			"Wikibase\\Search\\Elastic\\Hooks::onSetupAfterCache"
-		],
+		"SetupAfterCache": "main",
 		"CirrusSearchAnalysisConfig": [
 			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchAnalysisConfig"
 		],
@@ -102,21 +100,25 @@
 		"CirrusSearchAddQueryFeatures": [
 			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchAddQueryFeatures"
 		],
-		"ShowSearchHit": [
-			"Wikibase\\Search\\Elastic\\CirrusShowSearchHitHandler::onShowSearchHit"
-		],
-		"ShowSearchHitTitle": [
-			"Wikibase\\Search\\Elastic\\CirrusShowSearchHitHandler::onShowSearchHitTitle"
-		],
+		"ShowSearchHit": "search",
+		"ShowSearchHitTitle": "search",
 		"WikibaseRepoEntityTypes": [
 			"Wikibase\\Search\\Elastic\\Hooks::onWikibaseRepoEntityTypes"
 		],
-		"SpecialPage_initList": [
-			"Wikibase\\Search\\Elastic\\Hooks::onSpecialPageInitList"
-		],
-		"ApiOpenSearchSuggest": [
-			"Wikibase\\Search\\Elastic\\Hooks::onApiOpenSearchSuggest"
-		]
+		"SpecialPage_initList": "main",
+		"ApiOpenSearchSuggest": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "Wikibase\\Search\\Elastic\\Hooks"
+		},
+		"search": {
+			"class": "Wikibase\\Search\\Elastic\\CirrusShowSearchHitHandler",
+			"factory": "Wikibase\\Search\\Elastic\\CirrusShowSearchHitHandler::newFromGlobalState",
+			"services": [
+				"MainConfig"
+			]
+		}
 	},
 	"ExtensionMessagesFiles": {
 		"WikibaseCirrusSearchAlias": "WikibaseCirrusSearch.alias.php"

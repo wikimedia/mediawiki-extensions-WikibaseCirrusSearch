@@ -5,8 +5,6 @@ namespace Wikibase\Search\Elastic;
 use Html;
 use HtmlArmor;
 use IContextSource;
-use MediaWiki\Search\Hook\ShowSearchHitHook;
-use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
 use MediaWiki\Title\Title;
 use SearchResult;
 use SpecialSearch;
@@ -23,10 +21,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class CirrusShowSearchHitHandler implements
-	ShowSearchHitHook,
-	ShowSearchHitTitleHook
-{
+class CirrusShowSearchHitHandler {
 
 	/**
 	 * @var EntityLinkFormatter
@@ -54,7 +49,7 @@ class CirrusShowSearchHitHandler implements
 	 * @param IContextSource $context
 	 * @return self
 	 */
-	public static function newFromGlobalState( IContextSource $context ) {
+	private static function newFromGlobalState( IContextSource $context ) {
 		return new self(
 			WikibaseRepo::getEntityIdLookup(),
 			WikibaseRepo::getEntityLinkFormatterFactory()
@@ -67,12 +62,13 @@ class CirrusShowSearchHitHandler implements
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ShowSearchHit
 	 * @see showEntityResultHit
 	 */
-	public function onShowSearchHit( $searchPage, $result,
-		$terms, &$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related,
+	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result,
+		array $terms, &$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related,
 		&$html
 	) {
 		if ( $result instanceof EntityResult ) {
-			$this->showEntityResultHit( $searchPage, $result, $terms,
+			$self = self::newFromGlobalState( $searchPage->getContext() );
+			$self->showEntityResultHit( $searchPage, $result, $terms,
 				$link, $redirect, $section, $extract, $score, $size, $date, $related, $html );
 		}
 	}
@@ -110,25 +106,26 @@ class CirrusShowSearchHitHandler implements
 	 *
 	 * @todo Add highlighting when Q##-id matches and not label text.
 	 *
-	 * @param Title &$title
+	 * @param Title $title
 	 * @param string &$titleSnippet
 	 * @param SearchResult $result
-	 * @param array $terms
+	 * @param string $terms
 	 * @param SpecialSearch $specialSearch
 	 * @param string[] &$query
 	 * @param string[] &$attributes
 	 */
-	public function onShowSearchHitTitle(
-		&$title,
+	public static function onShowSearchHitTitle(
+		Title $title,
 		&$titleSnippet,
-		$result,
+		SearchResult $result,
 		$terms,
-		$specialSearch,
-		&$query,
-		&$attributes
+		SpecialSearch $specialSearch,
+		array &$query,
+		array &$attributes
 	) {
 		if ( $result instanceof EntityResult ) {
-			$this->getEntityLink( $result, $title, $titleSnippet, $attributes,
+			$self = self::newFromGlobalState( $specialSearch->getContext() );
+			$self->getEntityLink( $result, $title, $titleSnippet, $attributes,
 				$specialSearch->getLanguage()->getCode() );
 		}
 	}

@@ -159,7 +159,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 				$context->getProfileContextParams() );
 
 		// Set some bc defaults for properties that didn't always exist.
-		$profile['tie-breaker'] = $profile['tie-breaker'] ?? 0;
+		$profile['tie-breaker'] ??= 0;
 
 		// There are two flavors of profiles: fully specified, and generic
 		// fallback. When language-chain is provided we assume a fully
@@ -293,7 +293,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$strictLanguage,
 		string $profileContext = null
 	) {
-		$profileContext = $profileContext ?? self::CONTEXT_WIKIBASE_PREFIX;
+		$profileContext ??= self::CONTEXT_WIKIBASE_PREFIX;
 		$searcher = new WikibasePrefixSearcher( 0, $limit, $this->debugOptions );
 		$searcher->getSearchContext()->setProfileContext(
 			$profileContext,

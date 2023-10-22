@@ -74,7 +74,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 			),
 			StatementCountField::NAME => new StatementCountField(),
 		];
-		if ( !empty( $this->allowedQualifierPropertyIdsForQuantityStatements ) ) {
+		if ( $this->allowedQualifierPropertyIdsForQuantityStatements ) {
 			$fields[StatementQuantityField::NAME] = new StatementQuantityField(
 				$this->propertyDataTypeLookup,
 				$this->propertyIds,

@@ -357,7 +357,7 @@ class Hooks {
 				continue;
 			}
 		}
-		if ( empty( $entityIds ) ) {
+		if ( !$entityIds ) {
 			return;
 		}
 		$lookup = WikibaseRepo::getFallbackLabelDescriptionLookupFactory()
@@ -391,7 +391,7 @@ class Hooks {
 			return;
 		}
 
-		if ( empty( $results ) ) {
+		if ( !$results ) {
 			return;
 		}
 

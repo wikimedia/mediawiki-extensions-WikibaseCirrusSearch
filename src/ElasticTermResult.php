@@ -143,7 +143,7 @@ class ElasticTermResult extends BaseResultsType {
 				// If we matched title, this means it's a match by ID
 				$matchedTermType = 'entityId';
 				$matchedTerm = new Term( 'qid', $sourceData['title'] );
-			} elseif ( empty( $highlight ) ) {
+			} elseif ( !$highlight ) {
 				// Something went wrong, we don't have any highlighting data
 				continue;
 			} else {

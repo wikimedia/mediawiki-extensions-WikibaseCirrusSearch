@@ -22,19 +22,27 @@ class AnalysisConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			'he' => [ 'index' => false, 'query' => false ],
 		];
 		$upstreamBuilder = $this->createMock( AnalysisConfigBuilder::class );
-		$upstreamBuilder->expects( $this->exactly( 2 ) )
+		$expectedArgs = [
+			[
+				[],
+				[ 'en', 'ru' ],
+				[ 'plain', 'plain_search', 'text', 'text_search' ]
+			],
+			[
+				[],
+				[ 'uk', 'he', 'zh' ],
+				[ 'plain', 'plain_search' ]
+			]
+		];
+		$upstreamBuilder->expects( $this->exactly( count( $expectedArgs ) ) )
 			->method( 'buildLanguageConfigs' )
-			->withConsecutive(
-				[
-					$this->equalTo( [] ),
-					$this->equalToCanonicalizing( [ 'en', 'ru' ] ),
-					$this->equalTo( [ 'plain', 'plain_search', 'text', 'text_search' ] )
-				], [
-					$this->equalTo( [] ),
-					$this->equalToCanonicalizing( [ 'uk', 'he', 'zh' ] ),
-					$this->equalTo( [ 'plain', 'plain_search' ] )
-				] )
-			->willReturn( [] );
+			->willReturnCallback( function ( $conf, $lang, $analyzers ) use ( &$expectedArgs ) {
+				$curExpectedArgs = array_shift( $expectedArgs );
+				$this->assertSame( $curExpectedArgs[0], $conf );
+				$this->assertEqualsCanonicalizing( $curExpectedArgs[1], $lang );
+				$this->assertSame( $curExpectedArgs[2], $analyzers );
+				return [];
+			} );
 
 		$oldConfig = [];
 		$builder = new ConfigBuilder( [ 'en', 'ru', 'uk', 'he', 'zh' ], new \HashConfig( $langSettings ),

@@ -158,7 +158,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 		$options = [];
 
 		foreach ( $this->termsLanguages->getLanguages() as $languageCode ) {
-			$languageName = $this->languageNameLookup->getName( $languageCode );
+			$languageName = $this->languageNameLookup->getNameForTerms( $languageCode );
 			$options["$languageName ($languageCode)"] = $languageCode;
 		}
 

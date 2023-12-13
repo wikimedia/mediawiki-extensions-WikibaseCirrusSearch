@@ -2,14 +2,11 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use ApiMain;
+use ApiTestCase;
 use CirrusSearch\CirrusDebugOptions;
 use ExtensionRegistry;
 use Language;
 use MediaWiki\Request\FauxRequest;
-use MediaWikiIntegrationTestCase;
-use RequestContext;
-use Wikibase\DataAccess\EntitySourceLookup;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -17,15 +14,7 @@ use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
-use Wikibase\Lib\StaticContentLanguages;
-use Wikibase\Lib\Store\EntityArticleIdLookup;
-use Wikibase\Lib\Store\EntityTitleTextLookup;
-use Wikibase\Lib\Store\EntityUrlLookup;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\Api\ApiErrorReporter;
-use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\Api\SearchEntities;
-use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 
 /**
@@ -39,7 +28,7 @@ use Wikibase\Search\Elastic\EntitySearchElastic;
  * @license GPL-2.0-or-later
  * @author Thiemo Kreuz
  */
-class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
+class SearchEntitiesIntegrationTest extends ApiTestCase {
 
 	/**
 	 * @var EntityIdParser
@@ -112,7 +101,13 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		$mockEntitySearchElastic->method( 'getRankedSearchResults' )
 			->willReturnCallback( $this->makeElasticSearchCallback() );
 
-		$resultData = $this->executeApiModule( $mockEntitySearchElastic, $query );
+		$this->setService( 'WikibaseRepo.EntitySearchHelper', $mockEntitySearchElastic );
+
+		[ $resultData ] = $this->doApiRequest( [
+			'action' => 'wbsearchentities',
+			'language' => 'en',
+			'search' => $query,
+		] );
 		$this->assertSameSearchResults( $resultData, $expectedIds );
 	}
 
@@ -173,41 +168,6 @@ class SearchEntitiesIntegrationTest extends MediaWikiIntegrationTestCase {
 		foreach ( $expectedIds as $index => $expectedId ) {
 			$this->assertSame( $expectedId, $resultData['search'][$index]['id'] );
 		}
-	}
-
-	/**
-	 * @param EntitySearchHelper $entitySearchTermIndex
-	 * @param string $query
-	 *
-	 * @return array
-	 */
-	private function executeApiModule( EntitySearchHelper $entitySearchTermIndex, $query ) {
-		$context = new RequestContext();
-		$context->setRequest( new FauxRequest( [
-			'language' => 'en',
-			'search' => $query,
-		] ) );
-
-		$apiModule = new SearchEntities(
-			new ApiMain( $context ),
-			'',
-			$entitySearchTermIndex,
-			new StaticContentLanguages( [ 'en' ] ),
-			new EntitySourceLookup(
-				WikibaseRepo::getEntitySourceDefinitions(),
-				WikibaseRepo::getSubEntityTypesMapper()
-			),
-			$this->createMock( EntityTitleTextLookup::class ),
-			$this->createMock( EntityUrlLookup::class ),
-			$this->createMock( EntityArticleIdLookup::class ),
-			$this->createMock( ApiErrorReporter::class ),
-			[ 'item', 'property' ],
-			[ 'default' => null ]
-		);
-
-		$apiModule->execute();
-
-		return $apiModule->getResult()->getResultData( null, [ 'Strip' => 'all' ] );
 	}
 
 	/**

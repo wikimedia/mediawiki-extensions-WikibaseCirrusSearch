@@ -2,6 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
+use MediaWiki\Parser\ParserOutput;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -116,7 +117,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 		$page = $this->getMockWikiPage( $handler );
 
-		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$data = $handler->getDataForSearchIndex( $page, new ParserOutput(), $engine );
 		$this->assertSame( 1, $data['label_count'], 'label_count' );
 		$this->assertSame( 1, $data['statement_count'], 'statement_count' );
 	}

@@ -8,6 +8,7 @@ use CirrusSearch\Profile\ArrayProfileRepository;
 use CirrusSearch\Profile\SearchProfileRepositoryTransformer;
 use CirrusSearch\Profile\SearchProfileService;
 use Language;
+use MediaWiki\Config\ConfigException;
 use MediaWiki\MediaWikiServices;
 use RequestContext;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
@@ -179,7 +180,7 @@ class Hooks {
 	 * @param int[][] $namespacesForContexts list of namespaces indexed by profile context name
 	 * @see SearchProfileService
 	 * @see WikibaseRepo::getFulltextSearchTypes()
-	 * @throws \ConfigException
+	 * @throws ConfigException
 	 */
 	public static function registerSearchProfiles(
 		SearchProfileService $service,

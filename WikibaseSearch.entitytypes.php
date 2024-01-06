@@ -5,6 +5,7 @@
  */
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\SettingsArray;

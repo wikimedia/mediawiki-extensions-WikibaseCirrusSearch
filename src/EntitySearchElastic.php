@@ -11,7 +11,7 @@ use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Language;
 use MediaWiki\Request\FauxRequest;
-use WebRequest;
+use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Repo\Api\EntitySearchException;
@@ -81,7 +81,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 	/**
 	 * Web request context.
 	 * Used for implementing debug features such as cirrusDumpQuery.
-	 * @var \WebRequest
+	 * @var WebRequest
 	 */
 	private $request;
 

@@ -9,7 +9,7 @@ use CirrusSearch\Searcher;
 use Elastica\Query;
 use Elastica\Query\AbstractQuery;
 use MediaWiki\MediaWikiServices;
-use Status;
+use MediaWiki\Status\Status;
 
 /**
  * Searcher class for performing Wikibase prefix search.

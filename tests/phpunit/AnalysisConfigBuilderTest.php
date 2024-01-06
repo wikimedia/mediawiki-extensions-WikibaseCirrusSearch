@@ -3,6 +3,7 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
+use MediaWiki\Config\HashConfig;
 use MediaWikiIntegrationTestCase;
 use Wikibase\Search\Elastic\ConfigBuilder;
 
@@ -45,7 +46,7 @@ class AnalysisConfigBuilderTest extends MediaWikiIntegrationTestCase {
 			} );
 
 		$oldConfig = [];
-		$builder = new ConfigBuilder( [ 'en', 'ru', 'uk', 'he', 'zh' ], new \HashConfig( $langSettings ),
+		$builder = new ConfigBuilder( [ 'en', 'ru', 'uk', 'he', 'zh' ], new HashConfig( $langSettings ),
 				$upstreamBuilder );
 
 		$builder->buildConfig( $oldConfig );

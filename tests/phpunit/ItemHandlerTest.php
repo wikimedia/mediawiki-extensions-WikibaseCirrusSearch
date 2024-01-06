@@ -2,6 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
+use MediaWiki\Parser\ParserOutput;
 use MediaWiki\Title\Title;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
@@ -137,7 +138,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 
 		$page = $this->getMockWikiPage( $handler );
 
-		$data = $handler->getDataForSearchIndex( $page, new \ParserOutput(), $engine );
+		$data = $handler->getDataForSearchIndex( $page, new ParserOutput(), $engine );
 		$this->assertSame( 1, $data['label_count'], 'label_count' );
 		$this->assertSame( 1, $data['sitelink_count'], 'sitelink_count' );
 		$this->assertSame( 1, $data['statement_count'], 'statement_count' );

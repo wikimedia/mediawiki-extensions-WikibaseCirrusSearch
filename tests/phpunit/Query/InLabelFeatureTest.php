@@ -259,8 +259,8 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 			'multi_match' => [
 				'query' => 'himom',
 				'fields' => array_merge(
-					$this->letterRange( 'labels.aa', 'labels.az', '.plain' ),
-					$this->letterRange( 'labels.bb', 'labels.be', '.plain' ) ),
+					$this->letterRange( 'aa', 'az', 'labels.', '.plain' ),
+					$this->letterRange( 'bb', 'be', 'labels.', '.plain' ) ),
 				'operator' => 'and',
 			],
 		];
@@ -330,16 +330,14 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 
 	/**
 	 * Helper to generate a bunch of language "codes".
-	 * @param string $a
-	 * @param string $b
 	 */
-	private function letterRange( $a, $b, $suffix = '' ) {
+	private function letterRange( string $a, string $b, string $prefix = '', string $suffix = '' ) {
 		if ( $a > $b ) {
 			list( $a, $b ) = [ $b, $a ];
 		}
 		$range = [];
 		while ( $a <= $b ) {
-			$range[] = $a . $suffix;
+			$range[] = $prefix . $a . $suffix;
 			$a++;
 		}
 		return $range;

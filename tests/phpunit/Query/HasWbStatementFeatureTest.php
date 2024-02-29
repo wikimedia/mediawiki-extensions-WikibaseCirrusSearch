@@ -6,7 +6,6 @@ use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\Prefix;
-use ExtensionRegistry;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
 
@@ -21,9 +20,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 	}
 
 	public static function applyProvider() {

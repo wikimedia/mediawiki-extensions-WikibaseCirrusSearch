@@ -4,7 +4,6 @@ namespace Wikibase\Search\Elastic\Tests\Query;
 
 use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
-use ExtensionRegistry;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
@@ -20,9 +19,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 	}
 
 	public static function applyProvider() {

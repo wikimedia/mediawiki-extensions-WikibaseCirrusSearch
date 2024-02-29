@@ -4,7 +4,6 @@ namespace Wikibase\Search\Elastic\Tests;
 
 use ApiTestCase;
 use CirrusSearch\CirrusDebugOptions;
-use ExtensionRegistry;
 use Language;
 use MediaWiki\Request\FauxRequest;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
@@ -89,9 +88,7 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 	 * @dataProvider provideQueriesForEntityIds
 	 */
 	public function testElasticSearchIntegration( $query, array $expectedIds ) {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 
 		$mockEntitySearchElastic = $this->getMockBuilder( EntitySearchElastic::class )
 				->disableOriginalConstructor()

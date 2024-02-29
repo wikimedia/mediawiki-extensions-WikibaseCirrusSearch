@@ -4,7 +4,6 @@ namespace Wikibase\Search\Elastic\Tests\Query;
 
 use CirrusSearch\CrossSearchStrategy;
 use CirrusSearch\Query\KeywordFeatureAssertions;
-use ExtensionRegistry;
 use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
 
 /**
@@ -18,9 +17,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 	protected function setUp(): void {
 		parent::setUp();
 
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 	}
 
 	public static function applyProvider() {

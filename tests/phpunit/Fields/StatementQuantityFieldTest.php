@@ -3,7 +3,6 @@
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use CirrusSearch\CirrusSearch;
-use ExtensionRegistry;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -82,18 +81,14 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider statementsProvider
 	 */
 	public function testGetFieldData( $entity, array $expected ) {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 
 		$field = $this->createStatementQuantityField();
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
 
 	public function testGetMapping() {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 
 		$field = $this->createStatementQuantityField();
 		$searchEngine = $this->createMock( CirrusSearch::class );

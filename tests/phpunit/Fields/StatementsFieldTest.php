@@ -5,7 +5,6 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 use DataValues\BooleanValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
-use ExtensionRegistry;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\PropertyId;
@@ -100,9 +99,7 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider statementsProvider
 	 */
 	public function testStatements( EntityDocument $entity, array $expected ) {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 
 		$lookup = $this->getPropertyTypeLookup( [
 			'P9' => 'sometype',

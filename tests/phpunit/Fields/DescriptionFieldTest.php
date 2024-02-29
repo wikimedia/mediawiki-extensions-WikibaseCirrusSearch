@@ -71,9 +71,7 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 	}
 
 	public function testGetMapping() {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ],
 			[
 				'en' => [ 'index' => true, 'search' => true ],

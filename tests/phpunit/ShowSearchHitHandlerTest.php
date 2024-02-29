@@ -3,7 +3,6 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use ContextSource;
-use ExtensionRegistry;
 use HtmlArmor;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Specials\SpecialSearch;
@@ -314,9 +313,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$linkCount,
 		$expected
 	) {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 
 		$testFile = __DIR__ . '/data/searchHits/' . $expected . ".html";
 		$displayLanguage = 'en';

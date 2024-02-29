@@ -1,7 +1,6 @@
 <?php
 namespace Wikibase\Search\Elastic\Tests;
 
-use ExtensionRegistry;
 use MediaWiki\MainConfigNames;
 
 /**
@@ -19,9 +18,7 @@ trait WikibaseSearchTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 		$this->overrideConfigValue( MainConfigNames::UsePigLatinVariant, false );
 		$this->enableWBCS();
 	}

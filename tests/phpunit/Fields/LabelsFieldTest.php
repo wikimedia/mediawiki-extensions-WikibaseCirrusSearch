@@ -76,9 +76,7 @@ class LabelsFieldTest extends SearchFieldTestCase {
 	}
 
 	public function testGetMapping() {
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch needed.' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$searchEngine = $this->getSearchEngineMock();
 		$searchEngine->expects( $this->never() )->method( 'makeSearchFieldMapping' );

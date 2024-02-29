@@ -8,7 +8,6 @@ use CirrusSearch\CirrusTestCase;
 use CirrusSearch\Profile\SearchProfileService;
 use CirrusSearch\Search\SearchContext;
 use CirrusSearch\SearchConfig;
-use ExtensionRegistry;
 use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\ItemIdParser;
@@ -44,9 +43,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		if ( !ExtensionRegistry::getInstance()->isLoaded( 'CirrusSearch' ) ) {
-			$this->markTestSkipped( 'CirrusSearch not installed, skipping' );
-		}
+		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 
 		$this->overrideConfigValue( MainConfigNames::UsePigLatinVariant, false );
 		$this->setMwGlobals( self::$ENTITY_SEARCH_CONFIG );

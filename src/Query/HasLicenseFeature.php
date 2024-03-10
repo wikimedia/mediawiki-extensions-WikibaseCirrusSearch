@@ -203,7 +203,7 @@ class HasLicenseFeature extends SimpleKeywordFeature implements FilterQueryFeatu
 		$queries = [];
 		foreach ( $this->licenseMapping as $mapping ) {
 			foreach ( $mapping as $statementString ) {
-				list( $propertyId, ) = explode( '=', $statementString );
+				[ $propertyId, ] = explode( '=', $statementString );
 				if ( !isset( $queries[$propertyId] ) ) {
 					$queries[$propertyId] = [
 						'occur' => 'should',

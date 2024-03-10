@@ -327,14 +327,14 @@ class ElasticTermResultTest extends MediaWikiIntegrationTestCase {
 			->willReturn( $languages );
 		$mock->expects( $this->atLeastOnce() )
 			->method( 'extractPreferredValueOrAny' )
-			->will( $this->returnCallback( static function ( $sourceData ) use ( $languages ) {
+			->willReturnCallback( static function ( $sourceData ) use ( $languages ) {
 				foreach ( $languages as $language ) {
 					if ( isset( $sourceData[$language] ) ) {
 						return [ 'language' => $language, 'value' => $sourceData[$language] ];
 					}
 				}
 				return null;
-			} ) );
+			} );
 		return $mock;
 	}
 

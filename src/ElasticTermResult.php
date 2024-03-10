@@ -147,7 +147,7 @@ class ElasticTermResult extends BaseResultsType {
 				// Something went wrong, we don't have any highlighting data
 				continue;
 			} else {
-				list( $matchedTermType, $langCode, $term ) =
+				[ $matchedTermType, $langCode, $term ] =
 					$this->extractTermFromHighlight( $highlight, $sourceData );
 				$matchedTerm = new Term( $langCode, $term );
 			}

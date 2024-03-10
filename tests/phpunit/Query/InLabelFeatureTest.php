@@ -289,13 +289,13 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 
 		$factory = $this->createMock( LanguageFallbackChainFactory::class );
 		$factory->method( 'newFromLanguageCode' )
-			->will( $this->returnCallback( function ( $langCode ) use ( $languageChains ) {
+			->willReturnCallback( function ( $langCode ) use ( $languageChains ) {
 				$langFallbacks = $languageChains[$langCode] ?? [ 'en' ];
 				$fallbackLanguageChain = $this->createMock( TermLanguageFallbackChain::class );
 				$fallbackLanguageChain->method( 'getFetchLanguageCodes' )
 					->willReturn( $langFallbacks );
 				return $fallbackLanguageChain;
-			} ) );
+			} );
 		return new InLabelFeature( $factory, $validLanguages );
 	}
 
@@ -330,7 +330,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 	 */
 	private function letterRange( string $a, string $b, string $prefix = '', string $suffix = '' ) {
 		if ( $a > $b ) {
-			list( $a, $b ) = [ $b, $a ];
+			[ $a, $b ] = [ $b, $a ];
 		}
 		$range = [];
 		while ( $a <= $b ) {

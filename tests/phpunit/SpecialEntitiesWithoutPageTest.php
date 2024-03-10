@@ -37,7 +37,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	}
 
 	public function testForm() {
-		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $html, ] = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertStringContainsString( '(wikibasecirrus-entitieswithoutlabel-label-language)', $html );
 		$this->assertStringContainsString( 'name=\'language\'', $html );
@@ -58,7 +58,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 			'language' => "''LANGUAGE''",
 			'type' => "''TYPE''",
 		] );
-		list( $html, ) = $this->executeSpecialPage( '', $request );
+		[ $html, ] = $this->executeSpecialPage( '', $request );
 
 		$this->assertStringContainsString( '&#39;&#39;LANGUAGE&#39;&#39;', $html );
 		$this->assertStringContainsString( '&#39;&#39;TYPE&#39;&#39;', $html );
@@ -68,14 +68,14 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	}
 
 	public function testSubPageParts() {
-		list( $html, ) = $this->executeSpecialPage( "''LANGUAGE''/''TYPE''" );
+		[ $html, ] = $this->executeSpecialPage( "''LANGUAGE''/''TYPE''" );
 
 		$this->assertStringContainsString( '&#39;&#39;LANGUAGE&#39;&#39;', $html );
 		$this->assertStringContainsString( '&#39;&#39;TYPE&#39;&#39;', $html );
 	}
 
 	public function testNoParams() {
-		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $html, ] = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertStringNotContainsString( 'class="mw-spcontent"', $html );
 		$this->assertStringNotContainsString( '(htmlform-invalid-input)', $html );
@@ -83,21 +83,21 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 
 	public function testNoLanguage() {
 		$request = new FauxRequest( [ 'type' => 'item' ] );
-		list( $html, ) = $this->executeSpecialPage( '', $request, 'qqx' );
+		[ $html, ] = $this->executeSpecialPage( '', $request, 'qqx' );
 
 		$this->assertStringNotContainsString( 'class="mw-spcontent"', $html );
 		$this->assertStringNotContainsString( '(htmlform-invalid-input)', $html );
 	}
 
 	public function testNoType() {
-		list( $html, ) = $this->executeSpecialPage( 'acceptedlanguage', null, 'qqx' );
+		[ $html, ] = $this->executeSpecialPage( 'acceptedlanguage', null, 'qqx' );
 
 		$this->assertStringNotContainsString( 'class="mw-spcontent"', $html );
 		$this->assertStringNotContainsString( '(htmlform-invalid-input)', $html );
 	}
 
 	public function testInvalidLanguage() {
-		list( $html, ) = $this->executeSpecialPage( "''INVALID''", null, 'qqx' );
+		[ $html, ] = $this->executeSpecialPage( "''INVALID''", null, 'qqx' );
 
 		$this->assertStringContainsString(
 			'(wikibasecirrus-entitieswithoutlabel-invalid-language: &#39;&#39;INVALID&#39;&#39;)',
@@ -109,7 +109,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 		$request = new FauxRequest( [ 'type' => 'item' ] );
 
 		/** @var FauxResponse $response */
-		list( , $response ) = $this->executeSpecialPage( 'acceptedlanguage', $request, 'qqx' );
+		[ , $response ] = $this->executeSpecialPage( 'acceptedlanguage', $request, 'qqx' );
 		$target = $response->getHeader( 'Location' );
 
 		$this->assertStringContainsString( 'search=-haslabel:acceptedlanguage', $target );
@@ -117,7 +117,7 @@ class SpecialEntitiesWithoutPageTest extends SpecialPageTestBase {
 	}
 
 	public function testInvalidType() {
-		list( $html, ) = $this->executeSpecialPage( "acceptedlanguage/''INVALID''", null, 'qqx' );
+		[ $html, ] = $this->executeSpecialPage( "acceptedlanguage/''INVALID''", null, 'qqx' );
 
 		$this->assertStringContainsString(
 			'(wikibasecirrus-entitieswithoutlabel-invalid-type: &#39;&#39;INVALID&#39;&#39;)',

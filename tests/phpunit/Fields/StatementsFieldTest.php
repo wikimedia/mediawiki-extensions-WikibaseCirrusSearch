@@ -6,7 +6,6 @@ use DataValues\BooleanValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWikiIntegrationTestCase;
-use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
@@ -37,24 +36,32 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $properties = [ 'P1', 'P2', 'P4', 'P7', 'P8' ];
 
-	public static function statementsProvider() {
-		$testData = new RdfBuilderTestData(
+	private $testData;
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$this->testData = new RdfBuilderTestData(
 			__DIR__ . '/../data/rdf/entities', ''
 		);
 
+		$this->setService( 'WikibaseRepo.PropertyInfoLookup', $this->testData->getPropertyInfoLookup() );
+	}
+
+	public static function statementsProvider() {
 		return [
 			'empty' => [
-				$testData->getEntity( 'Q1' ),
+				'Q1',
 				[]
 			],
 			'Q4' => [
-				$testData->getEntity( 'Q4' ),
+				'Q4',
 				[ 'P2=Q42', 'P2=Q666', 'P7=simplestring',
 				  'P9=http://url.acme.test\badurl?chars=\привет< >"'
 				]
 			],
 			'Q6' => [
-				$testData->getEntity( 'Q6' ),
+				'Q6',
 				[
 					'P7=string',
 					'P7=string[P2=Q42]',
@@ -67,11 +74,11 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 				]
 			],
 			'Q7' => [
-				$testData->getEntity( 'Q7' ),
+				'Q7',
 				[ 'P7=string', 'P7=string2' ]
 			],
 			'Q8' => [
-				$testData->getEntity( 'Q8' ),
+				'Q8',
 				[]
 			],
 		];
@@ -98,8 +105,10 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider statementsProvider
 	 */
-	public function testStatements( EntityDocument $entity, array $expected ) {
+	public function testStatements( string $entityId, array $expected ) {
 		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
+
+		$entity = $this->testData->getEntity( $entityId );
 
 		$lookup = $this->getPropertyTypeLookup( [
 			'P9' => 'sometype',

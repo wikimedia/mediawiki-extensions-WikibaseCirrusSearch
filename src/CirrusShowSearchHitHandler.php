@@ -3,7 +3,7 @@
 namespace Wikibase\Search\Elastic;
 
 use HtmlArmor;
-use IContextSource;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Specials\SpecialSearch;
 use MediaWiki\Title\Title;

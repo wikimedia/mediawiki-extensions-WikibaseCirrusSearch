@@ -2,10 +2,10 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use ApiTestCase;
 use CirrusSearch\CirrusDebugOptions;
 use Language;
 use MediaWiki\Request\FauxRequest;
+use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;

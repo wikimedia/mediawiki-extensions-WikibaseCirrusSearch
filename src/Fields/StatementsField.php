@@ -168,10 +168,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 
 		/* @phan-suppress-next-line PhanUndeclaredMethod */
 		$dataValue = $snak->getDataValue();
-		$formatter = $this->searchIndexDataFormatters[$propType] ??
-			$this->searchIndexDataFormatters["PT:$propType"] ??
-			$this->searchIndexDataFormatters["VT:{$dataValue->getType()}"] ??
-			null;
+		$formatter = $this->searchIndexDataFormatters[$propType] ?? null;
 		if ( $formatter === null ) {
 			// We do not know how to format these values
 			return null;

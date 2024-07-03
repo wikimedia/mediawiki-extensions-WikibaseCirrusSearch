@@ -5,6 +5,7 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 use CirrusSearch\CirrusSearch;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikibase\Repo\WikibaseRepo;
@@ -60,7 +61,24 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 		$lookup = $this->createMock( PropertyDataTypeLookup::class );
 
 		$lookup->method( 'getDataTypeIdForProperty' )
-			->willReturn( 'DOES_NOT_MATTER' );
+			->willReturnCallback( static function ( PropertyId $id ) {
+				$map = [
+					'P2' => 'wikibase-item',
+					'P3' => 'commonsMedia',
+					'P4' => 'globe-coordinate',
+					'P5' => 'monolingualtext',
+					'P6' => 'quantity',
+					'P7' => 'string',
+					'P8' => 'time',
+					'P9' => 'url',
+					'P10' => 'geo-shape',
+					'P11' => 'external-id',
+				];
+				if ( isset( $map[$id->getSerialization()] ) ) {
+					return $map[$id->getSerialization()];
+				}
+				return 'unknown';
+			} );
 
 		return $lookup;
 	}

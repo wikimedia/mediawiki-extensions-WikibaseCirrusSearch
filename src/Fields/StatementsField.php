@@ -149,30 +149,41 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * e.g. [ 'propertyId' => 'P180', 'value' => 'Q999' ]
 	 *
 	 * @param Snak $snak
+	 * @param ?string $propType The property data type, if already known by the caller.
 	 * @return array|null
 	 */
-	protected function getSnakAsPropertyIdAndValue( Snak $snak ) {
+	protected function getSnakAsPropertyIdAndValue( Snak $snak, ?string $propType = null ) {
 		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
 			return null;
 		}
 		/**
 		 * @var PropertyValueSnak $snak
 		 */
+
+		try {
+			$propType ??= $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+		} catch ( PropertyDataTypeLookupException $e ) {
+			return null;
+		}
+
 		/* @phan-suppress-next-line PhanUndeclaredMethod */
 		$dataValue = $snak->getDataValue();
-		$definitionKey = 'VT:' . $dataValue->getType();
-
-		if ( !isset( $this->searchIndexDataFormatters[$definitionKey] ) ) {
+		$formatter = $this->searchIndexDataFormatters[$propType] ??
+			$this->searchIndexDataFormatters["PT:$propType"] ??
+			$this->searchIndexDataFormatters["VT:{$dataValue->getType()}"] ??
+			null;
+		if ( $formatter === null ) {
 			// We do not know how to format these values
 			return null;
 		}
 
-		$formatter = $this->searchIndexDataFormatters[$definitionKey];
 		$value = $formatter( $dataValue );
 
 		if ( !is_string( $value ) ) {
-			throw new UnexpectedValueException( 'Search index data formatter callback for "' . $definitionKey
-								   . '" didn\'t return a string' );
+			throw new UnexpectedValueException(
+				"Search index data formatter callback for data type '$propType' " .
+				" didn't return a string"
+			);
 		}
 		if ( $value === '' ) {
 			return null;
@@ -184,8 +195,8 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		];
 	}
 
-	protected function getSnakAsString( Snak $snak ) {
-		$snakAsPropertyIdAndValue = $this->getSnakAsPropertyIdAndValue( $snak );
+	protected function getSnakAsString( Snak $snak, ?string $propType = null ) {
+		$snakAsPropertyIdAndValue = $this->getSnakAsPropertyIdAndValue( $snak, $propType );
 		if ( $snakAsPropertyIdAndValue === null ) {
 			return null;
 		}
@@ -227,7 +238,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 			return null;
 		}
 
-		return $this->getSnakAsString( $snak );
+		return $this->getSnakAsString( $snak, $propType );
 	}
 
 	/**

@@ -96,7 +96,7 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 				if ( isset( $map[$id->getSerialization()] ) ) {
 					return $map[$id->getSerialization()];
 				}
-				return 'string';
+				return 'unknown';
 			} );
 
 		return $lookup;
@@ -111,36 +111,51 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 		$entity = $this->testData->getEntity( $entityId );
 
 		$lookup = $this->getPropertyTypeLookup( [
-			'P9' => 'sometype',
-			'P11' => 'sometype',
+			'P2' => 'wikibase-item',
+			'P3' => 'commonsMedia',
+			'P4' => 'globe-coordinate',
+			'P5' => 'monolingualtext',
+			'P6' => 'quantity',
+			'P7' => 'string',
+			'P8' => 'time',
+			'P9' => 'url',
+			'P10' => 'geo-shape',
+			'P11' => 'external-id',
 		] );
 
-		$field = new StatementsField( $lookup, $this->properties, [ 'sometype' ], [ 'P11' ],
+		$field = new StatementsField( $lookup, $this->properties, [ 'wikibase-item', 'url' ], [ 'P11' ],
 			WikibaseRepo::getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
 
 	public function testFormatters() {
 		$formatters = [
-			'VT:string' => static function ( StringValue $s ) {
+			'string' => static function ( StringValue $s ) {
 				return 'STRING:' . $s->getValue();
 			},
-			'VT:quantity' => static function ( UnboundedQuantityValue $v ) {
+			'quantity' => static function ( UnboundedQuantityValue $v ) {
 				return 'VALUE:' . $v->getAmount();
+			},
+			'sometype' => static function ( StringValue $s ) {
+				return 'SOMETYPE:' . $s->getValue();
 			},
 		];
 		$lookup = $this->getPropertyTypeLookup( [
+			'P123' => 'string',
+			'P456' => 'quantity',
+			'P789' => 'boolean', // not in $formatters
 			'P9' => 'sometype',
 		] );
-		$field = new StatementsField( $lookup, [ 'P123' ], [], [], $formatters );
+		$field = new StatementsField( $lookup, [ 'P123', 'P456', 'P789', 'P9' ], [], [], $formatters );
 
 		$statementList = new StatementList();
 		$statementList->addNewStatement( new PropertyValueSnak( 123, new StringValue( 'testString' ) ) );
-		$statementList->addNewStatement( new PropertyValueSnak( 123, UnboundedQuantityValue::newFromNumber( 456 ) ) );
+		$statementList->addNewStatement( new PropertyValueSnak( 456, UnboundedQuantityValue::newFromNumber( 456 ) ) );
 		$statementList->addNewStatement( new PropertySomeValueSnak( 123 ) );
 		$statementList->addNewStatement( new PropertyValueSnak( 123, new StringValue( 'testString2' ) ) );
 		$statementList->addNewStatement( new PropertyNoValueSnak( 123 ) );
-		$statementList->addNewStatement( new PropertyValueSnak( 123, new BooleanValue( false ) ) );
+		$statementList->addNewStatement( new PropertyValueSnak( 789, new BooleanValue( false ) ) );
+		$statementList->addNewStatement( new PropertyValueSnak( 9, new StringValue( 'testString3' ) ) );
 
 		$entity = $this->createMock( StatementListProviderDummy::class );
 		$entity->expects( $this->once() )
@@ -149,8 +164,9 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 
 		$expected = [
 			'P123=STRING:testString',
-			'P123=VALUE:+456',
-			'P123=STRING:testString2'
+			'P456=VALUE:+456',
+			'P123=STRING:testString2',
+			'P9=SOMETYPE:testString3',
 		];
 
 		$data = $field->getFieldData( $entity );

@@ -31,25 +31,21 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 	private $propertiesForQuantity = [ 'P6' ];
 
 	public function statementsProvider() {
-		$testData = new RdfBuilderTestData(
-			__DIR__ . '/../data/rdf/entities', ''
-		);
-
 		return [
 			'not a StatementListProvider' => [
-				$this->createMock( EntityDocument::class ),
+				null, // mock EntityDocument
 				[]
 			],
 			'entity with no statements' => [
-				$testData->getEntity( 'Q1' ),
+				'Q1',
 				[]
 			],
 			'entity with statements but no qualifiers' => [
-				$testData->getEntity( 'Q4' ),
+				'Q4',
 				[]
 			],
 			'entity with statements, one with a quantity qualifier' => [
-				$testData->getEntity( 'Q6' ),
+				'Q6',
 				[
 					'P7=string|20',
 				]
@@ -57,9 +53,10 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function getPropertyTypeLookup() {
-		$lookup = $this->createMock( PropertyDataTypeLookup::class );
+	protected function setUp(): void {
+		parent::setUp();
 
+		$lookup = $this->createMock( PropertyDataTypeLookup::class );
 		$lookup->method( 'getDataTypeIdForProperty' )
 			->willReturnCallback( static function ( PropertyId $id ) {
 				$map = [
@@ -79,17 +76,17 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 				}
 				return 'unknown';
 			} );
-
-		return $lookup;
+		$this->setService( 'WikibaseRepo.PropertyDataTypeLookup', $lookup );
 	}
 
 	private function createStatementQuantityField() {
+		$services = $this->getServiceContainer();
 		return new StatementQuantityField(
-			$this->getPropertyTypeLookup(),
+			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			$this->properties,
 			[],
 			[],
-			WikibaseRepo::getDataTypeDefinitions()
+			WikibaseRepo::getDataTypeDefinitions( $services )
 				->getSearchIndexDataFormatterCallbacks(),
 			$this->propertiesForQuantity
 		);
@@ -98,8 +95,17 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider statementsProvider
 	 */
-	public function testGetFieldData( $entity, array $expected ) {
+	public function testGetFieldData( ?string $entityId, array $expected ) {
 		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
+
+		if ( $entityId === null ) {
+			$entity = $this->createMock( EntityDocument::class );
+		} else {
+			$testData = new RdfBuilderTestData(
+				__DIR__ . '/../data/rdf/entities', ''
+			);
+			$entity = $testData->getEntity( $entityId );
+		}
 
 		$field = $this->createStatementQuantityField();
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );

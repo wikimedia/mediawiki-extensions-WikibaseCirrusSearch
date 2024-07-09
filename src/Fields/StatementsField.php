@@ -3,6 +3,8 @@
 namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use SearchEngine;
 use SearchIndexField;
 use SearchIndexFieldDefinition;
@@ -67,6 +69,8 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 */
 	private $excludedIds;
 
+	private LoggerInterface $logger;
+
 	/**
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param string[] $propertyIds List of property IDs to index
@@ -80,7 +84,8 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		array $propertyIds,
 		array $indexedTypes,
 		array $excludedIds,
-		array $searchIndexDataFormatters
+		array $searchIndexDataFormatters,
+		?LoggerInterface $logger = null
 	) {
 		parent::__construct( static::NAME, SearchIndexField::INDEX_TYPE_KEYWORD );
 
@@ -89,6 +94,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->excludedIds = array_flip( $excludedIds );
+		$this->logger = $logger ?? new NullLogger();
 	}
 
 	/**
@@ -235,8 +241,14 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		} catch ( PropertyDataTypeLookupException $e ) {
 			// T198091: looks like occasionally we get weird fails on indexing
 			// Log them but do not break indexing other data
-			wfLogWarning( __METHOD__ . ': Failed to look up property ' . $e->getPropertyId() .
-				' for ' . $guid );
+			$this->logger->warning(
+				__METHOD__ . ': Failed to look up property {propertyId} for {guid}',
+				[
+					'propertyId' => $e->getPropertyId()->getSerialization(),
+					'guid' => $guid,
+					'exception' => $e,
+				]
+			);
 			return null;
 		}
 		if ( !array_key_exists( $propType, $this->indexedTypes ) &&

@@ -55,7 +55,8 @@ return [
 				StatementProviderFieldDefinitions::newFromSettings(
 					new InProcessCachingDataTypeLookup( WikibaseRepo::getPropertyDataTypeLookup() ),
 					WikibaseRepo::getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
-					$searchSettings
+					$searchSettings,
+					WikibaseRepo::getLogger()
 				)
 			] );
 		},
@@ -73,7 +74,8 @@ return [
 						WikibaseRepo::getPropertyDataTypeLookup( $services ) ),
 					WikibaseRepo::getDataTypeDefinitions( $services )
 						->getSearchIndexDataFormatterCallbacks(),
-					$searchSettings
+					$searchSettings,
+					WikibaseRepo::getLogger( $services )
 				)
 			] );
 		},

@@ -4,6 +4,7 @@ namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
 use DataValues\UnboundedQuantityValue;
+use Psr\Log\LoggerInterface;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
@@ -45,14 +46,16 @@ class StatementQuantityField extends StatementsField implements WikibaseIndexFie
 		array $indexedTypes,
 		array $excludedIds,
 		array $searchIndexDataFormatters,
-		array $allowedQualifierPropertyIds
+		array $allowedQualifierPropertyIds,
+		?LoggerInterface $logger = null
 	) {
 		parent::__construct(
 			$propertyDataTypeLookup,
 			$propertyIds,
 			$indexedTypes,
 			$excludedIds,
-			$searchIndexDataFormatters
+			$searchIndexDataFormatters,
+			$logger
 		);
 		$this->allowedQualifierPropertyIds = $allowedQualifierPropertyIds;
 	}

@@ -58,7 +58,8 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 			'Q4' => [
 				'Q4',
 				[ 'P2=Q42', 'P2=Q666', 'P7=simplestring',
-				  'P9=http://url.acme.test\badurl?chars=\привет< >"'
+				  'P9=http://url.acme.test\badurl?chars=\привет< >"',
+				  'P3', 'P4', 'P5', 'P6', 'P8', 'P10', 'P11',
 				]
 			],
 			'Q6' => [
@@ -80,7 +81,7 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 			],
 			'Q8' => [
 				'Q8',
-				[]
+				[ 'P8' ]
 			],
 		];
 	}
@@ -168,6 +169,7 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 			'P456=VALUE:+456',
 			'P123=STRING:testString2',
 			'P9=SOMETYPE:testString3',
+			'P789',
 		];
 
 		$data = $field->getFieldData( $entity );

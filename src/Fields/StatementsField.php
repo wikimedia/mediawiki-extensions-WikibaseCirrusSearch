@@ -121,12 +121,18 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		}
 
 		$data = [];
+		$seen = [];
+		$skipped = [];
 
 		/** @var Statement $statement */
 		foreach ( $entity->getStatements() as $statement ) {
 			$snak = $statement->getMainSnak();
 			$mainSnakString = $this->getWhitelistedSnakAsString( $snak, $statement->getGuid() );
-			if ( $mainSnakString !== null ) {
+			$propertyId = $snak->getPropertyId()->getSerialization();
+			if ( $mainSnakString === null ) {
+				$skipped[$propertyId] = true;
+			} else {
+				$seen[$propertyId] = true;
 				$data[] = $mainSnakString;
 				foreach ( $statement->getQualifiers() as $qualifier ) {
 					$qualifierString = $this->getSnakAsString( $qualifier );
@@ -140,7 +146,10 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 			}
 		}
 
-		return $data;
+		// There are entities with thousands of properties, try and be somewhat efficient
+		$missing = array_diff( array_keys( $skipped ), array_keys( $seen ) );
+
+		return array_merge( $data, $missing );
 	}
 
 	/**

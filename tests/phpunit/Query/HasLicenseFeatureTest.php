@@ -16,6 +16,7 @@ use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
  */
 class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 
+	/** @var array */
 	private $licenceMapping = [
 		'cc-by-sa' => [
 			'P1=Q1',

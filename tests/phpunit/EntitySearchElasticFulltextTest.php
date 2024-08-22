@@ -36,6 +36,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 		'wgWBCSDefaultFulltextRescoreProfile' => 'wikibase_prefix_boost',
 		'wgWBCSUseStemming' => [ 'en' => [ 'query' => true ] ]
 	];
+	/** @var array */
 	private static $FULLTEXT_SEARCH_TYPES = [
 		// Mimic wikidata.org for the tests (items on NS_MAIN, properties on 120)
 		EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT => [ NS_MAIN, 120 ]

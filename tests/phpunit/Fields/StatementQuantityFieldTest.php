@@ -28,6 +28,7 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 	 * @var string[]
 	 */
 	private $properties = [ 'P1', 'P2', 'P4', 'P7', 'P8' ];
+	/** @var string[] */
 	private $propertiesForQuantity = [ 'P6' ];
 
 	public function statementsProvider() {

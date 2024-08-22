@@ -36,6 +36,7 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 	 */
 	private $properties = [ 'P1', 'P2', 'P4', 'P7', 'P8' ];
 
+	/** @var RdfBuilderTestData */
 	private $testData;
 
 	protected function setUp(): void {

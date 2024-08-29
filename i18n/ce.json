@@ -5,7 +5,7 @@
 			"Умар"
 		]
 	},
-	"wikibasecirrus-search-bad-entity-type": "Нийса доцу хӀуманан тайпа: $1",
+	"wikibasecirrus-search-bad-entity-type": "Нийса доцу духан тайпа: $1",
 	"special-entitieswithoutdescription": "Хаамаш боцу хӀуманаш",
 	"wikibasecirrus-entitieswithoutdescription-legend": "Хаамаш боцучу хӀуманийн могӀам схьаэца",
 	"special-entitieswithoutlabel": "ЦӀераш йоцу хӀуманаш",
@@ -14,5 +14,5 @@
 	"wikibasecirrus-entitieswithoutlabel-label-type": "Тайпа:",
 	"wikibasecirrus-entitieswithoutlabel-submit": "Лахар",
 	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» — меттан код нийса йац.",
-	"wikibasecirrus-entitieswithoutlabel-invalid-type": "«$1» — ца магайо хӀуманан тайпа."
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "«$1» — ца магайо духан тайпа."
 }

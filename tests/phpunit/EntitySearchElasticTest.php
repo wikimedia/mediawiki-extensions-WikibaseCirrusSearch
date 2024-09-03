@@ -49,12 +49,41 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 		return $tests;
 	}
 
+	private function overrideProfiles( array $profiles ) {
+		$this->setTemporaryHook(
+			'CirrusSearchProfileService',
+			static function ( $service ) use ( $profiles ) {
+				foreach ( $profiles as $repoType => $contextProfiles ) {
+					$service->registerArrayRepository( $repoType, 'phpunit_config', $contextProfiles );
+				}
+			},
+			/* $replace = */false
+		);
+	}
+
+	private function resetGlobalSearchConfig() {
+		// For whatever reason the mediawiki test suite reuses the same config
+		// objects for the entire test. This breaks caches inside the cirrus
+		// SearchConfig, so reset them as necessary.
+		$config = \MediaWiki\MediaWikiServices::getInstance()
+			->getConfigFactory()
+			->makeConfig( 'CirrusSearch' );
+		$reflProp = new \ReflectionProperty( $config, 'profileService' );
+		$reflProp->setAccessible( true );
+		$reflProp->setValue( $config, null );
+	}
+
 	/**
 	 * @dataProvider searchDataProvider
 	 * @param string[] $params query parameters
 	 * @param string $expected
 	 */
 	public function testSearchElastic( $params, $expected ) {
+		$this->resetGlobalSearchConfig();
+		if ( isset( $params['profiles'] ) ) {
+			$this->overrideProfiles( $params['profiles'] );
+		}
+
 		$this->setMwGlobals( [ 'wgEntitySearchUseCirrus' => true ] );
 		$search = $this->newEntitySearch( $this->getServiceContainer()->getLanguageFactory()->getLanguage( $params['userLang'] ) );
 		$limit = 10;

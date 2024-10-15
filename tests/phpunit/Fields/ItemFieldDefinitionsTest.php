@@ -5,7 +5,6 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\ItemFieldDefinitions;
-use Wikibase\Search\Elastic\Fields\LabelCountField;
 use Wikibase\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\SiteLinkCountField;
 use Wikibase\Search\Elastic\Fields\StatementCountField;
@@ -35,9 +34,6 @@ class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		] );
 
 		$fields = $fieldDefinitions->getFields();
-
-		$this->assertArrayHasKey( 'label_count', $fields );
-		$this->assertInstanceOf( LabelCountField::class, $fields['label_count'] );
 
 		$this->assertArrayHasKey( 'sitelink_count', $fields );
 		$this->assertInstanceOf( SiteLinkCountField::class, $fields['sitelink_count'] );

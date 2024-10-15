@@ -3,7 +3,6 @@
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use Wikibase\Search\Elastic\Fields\AllLabelsField;
-use Wikibase\Search\Elastic\Fields\LabelCountField;
 use Wikibase\Search\Elastic\Fields\LabelsField;
 use Wikibase\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
@@ -28,8 +27,6 @@ class LabelsProviderFieldDefinitionsTest extends SearchFieldTestCase {
 		);
 
 		$fields = $fieldDefinitions->getFields();
-		$this->assertArrayHasKey( 'label_count', $fields );
-		$this->assertInstanceOf( LabelCountField::class, $fields['label_count'] );
 		$this->assertArrayHasKey( 'labels', $fields );
 		$this->assertInstanceOf( LabelsField::class, $fields['labels'] );
 		$this->assertArrayHasKey( 'labels_all', $fields );

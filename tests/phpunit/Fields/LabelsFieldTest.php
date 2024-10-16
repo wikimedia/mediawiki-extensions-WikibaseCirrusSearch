@@ -37,42 +37,39 @@ class LabelsFieldTest extends SearchFieldTestCase {
 
 		$mock = $this->createMock( EntityDocument::class );
 
-		return [
-			'item labels' => [
-				[
-					'es' => [ 'Gato' ],
-					'ru' => [ 'Кошка' ],
-					'de' => [ 'Katze' ],
-					'fr' => [ 'Chat' ]
-				],
-				$item
+		yield 'item labels' => [
+			[
+				'es' => [ 'Gato' ],
+				'ru' => [ 'Кошка' ],
+				'de' => [ 'Katze' ],
+				'fr' => [ 'Chat' ]
 			],
-			'empty item' => [
-				null,
-				new Item()
-			],
-			'property labels' => [
-				[
-					'en' => [ 'astrological sign', 'zodiac sign' ],
-					'ru' => [ 'знак зодиака' ],
-					'es' => [ '', 'signo zodiacal' ],
-				],
-				$prop
-			],
-			'empty property' => [
-				null,
-				Property::newFromType( 'string' )
-			],
-			'empty entity document' => [ null, $mock ],
+			$item,
+			true,
 		];
+		yield 'empty item' => [ null, new Item(), true ];
+		yield 'property labels' => [
+			[
+				'en' => [ 'astrological sign', 'zodiac sign' ],
+				'ru' => [ 'знак зодиака' ],
+				'es' => [ '', 'signo zodiacal' ],
+			],
+			$prop,
+			true,
+		];
+		yield 'empty property' => [ null, Property::newFromType( 'string' ), true ];
+		yield 'empty entity document' => [ null, $mock, false ];
 	}
 
 	/**
 	 * @dataProvider  getFieldDataProvider
 	 */
-	public function testLabels( ?array $expected, EntityDocument $entity ) {
+	public function testLabels( ?array $expected, EntityDocument $entity, bool $labelsProvider ) {
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$this->assertSame( $expected, $labels->getFieldData( $entity ) );
+		if ( $labelsProvider ) {
+			$this->assertSame( $expected, $labels->getLabelsIndexedData( $entity ) );
+		}
 	}
 
 	public function testGetMapping() {

@@ -33,18 +33,21 @@ class AllLabelsFieldTest extends MediaWikiIntegrationTestCase {
 		$mock = $this->createMock( EntityDocument::class );
 
 		return [
-			[ $item ],
-			[ $prop ],
-			[ $mock ]
+			[ $item, true ],
+			[ $prop, true ],
+			[ $mock, false ]
 		];
 	}
 
 	/**
 	 * @dataProvider provideFieldData
 	 */
-	public function testGetFieldData( EntityDocument $entity ) {
+	public function testGetFieldData( EntityDocument $entity, bool $labelsProvider ) {
 		$labels = new AllLabelsField();
 		$this->assertNull( $labels->getFieldData( $entity ) );
+		if ( $labelsProvider ) {
+			$this->assertNull( $labels->getLabelsIndexedData( $entity ) );
+		}
 	}
 
 	public function testGetMapping() {

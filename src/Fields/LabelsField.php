@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\LabelsProvider;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class LabelsField extends TermIndexField {
+class LabelsField extends TermIndexField implements WikibaseLabelsIndexField {
 
 	/**
 	 * Field name
@@ -95,6 +95,13 @@ class LabelsField extends TermIndexField {
 		if ( !( $entity instanceof LabelsProvider ) ) {
 			return null;
 		}
+		return $this->getLabelsIndexedData( $entity );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getLabelsIndexedData( LabelsProvider $entity ) {
 		$data = [];
 		foreach ( $entity->getLabels() as $language => $label ) {
 			$data[$language][] = $label->getText();
@@ -128,5 +135,4 @@ class LabelsField extends TermIndexField {
 		}
 		return [ \CirrusSearch\Search\CirrusIndexField::NOOP_HINT => "equals" ];
 	}
-
 }

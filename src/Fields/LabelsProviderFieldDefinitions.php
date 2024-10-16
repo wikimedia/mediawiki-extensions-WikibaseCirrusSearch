@@ -2,6 +2,8 @@
 
 namespace Wikibase\Search\Elastic\Fields;
 
+use InvalidArgumentException;
+use MediaWiki\Config\ConfigFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 
@@ -25,11 +27,20 @@ class LabelsProviderFieldDefinitions implements FieldDefinitions {
 
 	/**
 	 * @param string[] $languageCodes
-	 * @param array $stemmingSettings
+	 * @param ConfigFactory|null $configFactory
 	 */
-	public function __construct( array $languageCodes, array $stemmingSettings = [] ) {
+	public function __construct( array $languageCodes, $configFactory = null ) {
 		$this->languageCodes = $languageCodes;
-		$this->stemmingSettings = $stemmingSettings;
+		if ( $configFactory === null ) {
+			$this->stemmingSettings = [];
+		} elseif ( $configFactory instanceof ConfigFactory ) {
+			$this->stemmingSettings = $configFactory->makeConfig( 'WikibaseCirrusSearch' )
+				->get( 'UseStemming' );
+		} elseif ( is_array( $configFactory ) ) {
+			$this->stemmingSettings = $configFactory; // B/C
+		} else {
+			throw new InvalidArgumentException( 'invalid $configFactory / $stemmingSettings' );
+		}
 	}
 
 	/**

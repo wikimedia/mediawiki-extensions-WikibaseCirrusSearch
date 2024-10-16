@@ -17,7 +17,7 @@ class DescriptionProviderFieldDefinitionsTest extends SearchFieldTestCase {
 	public function testGetFields() {
 		$languageCodes = [ 'ar', 'es' ];
 		$fieldDefinitions = new DescriptionsProviderFieldDefinitions(
-			$languageCodes, []
+			$languageCodes, null
 		);
 
 		$fields = $fieldDefinitions->getFields();

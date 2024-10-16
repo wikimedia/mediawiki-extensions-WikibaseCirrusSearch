@@ -48,10 +48,10 @@ return [
 			);
 		},
 		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
-			$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
+			$configFactory = MediaWikiServices::getInstance()->getConfigFactory();
 			return new ItemFieldDefinitions( [
-				new LabelsProviderFieldDefinitions( $languageCodes, $config->get( 'UseStemming' ) ),
-				new DescriptionsProviderFieldDefinitions( $languageCodes, $config->get( 'UseStemming' ) ),
+				new LabelsProviderFieldDefinitions( $languageCodes, $configFactory ),
+				new DescriptionsProviderFieldDefinitions( $languageCodes, $configFactory ),
 				StatementProviderFieldDefinitions::newFromSettings(
 					new InProcessCachingDataTypeLookup( WikibaseRepo::getPropertyDataTypeLookup() ),
 					WikibaseRepo::getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
@@ -64,10 +64,10 @@ return [
 	'property' => [
 		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$services = MediaWikiServices::getInstance();
-			$config = $services->getConfigFactory()->makeConfig( 'WikibaseCirrusSearch' );
+			$configFactory = $services->getConfigFactory();
 			return new PropertyFieldDefinitions( [
-				new LabelsProviderFieldDefinitions( $languageCodes, $config->get( 'UseStemming' ) ),
-				new DescriptionsProviderFieldDefinitions( $languageCodes, $config->get( 'UseStemming' ) ),
+				new LabelsProviderFieldDefinitions( $languageCodes, $configFactory ),
+				new DescriptionsProviderFieldDefinitions( $languageCodes, $configFactory ),
 				StatementProviderFieldDefinitions::newFromSettings(
 					new InProcessCachingDataTypeLookup(
 						WikibaseRepo::getPropertyDataTypeLookup( $services ) ),

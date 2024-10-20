@@ -2,7 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;

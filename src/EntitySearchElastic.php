@@ -9,7 +9,7 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\DisMax;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Entity\EntityIdParser;

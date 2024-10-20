@@ -4,7 +4,7 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use CirrusSearch\CirrusSearch;
 use CirrusSearch\SearchConfig;
-use ExtensionRegistry;
+use MediaWiki\Registration\ExtensionRegistry;
 use MediaWikiIntegrationTestCase;
 use SearchEngine;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;

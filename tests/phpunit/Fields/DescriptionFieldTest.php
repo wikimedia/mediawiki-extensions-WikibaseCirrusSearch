@@ -2,7 +2,7 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use ExtensionRegistry;
+use MediaWiki\Registration\ExtensionRegistry;
 use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;

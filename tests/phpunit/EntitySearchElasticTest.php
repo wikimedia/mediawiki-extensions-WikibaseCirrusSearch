@@ -4,7 +4,7 @@ namespace Wikibase\Search\Elastic\Tests;
 
 use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\CirrusTestCase;
-use Language;
+use MediaWiki\Language\Language;
 use MediaWiki\Request\FauxRequest;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;

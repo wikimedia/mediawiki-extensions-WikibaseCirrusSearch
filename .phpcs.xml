@@ -2,9 +2,7 @@
 <ruleset>
 	<!--  START Copied from wikibase-codesniffer T268828	-->
 
-	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<exclude name="MediaWiki.Usage.NullableType.ExplicitNullableTypes" />
-	</rule>
+	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki" />
 
 	<!-- The function comment sniff is too rigorous about too many details that need
 		exceptions:

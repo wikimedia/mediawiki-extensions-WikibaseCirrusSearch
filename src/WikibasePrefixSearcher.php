@@ -29,7 +29,7 @@ class WikibasePrefixSearcher extends Searcher {
 	 * @param int $limit Search limit.
 	 * @param CirrusDebugOptions|null $options
 	 */
-	public function __construct( $offset, $limit, CirrusDebugOptions $options = null ) {
+	public function __construct( $offset, $limit, ?CirrusDebugOptions $options = null ) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'CirrusSearch' );
 		/** @var SearchConfig $config */
 		'@phan-var SearchConfig $config';

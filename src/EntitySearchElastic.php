@@ -114,8 +114,8 @@ class EntitySearchElastic implements EntitySearchHelper {
 		EntityIdParser $idParser,
 		Language $userLang,
 		array $contentModelMap,
-		WebRequest $request = null,
-		CirrusDebugOptions $options = null
+		?WebRequest $request = null,
+		?CirrusDebugOptions $options = null
 	) {
 		$this->languageChainFactory = $languageChainFactory;
 		$this->idParser = $idParser;
@@ -291,7 +291,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$entityType,
 		$limit,
 		$strictLanguage,
-		string $profileContext = null
+		?string $profileContext = null
 	) {
 		$profileContext ??= self::CONTEXT_WIKIBASE_PREFIX;
 		$searcher = new WikibasePrefixSearcher( 0, $limit, $this->debugOptions );

@@ -52,7 +52,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		return new PropertyContent();
 	}
 
-	protected function newEntity( EntityId $id = null ) {
+	protected function newEntity( ?EntityId $id = null ) {
 		if ( !$id ) {
 			$id = new NumericPropertyId( 'P7' );
 		}
@@ -73,12 +73,12 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	 *
 	 * @return PropertyHandler
 	 */
-	protected function getHandler( SettingsArray $settings = null ) {
+	protected function getHandler( ?SettingsArray $settings = null ) {
 		$this->getWikibaseRepo( $settings ); // updates services as needed
 		return WikibaseRepo::getPropertyHandler();
 	}
 
-	protected function newEntityContent( EntityDocument $entity = null ): EntityContent {
+	protected function newEntityContent( ?EntityDocument $entity = null ): EntityContent {
 		if ( $entity === null ) {
 			$entity = $this->newEntity();
 		}

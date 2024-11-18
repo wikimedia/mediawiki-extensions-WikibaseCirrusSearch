@@ -28,11 +28,7 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class PropertyHandlerTest extends \MediaWikiIntegrationTestCase {
-
-	protected function setUp(): void {
-		$this->markTestSkipped( 'Temporarily skipping while dataProviders in EntityHandlerTestCase are made static' );
-	}
+class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	/**
 	 * @see EntityHandlerTestCase::getModelId
@@ -45,18 +41,18 @@ class PropertyHandlerTest extends \MediaWikiIntegrationTestCase {
 	/**
 	 * @see EntityHandlerTestCase::contentProvider
 	 */
-	public function contentProvider() {
+	public static function contentProvider(): array {
 		return [];
 	}
 
 	/**
 	 * @return PropertyContent
 	 */
-	protected function newEmptyContent() {
+	protected static function newEmptyContent() {
 		return new PropertyContent();
 	}
 
-	protected function newEntity( ?EntityId $id = null ) {
+	protected static function newEntity( ?EntityId $id = null ) {
 		if ( !$id ) {
 			$id = new NumericPropertyId( 'P7' );
 		}
@@ -66,7 +62,7 @@ class PropertyHandlerTest extends \MediaWikiIntegrationTestCase {
 		return $property;
 	}
 
-	public function entityIdProvider() {
+	public static function entityIdProvider() {
 		return [
 			[ 'P7' ]
 		];
@@ -82,19 +78,19 @@ class PropertyHandlerTest extends \MediaWikiIntegrationTestCase {
 		return WikibaseRepo::getPropertyHandler();
 	}
 
-	protected function newEntityContent( ?EntityDocument $entity = null ): EntityContent {
+	protected static function newEntityContent( ?EntityDocument $entity = null ): EntityContent {
 		if ( $entity === null ) {
-			$entity = $this->newEntity();
+			$entity = self::newEntity();
 		}
 
 		return new PropertyContent( new EntityInstanceHolder( $entity ) );
 	}
 
-	protected function newRedirectContent( EntityId $id, EntityId $target ): ?EntityContent {
+	protected static function newRedirectContent( EntityId $id, EntityId $target ): ?EntityContent {
 		return null;
 	}
 
-	protected function getEntityTypeDefinitionsConfiguration(): array {
+	protected static function getEntityTypeDefinitionsConfiguration(): array {
 		return wfArrayPlus2d(
 			require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
 			parent::getEntityTypeDefinitionsConfiguration()

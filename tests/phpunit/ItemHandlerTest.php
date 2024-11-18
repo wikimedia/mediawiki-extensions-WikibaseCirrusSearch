@@ -33,12 +33,8 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class ItemHandlerTest extends \MediaWikiIntegrationTestCase {
+class ItemHandlerTest extends EntityHandlerTestCase {
 	use WikibaseSearchTestCase;
-
-	protected function setUp(): void {
-		$this->markTestSkipped( 'Temporarily skipping while dataProviders in EntityHandlerTestCase are made static' );
-	}
 
 	/**
 	 * @see EntityHandlerTestCase::getModelId
@@ -51,14 +47,14 @@ class ItemHandlerTest extends \MediaWikiIntegrationTestCase {
 	/**
 	 * @see EntityHandlerTestCase::contentProvider
 	 */
-	public function contentProvider() {
+	public static function contentProvider(): array {
 		return [];
 	}
 
 	/**
 	 * @return ItemContent
 	 */
-	protected function newEmptyContent() {
+	protected static function newEmptyContent() {
 		return new ItemContent();
 	}
 
@@ -67,7 +63,7 @@ class ItemHandlerTest extends \MediaWikiIntegrationTestCase {
 	 *
 	 * @return EntityContent
 	 */
-	protected function newEntityContent( ?EntityDocument $entity = null ): EntityContent {
+	protected static function newEntityContent( ?EntityDocument $entity = null ): EntityContent {
 		if ( !$entity ) {
 			$entity = new Item( new ItemId( 'Q42' ) );
 		}
@@ -75,7 +71,7 @@ class ItemHandlerTest extends \MediaWikiIntegrationTestCase {
 		return new ItemContent( new EntityInstanceHolder( $entity ) );
 	}
 
-	protected function newRedirectContent( EntityId $id, EntityId $target ): EntityContent {
+	protected static function newRedirectContent( EntityId $id, EntityId $target ): EntityContent {
 		$redirect = new EntityRedirect( $id, $target );
 
 		$title = Title::makeTitle( 100, $target->getSerialization() );
@@ -86,13 +82,13 @@ class ItemHandlerTest extends \MediaWikiIntegrationTestCase {
 		return new ItemContent( null, $redirect, $title );
 	}
 
-	public function entityIdProvider() {
+	public static function entityIdProvider() {
 		return [
 			[ 'Q7' ],
 		];
 	}
 
-	protected function newEntity( ?EntityId $id = null ) {
+	protected static function newEntity( ?EntityId $id = null ) {
 		if ( !$id ) {
 			$id = new ItemId( 'Q7' );
 		}
@@ -104,7 +100,7 @@ class ItemHandlerTest extends \MediaWikiIntegrationTestCase {
 		$this->assertTrue( $this->getHandler()->supportsRedirects() );
 	}
 
-	protected function getEntityTypeDefinitionsConfiguration(): array {
+	protected static function getEntityTypeDefinitionsConfiguration(): array {
 		return wfArrayPlus2d(
 			require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
 			parent::getEntityTypeDefinitionsConfiguration()

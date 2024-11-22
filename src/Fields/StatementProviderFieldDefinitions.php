@@ -45,6 +45,11 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 
 	private ?LoggerInterface $logger;
 
+	/**
+	 * @var ?callable
+	 */
+	private $statementProvider;
+
 	public function __construct(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $searchIndexDataFormatters,
@@ -52,7 +57,8 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 		array $indexedTypes,
 		array $excludedIds,
 		array $allowedQualifierPropertyIdsForQuantityStatements,
-		?LoggerInterface $logger = null
+		?LoggerInterface $logger = null,
+		?callable $statementProvider = null
 	) {
 		$this->propertyIds = $propertyIds;
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
@@ -62,6 +68,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 		$this->allowedQualifierPropertyIdsForQuantityStatements =
 			$allowedQualifierPropertyIdsForQuantityStatements;
 		$this->logger = $logger;
+		$this->statementProvider = $statementProvider;
 	}
 
 	/**
@@ -76,7 +83,8 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 				$this->indexedTypes,
 				$this->excludedIds,
 				$this->searchIndexDataFormatters,
-				$this->logger
+				$this->logger,
+				$this->statementProvider
 			),
 			StatementCountField::NAME => new StatementCountField(),
 		];
@@ -100,20 +108,23 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @param callable[] $searchIndexDataFormatters
 	 * @param SettingsArray $settings
 	 * @param LoggerInterface|null $logger
+	 * @param ?callable $statementProvider
 	 * @return StatementProviderFieldDefinitions
 	 */
 	public static function newFromSettings(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $searchIndexDataFormatters,
 		SettingsArray $settings,
-		?LoggerInterface $logger = null
+		?LoggerInterface $logger = null,
+		?callable $statementProvider = null
 	) {
 		return new static( $propertyDataTypeLookup, $searchIndexDataFormatters,
 			$settings->getSetting( 'searchIndexProperties' ),
 			$settings->getSetting( 'searchIndexTypes' ),
 			$settings->getSetting( 'searchIndexPropertiesExclude' ),
 			$settings->getSetting( 'searchIndexQualifierPropertiesForQuantity' ),
-			$logger
+			$logger,
+			$statementProvider
 		);
 	}
 

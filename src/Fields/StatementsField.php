@@ -69,6 +69,12 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 */
 	private $excludedIds;
 
+	/**
+	 * @var ?callable Accepts an EntityDocument and returns an
+	 *  iterable of Statement instances to index.
+	 */
+	private $statementProvider;
+
 	private LoggerInterface $logger;
 
 	/**
@@ -78,6 +84,8 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 *      indexed regardless of $propertyIds.
 	 * @param string[] $excludedIds List of property IDs to exclude.
 	 * @param callable[] $searchIndexDataFormatters Search formatters, indexed by data type name
+	 * @param ?callable $statementProvider Callable that accepts an EntityDocument and returns
+	 *      an iterable containing Statement instances to index.
 	 */
 	public function __construct(
 		PropertyDataTypeLookup $propertyDataTypeLookup,
@@ -85,7 +93,8 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		array $indexedTypes,
 		array $excludedIds,
 		array $searchIndexDataFormatters,
-		?LoggerInterface $logger = null
+		?LoggerInterface $logger = null,
+		?callable $statementProvider = null
 	) {
 		parent::__construct( static::NAME, SearchIndexField::INDEX_TYPE_KEYWORD );
 
@@ -94,6 +103,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->excludedIds = array_flip( $excludedIds );
+		$this->statementProvider = $statementProvider;
 		$this->logger = $logger ?? new NullLogger();
 	}
 
@@ -114,6 +124,18 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		return $this;
 	}
 
+	private function getStatements( EntityDocument $entity ) {
+		if ( $this->statementProvider !== null ) {
+			return call_user_func( $this->statementProvider, $entity );
+		}
+
+		if ( $entity instanceof StatementListProvider ) {
+			return $entity->getStatements();
+		}
+
+		return [];
+	}
+
 	/**
 	 * @param EntityDocument $entity
 	 *
@@ -122,16 +144,12 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 *               is defined with nested type or an int or string for simple field types.
 	 */
 	public function getFieldData( EntityDocument $entity ) {
-		if ( !( $entity instanceof StatementListProvider ) ) {
-			return [];
-		}
-
 		$data = [];
 		$seen = [];
 		$skipped = [];
 
 		/** @var Statement $statement */
-		foreach ( $entity->getStatements() as $statement ) {
+		foreach ( $this->getStatements( $entity ) as $statement ) {
 			$snak = $statement->getMainSnak();
 			$mainSnakString = $this->getWhitelistedSnakAsString( $snak, $statement->getGuid() );
 			$propertyId = $snak->getPropertyId()->getSerialization();

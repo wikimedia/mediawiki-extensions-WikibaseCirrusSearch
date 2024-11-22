@@ -6,11 +6,13 @@ use DataValues\BooleanValue;
 use DataValues\StringValue;
 use DataValues\UnboundedQuantityValue;
 use MediaWikiIntegrationTestCase;
+use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
+use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
 use Wikibase\Repo\Tests\ChangeOp\StatementListProviderDummy;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
@@ -128,6 +130,28 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 		$field = new StatementsField( $lookup, $this->properties, [ 'wikibase-item', 'url' ], [ 'P11' ],
 			WikibaseRepo::getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
+	}
+
+	public function testStatementProvider() {
+		$entity = new StatementListProviderDummy( "Q1" );
+		$entity->getStatements()->addNewStatement(
+			new PropertyValueSnak( 123, new StringValue( 'testString' ) ) );
+
+		$lookup = $this->getPropertyTypeLookup( [
+			'P123' => 'string',
+		] );
+		$formatters = [
+			'string' => static function ( StringValue $s ) {
+				return $s->getValue();
+			},
+		];
+		$statementProvider = static function ( EntityDocument $entity ) {
+			// Not the actual intent, but proves this callable gets to choose the set of indexed statements.
+			return [ new Statement( new PropertyValueSnak( 123, new StringValue( 'override' ) ) ) ];
+		};
+		$field = new StatementsField( $lookup, [ 'P123' ], [], [], $formatters, null, $statementProvider );
+		$data = $field->getFieldData( $entity );
+		$this->assertEquals( [ 'P123=override' ], $data );
 	}
 
 	public function testFormatters() {

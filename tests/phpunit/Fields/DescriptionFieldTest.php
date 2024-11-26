@@ -33,41 +33,46 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 
 		$mock = $this->createMock( EntityDocument::class );
 
-		return [
-			'item descriptions' => [
-				[
-					'es' => [ 'Gato' ],
-					'ru' => [ 'Кошка' ],
-					'de' => [ 'Katze' ],
-					'fr' => [ 'Chat' ],
-				],
-				$item
+		yield 'item descriptions' => [
+			[
+				'es' => [ 'Gato' ],
+				'ru' => [ 'Кошка' ],
+				'de' => [ 'Katze' ],
+				'fr' => [ 'Chat' ],
 			],
-			'empty item' => [
-				null,
-				new Item()
-			],
-			'property descriptions' => [
-				[
-					'en' => [ 'astrological sign' ],
-					'ru' => [ 'знак зодиака' ],
-				],
-				$prop
-			],
-			'empty property' => [
-				null,
-				Property::newFromType( 'string' )
-			],
-			'plain entity document' => [ null, $mock ],
+			$item,
+			true,
 		];
+		yield 'empty item' => [
+			null,
+			new Item(),
+			true,
+		];
+		yield 'property descriptions' => [
+			[
+				'en' => [ 'astrological sign' ],
+				'ru' => [ 'знак зодиака' ],
+			],
+			$prop,
+			true,
+		];
+		yield 'empty property' => [
+			null,
+			Property::newFromType( 'string' ),
+			true,
+		];
+		yield 'plain entity document' => [ null, $mock, false ];
 	}
 
 	/**
 	 * @dataProvider  getFieldDataProvider
 	 */
-	public function testDescriptions( ?array $expected, EntityDocument $entity ) {
+	public function testDescriptions( ?array $expected, EntityDocument $entity, bool $descriptionsProvider ) {
 		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$this->assertSame( $expected, $labels->getFieldData( $entity ) );
+		if ( $descriptionsProvider ) {
+			$this->assertSame( $expected, $labels->getDescriptionsIndexedData( $entity ) );
+		}
 	}
 
 	public function testGetMapping() {

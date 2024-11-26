@@ -13,7 +13,7 @@ use Wikibase\DataModel\Term\DescriptionsProvider;
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class DescriptionsField extends TermIndexField {
+class DescriptionsField extends TermIndexField implements WikibaseDescriptionsIndexField {
 
 	/**
 	 * Field name
@@ -83,6 +83,10 @@ class DescriptionsField extends TermIndexField {
 		if ( !( $entity instanceof DescriptionsProvider ) ) {
 			return null;
 		}
+		return $this->getDescriptionsIndexedData( $entity );
+	}
+
+	public function getDescriptionsIndexedData( DescriptionsProvider $entity ) {
 		$data = [];
 		foreach ( $entity->getDescriptions() as $language => $desc ) {
 			// While wikibase can only have a single description,

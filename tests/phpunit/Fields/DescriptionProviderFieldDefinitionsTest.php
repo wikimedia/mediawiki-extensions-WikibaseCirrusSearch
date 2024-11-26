@@ -4,6 +4,7 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use Wikibase\Search\Elastic\Fields\DescriptionsField;
 use Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
+use Wikibase\Search\Elastic\Fields\WikibaseDescriptionsIndexField;
 
 /**
  * @covers \Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions
@@ -23,6 +24,7 @@ class DescriptionProviderFieldDefinitionsTest extends SearchFieldTestCase {
 		$fields = $fieldDefinitions->getFields();
 		$this->assertArrayHasKey( 'descriptions', $fields );
 		$this->assertInstanceOf( DescriptionsField::class, $fields['descriptions'] );
+		$this->assertContainsOnlyInstancesOf( WikibaseDescriptionsIndexField::class, $fields );
 
 		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 		$searchEngine = $this->getSearchEngineMock();

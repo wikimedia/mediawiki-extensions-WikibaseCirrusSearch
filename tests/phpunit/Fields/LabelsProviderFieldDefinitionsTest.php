@@ -32,9 +32,7 @@ class LabelsProviderFieldDefinitionsTest extends SearchFieldTestCase {
 		$this->assertInstanceOf( LabelsField::class, $fields['labels'] );
 		$this->assertArrayHasKey( 'labels_all', $fields );
 		$this->assertInstanceOf( AllLabelsField::class, $fields['labels_all'] );
-		foreach ( $fields as $field ) {
-			$this->assertInstanceOf( WikibaseLabelsIndexField::class, $field );
-		}
+		$this->assertContainsOnlyInstancesOf( WikibaseLabelsIndexField::class, $fields );
 
 		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 		$searchEngine = $this->getSearchEngineMock();

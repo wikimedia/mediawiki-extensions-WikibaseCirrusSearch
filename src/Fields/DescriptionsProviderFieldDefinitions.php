@@ -4,7 +4,6 @@ namespace Wikibase\Search\Elastic\Fields;
 
 use MediaWiki\Config\ConfigFactory;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
-use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 
 /**
  * Definitions for any entity that has descriptions.
@@ -38,7 +37,7 @@ class DescriptionsProviderFieldDefinitions implements FieldDefinitions {
 	}
 
 	/**
-	 * @return WikibaseIndexField[]
+	 * @return WikibaseDescriptionsIndexField[]
 	 */
 	public function getFields() {
 		return [

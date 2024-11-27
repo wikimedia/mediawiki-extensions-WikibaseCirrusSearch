@@ -3,6 +3,7 @@ namespace Wikibase\Search\Elastic;
 
 use Elastica\Query\ConstantScore;
 use Elastica\Query\MatchQuery;
+use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Term\Term;
@@ -39,17 +40,32 @@ final class EntitySearchUtils {
 	 * @return string Normalized ID or original string
 	 */
 	public static function normalizeId( $text, EntityIdParser $idParser ) {
+		return self::normalizeIdFromSearchQuery( $text, self::entityIdParserNormalizer( $idParser ) );
+	}
+
+	/**
+	 * If the text looks like ID, normalize it to ID title
+	 * Cases handled:
+	 * - q42
+	 * - (q42)
+	 * - leading/trailing spaces
+	 * - http://www.wikidata.org/entity/Q42
+	 * @param string $text
+	 * @param callable(string):(string|null) $idNormalizer
+	 * @return string Normalized ID or original string
+	 */
+	public static function normalizeIdFromSearchQuery( $text, callable $idNormalizer ) {
 		// TODO: this is a bit hacky, better way would be to make the field case-insensitive
 		// or add new subfiled which is case-insensitive
 		$text = strtoupper( str_replace( [ '(', ')' ], '', trim( $text ) ) );
-		$id = self::parseOrNull( $text, $idParser );
-		if ( $id ) {
-			return $id->getSerialization();
+		$id = $idNormalizer( $text );
+		if ( $id !== null ) {
+			return $id;
 		}
 		if ( preg_match( '/\b(\w+)$/', $text, $matches ) && $matches[1] ) {
-			$id = self::parseOrNull( $matches[1], $idParser );
-			if ( $id ) {
-				return $id->getSerialization();
+			$id = $idNormalizer( $matches[1] );
+			if ( $id !== null ) {
+				return $id;
 			}
 		}
 		return $text;
@@ -59,15 +75,31 @@ final class EntitySearchUtils {
 	 * Parse entity ID or return null
 	 * @param string $text
 	 * @param EntityIdParser $idParser
-	 * @return null|\Wikibase\DataModel\Entity\EntityId
+	 * @return ?EntityId
 	 */
-	public static function parseOrNull( $text, EntityIdParser $idParser ) {
+	public static function parseOrNull( $text, EntityIdParser $idParser ): ?EntityId {
 		try {
 			$id = $idParser->parse( $text );
 		} catch ( EntityIdParsingException $ex ) {
 			return null;
 		}
 		return $id;
+	}
+
+	/**
+	 * An id normalizer based on a given EntityIdParser.
+	 *
+	 * @param EntityIdParser $idParser
+	 * @return callable(string):(string|null)
+	 */
+	public static function entityIdParserNormalizer( EntityIdParser $idParser ): callable {
+		return static function ( string $text ) use ( $idParser ): ?string {
+			$id = EntitySearchUtils::parseOrNull( $text, $idParser );
+			if ( $id === null ) {
+				return null;
+			}
+			return $id->getSerialization();
+		};
 	}
 
 	/**

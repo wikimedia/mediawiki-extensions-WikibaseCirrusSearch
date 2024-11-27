@@ -13,6 +13,7 @@ use Wikibase\Search\Elastic\EntitySearchElastic;
 
 /**
  * @covers \Wikibase\Search\Elastic\EntitySearchElastic
+ * @covers \Wikibase\Search\Elastic\Query\LabelsCompletionQuery
  *
  * @group Wikibase
  *

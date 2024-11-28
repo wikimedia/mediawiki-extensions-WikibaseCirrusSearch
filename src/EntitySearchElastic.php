@@ -178,7 +178,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$query = $this->getElasticSearchQuery( $text, $languageCode, $entityType, $strictLanguage,
 				$searcher->getSearchContext() );
 
-		$searcher->setResultsType( new ElasticTermResult(
+		$searcher->setResultsType( new EntityElasticTermResult(
 			$this->idParser,
 			$query instanceof LabelsCompletionQuery ? $query->getSearchLanguageCodes() : [],
 			$this->languageChainFactory->newFromLanguage( $this->userLang )

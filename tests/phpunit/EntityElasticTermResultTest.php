@@ -7,17 +7,18 @@ use Elastica\ResultSet;
 use MediaWikiIntegrationTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Search\Elastic\ElasticTermResult;
+use Wikibase\Search\Elastic\EntityElasticTermResult;
 
 /**
  * @covers \Wikibase\Search\Elastic\ElasticTermResult
+ * @covers \Wikibase\Search\Elastic\EntityElasticTermResult
  *
  * @group Wikibase
  *
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class ElasticTermResultTest extends MediaWikiIntegrationTestCase {
+class EntityElasticTermResultTest extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
 	public static function termResultsProvider() {
@@ -342,7 +343,7 @@ class ElasticTermResultTest extends MediaWikiIntegrationTestCase {
 	 * @dataProvider termResultsProvider
 	 */
 	public function testTransformResult( array $languages, array $displayLanguages, array $resultData, array $expected ) {
-		$res = new ElasticTermResult(
+		$res = new EntityElasticTermResult(
 			new BasicEntityIdParser(),
 			$languages,
 			$this->getMockFallbackChain( $displayLanguages )

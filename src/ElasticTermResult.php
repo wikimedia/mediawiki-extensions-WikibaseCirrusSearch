@@ -3,8 +3,6 @@
 namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Search\BaseResultsType;
-use Wikibase\DataModel\Entity\EntityIdParser;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\TermLanguageFallbackChain;
@@ -13,18 +11,19 @@ use Wikibase\Search\Elastic\Fields\LabelsField;
 
 /**
  * This result type implements the result for searching
- * a Wikibase entity by its {@link LabelsField label or alias}
+ * an entity by its {@link LabelsField label or alias}
  * (also showing {@link DescriptionsField descriptions}).
+ *
+ * Fully implemented by {@link EntityElasticTermResult} for Wikibase entities.
+ * May also be used by other extensions,
+ * provided they use those same fields
+ * (via {@link \Wikibase\Search\Elastic\Fields\LabelsProviderFieldDefinitions LabelsProviderFieldDefinitions}
+ * and {@link \Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions DescriptionsProviderFieldDefinitions}).
  *
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
  */
-class ElasticTermResult extends BaseResultsType {
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
+abstract class ElasticTermResult extends BaseResultsType {
 
 	/**
 	 * List of language codes in the search fallback chain, the first
@@ -40,16 +39,13 @@ class ElasticTermResult extends BaseResultsType {
 	private $termFallbackChain;
 
 	/**
-	 * @param EntityIdParser $idParser
 	 * @param string[] $searchLanguageCodes Language fallback chain for search
 	 * @param TermLanguageFallbackChain $displayFallbackChain Fallback chain for display
 	 */
 	public function __construct(
-		EntityIdParser $idParser,
 		array $searchLanguageCodes,
 		TermLanguageFallbackChain $displayFallbackChain
 	) {
-		$this->idParser = $idParser;
 		$this->searchLanguageCodes = $searchLanguageCodes;
 		$this->termFallbackChain = $displayFallbackChain;
 	}
@@ -131,12 +127,6 @@ class ElasticTermResult extends BaseResultsType {
 		$results = [];
 		foreach ( $result->getResults() as $r ) {
 			$sourceData = $r->getSource();
-			try {
-				$entityId = $this->idParser->parse( $sourceData['title'] );
-			} catch ( EntityIdParsingException $e ) {
-				// Can not parse entity ID - skip it
-				continue;
-			}
 
 			// Highlight part contains information about what has actually been matched.
 			$highlight = $r->getHighlights();
@@ -161,14 +151,28 @@ class ElasticTermResult extends BaseResultsType {
 				$displayLabel = $matchedTerm;
 			}
 
-			$results[$entityId->getSerialization()] = new TermSearchResult(
-				$matchedTerm, $matchedTermType, $entityId, $displayLabel,
-				$displayDescription
+			$termSearchResult = $this->getTermSearchResult(
+				$sourceData, $matchedTerm, $matchedTermType, $displayLabel, $displayDescription
 			);
+			if ( $termSearchResult !== null ) {
+				$results[$termSearchResult->getEntityIdSerialization()] = $termSearchResult;
+			}
 		}
 
 		return $results;
 	}
+
+	/**
+	 * Turn the given result data into a {@link TermSearchResult}
+	 * (or skip this result if null is returned).
+	 */
+	abstract protected function getTermSearchResult(
+		array $sourceData,
+		Term $matchedTerm,
+		string $matchedTermType,
+		?Term $displayLabel,
+		?Term $displayDescription
+	): ?TermSearchResult;
 
 	/**
 	 * New highlighter pattern.

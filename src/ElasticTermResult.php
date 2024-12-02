@@ -8,10 +8,13 @@ use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Search\Elastic\Fields\DescriptionsField;
+use Wikibase\Search\Elastic\Fields\LabelsField;
 
 /**
  * This result type implements the result for searching
- * a Wikibase entity by its label or alias.
+ * a Wikibase entity by its {@link LabelsField label or alias}
+ * (also showing {@link DescriptionsField descriptions}).
  *
  * @license GPL-2.0-or-later
  * @author Stas Malyshev
@@ -59,8 +62,8 @@ class ElasticTermResult extends BaseResultsType {
 	public function getSourceFiltering() {
 		$fields = parent::getSourceFiltering();
 		foreach ( $this->termFallbackChain->getFetchLanguageCodes() as $code ) {
-			$fields[] = "labels.$code";
-			$fields[] = "descriptions.$code";
+			$fields[] = LabelsField::NAME . '.' . $code;
+			$fields[] = DescriptionsField::NAME . '.' . $code;
 		}
 		return $fields;
 	}
@@ -94,8 +97,9 @@ class ElasticTermResult extends BaseResultsType {
 			'number_of_fragments' => 0,
 			'matched_fields' => [ 'title.keyword' ]
 		];
+		$labelsName = LabelsField::NAME;
 		foreach ( $this->searchLanguageCodes as $code ) {
-			$config['fields']["labels.$code.prefix"] = [
+			$config['fields']["$labelsName.$code.prefix"] = [
 				'type' => 'experimental',
 				'fragmenter' => "none",
 				'number_of_fragments' => 0,
@@ -105,7 +109,7 @@ class ElasticTermResult extends BaseResultsType {
 				],
 			];
 		}
-		$config['fields']['labels.*.prefix'] = [
+		$config['fields']["$labelsName.*.prefix"] = [
 			'type' => 'experimental',
 			'fragmenter' => "none",
 			'number_of_fragments' => 0,
@@ -136,8 +140,8 @@ class ElasticTermResult extends BaseResultsType {
 
 			// Highlight part contains information about what has actually been matched.
 			$highlight = $r->getHighlights();
-			$displayLabel = EntitySearchUtils::findTermForDisplay( $sourceData, 'labels', $this->termFallbackChain );
-			$displayDescription = EntitySearchUtils::findTermForDisplay( $sourceData, 'descriptions', $this->termFallbackChain );
+			$displayLabel = EntitySearchUtils::findTermForDisplay( $sourceData, LabelsField::NAME, $this->termFallbackChain );
+			$displayDescription = EntitySearchUtils::findTermForDisplay( $sourceData, DescriptionsField::NAME, $this->termFallbackChain );
 
 			if ( !empty( $highlight['title'] ) ) {
 				// If we matched title, this means it's a match by ID
@@ -192,7 +196,7 @@ class ElasticTermResult extends BaseResultsType {
 		$term = reset( $highlight ); // Take the first one
 		$term = $term[0]; // Highlighter returns array
 		$field = key( $highlight );
-		if ( preg_match( '/^labels\.([^.]+)\.prefix$/', $field, $match ) ) {
+		if ( preg_match( '/^' . preg_quote( LabelsField::NAME ) . '\.([^.]+)\.prefix$/', $field, $match ) ) {
 			$langCode = $match[1];
 			if ( preg_match( self::HIGHLIGHT_PATTERN, $term, $termMatch ) ) {
 				$isFirst = ( $term[0] === '0' );
@@ -200,11 +204,11 @@ class ElasticTermResult extends BaseResultsType {
 			} else {
 				$isFirst = true;
 			}
-			if ( !empty( $sourceData['labels'][$langCode] ) ) {
+			if ( !empty( $sourceData[LabelsField::NAME][$langCode] ) ) {
 				// Here we have match in one of the languages we asked for.
 				// Primary label always comes first, so if it's not the first one,
 				// it's an alias.
-				if ( $sourceData['labels'][$langCode][0] !== $term ) {
+				if ( $sourceData[LabelsField::NAME][$langCode][0] !== $term ) {
 					$matchedTermType = 'alias';
 				}
 			} else {

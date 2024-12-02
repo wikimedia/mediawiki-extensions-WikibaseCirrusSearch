@@ -31,7 +31,7 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 	/** @var string[] */
 	private $propertiesForQuantity = [ 'P6' ];
 
-	public function statementsProvider() {
+	public static function statementsProvider() {
 		return [
 			'not a StatementListProvider' => [
 				null, // mock EntityDocument

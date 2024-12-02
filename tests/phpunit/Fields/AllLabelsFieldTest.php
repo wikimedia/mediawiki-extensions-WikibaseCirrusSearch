@@ -23,26 +23,25 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 class AllLabelsFieldTest extends MediaWikiIntegrationTestCase {
 	use WikibaseSearchTestCase;
 
-	public function provideFieldData() {
+	public static function provideFieldData() {
 		$item = new Item();
 		$item->getFingerprint()->setLabel( 'es', 'Gato' );
 
 		$prop = Property::newFromType( 'string' );
 		$prop->getFingerprint()->setLabel( 'en', 'astrological sign' );
 
-		$mock = $this->createMock( EntityDocument::class );
-
 		return [
 			[ $item, true ],
 			[ $prop, true ],
-			[ $mock, false ]
+			[ null, false ]
 		];
 	}
 
 	/**
 	 * @dataProvider provideFieldData
 	 */
-	public function testGetFieldData( EntityDocument $entity, bool $labelsProvider ) {
+	public function testGetFieldData( ?EntityDocument $entity, bool $labelsProvider ) {
+		$entity ??= $this->createMock( EntityDocument::class );
 		$labels = new AllLabelsField();
 		$this->assertNull( $labels->getFieldData( $entity ) );
 		if ( $labelsProvider ) {

@@ -25,7 +25,7 @@ class SiteLinkCountFieldTest extends WikibaseNumericFieldTestCase {
 		return new SiteLinkCountField();
 	}
 
-	public function getFieldDataProvider() {
+	public static function getFieldDataProvider() {
 		$item = new Item();
 		$item->getSiteLinkList()->addNewSiteLink( 'enwiki', 'Kitten' );
 		$item->getSiteLinkList()->addNewSiteLink( 'eswiki', 'Gato' );

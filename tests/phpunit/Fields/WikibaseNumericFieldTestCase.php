@@ -44,7 +44,7 @@ abstract class WikibaseNumericFieldTestCase extends MediaWikiIntegrationTestCase
 		$this->assertSame( $expected, $labelCountField->getFieldData( $entity ) );
 	}
 
-	abstract public function getFieldDataProvider();
+	abstract public static function getFieldDataProvider();
 
 	/**
 	 * @return WikibaseNumericField

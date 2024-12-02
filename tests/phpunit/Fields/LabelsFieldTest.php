@@ -22,7 +22,7 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 class LabelsFieldTest extends SearchFieldTestCase {
 	use WikibaseSearchTestCase;
 
-	public function getFieldDataProvider() {
+	public static function getFieldDataProvider() {
 		$item = new Item();
 		$item->getFingerprint()->setLabel( 'es', 'Gato' );
 		$item->getFingerprint()->setLabel( 'ru', 'Кошка' );
@@ -34,8 +34,6 @@ class LabelsFieldTest extends SearchFieldTestCase {
 		$prop->getFingerprint()->setLabel( 'ru', 'знак зодиака' );
 		$prop->getFingerprint()->setAliasGroup( 'en', [ 'zodiac sign' ] );
 		$prop->getFingerprint()->setAliasGroup( 'es', [ 'signo zodiacal' ] );
-
-		$mock = $this->createMock( EntityDocument::class );
 
 		yield 'item labels' => [
 			[
@@ -58,13 +56,14 @@ class LabelsFieldTest extends SearchFieldTestCase {
 			true,
 		];
 		yield 'empty property' => [ null, Property::newFromType( 'string' ), true ];
-		yield 'empty entity document' => [ null, $mock, false ];
+		yield 'empty entity document' => [ null, null, false ];
 	}
 
 	/**
 	 * @dataProvider  getFieldDataProvider
 	 */
-	public function testLabels( ?array $expected, EntityDocument $entity, bool $labelsProvider ) {
+	public function testLabels( ?array $expected, ?EntityDocument $entity, bool $labelsProvider ) {
+		$entity ??= $this->createMock( EntityDocument::class );
 		$labels = new LabelsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$this->assertSame( $expected, $labels->getFieldData( $entity ) );
 		if ( $labelsProvider ) {

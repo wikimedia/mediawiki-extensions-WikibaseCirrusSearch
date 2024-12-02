@@ -26,7 +26,7 @@ class StatementCountFieldTest extends WikibaseNumericFieldTestCase {
 		return new StatementCountField();
 	}
 
-	public function getFieldDataProvider() {
+	public static function getFieldDataProvider() {
 		$item = new Item();
 		$item->getStatements()->addNewStatement( new PropertyNoValueSnak( 1 ) );
 

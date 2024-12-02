@@ -20,7 +20,7 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 class DescriptionFieldTest extends SearchFieldTestCase {
 	use WikibaseSearchTestCase;
 
-	public function getFieldDataProvider() {
+	public static function getFieldDataProvider() {
 		$item = new Item();
 		$item->getFingerprint()->setDescription( 'es', 'Gato' );
 		$item->getFingerprint()->setDescription( 'ru', 'Кошка' );
@@ -30,8 +30,6 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 		$prop = Property::newFromType( 'string' );
 		$prop->getFingerprint()->setDescription( 'en', 'astrological sign' );
 		$prop->getFingerprint()->setDescription( 'ru', 'знак зодиака' );
-
-		$mock = $this->createMock( EntityDocument::class );
 
 		yield 'item descriptions' => [
 			[
@@ -61,13 +59,14 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 			Property::newFromType( 'string' ),
 			true,
 		];
-		yield 'plain entity document' => [ null, $mock, false ];
+		yield 'plain entity document' => [ null, null, false ];
 	}
 
 	/**
 	 * @dataProvider  getFieldDataProvider
 	 */
-	public function testDescriptions( ?array $expected, EntityDocument $entity, bool $descriptionsProvider ) {
+	public function testDescriptions( ?array $expected, ?EntityDocument $entity, bool $descriptionsProvider ) {
+		$entity ??= $this->createMock( EntityDocument::class );
 		$labels = new DescriptionsField( [ 'en', 'es', 'ru', 'de' ], [] );
 		$this->assertSame( $expected, $labels->getFieldData( $entity ) );
 		if ( $descriptionsProvider ) {

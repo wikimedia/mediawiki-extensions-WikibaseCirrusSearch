@@ -85,8 +85,7 @@ class WikibasePrefixSearcher extends Searcher {
 
 		// TODO: this probably needs to go to Searcher API.
 		foreach ( $this->searchContext->getWarnings() as $warning ) {
-			// $warning is a parameter array
-			call_user_func_array( [ $status, 'warning' ], $warning );
+			$status->warning( ...$warning );
 		}
 
 		return $status;
@@ -95,9 +94,10 @@ class WikibasePrefixSearcher extends Searcher {
 	/**
 	 * Add warning message about something in search.
 	 * @param string $message i18n message key
+	 * @param mixed ...$params
 	 */
-	public function addWarning( $message /*, parameters... */ ) {
-		call_user_func_array( [ $this->searchContext, 'addWarning' ], func_get_args() );
+	public function addWarning( $message, ...$params ) {
+		$this->searchContext->addWarning( $message, ...$params );
 	}
 
 }

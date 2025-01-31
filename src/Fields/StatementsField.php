@@ -126,7 +126,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 
 	private function getStatements( EntityDocument $entity ) {
 		if ( $this->statementProvider !== null ) {
-			return call_user_func( $this->statementProvider, $entity );
+			return ( $this->statementProvider )( $entity );
 		}
 
 		if ( $entity instanceof StatementListProvider ) {

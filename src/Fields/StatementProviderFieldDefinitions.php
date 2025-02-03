@@ -8,7 +8,6 @@ use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Fields\WikibaseIndexField;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Fields for an object that has statements.
@@ -112,24 +111,6 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 		return $fields;
 	}
 
-	public static function newFromSettings( ...$args ) {
-		if ( $args[0] instanceof DataTypeFactory ) {
-			// new-style call
-			// @phan-suppress-next-line PhanParamTooFewUnpack
-			return static::realNewFromSettings( ...$args );
-		} else {
-			// old-style call, summon a $dataTypeFactory out of thin air
-			if ( defined( 'MW_PHPUNIT_TEST' ) ) {
-				// *super* ugly, avoid accessing service container here
-				$dataTypeFactory = new DataTypeFactory( [] );
-			} else {
-				$dataTypeFactory = WikibaseRepo::getDataTypeFactory();
-			}
-			// @phan-suppress-next-line PhanParamTooFewUnpack
-			return static::realNewFromSettings( $dataTypeFactory, ...$args );
-		}
-	}
-
 	/**
 	 * Factory to create StatementProviderFieldDefinitions from configs
 	 * @param DataTypeFactory$dataTypeFactory
@@ -140,7 +121,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @param ?callable $statementProvider
 	 * @return StatementProviderFieldDefinitions
 	 */
-	private static function realNewFromSettings(
+	public static function newFromSettings(
 		DataTypeFactory $dataTypeFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $searchIndexDataFormatters,

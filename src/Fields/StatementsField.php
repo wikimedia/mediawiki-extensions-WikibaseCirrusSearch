@@ -3,6 +3,7 @@
 namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
+use OutOfBoundsException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SearchEngine;
@@ -16,6 +17,7 @@ use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Snak\Snak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 
 /**
@@ -64,6 +66,12 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @var PropertyDataTypeLookup
 	 */
 	private $propertyDataTypeLookup;
+
+	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
+
 	/**
 	 * @var array
 	 */
@@ -88,6 +96,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 *      an iterable containing Statement instances to index.
 	 */
 	public function __construct(
+		DataTypeFactory $dataTypeFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $propertyIds,
 		array $indexedTypes,
@@ -101,6 +110,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		$this->propertyIds = array_flip( $propertyIds );
 		$this->indexedTypes = array_flip( $indexedTypes );
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
+		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->excludedIds = array_flip( $excludedIds );
 		$this->statementProvider = $statementProvider;
@@ -198,9 +208,19 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		} catch ( PropertyDataTypeLookupException $e ) {
 			return null;
 		}
+		try {
+			$dataType = $this->dataTypeFactory->getType( $propType );
+		} catch ( OutOfBoundsException $e ) {
+			return null;
+		}
 
 		/* @phan-suppress-next-line PhanUndeclaredMethod */
 		$dataValue = $snak->getDataValue();
+		if ( $dataValue::getType() !== $dataType->getDataValueType() ) {
+			// Property type and data value type do not match (T372993)
+			return null;
+		}
+
 		$formatter = $this->searchIndexDataFormatters[$propType] ?? null;
 		if ( $formatter === null ) {
 			// We do not know how to format these values

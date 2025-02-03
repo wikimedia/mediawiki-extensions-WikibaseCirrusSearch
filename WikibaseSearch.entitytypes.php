@@ -48,15 +48,19 @@ return [
 			);
 		},
 		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
-			$configFactory = MediaWikiServices::getInstance()->getConfigFactory();
+			$services = MediaWikiServices::getInstance();
+			$configFactory = $services->getConfigFactory();
 			return new ItemFieldDefinitions( [
 				new LabelsProviderFieldDefinitions( $languageCodes, $configFactory ),
 				new DescriptionsProviderFieldDefinitions( $languageCodes, $configFactory ),
 				StatementProviderFieldDefinitions::newFromSettings(
-					new InProcessCachingDataTypeLookup( WikibaseRepo::getPropertyDataTypeLookup() ),
-					WikibaseRepo::getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks(),
+					WikibaseRepo::getDataTypeFactory( $services ),
+					new InProcessCachingDataTypeLookup(
+						WikibaseRepo::getPropertyDataTypeLookup( $services ) ),
+					WikibaseRepo::getDataTypeDefinitions( $services )
+						->getSearchIndexDataFormatterCallbacks(),
 					$searchSettings,
-					WikibaseRepo::getLogger()
+					WikibaseRepo::getLogger( $services )
 				)
 			] );
 		},
@@ -70,6 +74,7 @@ return [
 				new LabelsProviderFieldDefinitions( $languageCodes, $configFactory ),
 				new DescriptionsProviderFieldDefinitions( $languageCodes, $configFactory ),
 				StatementProviderFieldDefinitions::newFromSettings(
+					WikibaseRepo::getDataTypeFactory( $services ),
 					new InProcessCachingDataTypeLookup(
 						WikibaseRepo::getPropertyDataTypeLookup( $services ) ),
 					WikibaseRepo::getDataTypeDefinitions( $services )

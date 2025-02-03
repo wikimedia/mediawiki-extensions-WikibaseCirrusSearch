@@ -3,6 +3,7 @@
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
@@ -29,8 +30,11 @@ class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 		$fieldDefinitions = new ItemFieldDefinitions( [
 			$this->newLabelsProviderFieldDefinitions( $languageCodes ),
 			$this->newDescriptionsProviderFieldDefinitions( $languageCodes ),
-			new StatementProviderFieldDefinitions( $this->createMock( PropertyDataTypeLookup::class ),
-				[], [], [], [], [] ),
+			new StatementProviderFieldDefinitions(
+				new DataTypeFactory( [] ),
+				$this->createMock( PropertyDataTypeLookup::class ),
+				[], [], [], [], []
+			),
 		] );
 
 		$fields = $fieldDefinitions->getFields();

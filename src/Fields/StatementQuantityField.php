@@ -10,6 +10,7 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementListProvider;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 
 /**
@@ -41,6 +42,7 @@ class StatementQuantityField extends StatementsField implements WikibaseIndexFie
 	 * 	qualifier is in this list
 	 */
 	public function __construct(
+		DataTypeFactory $dataTypeFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $propertyIds,
 		array $indexedTypes,
@@ -50,6 +52,7 @@ class StatementQuantityField extends StatementsField implements WikibaseIndexFie
 		?LoggerInterface $logger = null
 	) {
 		parent::__construct(
+			$dataTypeFactory,
 			$propertyDataTypeLookup,
 			$propertyIds,
 			$indexedTypes,

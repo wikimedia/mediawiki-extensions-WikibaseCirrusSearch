@@ -4,9 +4,11 @@ namespace Wikibase\Search\Elastic\Fields;
 
 use Psr\Log\LoggerInterface;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\Search\Fields\FieldDefinitions;
 use Wikibase\Repo\Search\Fields\WikibaseIndexField;
+use Wikibase\Repo\WikibaseRepo;
 
 /**
  * Fields for an object that has statements.
@@ -26,6 +28,10 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @var callable[]
 	 */
 	private $searchIndexDataFormatters;
+	/**
+	 * @var DataTypeFactory
+	 */
+	private $dataTypeFactory;
 	/**
 	 * @var PropertyDataTypeLookup
 	 */
@@ -51,6 +57,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	private $statementProvider;
 
 	public function __construct(
+		DataTypeFactory $dataTypeFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $searchIndexDataFormatters,
 		array $propertyIds,
@@ -62,6 +69,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	) {
 		$this->propertyIds = $propertyIds;
 		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
+		$this->dataTypeFactory = $dataTypeFactory;
 		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->indexedTypes = $indexedTypes;
 		$this->excludedIds = $excludedIds;
@@ -78,6 +86,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	public function getFields() {
 		$fields = [
 			StatementsField::NAME => new StatementsField(
+				$this->dataTypeFactory,
 				$this->propertyDataTypeLookup,
 				$this->propertyIds,
 				$this->indexedTypes,
@@ -90,6 +99,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 		];
 		if ( $this->allowedQualifierPropertyIdsForQuantityStatements ) {
 			$fields[StatementQuantityField::NAME] = new StatementQuantityField(
+				$this->dataTypeFactory,
 				$this->propertyDataTypeLookup,
 				$this->propertyIds,
 				$this->indexedTypes,
@@ -102,8 +112,27 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 		return $fields;
 	}
 
+	public static function newFromSettings( ...$args ) {
+		if ( $args[0] instanceof DataTypeFactory ) {
+			// new-style call
+			// @phan-suppress-next-line PhanParamTooFewUnpack
+			return static::realNewFromSettings( ...$args );
+		} else {
+			// old-style call, summon a $dataTypeFactory out of thin air
+			if ( defined( 'MW_PHPUNIT_TEST' ) ) {
+				// *super* ugly, avoid accessing service container here
+				$dataTypeFactory = new DataTypeFactory( [] );
+			} else {
+				$dataTypeFactory = WikibaseRepo::getDataTypeFactory();
+			}
+			// @phan-suppress-next-line PhanParamTooFewUnpack
+			return static::realNewFromSettings( $dataTypeFactory, ...$args );
+		}
+	}
+
 	/**
 	 * Factory to create StatementProviderFieldDefinitions from configs
+	 * @param DataTypeFactory$dataTypeFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param callable[] $searchIndexDataFormatters
 	 * @param SettingsArray $settings
@@ -111,14 +140,18 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 	 * @param ?callable $statementProvider
 	 * @return StatementProviderFieldDefinitions
 	 */
-	public static function newFromSettings(
+	private static function realNewFromSettings(
+		DataTypeFactory $dataTypeFactory,
 		PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $searchIndexDataFormatters,
 		SettingsArray $settings,
 		?LoggerInterface $logger = null,
 		?callable $statementProvider = null
-	) {
-		return new static( $propertyDataTypeLookup, $searchIndexDataFormatters,
+	): self {
+		return new static(
+			$dataTypeFactory,
+			$propertyDataTypeLookup,
+			$searchIndexDataFormatters,
 			$settings->getSetting( 'searchIndexProperties' ),
 			$settings->getSetting( 'searchIndexTypes' ),
 			$settings->getSetting( 'searchIndexPropertiesExclude' ),

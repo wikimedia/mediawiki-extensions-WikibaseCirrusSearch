@@ -14,6 +14,7 @@ use Wikibase\DataModel\Snak\PropertySomeValueSnak;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
 use Wikibase\DataModel\Statement\Statement;
 use Wikibase\DataModel\Statement\StatementList;
+use Wikibase\Lib\DataTypeFactory;
 use Wikibase\Repo\Tests\ChangeOp\StatementListProviderDummy;
 use Wikibase\Repo\Tests\Rdf\RdfBuilderTestData;
 use Wikibase\Repo\WikibaseRepo;
@@ -127,8 +128,16 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 			'P11' => 'external-id',
 		] );
 
-		$field = new StatementsField( $lookup, $this->properties, [ 'wikibase-item', 'url' ], [ 'P11' ],
-			WikibaseRepo::getDataTypeDefinitions()->getSearchIndexDataFormatterCallbacks() );
+		$services = $this->getServiceContainer();
+		$field = new StatementsField(
+			WikibaseRepo::getDataTypeFactory( $services ),
+			$lookup,
+			$this->properties,
+			[ 'wikibase-item', 'url' ],
+			[ 'P11' ],
+			WikibaseRepo::getDataTypeDefinitions( $services )
+				->getSearchIndexDataFormatterCallbacks()
+		);
 		$this->assertEquals( $expected, $field->getFieldData( $entity ) );
 	}
 
@@ -149,7 +158,16 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 			// Not the actual intent, but proves this callable gets to choose the set of indexed statements.
 			return [ new Statement( new PropertyValueSnak( 123, new StringValue( 'override' ) ) ) ];
 		};
-		$field = new StatementsField( $lookup, [ 'P123' ], [], [], $formatters, null, $statementProvider );
+		$field = new StatementsField(
+			WikibaseRepo::getDataTypeFactory(),
+			$lookup,
+			[ 'P123' ],
+			[],
+			[],
+			$formatters,
+			null,
+			$statementProvider
+		);
 		$data = $field->getFieldData( $entity );
 		$this->assertEquals( [ 'P123=override' ], $data );
 	}
@@ -172,7 +190,19 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 			'P789' => 'boolean', // not in $formatters
 			'P9' => 'sometype',
 		] );
-		$field = new StatementsField( $lookup, [ 'P123', 'P456', 'P789', 'P9' ], [], [], $formatters );
+		$field = new StatementsField(
+			new DataTypeFactory( [
+				'string' => 'string',
+				'quantity' => 'quantity',
+				'boolean' => 'boolean',
+				'sometype' => 'string',
+			] ),
+			$lookup,
+			[ 'P123', 'P456', 'P789', 'P9' ],
+			[],
+			[],
+			$formatters
+		);
 
 		$statementList = new StatementList();
 		$statementList->addNewStatement( new PropertyValueSnak( 123, new StringValue( 'testString' ) ) );

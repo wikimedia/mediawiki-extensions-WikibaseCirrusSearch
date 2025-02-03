@@ -83,6 +83,7 @@ class StatementQuantityFieldTest extends MediaWikiIntegrationTestCase {
 	private function createStatementQuantityField() {
 		$services = $this->getServiceContainer();
 		return new StatementQuantityField(
+			WikibaseRepo::getDataTypeFactory( $services ),
 			WikibaseRepo::getPropertyDataTypeLookup( $services ),
 			$this->properties,
 			[],

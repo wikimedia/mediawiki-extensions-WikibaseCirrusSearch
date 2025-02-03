@@ -258,8 +258,8 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$searchPage = $this->createMock( SpecialSearch::class );
 		$searchPage->method( 'msg' )
 			->willReturnCallback(
-				static function () {
-					return new RawMessage( implode( ",", func_get_args() ) );
+				static function ( ...$args ) {
+					return new RawMessage( implode( ",", $args ) );
 				}
 			);
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $language );

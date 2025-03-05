@@ -1,6 +1,7 @@
-/* eslint-env node, es6 */
+'use strict';
+
 module.exports = function ( grunt ) {
-	var conf = grunt.file.readJSON( 'extension.json' );
+	const conf = grunt.file.readJSON( 'extension.json' );
 
 	grunt.loadNpmTasks( 'grunt-banana-checker' );
 	grunt.loadNpmTasks( 'grunt-eslint' );
@@ -11,11 +12,7 @@ module.exports = function ( grunt ) {
 			options: {
 				cache: true
 			},
-			all: [
-				'**/*.{js,json}',
-				'!node_modules/**',
-				'!vendor/**'
-			]
+			all: [ '.' ]
 		}
 	} );
 

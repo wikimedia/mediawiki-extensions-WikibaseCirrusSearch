@@ -58,6 +58,7 @@ class AllLabelsField extends TermIndexField implements WikibaseLabelsIndexField 
 		return null;
 	}
 
+	/** @inheritDoc */
 	public function getLabelsIndexedData( LabelsProvider $entity ) {
 		return null;
 	}

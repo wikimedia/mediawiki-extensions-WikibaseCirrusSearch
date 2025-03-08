@@ -328,7 +328,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 	/**
 	 * Helper to generate a bunch of language "codes".
 	 */
-	private function letterRange( string $a, string $b, string $prefix = '', string $suffix = '' ) {
+	private function letterRange( string $a, string $b, string $prefix = '', string $suffix = '' ): array {
 		if ( $a > $b ) {
 			[ $a, $b ] = [ $b, $a ];
 		}

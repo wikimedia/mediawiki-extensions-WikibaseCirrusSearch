@@ -86,7 +86,7 @@ class DescriptionsField extends TermIndexField implements WikibaseDescriptionsIn
 		return $this->getDescriptionsIndexedData( $entity );
 	}
 
-	public function getDescriptionsIndexedData( DescriptionsProvider $entity ) {
+	public function getDescriptionsIndexedData( DescriptionsProvider $entity ): ?array {
 		$data = [];
 		foreach ( $entity->getDescriptions() as $language => $desc ) {
 			// While wikibase can only have a single description,

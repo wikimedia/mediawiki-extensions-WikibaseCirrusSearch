@@ -86,12 +86,14 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	private LoggerInterface $logger;
 
 	/**
+	 * @param DataTypeFactory $dataTypeFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param string[] $propertyIds List of property IDs to index
 	 * @param string[] $indexedTypes List of property types to index. Property of this type will be
 	 *      indexed regardless of $propertyIds.
 	 * @param string[] $excludedIds List of property IDs to exclude.
 	 * @param callable[] $searchIndexDataFormatters Search formatters, indexed by data type name
+	 * @param ?LoggerInterface $logger
 	 * @param ?callable $statementProvider Callable that accepts an EntityDocument and returns
 	 *      an iterable containing Statement instances to index.
 	 */
@@ -134,7 +136,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		return $this;
 	}
 
-	private function getStatements( EntityDocument $entity ) {
+	private function getStatements( EntityDocument $entity ): iterable {
 		if ( $this->statementProvider !== null ) {
 			return ( $this->statementProvider )( $entity );
 		}
@@ -245,7 +247,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		];
 	}
 
-	protected function getSnakAsString( Snak $snak, ?string $propType = null ) {
+	protected function getSnakAsString( Snak $snak, ?string $propType = null ): ?string {
 		$snakAsPropertyIdAndValue = $this->getSnakAsPropertyIdAndValue( $snak, $propType );
 		if ( $snakAsPropertyIdAndValue === null ) {
 			return null;

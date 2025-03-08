@@ -113,7 +113,7 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 
 	/**
 	 * Factory to create StatementProviderFieldDefinitions from configs
-	 * @param DataTypeFactory$dataTypeFactory
+	 * @param DataTypeFactory $dataTypeFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param callable[] $searchIndexDataFormatters
 	 * @param SettingsArray $settings

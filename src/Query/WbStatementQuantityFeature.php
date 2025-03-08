@@ -80,7 +80,7 @@ class WbStatementQuantityFeature extends SimpleKeywordFeature implements FilterQ
 		return [ $this->createFilters( $params ), false ];
 	}
 
-	private function createFilters( array $params ) {
+	private function createFilters( array $params ): AbstractQuery {
 		$filters = [];
 		foreach ( $params[ 'statements' ] as $index => $statement ) {
 			$filters[] = new TermFreq(

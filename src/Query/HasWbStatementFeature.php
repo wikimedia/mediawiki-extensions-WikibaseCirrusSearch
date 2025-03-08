@@ -232,21 +232,21 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		);
 	}
 
-	private function statementContainsPropertyOnly( $statementString ) {
+	private function statementContainsPropertyOnly( string $statementString ): bool {
 		if ( strpos( $statementString, '=' ) === false ) {
 			return true;
 		}
 		return false;
 	}
 
-	private function statementEndsWithWildcard( $statementString ) {
+	private function statementEndsWithWildcard( string $statementString ): bool {
 		if ( substr( $statementString, -1 ) == '*' ) {
 			return true;
 		}
 		return false;
 	}
 
-	private function statementContainsOnlyWildcard( $statementString ) {
+	private function statementContainsOnlyWildcard( string $statementString ): bool {
 		return $statementString === '*';
 	}
 

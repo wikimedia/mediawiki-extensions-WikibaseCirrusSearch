@@ -61,6 +61,19 @@ class CirrusShowSearchHitHandler {
 	 * Format the output when the search result contains entities
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ShowSearchHit
 	 * @see showEntityResultHit
+	 *
+	 * @param SpecialSearch $searchPage
+	 * @param SearchResult $result
+	 * @param string[] $terms
+	 * @param string &$link
+	 * @param string &$redirect
+	 * @param string &$section
+	 * @param string &$extract
+	 * @param string &$score
+	 * @param string &$size
+	 * @param string &$date
+	 * @param string &$related
+	 * @param string &$html
 	 */
 	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result,
 		array $terms, &$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related,
@@ -75,6 +88,19 @@ class CirrusShowSearchHitHandler {
 
 	/**
 	 * Show result hit which is the result of Cirrus-driven entity search.
+	 *
+	 * @param SpecialSearch $searchPage
+	 * @param EntityResult $result
+	 * @param string[] $terms
+	 * @param string &$link
+	 * @param string &$redirect
+	 * @param string &$section
+	 * @param string &$extract
+	 * @param string &$score
+	 * @param string &$size
+	 * @param string &$date
+	 * @param string &$related
+	 * @param string &$html
 	 */
 	private function showEntityResultHit( SpecialSearch $searchPage, EntityResult $result, array $terms,
 		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html

@@ -32,6 +32,7 @@ class StatementQuantityField extends StatementsField implements WikibaseIndexFie
 	private $allowedQualifierPropertyIds;
 
 	/**
+	 * @param DataTypeFactory $dataTypeFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param string[] $propertyIds List of property IDs to index
 	 * @param string[] $indexedTypes List of property types to index. Property of this type will be

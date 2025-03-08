@@ -177,7 +177,7 @@ class HasLicenseFeature extends SimpleKeywordFeature implements FilterQueryFeatu
 		return $queries;
 	}
 
-	private function licenseStringToQueries( $licenseString ) {
+	private function licenseStringToQueries( string $licenseString ): array {
 		$queries = [];
 		if ( $licenseString === 'other' ) {
 			return $this->getQueriesForOther();
@@ -199,7 +199,7 @@ class HasLicenseFeature extends SimpleKeywordFeature implements FilterQueryFeatu
 	 * For "other" licence types, search for results that match the properties
 	 * but not the statements
 	 */
-	private function getQueriesForOther() {
+	private function getQueriesForOther(): array {
 		$queries = [];
 		foreach ( $this->licenseMapping as $mapping ) {
 			foreach ( $mapping as $statementString ) {

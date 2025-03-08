@@ -28,7 +28,7 @@ use Wikimedia\TestingAccessWrapper;
  */
 class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 
-	/**
+	/*
 	 * Test cases that should be covered:
 	 * - non-Entity result
 	 * - name+description
@@ -40,7 +40,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 * - name + description + extra data in different language
 	 */
 
-	public static function showSearchHitProvider() {
+	public static function showSearchHitProvider(): array {
 		return [
 			'label hit' => [
 				// label

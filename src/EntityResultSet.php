@@ -39,6 +39,7 @@ class EntityResultSet extends BaseCirrusSearchResultSet {
 		$this->displayLanguage = $displayLanguage;
 	}
 
+	/** @inheritDoc */
 	protected function transformOneResult( \Elastica\Result $result ) {
 		return new EntityResult( $this->displayLanguage, $this->termFallbackChain, $result );
 	}

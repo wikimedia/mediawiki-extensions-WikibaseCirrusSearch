@@ -261,7 +261,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * e.g. P180=Q537, P240=1234567
 	 *
 	 * @param Snak $snak
-	 * @param string $guid Statement GUID to which this snak belongs
+	 * @param string|null $guid Statement GUID to which this snak belongs
 	 * @return null|string
 	 */
 	protected function getWhitelistedSnakAsString( Snak $snak, $guid ) {

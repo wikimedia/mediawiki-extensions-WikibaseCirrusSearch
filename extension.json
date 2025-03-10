@@ -41,6 +41,14 @@
 			"value": null,
 			"description": "Profile definitions for fulltext search."
 		},
+		"InLabelSearchProfile": {
+			"value": null,
+			"description": "Default profile name for simple entity search by label. See profiles in config/EntityInLabelSearchProfiles.php"
+		},
+		"InLabelSearchProfiles": {
+			"value": null,
+			"description": "Profile definitions for simple entity search by label."
+		},
 		"DefaultPrefixRescoreProfile": {
 			"value": null,
 			"description": "Default rescore profile for prefix search."
@@ -48,6 +56,10 @@
 		"DefaultFulltextRescoreProfile": {
 			"value": null,
 			"description": "Default rescore profile for prefix search."
+		},
+		"DefaultInLabelRescoreProfile": {
+			"value": null,
+			"description": "Default rescore profile for simple entity search by label."
 		},
 		"RescoreProfiles": {
 			"value": null,

@@ -19,11 +19,19 @@ final class EntitySearchUtils {
 	 * @param string $field
 	 * @param string|double $boost
 	 * @param string $text
+	 * @param string $matchOperator
 	 * @return ConstantScore
 	 */
-	public static function makeConstScoreQuery( $field, $boost, $text ) {
+	public static function makeConstScoreQuery( $field, $boost, $text, $matchOperator = MatchQuery::OPERATOR_OR ) {
+		if ( $matchOperator === MatchQuery::OPERATOR_AND ) {
+			$filter = new MatchQuery( $field, [ 'query' => $text ] );
+			$filter->setFieldOperator( $field, $matchOperator );
+		} else {
+			$filter = new MatchQuery( $field, $text );
+		}
+
 		$csquery = new ConstantScore();
-		$csquery->setFilter( new MatchQuery( $field, $text ) );
+		$csquery->setFilter( $filter );
 		$csquery->setBoost( $boost );
 		return $csquery;
 	}

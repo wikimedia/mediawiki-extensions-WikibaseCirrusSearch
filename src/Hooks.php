@@ -200,6 +200,8 @@ class Hooks {
 		) );
 		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			'wikibase_base', __DIR__ . '/config/EntityPrefixSearchProfiles.php' );
+		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_IN_LABEL_QUERY_BUILDER,
+			'wikibase_base', __DIR__ . '/config/EntityInLabelSearchProfiles.php' );
 		$service->registerFileRepository( SearchProfileService::FT_QUERY_BUILDER,
 			'wikibase_base', __DIR__ . '/config/EntitySearchProfiles.php' );
 
@@ -223,6 +225,9 @@ class Hooks {
 			$service, $entitySearchConfig );
 		self::registerArrayProfile( 'FulltextSearchProfiles',
 			SearchProfileService::FT_QUERY_BUILDER,
+			$service, $entitySearchConfig );
+		self::registerArrayProfile( 'InLabelSearchProfiles',
+			EntitySearchElastic::WIKIBASE_IN_LABEL_QUERY_BUILDER,
 			$service, $entitySearchConfig );
 
 		// Determine the default rescore profile to use for entity autocomplete search
@@ -248,6 +253,39 @@ class Hooks {
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, "{$defaultQB}-{lang}", [ '{lang}' => 'language' ] );
 		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
 			EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX, 'cirrusWBProfile' );
+
+		// Determine the default rescore profile to use for entity search by label
+		$defaultInLabelRescore = 'wikibase_in_label';
+		$service->registerDefaultProfile( SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_IN_LABEL, $defaultInLabelRescore );
+		$service->registerConfigOverride(
+			SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_IN_LABEL,
+			$entitySearchConfig,
+			'DefaultInLabelRescoreProfile'
+		);
+		// Check for a variation of the default profile with the requested language code appended. If available
+		// use the language specific profile instead of the default profile.
+		$service->registerContextualOverride( SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_IN_LABEL, "{$defaultInLabelRescore}-{lang}", [ '{lang}' => 'language' ] );
+		// add the possibility to override the profile by setting the URI param cirrusRescoreProfile
+		$service->registerUriParamOverride( SearchProfileService::RESCORE,
+			EntitySearchElastic::CONTEXT_WIKIBASE_IN_LABEL, 'cirrusRescoreProfile' );
+
+		// Determine the default query builder profile to use for entity search by label
+		$defaultInLabelQB = 'default';
+		$service->registerConfigOverride(
+			EntitySearchElastic::WIKIBASE_IN_LABEL_QUERY_BUILDER,
+			EntitySearchElastic::CONTEXT_WIKIBASE_IN_LABEL,
+			$entitySearchConfig,
+			'InLabelSearchProfile'
+		);
+		$service->registerDefaultProfile( EntitySearchElastic::WIKIBASE_IN_LABEL_QUERY_BUILDER,
+			EntitySearchElastic::CONTEXT_WIKIBASE_IN_LABEL, $defaultInLabelQB );
+		$service->registerContextualOverride( EntitySearchElastic::WIKIBASE_IN_LABEL_QUERY_BUILDER,
+			EntitySearchElastic::CONTEXT_WIKIBASE_IN_LABEL, "{$defaultInLabelQB}-{lang}", [ '{lang}' => 'language' ] );
+		$service->registerUriParamOverride( EntitySearchElastic::WIKIBASE_IN_LABEL_QUERY_BUILDER,
+			EntitySearchElastic::CONTEXT_WIKIBASE_IN_LABEL, 'cirrusWBProfile' );
 
 		// Determine query builder profile for fulltext search
 		$defaultFQB = $entitySearchConfig->get( 'FulltextSearchProfile',

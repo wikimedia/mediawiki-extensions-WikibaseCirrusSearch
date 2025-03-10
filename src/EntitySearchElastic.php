@@ -39,9 +39,19 @@ class EntitySearchElastic implements EntitySearchHelper {
 	public const CONTEXT_WIKIBASE_FULLTEXT = 'wikibase_fulltext_search';
 
 	/**
+	 * Name of the context for profile name resolution
+	 */
+	public const CONTEXT_WIKIBASE_IN_LABEL = 'wikibase_in_label_search';
+
+	/**
 	 * Name of the profile type used to build the elastic query
 	 */
 	public const WIKIBASE_PREFIX_QUERY_BUILDER = 'wikibase_prefix_querybuilder';
+
+	/**
+	 * Name of the profile type used to build the elastic query
+	 */
+	public const WIKIBASE_IN_LABEL_QUERY_BUILDER = 'wikibase_in_label_querybuilder';
 
 	/**
 	 * Default query builder profile for prefix searches

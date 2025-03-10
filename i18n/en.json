@@ -21,6 +21,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "Rescore profile for completion search with statement boosting",
 	"wikibasecirrus-rescore-profile-fulltext": "Default rescore profile for fulltext search",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Rescore profile for fulltext search with phrase scoring",
+	"wikibasecirrus-rescore-profile-in-label": "Default rescore profile for simple entity search by label",
 	"wikibasecirrus-search-bad-entity-type": "Bad entity type: $1",
 	"wikibasecirrus-search-bad-profile-name": "Bad search profile name: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "haswbstatement keyword contains no valid statements",

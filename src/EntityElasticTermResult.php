@@ -25,9 +25,10 @@ class EntityElasticTermResult extends ElasticTermResult {
 	public function __construct(
 		EntityIdParser $idParser,
 		array $searchLanguageCodes,
+		string $highlightSubField,
 		TermLanguageFallbackChain $displayFallbackChain
 	) {
-		parent::__construct( $searchLanguageCodes, $displayFallbackChain );
+		parent::__construct( $searchLanguageCodes, $displayFallbackChain, $highlightSubField );
 		$this->idParser = $idParser;
 	}
 

@@ -346,6 +346,7 @@ class EntityElasticTermResultTest extends MediaWikiIntegrationTestCase {
 		$res = new EntityElasticTermResult(
 			new BasicEntityIdParser(),
 			$languages,
+			'prefix',
 			$this->getMockFallbackChain( $displayLanguages )
 		);
 

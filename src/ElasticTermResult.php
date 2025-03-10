@@ -37,17 +37,21 @@ abstract class ElasticTermResult extends BaseResultsType {
 	 * @var TermLanguageFallbackChain
 	 */
 	private $termFallbackChain;
+	private string $highlightSubField;
 
 	/**
 	 * @param string[] $searchLanguageCodes Language fallback chain for search
 	 * @param TermLanguageFallbackChain $displayFallbackChain Fallback chain for display
+	 * @param string $highlightSubField 'prefix' or 'plain'
 	 */
 	public function __construct(
 		array $searchLanguageCodes,
-		TermLanguageFallbackChain $displayFallbackChain
+		TermLanguageFallbackChain $displayFallbackChain,
+		string $highlightSubField = 'prefix'
 	) {
 		$this->searchLanguageCodes = $searchLanguageCodes;
 		$this->termFallbackChain = $displayFallbackChain;
+		$this->highlightSubField = $highlightSubField;
 	}
 
 	/**
@@ -95,7 +99,7 @@ abstract class ElasticTermResult extends BaseResultsType {
 		];
 		$labelsName = LabelsField::NAME;
 		foreach ( $this->searchLanguageCodes as $code ) {
-			$config['fields']["$labelsName.$code.prefix"] = [
+			$config['fields']["$labelsName.$code.{$this->highlightSubField}"] = [
 				'type' => 'experimental',
 				'fragmenter' => "none",
 				'number_of_fragments' => 0,
@@ -105,7 +109,7 @@ abstract class ElasticTermResult extends BaseResultsType {
 				],
 			];
 		}
-		$config['fields']["$labelsName.*.prefix"] = [
+		$config['fields']["$labelsName.*.{$this->highlightSubField}"] = [
 			'type' => 'experimental',
 			'fragmenter' => "none",
 			'number_of_fragments' => 0,
@@ -200,7 +204,7 @@ abstract class ElasticTermResult extends BaseResultsType {
 		$term = reset( $highlight ); // Take the first one
 		$term = $term[0]; // Highlighter returns array
 		$field = key( $highlight );
-		if ( preg_match( '/^' . preg_quote( LabelsField::NAME ) . '\.([^.]+)\.prefix$/', $field, $match ) ) {
+		if ( preg_match( '/^' . preg_quote( LabelsField::NAME ) . "\.([^.]+)\.{$this->highlightSubField}$/", $field, $match ) ) {
 			$langCode = $match[1];
 			if ( preg_match( self::HIGHLIGHT_PATTERN, $term, $termMatch ) ) {
 				$isFirst = ( $term[0] === '0' );

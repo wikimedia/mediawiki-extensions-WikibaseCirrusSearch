@@ -171,7 +171,7 @@ class EntitySearchElastic implements EntitySearchHelper {
 		?string $profileContext = null
 	) {
 		$profileContext ??= self::CONTEXT_WIKIBASE_PREFIX;
-		$searcher = new WikibasePrefixSearcher( 0, $limit, $this->debugOptions );
+		$searcher = new WikibaseEntitySearcher( 0, $limit, 'wikibase_prefix', 'wikibase-prefix', $this->debugOptions );
 		$searcher->getSearchContext()->setProfileContext(
 			$profileContext,
 			[ 'language' => $languageCode ] );

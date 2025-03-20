@@ -40,6 +40,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "Rescore-Profil für die Vervollständigungssuche mit Aussagenverstärkung",
 	"wikibasecirrus-rescore-profile-fulltext": "Standard-Rescore-Profil für die Volltextsuche",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Rescore-Profil für die Volltextsuche mit Ausdrucksbewertung",
+	"wikibasecirrus-rescore-profile-in-label": "Standard-Rescore-Profil für die einfache Entitätssuche nach Label",
 	"wikibasecirrus-search-bad-entity-type": "Ungültiger Objekttyp: $1",
 	"wikibasecirrus-search-bad-profile-name": "Ungültiger Suchprofilname: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Das Schlüsselwort haswbstatement enthält keine gültigen Aussagen",

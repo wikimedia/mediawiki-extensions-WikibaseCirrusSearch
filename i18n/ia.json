@@ -12,6 +12,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "Profilo \"rescore\" pro recerca de completamento con reinfortiamento de declarationes",
 	"wikibasecirrus-rescore-profile-fulltext": "Profilo \"rescore\" predefinite pro le recerca de texto integral",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Profilo \"rescore\" pro le recerca de texto integral con scores de phrases",
+	"wikibasecirrus-rescore-profile-in-label": "Profilo rescore predefinite pro le recerca simple de entitates per etiquetta",
 	"wikibasecirrus-search-bad-entity-type": "Mal typo de entitate: $1",
 	"wikibasecirrus-search-bad-profile-name": "Mal nomine de profilo de recerca: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Le parola-clave haswbstatement non contine declarationes valide.",

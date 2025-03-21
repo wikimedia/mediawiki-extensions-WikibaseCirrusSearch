@@ -16,6 +16,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "Преоценувачки профил за самодополнето пребарување со истакнување на искази",
 	"wikibasecirrus-rescore-profile-fulltext": "Основен преоценувачки профил за целотекстно пребарување",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Преоценувачки профил за целотекстно пребарување со оценување на изрази",
+	"wikibasecirrus-rescore-profile-in-label": "Стандардниот преоценувачки профил за просто пребарување на единици по натпис",
 	"wikibasecirrus-search-bad-entity-type": "Неисправен тип на единица: $1",
 	"wikibasecirrus-search-bad-profile-name": "Неисправно пребарувачко профилно име: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Клучниот збор haswbstatement не содржи важечки искази",

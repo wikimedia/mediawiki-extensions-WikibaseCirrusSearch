@@ -23,6 +23,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "פרופיל להשלמת החיפוש עם הצהרה מוגברת",
 	"wikibasecirrus-rescore-profile-fulltext": "פרופיל דירוג משני לחיפוש בטקסט מלא",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "פרופיל דירוג משני לחיפוש בטקסט מלא עם דירוג משפטים",
+	"wikibasecirrus-rescore-profile-in-label": "פרופיל דירוג חוזר (rescore) לחיפוש ישויות פשוט לפי תווית",
 	"wikibasecirrus-search-bad-entity-type": "סוג ישות רע: $1",
 	"wikibasecirrus-search-bad-profile-name": "שם פרופיל חיפוש רע: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "מילת המפתח haswbstatement אינה מכילה קביעות תקינות",

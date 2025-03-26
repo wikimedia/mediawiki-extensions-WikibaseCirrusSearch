@@ -38,6 +38,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "الملف الشخصي للبحث عن الانتهاء مع زيادة البيان",
 	"wikibasecirrus-rescore-profile-fulltext": "ملف التعريف الافتراضي للبحث في النص الكامل",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "ملف النتيجة للبحث عن النص الكامل مع نتيجة العبارات",
+	"wikibasecirrus-rescore-profile-in-label": "ملف تعريف إعادة التسجيل الافتراضي للبحث البسيط عن الكيان حسب التسمية",
 	"wikibasecirrus-search-bad-entity-type": "نوع كيان غير صالح: $1",
 	"wikibasecirrus-search-bad-profile-name": "اسم بحث غير صالح: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "الكلمة الأساسية haswbstatement لا تحتوي على بيانات صالحة",

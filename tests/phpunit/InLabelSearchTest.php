@@ -29,10 +29,14 @@ class InLabelSearchTest extends MediaWikiIntegrationTestCase {
 
 		$this->setMwGlobals( [ 'wgEntitySearchUseCirrus' => true ] );
 		$limit = 10;
+		$offset = 0;
 		if ( isset( $params['limit'] ) ) {
 			$limit = $params['limit'];
 		}
-		$elasticQuery = $this->newEntitySearch()->search( $params['search'], $params['language'], $params['type'], $limit );
+		if ( isset( $params['offset'] ) ) {
+			$offset = $params['offset'];
+		}
+		$elasticQuery = $this->newEntitySearch()->search( $params['search'], $params['language'], $params['type'], $limit, $offset );
 		$elasticQuery = $elasticQuery['__main__'] ?? $elasticQuery;
 		unset( $elasticQuery['path'] );
 		// serialize_precision set for T205958

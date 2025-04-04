@@ -42,10 +42,11 @@ class InLabelSearch {
 		string $searchTerm,
 		string $languageCode,
 		string $entityType,
-		int $limit
+		int $limit,
+		int $offset = 0
 	): array {
 		$searcher = new WikibaseEntitySearcher(
-			0,
+			$offset,
 			$limit,
 			'wikibase_in_label',
 			'wikibase-in-label',

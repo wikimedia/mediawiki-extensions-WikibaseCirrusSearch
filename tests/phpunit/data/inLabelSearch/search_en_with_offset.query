@@ -1,0 +1,7 @@
+{
+    "search": "Duck",
+    "language": "en",
+    "type": "item",
+    "limit": 10,
+    "offset": 5
+}

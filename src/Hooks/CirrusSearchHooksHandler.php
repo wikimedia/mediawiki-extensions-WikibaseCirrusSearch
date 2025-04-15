@@ -1,78 +1,52 @@
 <?php
 
-namespace Wikibase\Search\Elastic;
+declare( strict_types = 1 );
 
+namespace Wikibase\Search\Elastic\Hooks;
+
+use CirrusSearch\Hooks\CirrusSearchAddQueryFeaturesHook;
+use CirrusSearch\Hooks\CirrusSearchAnalysisConfigHook;
+use CirrusSearch\Hooks\CirrusSearchProfileServiceHook;
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
 use CirrusSearch\Parser\BasicQueryClassifier;
 use CirrusSearch\Profile\ArrayProfileRepository;
 use CirrusSearch\Profile\SearchProfileRepositoryTransformer;
 use CirrusSearch\Profile\SearchProfileService;
+use CirrusSearch\SearchConfig;
 use MediaWiki\Config\ConfigException;
-use MediaWiki\Context\RequestContext;
-use MediaWiki\Language\Language;
-use MediaWiki\MediaWikiServices;
-use Wikibase\DataModel\Entity\EntityIdParsingException;
 use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Search\Elastic\ConfigBuilder;
+use Wikibase\Search\Elastic\EntitySearchElastic;
 use Wikibase\Search\Elastic\Fields\StatementsField;
 use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
 use Wikibase\Search\Elastic\Query\HasLicenseFeature;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
 use Wikibase\Search\Elastic\Query\WbStatementQuantityFeature;
+use Wikibase\Search\Elastic\WikibaseSearchConfig;
 use Wikimedia\Assert\Assert;
 
 /**
  * Hooks for Wikibase search.
  */
-class Hooks {
+class CirrusSearchHooksHandler implements
+	CirrusSearchAnalysisConfigHook,
+	CirrusSearchProfileServiceHook,
+	CirrusSearchAddQueryFeaturesHook
+{
+
 	private const LANGUAGE_SELECTOR_PREFIX = "language_selector_prefix";
-
-	/**
-	 * Setup hook.
-	 * Enables/disables CirrusSearch depending on request settings.
-	 */
-	public static function onSetupAfterCache() {
-		$request = RequestContext::getMain()->getRequest();
-		$useCirrus = $request->getVal( 'useCirrus' );
-		if ( $useCirrus !== null ) {
-			$GLOBALS['wgWBCSUseCirrus'] = wfStringToBool( $useCirrus );
-		}
-		$config = self::getWBCSConfig();
-		if ( $config->enabled() ) {
-			global $wgCirrusSearchExtraIndexSettings;
-			// Bump max fields so that labels/descriptions fields fit in.
-			$wgCirrusSearchExtraIndexSettings['index.mapping.total_fields.limit'] = 5000;
-		}
-	}
-
-	/**
-	 * Adds the definitions relevant for Search to entity types definitions.
-	 *
-	 * @see WikibaseSearch.entitytypes.php
-	 *
-	 * @param array[] &$entityTypeDefinitions
-	 */
-	public static function onWikibaseRepoEntityTypes( array &$entityTypeDefinitions ) {
-		$wbcsConfig = self::getWBCSConfig();
-		if ( !$wbcsConfig->enabled() ) {
-			return;
-		}
-		$entityTypeDefinitions = wfArrayPlus2d(
-			require __DIR__ . '/../WikibaseSearch.entitytypes.php',
-			$entityTypeDefinitions
-		);
-	}
 
 	/**
 	 * Add Wikibase-specific ElasticSearch analyzer configurations.
 	 * @param array &$config
 	 * @param AnalysisConfigBuilder $builder
 	 */
-	public static function onCirrusSearchAnalysisConfig( &$config, AnalysisConfigBuilder $builder ) {
+	public function onCirrusSearchAnalysisConfig( array &$config, AnalysisConfigBuilder $builder ): void {
 		if ( defined( 'MW_PHPUNIT_TEST' ) ) {
 			return;
 		}
-		$wbcsConfig = self::getWBCSConfig();
+		$wbcsConfig = CirrusSearchConfiguration::getWBCSConfig();
 		if ( !$wbcsConfig->enabled() ) {
 			return;
 		}
@@ -111,7 +85,7 @@ class Hooks {
 
 		// Language analyzers for descriptions
 		$wbBuilder = new ConfigBuilder( WikibaseRepo::getTermsLanguages()->getLanguages(),
-			self::getWBCSConfig(),
+			$wbcsConfig,
 			$builder
 		);
 		$inHook = true;
@@ -127,8 +101,8 @@ class Hooks {
 	 *
 	 * @param SearchProfileService $service
 	 */
-	public static function onCirrusSearchProfileService( SearchProfileService $service ) {
-		$config = self::getWBCSConfig();
+	public function onCirrusSearchProfileService( SearchProfileService $service ): void {
+		$config = CirrusSearchConfiguration::getWBCSConfig();
 		if ( !defined( 'MW_PHPUNIT_TEST' ) && !$config->enabled() ) {
 			return;
 		}
@@ -190,20 +164,20 @@ class Hooks {
 		$stmtBoost = $entitySearchConfig->get( 'StatementBoost' );
 		// register base profiles available on all wikibase installs
 		$service->registerFileRepository( SearchProfileService::RESCORE,
-			'wikibase_base', __DIR__ . '/config/ElasticSearchRescoreProfiles.php' );
+			'wikibase_base', __DIR__ . '/../config/ElasticSearchRescoreProfiles.php' );
 		$service->registerRepository( new SearchProfileRepositoryTransformer(
 			ArrayProfileRepository::fromFile(
 				SearchProfileService::RESCORE_FUNCTION_CHAINS,
 				'wikibase_base',
-				__DIR__ . '/config/ElasticSearchRescoreFunctions.php' ),
+				__DIR__ . '/../config/ElasticSearchRescoreFunctions.php' ),
 			[ EntitySearchElastic::STMT_BOOST_PROFILE_REPL => $stmtBoost ]
 		) );
 		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER,
-			'wikibase_base', __DIR__ . '/config/EntityPrefixSearchProfiles.php' );
+			'wikibase_base', __DIR__ . '/../config/EntityPrefixSearchProfiles.php' );
 		$service->registerFileRepository( EntitySearchElastic::WIKIBASE_IN_LABEL_QUERY_BUILDER,
-			'wikibase_base', __DIR__ . '/config/EntityInLabelSearchProfiles.php' );
+			'wikibase_base', __DIR__ . '/../config/EntityInLabelSearchProfiles.php' );
 		$service->registerFileRepository( SearchProfileService::FT_QUERY_BUILDER,
-			'wikibase_base', __DIR__ . '/config/EntitySearchProfiles.php' );
+			'wikibase_base', __DIR__ . '/../config/EntitySearchProfiles.php' );
 
 		// register custom profiles provided in the wikibase config
 		self::registerArrayProfile( 'RescoreProfiles', SearchProfileService::RESCORE,
@@ -361,8 +335,8 @@ class Hooks {
 	 * @param \CirrusSearch\SearchConfig $config (not used, required by hook)
 	 * @param array &$extraFeatures
 	 */
-	public static function onCirrusSearchAddQueryFeatures( $config, array &$extraFeatures ) {
-		$searchConfig = self::getWBCSConfig();
+	public function onCirrusSearchAddQueryFeatures( SearchConfig $config, array &$extraFeatures ): void {
+		$searchConfig = CirrusSearchConfiguration::getWBCSConfig();
 		if ( !$searchConfig->enabled() ) {
 			return;
 		}
@@ -376,98 +350,6 @@ class Hooks {
 		$extraFeatures[] = new InLabelFeature( WikibaseRepo::getLanguageFallbackChainFactory(), $languageCodes );
 
 		$extraFeatures[] = new HasDataForLangFeature( $languageCodes );
-	}
-
-	/**
-	 * Will instantiate descriptions for search results.
-	 * @param Language $lang
-	 * @param array &$results
-	 */
-	public static function amendSearchResults( Language $lang, array &$results ) {
-		$idParser = WikibaseRepo::getEntityIdParser();
-		$entityIds = [];
-		$namespaceLookup = WikibaseRepo::getEntityNamespaceLookup();
-
-		foreach ( $results as &$result ) {
-			if ( empty( $result['title'] ) ||
-				!$namespaceLookup->isEntityNamespace( $result['title']->getNamespace() ) ) {
-				continue;
-			}
-			try {
-				$title = $result['title']->getText();
-				$entityId = $idParser->parse( $title );
-				$entityIds[] = $entityId;
-				$result['entityId'] = $entityId;
-			} catch ( EntityIdParsingException $e ) {
-				continue;
-			}
-		}
-		if ( !$entityIds ) {
-			return;
-		}
-		$lookup = WikibaseRepo::getFallbackLabelDescriptionLookupFactory()
-			->newLabelDescriptionLookup( $lang, $entityIds );
-		$formatterFactory = WikibaseRepo::getEntityLinkFormatterFactory();
-		foreach ( $results as &$result ) {
-			if ( empty( $result['entityId'] ) ) {
-				continue;
-			}
-			$entityId = $result['entityId'];
-			unset( $result['entityId'] );
-			$label = $lookup->getLabel( $entityId );
-			if ( !$label ) {
-				continue;
-			}
-			$linkFormatter = $formatterFactory->getLinkFormatter( $entityId->getEntityType(), $lang );
-			$result['extract'] = strip_tags( $linkFormatter->getHtml( $entityId, [
-				'value' => $label->getText(),
-				'language' => $label->getActualLanguageCode(),
-			] ) );
-		}
-	}
-
-	/**
-	 * Will instantiate descriptions for search results.
-	 * @param array &$results
-	 */
-	public static function onApiOpenSearchSuggest( &$results ) {
-		$wbcsConfig = self::getWBCSConfig();
-		if ( !$wbcsConfig->enabled() ) {
-			return;
-		}
-
-		if ( !$results ) {
-			return;
-		}
-
-		self::amendSearchResults( WikibaseRepo::getUserLanguage(), $results );
-	}
-
-	/**
-	 * Register special pages.
-	 *
-	 * @param array &$list
-	 */
-	public static function onSpecialPageInitList( &$list ) {
-		$list['EntitiesWithoutLabel'] = [
-			SpecialEntitiesWithoutPageFactory::class,
-			'newSpecialEntitiesWithoutLabel'
-		];
-
-		$list['EntitiesWithoutDescription'] = [
-			SpecialEntitiesWithoutPageFactory::class,
-			'newSpecialEntitiesWithoutDescription'
-		];
-	}
-
-	/**
-	 * @return WikibaseSearchConfig
-	 * @suppress PhanTypeMismatchReturnSuperType
-	 */
-	private static function getWBCSConfig(): WikibaseSearchConfig {
-		return MediaWikiServices::getInstance()
-			->getConfigFactory()
-			->makeConfig( 'WikibaseCirrusSearch' );
 	}
 
 }

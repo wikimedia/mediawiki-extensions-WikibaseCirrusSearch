@@ -98,11 +98,11 @@ class InLabelQuery extends AbstractQuery {
 	 * @param SearchProfileService $searchProfileService
 	 * @param LanguageFallbackChainFactory $languageFallbackChainFactory
 	 * @param string $queryBuilderType the type of query builder for which profiles are set
-	 * (e.g. {@link \Wikibase\Search\Elastic\Hooks::registerSearchProfiles()} and
+	 * (e.g. {@link \Wikibase\Search\Elastic\CirrusSearchHooksHandler::registerSearchProfiles()} and
 	 * {@link \Wikibase\Search\Elastic\EntitySearchElastic::WIKIBASE_PREFIX_QUERY_BUILDER})
 	 * @param string $profileContextName the name of the search context used to determined what is
 	 * the default profile to use in this context
-	 * (e.g. {@link \Wikibase\Search\Elastic\Hooks::registerSearchProfiles()} and
+	 * (e.g. {@link \Wikibase\Search\Elastic\CirrusSearchHooksHandler::registerSearchProfiles()} and
 	 * {@link \Wikibase\Search\Elastic\EntitySearchElastic::CONTEXT_WIKIBASE_PREFIX})
 	 * @param array $contextParams the context parameters (i.e. used to hold the user language)
 	 * @param string $languageCode the user language code

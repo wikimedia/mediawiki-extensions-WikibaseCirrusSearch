@@ -1,17 +1,20 @@
 <?php
 
-namespace Wikibase\Search\Elastic;
+declare( strict_types = 1 );
+
+namespace Wikibase\Search\Elastic\Hooks;
 
 use HtmlArmor;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
+use MediaWiki\Search\Hook\ShowSearchHitHook;
+use MediaWiki\Search\Hook\ShowSearchHitTitleHook;
 use MediaWiki\Specials\SpecialSearch;
 use MediaWiki\Title\Title;
-use SearchResult;
 use Wikibase\Lib\Store\EntityIdLookup;
-use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatter;
+use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
-use Wikibase\Repo\WikibaseRepo;
+use Wikibase\Search\Elastic\EntityResult;
 
 /**
  * Handler to format entities in the search results
@@ -21,67 +24,32 @@ use Wikibase\Repo\WikibaseRepo;
  * @author Daniel Kinzler
  * @author Stas Malyshev
  */
-class CirrusShowSearchHitHandler {
+class CirrusShowSearchHitHooksHandler implements ShowSearchHitHook, ShowSearchHitTitleHook {
 
-	/**
-	 * @var EntityLinkFormatter
-	 */
-	private $linkFormatter;
-
-	/**
-	 * @var EntityIdLookup
-	 */
-	private $entityIdLookup;
+	private EntityLinkFormatterFactory $linkFormatterFactory;
+	private EntityIdLookup $entityIdLookup;
 
 	/**
 	 * @param EntityIdLookup $entityIdLookup
-	 * @param EntityLinkFormatter $linkFormatter
+	 * @param EntityLinkFormatterFactory $linkFormatterFactory
 	 */
 	public function __construct(
 		EntityIdLookup $entityIdLookup,
-		EntityLinkFormatter $linkFormatter
+		EntityLinkFormatterFactory $linkFormatterFactory
 	) {
 		$this->entityIdLookup = $entityIdLookup;
-		$this->linkFormatter = $linkFormatter;
+		$this->linkFormatterFactory = $linkFormatterFactory;
 	}
 
 	/**
-	 * @param IContextSource $context
-	 * @return self
+	 * @inheritDoc
 	 */
-	private static function newFromGlobalState( IContextSource $context ) {
-		return new self(
-			WikibaseRepo::getEntityIdLookup(),
-			WikibaseRepo::getEntityLinkFormatterFactory()
-				->getDefaultLinkFormatter( $context->getLanguage() )
-		);
-	}
-
-	/**
-	 * Format the output when the search result contains entities
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ShowSearchHit
-	 * @see showEntityResultHit
-	 *
-	 * @param SpecialSearch $searchPage
-	 * @param SearchResult $result
-	 * @param string[] $terms
-	 * @param string &$link
-	 * @param string &$redirect
-	 * @param string &$section
-	 * @param string &$extract
-	 * @param string &$score
-	 * @param string &$size
-	 * @param string &$date
-	 * @param string &$related
-	 * @param string &$html
-	 */
-	public static function onShowSearchHit( SpecialSearch $searchPage, SearchResult $result,
-		array $terms, &$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related,
+	public function onShowSearchHit( $searchPage, $result,
+		$terms, &$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related,
 		&$html
 	) {
 		if ( $result instanceof EntityResult ) {
-			$self = self::newFromGlobalState( $searchPage->getContext() );
-			$self->showEntityResultHit( $searchPage, $result, $terms,
+			$this->showEntityResultHit( $searchPage, $result, $terms,
 				$link, $redirect, $section, $extract, $score, $size, $date, $related, $html );
 		}
 	}
@@ -127,37 +95,28 @@ class CirrusShowSearchHitHandler {
 	}
 
 	/**
-	 * Remove span tag (added by Cirrus) placed around title search hit for entity titles
-	 * to highlight matches in bold.
+	 * @inheritDoc
 	 *
 	 * @todo Add highlighting when Q##-id matches and not label text.
-	 *
-	 * @param Title $title
-	 * @param string &$titleSnippet
-	 * @param SearchResult $result
-	 * @param string $terms
-	 * @param SpecialSearch $specialSearch
-	 * @param string[] &$query
-	 * @param string[] &$attributes
 	 */
-	public static function onShowSearchHitTitle(
-		Title $title,
+	public function onShowSearchHitTitle(
+		&$title,
 		&$titleSnippet,
-		SearchResult $result,
+		$result,
 		$terms,
-		SpecialSearch $specialSearch,
-		array &$query,
-		array &$attributes
+		$specialSearch,
+		&$query,
+		&$attributes
 	) {
 		if ( $result instanceof EntityResult ) {
-			$self = self::newFromGlobalState( $specialSearch->getContext() );
-			$self->getEntityLink( $result, $title, $titleSnippet, $attributes,
+			$this->getEntityLink( $specialSearch->getContext(), $result, $title, $titleSnippet, $attributes,
 				$specialSearch->getLanguage()->getCode() );
 		}
 	}
 
 	/**
 	 * Generate link text for Title link in search hit.
+	 * @param IContextSource $context
 	 * @param EntityResult $result
 	 * @param Title $title
 	 * @param string|HtmlArmor &$html Variable where HTML will be placed
@@ -165,6 +124,7 @@ class CirrusShowSearchHitHandler {
 	 * @param string $displayLanguage
 	 */
 	private function getEntityLink(
+		IContextSource $context,
 		EntityResult $result,
 		Title $title,
 		&$html,
@@ -175,14 +135,15 @@ class CirrusShowSearchHitHandler {
 		if ( !$entityId ) {
 			return;
 		}
+		$linkFormatter = $this->linkFormatterFactory->getDefaultLinkFormatter( $context->getLanguage() );
 		// Highlighter already encodes and marks up the HTML
 		$html = new HtmlArmor(
-			$this->linkFormatter->getHtml( $entityId,
+			$linkFormatter->getHtml( $entityId,
 				ShowSearchHitHandler::withLanguage( $result->getLabelHighlightedData(), $displayLanguage )
 			)
 		);
 
-		$attributes['title'] = $this->linkFormatter->getTitleAttribute(
+		$attributes['title'] = $linkFormatter->getTitleAttribute(
 			$entityId,
 			$result->getLabelData(),
 			$result->getDescriptionData()

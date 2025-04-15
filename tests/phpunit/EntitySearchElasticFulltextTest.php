@@ -14,12 +14,12 @@ use Wikibase\DataModel\Entity\ItemIdParser;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\EntityFullTextQueryBuilder;
 use Wikibase\Search\Elastic\EntitySearchElastic;
-use Wikibase\Search\Elastic\Hooks;
+use Wikibase\Search\Elastic\Hooks\CirrusSearchHooksHandler;
 use Wikibase\Search\Elastic\WikibaseSearchConfig;
 
 /**
  * @covers \Wikibase\Search\Elastic\EntityFullTextQueryBuilder
- * @covers \Wikibase\Search\Elastic\Hooks::registerSearchProfiles()
+ * @covers \Wikibase\Search\Elastic\Hooks\CirrusSearchHooksHandler::registerSearchProfiles()
  *
  * @group Wikibase
  * @license GPL-2.0-or-later
@@ -53,7 +53,7 @@ class EntitySearchElasticFulltextTest extends MediaWikiIntegrationTestCase {
 		// are properly initialized
 		parent::setTemporaryHook( 'CirrusSearchProfileService',
 			static function ( SearchProfileService $service ) {
-				Hooks::registerSearchProfiles(
+				CirrusSearchHooksHandler::registerSearchProfiles(
 					$service,
 					new WikibaseSearchConfig( self::$ENTITY_SEARCH_CONFIG ),
 					self::$FULLTEXT_SEARCH_TYPES

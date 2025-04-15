@@ -12,10 +12,10 @@ use Wikibase\Lib\Store\EntityNamespaceLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookup;
 use Wikibase\Lib\Store\FallbackLabelDescriptionLookupFactory;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Search\Elastic\Hooks;
+use Wikibase\Search\Elastic\Hooks\MediaWikiCoreHooksHandler;
 
 /**
- * @covers \Wikibase\Search\Elastic\Hooks
+ * @covers \Wikibase\Search\Elastic\Hooks\CirrusSearchHooksHandler
  */
 class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 
@@ -89,7 +89,7 @@ class OpenSearchLabelsTest extends MediaWikiIntegrationTestCase {
 		$lang = $this->getServiceContainer()->getLanguageFactory()->getLanguage( $language );
 
 		$this->mockWikibaseRepoServices( $lang, $labels );
-		Hooks::amendSearchResults( $lang, $results );
+		MediaWikiCoreHooksHandler::amendSearchResults( $lang, $results );
 
 		$resultsByTitle = [];
 		foreach ( $results as $result ) {

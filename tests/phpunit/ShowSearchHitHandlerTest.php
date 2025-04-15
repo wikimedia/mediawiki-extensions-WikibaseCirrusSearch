@@ -15,12 +15,12 @@ use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\WikibaseRepo;
-use Wikibase\Search\Elastic\CirrusShowSearchHitHandler;
 use Wikibase\Search\Elastic\EntityResult;
+use Wikibase\Search\Elastic\Hooks\CirrusShowSearchHitHooksHandler;
 use Wikimedia\TestingAccessWrapper;
 
 /**
- * @covers \Wikibase\Search\Elastic\CirrusShowSearchHitHandler
+ * @covers \Wikibase\Search\Elastic\Hooks\CirrusShowSearchHitHooksHandler
  *
  * @group Wikibase
  *
@@ -282,7 +282,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$redirect = $section = $score = $size = $date = $related = $html = '';
 		$searchResult = $this->createMock( SearchResult::class );
 		$searchResult->method( 'getTitle' )->willReturn( Title::newFromText( 'Test', NS_TALK ) );
-		CirrusShowSearchHitHandler::onShowSearchHit(
+		$this->getShowSearchHitHandler( [], [] )->onShowSearchHit(
 			$searchPage,
 			$searchResult,
 			[],
@@ -341,6 +341,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 
 		$handler->__call(
 			'getEntityLink', [
+				$searchPage->getContext(),
 				$searchResult,
 				Title::newFromText( 'Q1' ),
 				&$title,
@@ -349,19 +350,21 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 			]
 		);
 
-		CirrusShowSearchHitHandler::onShowSearchHit(
-			$searchPage,
-			$searchResult,
-			[],
-			$link,
-			$redirect,
-			$section,
-			$extract,
-			$score,
-			$size,
-			$date,
-			$related,
-			$html
+		$handler->__call(
+			'onShowSearchHit', [
+				$searchPage,
+				$searchResult,
+				[],
+				&$link,
+				&$redirect,
+				&$section,
+				&$extract,
+				&$score,
+				&$size,
+				&$date,
+				&$related,
+				&$html
+			]
 		);
 		$output = HtmlArmor::getHtml( $title ) . "\n" .
 				json_encode( $attributes, JSON_PRETTY_PRINT ) . "\n" .
@@ -393,13 +396,12 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param string[] $languages
 	 * @param Item[] $entities
-	 * @return CirrusShowSearchHitHandler
+	 * @return CirrusShowSearchHitHooksHandler
 	 */
 	private function getShowSearchHitHandler( array $languages, array $entities ) {
-		return new CirrusShowSearchHitHandler(
+		return new CirrusShowSearchHitHooksHandler(
 			$this->getEntityIdLookup(),
 			WikibaseRepo::getEntityLinkFormatterFactory()
-				->getDefaultLinkFormatter( $this->getServiceContainer()->getLanguageFactory()->getLanguage( 'en' ) )
 		);
 	}
 

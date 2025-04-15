@@ -102,33 +102,33 @@
 		"WikibaseCirrusSearch": "Wikibase\\Search\\Elastic\\WikibaseSearchConfig::newFromGlobals"
 	},
 	"Hooks": {
-		"SetupAfterCache": [
-			"Wikibase\\Search\\Elastic\\Hooks::onSetupAfterCache"
-		],
-		"CirrusSearchAnalysisConfig": [
-			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchAnalysisConfig"
-		],
-		"CirrusSearchProfileService": [
-			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchProfileService"
-		],
-		"CirrusSearchAddQueryFeatures": [
-			"Wikibase\\Search\\Elastic\\Hooks::onCirrusSearchAddQueryFeatures"
-		],
-		"ShowSearchHit": [
-			"Wikibase\\Search\\Elastic\\CirrusShowSearchHitHandler::onShowSearchHit"
-		],
-		"ShowSearchHitTitle": [
-			"Wikibase\\Search\\Elastic\\CirrusShowSearchHitHandler::onShowSearchHitTitle"
-		],
-		"WikibaseRepoEntityTypes": [
-			"Wikibase\\Search\\Elastic\\Hooks::onWikibaseRepoEntityTypes"
-		],
-		"SpecialPage_initList": [
-			"Wikibase\\Search\\Elastic\\Hooks::onSpecialPageInitList"
-		],
-		"ApiOpenSearchSuggest": [
-			"Wikibase\\Search\\Elastic\\Hooks::onApiOpenSearchSuggest"
-		]
+		"SetupAfterCache": "MediaWikiHooksHandler",
+		"CirrusSearchAnalysisConfig": "CirrusSearchHooksHandler",
+		"CirrusSearchProfileService": "CirrusSearchHooksHandler",
+		"CirrusSearchAddQueryFeatures": "CirrusSearchHooksHandler",
+		"ShowSearchHit": "CirrusShowSearchHitHooksHandler",
+		"ShowSearchHitTitle": "CirrusShowSearchHitHooksHandler",
+		"WikibaseRepoEntityTypes": "WikibaseRepoEntityTypes",
+		"SpecialPage_initList": "MediaWikiHooksHandler",
+		"ApiOpenSearchSuggest": "MediaWikiHooksHandler"
+	},
+	"HookHandlers": {
+		"MediaWikiHooksHandler": {
+			"class": "Wikibase\\Search\\Elastic\\Hooks\\MediaWikiCoreHooksHandler"
+		},
+		"CirrusSearchHooksHandler": {
+			"class": "Wikibase\\Search\\Elastic\\Hooks\\CirrusSearchHooksHandler"
+		},
+		"CirrusShowSearchHitHooksHandler": {
+			"class": "Wikibase\\Search\\Elastic\\Hooks\\CirrusShowSearchHitHooksHandler",
+			"services": [
+				"WikibaseRepo.EntityIdLookup",
+				"WikibaseRepo.EntityLinkFormatterFactory"
+			]
+		},
+		"WikibaseRepoEntityTypes": {
+			"class": "Wikibase\\Search\\Elastic\\Hooks\\WikibaseRepoEntityTypesHookHandler"
+		}
 	},
 	"ExtensionMessagesFiles": {
 		"WikibaseCirrusSearchAlias": "WikibaseCirrusSearch.alias.php"

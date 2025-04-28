@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types = 1 );
 
 namespace Wikibase\Search\Elastic\Tests;
 
@@ -12,6 +12,8 @@ use Wikibase\Search\Elastic\InLabelSearch;
 /**
  * @covers \Wikibase\Search\Elastic\InLabelSearch
  * @covers \Wikibase\Search\Elastic\Query\InLabelQuery
+ * @covers \Wikibase\Search\Elastic\Query\InLabelFilterVisitor
+ * @covers \Wikibase\Search\Elastic\Query\InLabelScoringVisitor
  *
  * @group Wikibase
  *
@@ -24,7 +26,7 @@ class InLabelSearchTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider searchDataProvider
 	 */
-	public function testSearchElastic( array $params, string $expected ) {
+	public function testSearchElastic( array $params, string $expected ): void {
 		$this->resetGlobalSearchConfig();
 
 		$this->setMwGlobals( [ 'wgEntitySearchUseCirrus' => true ] );
@@ -45,7 +47,7 @@ class InLabelSearchTest extends MediaWikiIntegrationTestCase {
 		$this->assertFileContains( $expected, $encodedData, CirrusTestCase::canRebuildFixture() );
 	}
 
-	public static function searchDataProvider() {
+	public static function searchDataProvider(): array {
 		$tests = [];
 		foreach ( glob( __DIR__ . '/data/inLabelSearch/*.query' ) as $queryFile ) {
 			$testName = substr( basename( $queryFile ), 0, -6 );
@@ -57,7 +59,7 @@ class InLabelSearchTest extends MediaWikiIntegrationTestCase {
 		return $tests;
 	}
 
-	private function newEntitySearch() {
+	private function newEntitySearch(): InLabelSearch {
 		return new InLabelSearch(
 			WikibaseRepo::getLanguageFallbackChainFactory(),
 			new BasicEntityIdParser(),
@@ -66,7 +68,7 @@ class InLabelSearchTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	private function resetGlobalSearchConfig() {
+	private function resetGlobalSearchConfig(): void {
 		// For whatever reason the mediawiki test suite reuses the same config
 		// objects for the entire test. This breaks caches inside the cirrus
 		// SearchConfig, so reset them as necessary.

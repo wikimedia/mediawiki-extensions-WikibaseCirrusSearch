@@ -1,5 +1,5 @@
 {
-    "description": "wikibase_in_label search for 'Duck'",
+    "description": "wikibase_in_label search for 'first AND second && third'",
     "params": {
         "timeout": "20s"
     },
@@ -19,11 +19,33 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.plain": {
-                                            "query": "Duck",
-                                            "operator": "and"
-                                        }
+                                    "bool": {
+                                        "must": [
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "first",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "second",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "third",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -36,7 +58,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.near_match": "Duck"
+                                                            "labels.en.near_match": "first second third"
                                                         }
                                                     },
                                                     "boost": 2
@@ -46,7 +68,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.near_match_folded": "Duck"
+                                                            "labels.en.near_match_folded": "first second third"
                                                         }
                                                     },
                                                     "boost": 1.6
@@ -56,7 +78,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.plain": "Duck"
+                                                            "labels.en.plain": "first second third"
                                                         }
                                                     },
                                                     "boost": 1.1
@@ -70,7 +92,7 @@
                     },
                     {
                         "term": {
-                            "title.keyword": "DUCK"
+                            "title.keyword": "FIRST AND SECOND && THIRD"
                         }
                     }
                 ]
@@ -121,7 +143,6 @@
                 }
             }
         },
-        "from": 5,
         "size": 10,
         "rescore": [
             {

@@ -6,6 +6,14 @@
     "query": {
         "query": {
             "bool": {
+                "minimum_should_match": 1,
+                "filter": [
+                    {
+                        "term": {
+                            "content_model": "wikibase-item"
+                        }
+                    }
+                ],
                 "should": [
                     {
                         "bool": {
@@ -48,23 +56,10 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.plain": {
-                                                                "query": "Duck",
-                                                                "operator": "and"
-                                                            }
+                                                            "labels.en.plain": "Duck"
                                                         }
                                                     },
                                                     "boost": 1.1
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels_all.near_match_folded": "Duck"
-                                                        }
-                                                    },
-                                                    "boost": 0.001
                                                 }
                                             }
                                         ]
@@ -76,14 +71,6 @@
                     {
                         "term": {
                             "title.keyword": "DUCK"
-                        }
-                    }
-                ],
-                "minimum_should_match": 1,
-                "filter": [
-                    {
-                        "term": {
-                            "content_model": "wikibase-item"
                         }
                     }
                 ]

@@ -1,5 +1,5 @@
 {
-    "description": "wikibase_in_label search for 'Duck'",
+    "description": "wikibase_in_label search for 'Duck NOT bird -animal !cartoon'",
     "params": {
         "timeout": "20s"
     },
@@ -19,11 +19,43 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.plain": {
-                                            "query": "Duck",
-                                            "operator": "and"
-                                        }
+                                    "bool": {
+                                        "must": [
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "Duck",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "must_not": [
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "bird",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "animal",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "cartoon",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -70,7 +102,7 @@
                     },
                     {
                         "term": {
-                            "title.keyword": "DUCK"
+                            "title.keyword": "DUCK NOT BIRD -ANIMAL !CARTOON"
                         }
                     }
                 ]
@@ -121,7 +153,6 @@
                 }
             }
         },
-        "from": 5,
         "size": 10,
         "rescore": [
             {

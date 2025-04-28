@@ -1,0 +1,5 @@
+{
+	"search": "first AND second NOT third",
+	"language": "en",
+	"type": "item"
+}

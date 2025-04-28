@@ -1,0 +1,5 @@
+{
+	"search": "first OR second || third",
+	"language": "en",
+	"type": "item"
+}

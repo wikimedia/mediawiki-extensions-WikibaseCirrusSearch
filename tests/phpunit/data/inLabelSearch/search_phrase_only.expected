@@ -1,5 +1,5 @@
 {
-    "description": "wikibase_in_label search for 'Duck'",
+    "description": "wikibase_in_label search for '\"phrase search\"'",
     "params": {
         "timeout": "20s"
     },
@@ -19,11 +19,8 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.plain": {
-                                            "query": "Duck",
-                                            "operator": "and"
-                                        }
+                                    "match_phrase": {
+                                        "labels_all.plain": "phrase search"
                                     }
                                 }
                             ],
@@ -36,27 +33,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.near_match": "Duck"
-                                                        }
-                                                    },
-                                                    "boost": 2
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.near_match_folded": "Duck"
-                                                        }
-                                                    },
-                                                    "boost": 1.6
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.plain": "Duck"
+                                                            "labels.en.plain": "phrase search"
                                                         }
                                                     },
                                                     "boost": 1.1
@@ -70,7 +47,7 @@
                     },
                     {
                         "term": {
-                            "title.keyword": "DUCK"
+                            "title.keyword": "\"PHRASE SEARCH\""
                         }
                     }
                 ]
@@ -121,7 +98,6 @@
                 }
             }
         },
-        "from": 5,
         "size": 10,
         "rescore": [
             {

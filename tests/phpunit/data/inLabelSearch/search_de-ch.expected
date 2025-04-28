@@ -6,6 +6,14 @@
     "query": {
         "query": {
             "bool": {
+                "minimum_should_match": 1,
+                "filter": [
+                    {
+                        "term": {
+                            "content_model": "wikibase-item"
+                        }
+                    }
+                ],
                 "should": [
                     {
                         "bool": {
@@ -48,23 +56,10 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de-ch.plain": {
-                                                                "query": "Wien",
-                                                                "operator": "and"
-                                                            }
+                                                            "labels.de-ch.plain": "Wien"
                                                         }
                                                     },
                                                     "boost": 1.1
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels_all.near_match_folded": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 0.001
                                                 }
                                             },
                                             {
@@ -91,10 +86,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de.plain": {
-                                                                "query": "Wien",
-                                                                "operator": "and"
-                                                            }
+                                                            "labels.de.plain": "Wien"
                                                         }
                                                     },
                                                     "boost": 0.36
@@ -124,10 +116,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.plain": {
-                                                                "query": "Wien",
-                                                                "operator": "and"
-                                                            }
+                                                            "labels.en.plain": "Wien"
                                                         }
                                                     },
                                                     "boost": 0.324
@@ -142,14 +131,6 @@
                     {
                         "term": {
                             "title.keyword": "WIEN"
-                        }
-                    }
-                ],
-                "minimum_should_match": 1,
-                "filter": [
-                    {
-                        "term": {
-                            "content_model": "wikibase-item"
                         }
                     }
                 ]

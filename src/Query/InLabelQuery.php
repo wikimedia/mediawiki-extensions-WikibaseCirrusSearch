@@ -1,17 +1,21 @@
-<?php
+<?php declare( strict_types=1 );
 
 namespace Wikibase\Search\Elastic\Query;
 
+use CirrusSearch\Parser\EmptyQueryClassifiersRepository;
+use CirrusSearch\Parser\KeywordRegistry;
+use CirrusSearch\Parser\NamespacePrefixParser;
+use CirrusSearch\Parser\QueryParser;
+use CirrusSearch\Parser\QueryStringRegex\QueryStringRegexParser;
+use CirrusSearch\Parser\QueryStringRegex\SearchQueryParseException;
 use CirrusSearch\Profile\SearchProfileService;
+use CirrusSearch\Search\Escaper;
 use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\DisMax;
-use Elastica\Query\MatchQuery;
 use Elastica\Query\Term;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\EntitySearchUtils;
 use Wikibase\Search\Elastic\Fields\AllLabelsField;
-use Wikibase\Search\Elastic\Fields\LabelsField;
 
 /**
  * Query used to perform search on the multilanguage labels field.
@@ -23,6 +27,7 @@ class InLabelQuery extends AbstractQuery {
 	private array $searchLanguageCodes;
 	private bool $strictLanguage;
 	private string $contentModel;
+	private QueryParser $queryParser;
 	/**
 	 * @var string|null an id identified in the user query that might match the title field
 	 */
@@ -35,6 +40,7 @@ class InLabelQuery extends AbstractQuery {
 		array $searchLanguageCodes,
 		bool $strictLanguage,
 		string $contentModel,
+		QueryParser $queryParser,
 		?string $normalizedId
 	) {
 		$this->normalizedQuery = $normalizedQuery;
@@ -43,6 +49,7 @@ class InLabelQuery extends AbstractQuery {
 		$this->searchLanguageCodes = $searchLanguageCodes;
 		$this->strictLanguage = $strictLanguage;
 		$this->contentModel = $contentModel;
+		$this->queryParser = $queryParser;
 		$this->normalizedId = $normalizedId;
 	}
 
@@ -80,6 +87,30 @@ class InLabelQuery extends AbstractQuery {
 			// in the profile to not match the profile request?
 			$languageCode = $searchLanguageCodes[0];
 		}
+
+		// keywords aren't supported, so create a KeywordRegistry that always returns an empty array
+		$keywordRegistry = new class() implements KeywordRegistry {
+			/** @inheritDoc */
+			public function getKeywords(): array {
+				return [];
+			}
+		};
+		// namespace prefix is not supported, so create a NamespacePrefixParser that always returns false
+		$namespacePrefixParser = new class() implements NamespacePrefixParser {
+			/** @inheritDoc */
+			public function parse( $query ): bool {
+				return false;
+			}
+		};
+		$queryParser = new QueryStringRegexParser(
+			$keywordRegistry,
+			new Escaper( $languageCode, false ),
+			"none",
+			new EmptyQueryClassifiersRepository(),
+			$namespacePrefixParser,
+			null
+		);
+
 		return new self(
 			$normalizedQuery,
 			$profile,
@@ -87,6 +118,7 @@ class InLabelQuery extends AbstractQuery {
 			$searchLanguageCodes,
 			$strictLanguage,
 			$contentModel,
+			$queryParser,
 			$normalizedId
 		);
 	}
@@ -165,73 +197,36 @@ class InLabelQuery extends AbstractQuery {
 
 	/**
 	 * @inheritDoc
+	 * @throws SearchQueryParseException
 	 */
-	public function toArray() {
-		$query = new BoolQuery();
+	public function toArray(): array {
+		$parsedQuery = $this->queryParser->parse( $this->normalizedQuery );
 
-		$labelsName = LabelsField::NAME;
-		$allLabelsName = AllLabelsField::NAME;
+		$baseQuery = new BoolQuery();
+		$baseQuery->setMinimumShouldMatch( 1 );
+		// fetch only the requested entity type
+		$baseQuery->addFilter( new Term( [ 'content_model' => $this->contentModel ] ) );
 
-		$labelsFilter = new MatchQuery( "$allLabelsName.plain", [ 'query' => $this->normalizedQuery ] );
-		$labelsFilter->setFieldOperator( "$allLabelsName.plain", MatchQuery::OPERATOR_AND );
+		$filterVisitor = new InLabelFilterVisitor( AllLabelsField::NAME . '.plain' );
+		$parsedQuery->getRoot()->accept( $filterVisitor );
+		$filterQuery = $filterVisitor->getFilterQuery();
 
-		$languageCode = $this->languageCode;
-		$profile = $this->profile;
-		$fields = [
-			[ "$labelsName.{$languageCode}.near_match", $profile["{$languageCode}-exact"], MatchQuery::OPERATOR_OR ],
-			[ "$labelsName.{$languageCode}.near_match_folded", $profile["{$languageCode}-folded"], MatchQuery::OPERATOR_OR ],
-		];
-		$weight = $profile["{$languageCode}-tokenized"];
-
-		$fields[] = [ "labels.{$languageCode}.plain", $weight, MatchQuery::OPERATOR_AND ];
-
-		if ( !$this->strictLanguage ) {
-			$fields[] = [ "labels_all.near_match_folded", $profile['any'], MatchQuery::OPERATOR_OR ];
-			foreach ( $this->searchLanguageCodes as $fallbackCode ) {
-				if ( $fallbackCode === $languageCode ) {
-					continue;
-				}
-				$fields[] = [
-					"labels.{$fallbackCode}.near_match",
-					$profile["{$fallbackCode}-exact"],
-					MatchQuery::OPERATOR_OR ];
-				$fields[] = [
-					"labels.{$fallbackCode}.near_match_folded",
-					$profile["{$fallbackCode}-folded"],
-					MatchQuery::OPERATOR_OR ];
-
-				$weight = $profile["{$fallbackCode}-tokenized"];
-				$fields[] = [ "labels.{$fallbackCode}.plain", $weight, MatchQuery::OPERATOR_AND ];
-			}
-		}
-
-		$dismax = new DisMax();
-		$dismax->setTieBreaker( $profile['tie-breaker'] );
-		foreach ( $fields as [ $field, $boost, $matchOperator ] ) {
-			$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery(
-				$field,
-				$boost,
-				$this->normalizedQuery,
-				$matchOperator
-			) );
-		}
+		$scoringVisitor = new InLabelScoringVisitor();
+		$parsedQuery->getRoot()->accept( $scoringVisitor );
+		$scoringQuery = $scoringVisitor->buildScoringQuery( $this->searchLanguageCodes, $this->profile );
 
 		$labelsQuery = new BoolQuery();
-		$labelsQuery->addFilter( $labelsFilter );
-		$labelsQuery->addShould( $dismax );
+		$labelsQuery->addFilter( $filterQuery );
+		$labelsQuery->addShould( $scoringQuery );
+
 		// Match either labels or exact match to title
-		$query->addShould( $labelsQuery );
+		$baseQuery->addShould( $labelsQuery );
 		if ( $this->normalizedId !== null ) {
 			$titleMatch = new Term( [ 'title.keyword' => $this->normalizedId ] );
-			$query->addShould( $titleMatch );
+			$baseQuery->addShould( $titleMatch );
 		}
 
-		$query->setMinimumShouldMatch( 1 );
-
-		// Filter to fetch only given entity type
-		$query->addFilter( new Term( [ 'content_model' => $this->contentModel ] ) );
-
-		return $query->toArray();
+		return $baseQuery->toArray();
 	}
 
 	/**

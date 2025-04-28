@@ -1,5 +1,5 @@
 {
-    "description": "wikibase_in_label search for 'Duck'",
+    "description": "wikibase_in_label search for '\"prefix phrase*\" AND fuzzy~ AND prefix* AND wildc*rd'",
     "params": {
         "timeout": "20s"
     },
@@ -19,11 +19,38 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.plain": {
-                                            "query": "Duck",
-                                            "operator": "and"
-                                        }
+                                    "bool": {
+                                        "must": [
+                                            {
+                                                "match_phrase": {
+                                                    "labels_all.plain": "prefix phrase"
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "fuzzy",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "prefix",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "wildc*rd",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -36,27 +63,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.near_match": "Duck"
-                                                        }
-                                                    },
-                                                    "boost": 2
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.near_match_folded": "Duck"
-                                                        }
-                                                    },
-                                                    "boost": 1.6
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.plain": "Duck"
+                                                            "labels.en.plain": "prefix phrase fuzzy prefix wildc*rd"
                                                         }
                                                     },
                                                     "boost": 1.1
@@ -70,7 +77,7 @@
                     },
                     {
                         "term": {
-                            "title.keyword": "DUCK"
+                            "title.keyword": "\"PREFIX PHRASE*\" AND FUZZY~ AND PREFIX* AND WILDC*RD"
                         }
                     }
                 ]
@@ -121,7 +128,6 @@
                 }
             }
         },
-        "from": 5,
         "size": 10,
         "rescore": [
             {

@@ -1,0 +1,5 @@
+{
+	"search": "\"prefix phrase*\" AND fuzzy~ AND prefix* AND wildc*rd",
+	"language": "en",
+	"type": "item"
+}

@@ -45,7 +45,7 @@ class MediaWikiCoreHooksHandler	implements SetupAfterCacheHook, ApiOpenSearchSug
 			return;
 		}
 
-		self::amendSearchResults( WikibaseRepo::getUserLanguage(), $results );
+		self::amendSearchResults( RequestContext::getMain()->getLanguage(), $results );
 	}
 
 	/**

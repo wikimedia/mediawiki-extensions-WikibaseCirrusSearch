@@ -12,6 +12,7 @@ use Elastica\Query\MatchNone;
 use Elastica\Query\MatchQuery;
 use Elastica\Query\MultiMatch;
 use Elastica\Query\Term;
+use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -79,7 +80,7 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 			$settings,
 			WikibaseRepo::getLanguageFallbackChainFactory( $services ),
 			WikibaseRepo::getEntityIdParser( $services ),
-			WikibaseRepo::getUserLanguage( $services )->getCode()
+			RequestContext::getMain()->getLanguage()->getCode()
 		);
 	}
 

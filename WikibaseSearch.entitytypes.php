@@ -25,6 +25,9 @@ return [
 		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
 			$entityIdParser = WikibaseRepo::getEntityIdParser();
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+			$context = new RequestContext();
+			$context->setRequest( $request );
+			$userLanguage = $context->getLanguage();
 
 			return new CombinedEntitySearchHelper(
 				[
@@ -33,14 +36,14 @@ return [
 						$entityIdParser,
 						new LanguageFallbackLabelDescriptionLookup(
 							WikibaseRepo::getTermLookup(),
-							$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
+							$languageFallbackChainFactory->newFromLanguage( $userLanguage )
 						),
 						WikibaseRepo::getEnabledEntityTypes()
 					),
 					new EntitySearchElastic(
 						$languageFallbackChainFactory,
 						$entityIdParser,
-						WikibaseRepo::getUserLanguage(),
+						$userLanguage,
 						WikibaseRepo::getContentModelMappings(),
 						$request
 					)
@@ -87,6 +90,9 @@ return [
 		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
 			$entityIdParser = WikibaseRepo::getEntityIdParser();
 			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
+			$context = new RequestContext();
+			$context->setRequest( $request );
+			$userLanguage = $context->getLanguage();
 
 			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
 				new CombinedEntitySearchHelper(
@@ -96,14 +102,14 @@ return [
 							$entityIdParser,
 							new LanguageFallbackLabelDescriptionLookup(
 								WikibaseRepo::getTermLookup(),
-								$languageFallbackChainFactory->newFromLanguage( WikibaseRepo::getUserLanguage() )
+								$languageFallbackChainFactory->newFromLanguage( $userLanguage )
 							),
 							WikibaseRepo::getEnabledEntityTypes()
 						),
 						new EntitySearchElastic(
 							$languageFallbackChainFactory,
 							$entityIdParser,
-							WikibaseRepo::getUserLanguage(),
+							$userLanguage,
 							WikibaseRepo::getContentModelMappings(),
 							$request
 						)

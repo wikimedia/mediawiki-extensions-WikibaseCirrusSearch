@@ -8,6 +8,8 @@ use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;
 use Wikibase\Search\Elastic\Fields\DescriptionsField;
+use Wikibase\Search\Elastic\Fields\LabelsField;
+use Wikibase\Search\Elastic\Fields\TermIndexField;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 
 /**
@@ -118,6 +120,61 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 		} else {
 			$this->assertEquals( [ 'noop' => 'equals' ], $labels->getEngineHints( $searchEngine ) );
 		}
+	}
+
+	/** @dataProvider provideMerge */
+	public function testMerge( DescriptionsField $sut, TermIndexField $that, $expected ): void {
+		$actual = $sut->merge( $that );
+
+		$this->assertEquals( $expected, $actual );
+	}
+
+	public static function provideMerge(): iterable {
+		$sutLanguages = [ 'en', 'de' ];
+		$sutStemmingSettings = [ 'stemming' => 'settings' ];
+		$sut = new DescriptionsField( $sutLanguages, $sutStemmingSettings );
+
+		yield 'same field' => [
+			'sut' => $sut,
+			'that' => $sut,
+			'expected' => $sut,
+		];
+
+		yield 'equal field' => [
+			'sut' => $sut,
+			'that' => new DescriptionsField( $sutLanguages, $sutStemmingSettings ),
+			'expected' => $sut,
+		];
+
+		yield 'superset of languages' => [
+			'sut' => $sut,
+			'that' => new DescriptionsField( [ 'en' /* no 'de' */ ], $sutStemmingSettings ),
+			'expected' => $sut,
+		];
+
+		yield 'subset of languages' => [
+			'sut' => $sut,
+			'that' => new DescriptionsField( [ 'en', 'de', 'pt' ], $sutStemmingSettings ),
+			'expected' => new DescriptionsField( [ 'en', 'de', 'pt' ], $sutStemmingSettings ),
+		];
+
+		yield 'intersecting languages' => [
+			'sut' => $sut,
+			'that' => new DescriptionsField( [ 'en', /* no 'de' */ 'pt' ], $sutStemmingSettings ),
+			'expected' => new DescriptionsField( [ 'en', 'de', 'pt' ], $sutStemmingSettings ),
+		];
+
+		yield 'different stemming settings' => [
+			'sut' => $sut,
+			'that' => new DescriptionsField( $sutLanguages, [ 'other' => 'stemmingSettings' ] ),
+			'expected' => false,
+		];
+
+		yield 'different type' => [
+			'sut' => $sut,
+			'that' => new LabelsField( $sutLanguages, $sutStemmingSettings ),
+			'expected' => false,
+		];
 	}
 
 }

@@ -13,7 +13,10 @@ trait WikibaseSearchTestCase {
 		$this->setMwGlobals( 'wgWBCSUseCirrus', true );
 	}
 
-	// Declare dependency on setMwGlobals
+	/**
+	 * Declare dependency on setMwGlobals
+	 * @inheritDoc
+	 */
 	abstract public function setMwGlobals( $pairs, $value = null );
 
 	protected function setUp(): void {

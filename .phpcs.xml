@@ -2,9 +2,7 @@
 <ruleset>
 	<!--  START Copied from wikibase-codesniffer T268828	-->
 
-	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
-		<exclude name="MediaWiki.Commenting.FunctionComment.WrongStyle" />
-	</rule>
+	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki" />
 
 	<!-- Even if we encourage to use spaces in comments, we don't think this sniff should block
 		patches from being merged. -->

@@ -3,7 +3,6 @@ namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
 use SearchEngine;
-use SearchIndexField;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\AliasesProvider;
 use Wikibase\DataModel\Term\LabelsProvider;
@@ -16,30 +15,12 @@ use Wikibase\DataModel\Term\LabelsProvider;
  */
 class LabelsField extends TermIndexField implements WikibaseLabelsIndexField {
 
+	use LabelsDescriptionsFieldTrait;
+
 	/**
 	 * Field name
 	 */
 	public const NAME = "labels";
-
-	/**
-	 * List of available languages
-	 * @var string[]
-	 */
-	private $languages;
-
-	/**
-	 * @var array
-	 */
-	private $stemmingSettings;
-
-	/**
-	 * @param string[] $languages
-	 */
-	public function __construct( array $languages, array $stemmingSettings ) {
-		$this->languages = $languages;
-		parent::__construct( self::NAME, \SearchIndexField::INDEX_TYPE_NESTED );
-		$this->stemmingSettings = $stemmingSettings;
-	}
 
 	/**
 	 * @param SearchEngine $engine
@@ -120,45 +101,5 @@ class LabelsField extends TermIndexField implements WikibaseLabelsIndexField {
 		// empty list instead of an empty map. Elastic doesn't mind, but this
 		// allows more consistency working with the resulting cirrus docs
 		return $data ?: null;
-	}
-
-	/**
-	 * Set engine hints.
-	 * Specifically, sets noop hint so that labels would be compared
-	 * as arrays and removal of labels would be processed correctly.
-	 * @param SearchEngine $engine
-	 * @return array
-	 */
-	public function getEngineHints( SearchEngine $engine ) {
-		if ( !( $engine instanceof CirrusSearch ) ) {
-			// For now only Cirrus/Elastic is supported
-			return [];
-		}
-		return [ \CirrusSearch\Search\CirrusIndexField::NOOP_HINT => "equals" ];
-	}
-
-	/** @inheritDoc */
-	public function merge( SearchIndexField $that ) {
-		// require the same class and stemming settings to be mergeable
-		if (
-			$that instanceof self &&
-			$this->type === $that->type &&
-			$this->stemmingSettings === $that->stemmingSettings
-		) {
-			// merge the languages together (index all languages mentioned in either)
-			$allLanguages = array_values( array_unique( array_merge(
-				$this->languages,
-				$that->languages
-			) ) );
-			if ( $allLanguages === $this->languages ) {
-				return $this;
-			} elseif ( $allLanguages === $that->languages ) {
-				return $that;
-			} else {
-				return new self( $allLanguages, $this->stemmingSettings );
-			}
-		}
-
-		return false;
 	}
 }

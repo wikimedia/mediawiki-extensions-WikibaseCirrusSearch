@@ -57,28 +57,40 @@ trait LabelsDescriptionsFieldTrait {
 
 	/** @inheritDoc */
 	public function merge( SearchIndexField $that ) {
-		// require the same class and stemming settings to be mergeable
-		if (
-			$that instanceof self &&
-			$this->type === $that->type &&
-			$this->stemmingSettings === $that->stemmingSettings
-		) {
-			// merge the languages together (index all languages mentioned in either)
-			$allLanguages = array_values( array_unique( array_merge(
-				$this->languages,
-				$that->languages
-			) ) );
-			if ( $allLanguages === $this->languages ) {
-				return $this;
-			} elseif ( $allLanguages === $that->languages ) {
-				return $that;
-			} else {
-				/* @phan-suppress-next-line PhanTypeInstantiateTraitStaticOrSelf */
-				return new self( $allLanguages, $this->stemmingSettings );
-			}
+		if ( !( $that instanceof self ) || $this->type !== $that->type ) {
+			return false;
 		}
 
-		return false;
+		if (
+			$this->stemmingSettings == $that->stemmingSettings ||
+			$that->stemmingSettings === []
+		) {
+			$mergedStemmingSettings = $this->stemmingSettings;
+		} elseif ( $this->stemmingSettings === [] ) {
+			$mergedStemmingSettings = $that->stemmingSettings;
+		} else {
+			return false;
+		}
+
+		$mergedLanguages = array_values( array_unique( array_merge(
+			$this->languages,
+			$that->languages
+		) ) );
+
+		if (
+			$this->languages === $mergedLanguages &&
+			$this->stemmingSettings === $mergedStemmingSettings
+		) {
+			return $this;
+		} elseif (
+			$that->languages === $mergedLanguages &&
+			$that->stemmingSettings === $mergedStemmingSettings
+		) {
+			return $that;
+		} else {
+			/* @phan-suppress-next-line PhanTypeInstantiateTraitStaticOrSelf */
+			return new self( $mergedLanguages, $mergedStemmingSettings );
+		}
 	}
 
 }

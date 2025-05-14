@@ -164,6 +164,12 @@ class DescriptionFieldTest extends SearchFieldTestCase {
 			'expected' => new DescriptionsField( [ 'en', 'de', 'pt' ], $sutStemmingSettings ),
 		];
 
+		yield 'compatible stemming settings (one side empty)' => [
+			'sut' => $sut,
+			'that' => new DescriptionsField( $sutLanguages, [] ),
+			'expected' => $sut,
+		];
+
 		yield 'different stemming settings' => [
 			'sut' => $sut,
 			'that' => new DescriptionsField( $sutLanguages, [ 'other' => 'stemmingSettings' ] ),

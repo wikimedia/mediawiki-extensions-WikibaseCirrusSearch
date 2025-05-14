@@ -146,6 +146,12 @@ class LabelsFieldTest extends SearchFieldTestCase {
 			'expected' => new LabelsField( [ 'en', 'de', 'pt' ], $sutStemmingSettings ),
 		];
 
+		yield 'compatible stemming settings (one side empty)' => [
+			'sut' => $sut,
+			'that' => new LabelsField( $sutLanguages, [] ),
+			'expected' => $sut,
+		];
+
 		yield 'different stemming settings' => [
 			'sut' => $sut,
 			'that' => new LabelsField( $sutLanguages, [ 'other' => 'stemmingSettings' ] ),

@@ -12,14 +12,6 @@ $cfg['directory_list'] = array_merge(
 	]
 );
 
-// Exclude Wikibase stubs for Cirrus
-$cfg['exclude_file_list'] = array_merge(
-	$cfg['exclude_file_list'],
-	[
-		'../../extensions/Wikibase/repo/tests/phpunit/includes/Search/Elastic/DispatchingQueryBuilderTest.php',
-	]
-);
-
 $cfg['exclude_analysis_directory_list'] = array_merge(
 	$cfg['exclude_analysis_directory_list'],
 	[

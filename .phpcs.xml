@@ -28,10 +28,6 @@
 
 	<!--  END Copied from wikibase-codesniffer T268828	-->
 
-	<rule ref="MediaWiki.Commenting.PhpunitAnnotations.NotClassTrait">
-		<exclude-pattern>DispatchingQueryBuilderTest\.php</exclude-pattern>
-	</rule>
-
 	<!--  START Copied from wikibase-codesniffer T268828	-->
 
 	<rule ref="MediaWiki.NamingConventions.LowerCamelFunctionsName">

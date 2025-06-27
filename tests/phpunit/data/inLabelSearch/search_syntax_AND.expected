@@ -22,27 +22,48 @@
                                     "bool": {
                                         "must": [
                                             {
-                                                "match": {
-                                                    "labels_all.plain": {
-                                                        "query": "first",
-                                                        "operator": "and"
-                                                    }
+                                                "bool": {
+                                                    "minimum_should_match": 1,
+                                                    "should": [
+                                                        {
+                                                            "match": {
+                                                                "labels_all.plain": {
+                                                                    "query": "first",
+                                                                    "operator": "and"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             },
                                             {
-                                                "match": {
-                                                    "labels_all.plain": {
-                                                        "query": "second",
-                                                        "operator": "and"
-                                                    }
+                                                "bool": {
+                                                    "minimum_should_match": 1,
+                                                    "should": [
+                                                        {
+                                                            "match": {
+                                                                "labels_all.plain": {
+                                                                    "query": "second",
+                                                                    "operator": "and"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             },
                                             {
-                                                "match": {
-                                                    "labels_all.plain": {
-                                                        "query": "third",
-                                                        "operator": "and"
-                                                    }
+                                                "bool": {
+                                                    "minimum_should_match": 1,
+                                                    "should": [
+                                                        {
+                                                            "match": {
+                                                                "labels_all.plain": {
+                                                                    "query": "third",
+                                                                    "operator": "and"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]

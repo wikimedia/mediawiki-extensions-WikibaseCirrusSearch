@@ -22,11 +22,18 @@
                                     "bool": {
                                         "must": [
                                             {
-                                                "match": {
-                                                    "labels_all.plain": {
-                                                        "query": "test",
-                                                        "operator": "and"
-                                                    }
+                                                "bool": {
+                                                    "minimum_should_match": 1,
+                                                    "should": [
+                                                        {
+                                                            "match": {
+                                                                "labels_all.plain": {
+                                                                    "query": "test",
+                                                                    "operator": "and"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             },
                                             {

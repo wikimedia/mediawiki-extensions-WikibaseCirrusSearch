@@ -23,9 +23,11 @@ class InLabelScoringVisitor extends LeafVisitor {
 
 	private array $nonNegatedWords = [];
 	private bool $containsPhrase = false;
+	private array $stemmingSettings;
 
-	public function __construct() {
+	public function __construct( array $stemmingSettings ) {
 		parent::__construct( [ BooleanClause::MUST_NOT ] );
+		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	public function buildScoringQuery( array $languageCodes, array $profile ): DisMax {
@@ -54,6 +56,14 @@ class InLabelScoringVisitor extends LeafVisitor {
 				$profile["$languageCode-tokenized"],
 				$text
 			) );
+
+			if ( !empty( $this->stemmingSettings[$languageCode]['query'] ) ) {
+				$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery(
+					"$labelsName.$languageCode",
+					$profile["$languageCode-stemmed"] ?? $profile["$languageCode-tokenized"],
+					$text
+				) );
+			}
 
 			// TODO: Should we also add a 'labels_all' field using $profile['any']?
 			//       Which type(s)? '.plain' / '.near_match' / '.near_match_folded'?

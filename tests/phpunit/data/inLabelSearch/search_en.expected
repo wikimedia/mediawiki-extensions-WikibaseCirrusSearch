@@ -19,11 +19,18 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.plain": {
-                                            "query": "Duck",
-                                            "operator": "and"
-                                        }
+                                    "bool": {
+                                        "minimum_should_match": 1,
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "Duck",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],

@@ -1,5 +1,5 @@
 {
-    "description": "wikibase_in_label search for 'Wien'",
+    "description": "wikibase_in_label search for 'Duck'",
     "params": {
         "timeout": "20s"
     },
@@ -25,7 +25,15 @@
                                             {
                                                 "match": {
                                                     "labels_all.plain": {
-                                                        "query": "Wien",
+                                                        "query": "Duck",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels.en": {
+                                                        "query": "Duck",
                                                         "operator": "and"
                                                     }
                                                 }
@@ -43,7 +51,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de-ch.near_match": "Wien"
+                                                            "labels.en.near_match": "Duck"
                                                         }
                                                     },
                                                     "boost": 2
@@ -53,7 +61,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de-ch.near_match_folded": "Wien"
+                                                            "labels.en.near_match_folded": "Duck"
                                                         }
                                                     },
                                                     "boost": 1.6
@@ -63,7 +71,7 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de-ch.plain": "Wien"
+                                                            "labels.en.plain": "Duck"
                                                         }
                                                     },
                                                     "boost": 1.1
@@ -73,60 +81,10 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de.near_match": "Wien"
+                                                            "labels.en": "Duck"
                                                         }
                                                     },
-                                                    "boost": 1.71
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.de.near_match_folded": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 1.17
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.de.plain": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 0.36
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.near_match": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 1.539
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.near_match_folded": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 1.053
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.plain": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 0.324
+                                                    "boost": 1.05
                                                 }
                                             }
                                         ]
@@ -137,7 +95,7 @@
                     },
                     {
                         "term": {
-                            "title.keyword": "WIEN"
+                            "title.keyword": "DUCK"
                         }
                     }
                 ]
@@ -148,10 +106,6 @@
             "title",
             "namespace_text",
             "wiki",
-            "labels.de-ch",
-            "descriptions.de-ch",
-            "labels.de",
-            "descriptions.de",
             "labels.en",
             "descriptions.en"
         ],
@@ -171,24 +125,6 @@
                     "matched_fields": [
                         "title.keyword"
                     ]
-                },
-                "labels.de-ch.plain": {
-                    "type": "experimental",
-                    "fragmenter": "none",
-                    "number_of_fragments": 0,
-                    "options": {
-                        "skip_if_last_matched": true,
-                        "return_snippets_and_offsets": true
-                    }
-                },
-                "labels.de.plain": {
-                    "type": "experimental",
-                    "fragmenter": "none",
-                    "number_of_fragments": 0,
-                    "options": {
-                        "skip_if_last_matched": true,
-                        "return_snippets_and_offsets": true
-                    }
                 },
                 "labels.en.plain": {
                     "type": "experimental",
@@ -210,7 +146,7 @@
                 }
             }
         },
-        "size": 7,
+        "size": 10,
         "rescore": [
             {
                 "window_size": 8192,

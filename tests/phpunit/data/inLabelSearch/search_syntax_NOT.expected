@@ -22,37 +22,65 @@
                                     "bool": {
                                         "must": [
                                             {
-                                                "match": {
-                                                    "labels_all.plain": {
-                                                        "query": "Duck",
-                                                        "operator": "and"
-                                                    }
+                                                "bool": {
+                                                    "minimum_should_match": 1,
+                                                    "should": [
+                                                        {
+                                                            "match": {
+                                                                "labels_all.plain": {
+                                                                    "query": "Duck",
+                                                                    "operator": "and"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ],
                                         "must_not": [
                                             {
-                                                "match": {
-                                                    "labels_all.plain": {
-                                                        "query": "bird",
-                                                        "operator": "and"
-                                                    }
+                                                "bool": {
+                                                    "minimum_should_match": 1,
+                                                    "should": [
+                                                        {
+                                                            "match": {
+                                                                "labels_all.plain": {
+                                                                    "query": "bird",
+                                                                    "operator": "and"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             },
                                             {
-                                                "match": {
-                                                    "labels_all.plain": {
-                                                        "query": "animal",
-                                                        "operator": "and"
-                                                    }
+                                                "bool": {
+                                                    "minimum_should_match": 1,
+                                                    "should": [
+                                                        {
+                                                            "match": {
+                                                                "labels_all.plain": {
+                                                                    "query": "animal",
+                                                                    "operator": "and"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             },
                                             {
-                                                "match": {
-                                                    "labels_all.plain": {
-                                                        "query": "cartoon",
-                                                        "operator": "and"
-                                                    }
+                                                "bool": {
+                                                    "minimum_should_match": 1,
+                                                    "should": [
+                                                        {
+                                                            "match": {
+                                                                "labels_all.plain": {
+                                                                    "query": "cartoon",
+                                                                    "operator": "and"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
                                                 }
                                             }
                                         ]

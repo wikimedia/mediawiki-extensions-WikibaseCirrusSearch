@@ -20,18 +20,20 @@ class InLabelSearch {
 	private EntityIdParser $idParser;
 	private array $contentModelMap;
 	private CirrusDebugOptions $debugOptions;
+	private array $stemmingSettings;
 
 	public function __construct(
 		LanguageFallbackChainFactory $languageChainFactory,
 		EntityIdParser $idParser,
 		array $contentModelMap,
 		CirrusDebugOptions $debugOptions,
-		array $stemmingSettings = []
+		array $stemmingSettings
 	) {
 		$this->languageChainFactory = $languageChainFactory;
 		$this->idParser = $idParser;
 		$this->contentModelMap = $contentModelMap;
 		$this->debugOptions = $debugOptions;
+		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	/**
@@ -96,8 +98,8 @@ class InLabelSearch {
 			$profile,
 			$this->contentModelMap[$entityType],
 			$languageCode,
-			false,
-			EntitySearchUtils::entityIdParserNormalizer( $this->idParser )
+			EntitySearchUtils::entityIdParserNormalizer( $this->idParser ),
+			$this->stemmingSettings
 		);
 	}
 

@@ -19,11 +19,18 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.plain": {
-                                            "query": "haswbstatement:P31=Q5 Jane Doe",
-                                            "operator": "and"
-                                        }
+                                    "bool": {
+                                        "minimum_should_match": 1,
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.plain": {
+                                                        "query": "haswbstatement:P31=Q5 Jane Doe",
+                                                        "operator": "and"
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],

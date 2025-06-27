@@ -15,7 +15,6 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Term;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Search\Elastic\EntitySearchUtils;
-use Wikibase\Search\Elastic\Fields\AllLabelsField;
 
 /**
  * Query used to perform search on the multilanguage labels field.
@@ -25,32 +24,32 @@ class InLabelQuery extends AbstractQuery {
 	private array $profile;
 	private string $languageCode;
 	private array $searchLanguageCodes;
-	private bool $strictLanguage;
 	private string $contentModel;
 	private QueryParser $queryParser;
 	/**
 	 * @var string|null an id identified in the user query that might match the title field
 	 */
 	private ?string $normalizedId;
+	private array $stemmingSettings;
 
 	private function __construct(
 		string $normalizedQuery,
 		array $profile,
 		string $languageCode,
 		array $searchLanguageCodes,
-		bool $strictLanguage,
 		string $contentModel,
 		QueryParser $queryParser,
-		?string $normalizedId
+		?string $normalizedId,
+		array $stemmingSettings
 	) {
 		$this->normalizedQuery = $normalizedQuery;
 		$this->profile = $profile;
 		$this->languageCode = $languageCode;
 		$this->searchLanguageCodes = $searchLanguageCodes;
-		$this->strictLanguage = $strictLanguage;
 		$this->contentModel = $contentModel;
 		$this->queryParser = $queryParser;
 		$this->normalizedId = $normalizedId;
+		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	/**
@@ -63,9 +62,8 @@ class InLabelQuery extends AbstractQuery {
 	 * @param array $profile the profile to build the query
 	 * @param string $contentModel the content model
 	 * @param string $languageCode the language code (generally the user language)
-	 * @param bool $strictLanguage whether we're interested in matching language fallbacks or not
-	 * (use false to match fallbacks)
 	 * @param callable(string):(string|null)|null $idNormalizer optional function to normalize parts of the user query
+	 * @param array $stemmingSettings
 	 * that resembles an ID of the type of object we're searching. The function must return null
 	 * if its argument is not something that can be parsed as an ID.
 	 *
@@ -76,8 +74,8 @@ class InLabelQuery extends AbstractQuery {
 		array $profile,
 		string $contentModel,
 		string $languageCode,
-		bool $strictLanguage,
-		?callable $idNormalizer = null
+		?callable $idNormalizer,
+		array $stemmingSettings
 	): self {
 		$normalizedQuery = trim( $userQuery );
 		$normalizedId = $idNormalizer !== null ? EntitySearchUtils::normalizeIdFromSearchQuery( $normalizedQuery, $idNormalizer ) : null;
@@ -116,10 +114,10 @@ class InLabelQuery extends AbstractQuery {
 			$profile,
 			$languageCode,
 			$searchLanguageCodes,
-			$strictLanguage,
 			$contentModel,
 			$queryParser,
-			$normalizedId
+			$normalizedId,
+			$stemmingSettings
 		);
 	}
 
@@ -179,6 +177,7 @@ class InLabelQuery extends AbstractQuery {
 			"{$languageCode}-exact" => $profile['lang-exact'],
 			"{$languageCode}-folded" => $profile['lang-folded'],
 			"{$languageCode}-tokenized" => $profile['lang-tokenized'],
+			"{$languageCode}-stemmed" => $profile['lang-stemmed'],
 		];
 
 		$discount = $profile['fallback-discount'];
@@ -207,11 +206,11 @@ class InLabelQuery extends AbstractQuery {
 		// fetch only the requested entity type
 		$baseQuery->addFilter( new Term( [ 'content_model' => $this->contentModel ] ) );
 
-		$filterVisitor = new InLabelFilterVisitor( AllLabelsField::NAME . '.plain' );
+		$filterVisitor = new InLabelFilterVisitor( $this->languageCode, $this->stemmingSettings );
 		$parsedQuery->getRoot()->accept( $filterVisitor );
 		$filterQuery = $filterVisitor->getFilterQuery();
 
-		$scoringVisitor = new InLabelScoringVisitor();
+		$scoringVisitor = new InLabelScoringVisitor( $this->stemmingSettings );
 		$parsedQuery->getRoot()->accept( $scoringVisitor );
 		$scoringQuery = $scoringVisitor->buildScoringQuery( $this->searchLanguageCodes, $this->profile );
 

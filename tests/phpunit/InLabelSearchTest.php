@@ -38,7 +38,8 @@ class InLabelSearchTest extends MediaWikiIntegrationTestCase {
 		if ( isset( $params['offset'] ) ) {
 			$offset = $params['offset'];
 		}
-		$elasticQuery = $this->newEntitySearch()->search( $params['search'], $params['language'], $params['type'], $limit, $offset );
+		$elasticQuery = $this->newEntitySearch( $params['stemming'] ?? [] )
+			->search( $params['search'], $params['language'], $params['type'], $limit, $offset );
 		$elasticQuery = $elasticQuery['__main__'] ?? $elasticQuery;
 		unset( $elasticQuery['path'] );
 		// serialize_precision set for T205958
@@ -59,12 +60,13 @@ class InLabelSearchTest extends MediaWikiIntegrationTestCase {
 		return $tests;
 	}
 
-	private function newEntitySearch(): InLabelSearch {
+	private function newEntitySearch( array $stemmingSettings ): InLabelSearch {
 		return new InLabelSearch(
 			WikibaseRepo::getLanguageFallbackChainFactory(),
 			new BasicEntityIdParser(),
 			WikibaseRepo::getContentModelMappings(),
-			CirrusDebugOptions::forDumpingQueriesInUnitTests()
+			CirrusDebugOptions::forDumpingQueriesInUnitTests(),
+			$stemmingSettings
 		);
 	}
 

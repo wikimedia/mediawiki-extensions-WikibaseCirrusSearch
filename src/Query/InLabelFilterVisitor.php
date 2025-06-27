@@ -16,18 +16,24 @@ use Elastica\Query\AbstractQuery;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchPhrase;
 use Elastica\Query\MatchQuery;
+use Wikibase\Search\Elastic\Fields\AllLabelsField;
+use Wikibase\Search\Elastic\Fields\LabelsField;
 
 /**
  * @license GPL-2.0-or-later
  */
 class InLabelFilterVisitor extends LeafVisitor {
-	private AbstractQuery $filterQuery;
-	private string $field;
+	private const ALL_LABELS_FIELD = AllLabelsField::NAME . '.plain';
 
-	public function __construct( string $field ) {
+	private AbstractQuery $filterQuery;
+	private string $languageCode;
+	private array $stemmingSettings;
+
+	public function __construct( string $languageCode, array $stemmingSettings ) {
 		parent::__construct();
-		$this->field = $field;
 		$this->filterQuery = new BoolQuery();
+		$this->languageCode = $languageCode;
+		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	public function getFilterQuery(): AbstractQuery {
@@ -54,39 +60,50 @@ class InLabelFilterVisitor extends LeafVisitor {
 
 	/** @inheritDoc */
 	public function visitWordsQueryNode( WordsQueryNode $node ) {
-		$matchQuery = new MatchQuery( $this->field, [ 'query' => $node->getWords() ] );
-		$matchQuery->setFieldOperator( $this->field, MatchQuery::OPERATOR_AND );
-		$this->updateFilterQuery( $matchQuery );
+		$filter = new BoolQuery();
+		$filter->setMinimumShouldMatch( 1 );
+
+		$matchQuery = new MatchQuery( self::ALL_LABELS_FIELD, [ 'query' => $node->getWords() ] );
+		$matchQuery->setFieldOperator( self::ALL_LABELS_FIELD, MatchQuery::OPERATOR_AND );
+		$filter->addShould( $matchQuery );
+
+		if ( !empty( $this->stemmingSettings[$this->languageCode]['query'] ) ) {
+			$stemFilter = new MatchQuery( LabelsField::NAME . '.' . $this->languageCode, [ 'query' => $node->getWords() ] );
+			$stemFilter->setFieldOperator( LabelsField::NAME . '.' . $this->languageCode, MatchQuery::OPERATOR_AND );
+			$filter->addShould( $stemFilter );
+		}
+
+		$this->updateFilterQuery( $filter );
 	}
 
 	/** @inheritDoc	*/
 	public function visitPhraseQueryNode( PhraseQueryNode $node ) {
-		$this->updateFilterQuery( new MatchPhrase( $this->field, $node->getPhrase() ) );
+		$this->updateFilterQuery( new MatchPhrase( self::ALL_LABELS_FIELD, $node->getPhrase() ) );
 	}
 
 	/** @inheritDoc	*/
 	public function visitPhrasePrefixNode( PhrasePrefixNode $node ) {
-		$this->updateFilterQuery( new MatchPhrase( $this->field, $node->getPhrase() ) );
+		$this->updateFilterQuery( new MatchPhrase( self::ALL_LABELS_FIELD, $node->getPhrase() ) );
 	}
 
 	/** @inheritDoc	*/
 	public function visitFuzzyNode( FuzzyNode $node ) {
-		$matchQuery = new MatchQuery( $this->field, [ 'query' => $node->getWord() ] );
-		$matchQuery->setFieldOperator( $this->field, MatchQuery::OPERATOR_AND );
+		$matchQuery = new MatchQuery( self::ALL_LABELS_FIELD, [ 'query' => $node->getWord() ] );
+		$matchQuery->setFieldOperator( self::ALL_LABELS_FIELD, MatchQuery::OPERATOR_AND );
 		$this->updateFilterQuery( $matchQuery );
 	}
 
 	/** @inheritDoc	*/
 	public function visitPrefixNode( PrefixNode $node ) {
-		$matchQuery = new MatchQuery( $this->field, [ 'query' => $node->getPrefix() ] );
-		$matchQuery->setFieldOperator( $this->field, MatchQuery::OPERATOR_AND );
+		$matchQuery = new MatchQuery( self::ALL_LABELS_FIELD, [ 'query' => $node->getPrefix() ] );
+		$matchQuery->setFieldOperator( self::ALL_LABELS_FIELD, MatchQuery::OPERATOR_AND );
 		$this->updateFilterQuery( $matchQuery );
 	}
 
 	/** @inheritDoc	*/
 	public function visitWildcardNode( WildcardNode $node ) {
-		$matchQuery = new MatchQuery( $this->field, [ 'query' => $node->getWildcardQuery() ] );
-		$matchQuery->setFieldOperator( $this->field, MatchQuery::OPERATOR_AND );
+		$matchQuery = new MatchQuery( self::ALL_LABELS_FIELD, [ 'query' => $node->getWildcardQuery() ] );
+		$matchQuery->setFieldOperator( self::ALL_LABELS_FIELD, MatchQuery::OPERATOR_AND );
 		$this->updateFilterQuery( $matchQuery );
 	}
 

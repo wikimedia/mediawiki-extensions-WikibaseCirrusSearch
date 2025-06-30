@@ -25,7 +25,8 @@ class InLabelSearch {
 		LanguageFallbackChainFactory $languageChainFactory,
 		EntityIdParser $idParser,
 		array $contentModelMap,
-		CirrusDebugOptions $debugOptions
+		CirrusDebugOptions $debugOptions,
+		array $stemmingSettings = []
 	) {
 		$this->languageChainFactory = $languageChainFactory;
 		$this->idParser = $idParser;

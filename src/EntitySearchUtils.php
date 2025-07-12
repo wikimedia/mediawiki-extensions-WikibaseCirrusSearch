@@ -88,7 +88,7 @@ final class EntitySearchUtils {
 	public static function parseOrNull( $text, EntityIdParser $idParser ): ?EntityId {
 		try {
 			$id = $idParser->parse( $text );
-		} catch ( EntityIdParsingException $ex ) {
+		} catch ( EntityIdParsingException ) {
 			return null;
 		}
 		return $id;

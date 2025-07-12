@@ -90,7 +90,7 @@ class MediaWikiCoreHooksHandler	implements SetupAfterCacheHook, ApiOpenSearchSug
 				$entityId = $idParser->parse( $title );
 				$entityIds[] = $entityId;
 				$result['entityId'] = $entityId;
-			} catch ( EntityIdParsingException $e ) {
+			} catch ( EntityIdParsingException ) {
 				continue;
 			}
 		}

@@ -207,12 +207,12 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 
 		try {
 			$propType ??= $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
-		} catch ( PropertyDataTypeLookupException $e ) {
+		} catch ( PropertyDataTypeLookupException ) {
 			return null;
 		}
 		try {
 			$dataType = $this->dataTypeFactory->getType( $propType );
-		} catch ( OutOfBoundsException $e ) {
+		} catch ( OutOfBoundsException ) {
 			return null;
 		}
 

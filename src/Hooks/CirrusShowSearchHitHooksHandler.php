@@ -49,7 +49,7 @@ class CirrusShowSearchHitHooksHandler implements ShowSearchHitHook, ShowSearchHi
 		&$html
 	) {
 		if ( $result instanceof EntityResult ) {
-			$this->showEntityResultHit( $searchPage, $result, $terms,
+			$this->showEntityResultHit( $searchPage, $result,
 				$link, $redirect, $section, $extract, $score, $size, $date, $related, $html );
 		}
 	}
@@ -59,7 +59,6 @@ class CirrusShowSearchHitHooksHandler implements ShowSearchHitHook, ShowSearchHi
 	 *
 	 * @param SpecialSearch $searchPage
 	 * @param EntityResult $result
-	 * @param string[] $terms
 	 * @param string &$link
 	 * @param string &$redirect
 	 * @param string &$section
@@ -70,7 +69,7 @@ class CirrusShowSearchHitHooksHandler implements ShowSearchHitHook, ShowSearchHi
 	 * @param string &$related
 	 * @param string &$html
 	 */
-	private function showEntityResultHit( SpecialSearch $searchPage, EntityResult $result, array $terms,
+	private function showEntityResultHit( SpecialSearch $searchPage, EntityResult $result,
 		&$link, &$redirect, &$section, &$extract, &$score, &$size, &$date, &$related, &$html
 	) {
 		$extract = '';

@@ -41,7 +41,7 @@ class EntityElasticTermResult extends ElasticTermResult {
 	): ?TermSearchResult {
 		try {
 			$entityId = $this->idParser->parse( $sourceData['title'] );
-		} catch ( EntityIdParsingException $e ) {
+		} catch ( EntityIdParsingException ) {
 			// Can not parse entity ID - skip it
 			return null;
 		}

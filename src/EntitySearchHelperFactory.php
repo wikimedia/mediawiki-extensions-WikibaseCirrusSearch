@@ -74,4 +74,8 @@ class EntitySearchHelperFactory {
 			]
 		);
 	}
+
+	public function newItemPropertySearchHelper( WebRequest $request, Language $resultLanguage ): EntitySearchHelper {
+		return $this->newItemSearchForResultLanguage( $request, $resultLanguage );
+	}
 }

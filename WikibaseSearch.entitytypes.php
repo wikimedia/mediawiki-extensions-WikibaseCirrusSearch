@@ -9,9 +9,6 @@ use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\SettingsArray;
-use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
-use Wikibase\Repo\Api\CombinedEntitySearchHelper;
-use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 use Wikibase\Search\Elastic\EntitySearchHelperFactory;
@@ -29,7 +26,7 @@ return [
 			$userLanguage = $context->getLanguage();
 
 			return EntitySearchHelperFactory::newFromGlobalState()
-				->newItemSearchForResultLanguage( $request, $userLanguage );
+				->newItemPropertySearchHelper( $request, $userLanguage );
 		},
 		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$services = MediaWikiServices::getInstance();
@@ -69,33 +66,13 @@ return [
 			] );
 		},
 		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
-			$entityIdParser = WikibaseRepo::getEntityIdParser();
-			$languageFallbackChainFactory = WikibaseRepo::getLanguageFallbackChainFactory();
 			$context = new RequestContext();
 			$context->setRequest( $request );
 			$userLanguage = $context->getLanguage();
 
 			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
-				new CombinedEntitySearchHelper(
-					[
-						new EntityIdSearchHelper(
-							WikibaseRepo::getEntityLookup(),
-							$entityIdParser,
-							new LanguageFallbackLabelDescriptionLookup(
-								WikibaseRepo::getTermLookup(),
-								$languageFallbackChainFactory->newFromLanguage( $userLanguage )
-							),
-							WikibaseRepo::getEnabledEntityTypes()
-						),
-						new EntitySearchElastic(
-							$languageFallbackChainFactory,
-							$entityIdParser,
-							$userLanguage,
-							WikibaseRepo::getContentModelMappings(),
-							$request
-						)
-					]
-				),
+				EntitySearchHelperFactory::newFromGlobalState()
+				->newItemPropertySearchHelper( $request, $userLanguage ),
 				WikibaseRepo::getPropertyDataTypeLookup()
 			);
 		},

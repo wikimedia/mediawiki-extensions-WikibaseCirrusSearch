@@ -52,7 +52,7 @@ class EntitySearchHelperFactory {
 		);
 	}
 
-	public function newItemSearchForResultLanguage( WebRequest $request, Language $resultLanguage ): EntitySearchHelper {
+	public function newItemPropertySearchHelper( WebRequest $request, Language $resultLanguage ): EntitySearchHelper {
 		return new CombinedEntitySearchHelper(
 			[
 				new EntityIdSearchHelper(
@@ -75,7 +75,4 @@ class EntitySearchHelperFactory {
 		);
 	}
 
-	public function newItemPropertySearchHelper( WebRequest $request, Language $resultLanguage ): EntitySearchHelper {
-		return $this->newItemSearchForResultLanguage( $request, $resultLanguage );
-	}
 }

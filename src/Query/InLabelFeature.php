@@ -144,15 +144,13 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 			$withFallbacks = false;
 			$withoutEnFallback = false;
 			$len = strlen( $languageCode );
-			if ( $len > 1 && $languageCode[$len - 1] === '*' ) {
+			if ( $len > 1 && str_ends_with( $languageCode, '*' ) ) {
 				$languageCode = substr( $languageCode, 0, -1 );
 				$withFallbacks = true;
-				$len--;
-			} elseif ( $len > 1 && $languageCode[$len - 1] === '+' ) {
+			} elseif ( $len > 1 && str_ends_with( $languageCode, '+' ) ) {
 				$languageCode = substr( $languageCode, 0, -1 );
 				$withFallbacks = true;
 				$withoutEnFallback = true;
-				$len--;
 			}
 
 			if ( !isset( $this->languages[$languageCode] ) ) {

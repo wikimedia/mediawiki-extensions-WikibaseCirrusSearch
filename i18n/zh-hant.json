@@ -26,7 +26,8 @@
 			"和平奮鬥救地球",
 			"烈羽",
 			"飞舞回堂前",
-			"아라"
+			"아라",
+			"SupaplexTW"
 		]
 	},
 	"wikibasecirrus-desc": "用於使用 CirrusSearch 功能的 Wikibase 擴充套件",
@@ -37,6 +38,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "用於陳述推進完整搜尋的重新計分配置",
 	"wikibasecirrus-rescore-profile-fulltext": "用於全文搜尋的預設重新計分配置",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "用於詞語計分全文搜尋的重新計分配置",
+	"wikibasecirrus-rescore-profile-in-label": "透過標籤進行簡單實體搜尋的預設重新評分配置文件",
 	"wikibasecirrus-search-bad-entity-type": "錯誤實體類型：$1",
 	"wikibasecirrus-search-bad-profile-name": "錯誤搜尋配置名稱：$1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "haswbstatement 關鍵字不包含有效陳述",

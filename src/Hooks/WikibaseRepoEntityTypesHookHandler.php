@@ -17,10 +17,10 @@ class WikibaseRepoEntityTypesHookHandler extends CirrusSearchConfiguration
 		if ( !CirrusSearchConfiguration::isWBCSEnabled() ) {
 			return;
 		}
-		$entityTypeDefinitions = wfArrayPlus2d(
-			require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
-			$entityTypeDefinitions
-		);
+		$searchDefinitions = require __DIR__ . '/../../WikibaseSearch.entitytypes.php';
+		foreach ( $searchDefinitions as $type => $definition ) {
+			$entityTypeDefinitions[$type] = $definition + ( $entityTypeDefinitions[$type] ?? [] );
+		}
 	}
 
 }

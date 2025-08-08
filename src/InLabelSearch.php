@@ -4,6 +4,7 @@ namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\CirrusDebugOptions;
 use CirrusSearch\Search\SearchContext;
+use MediaWiki\Context\RequestContext;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
@@ -73,6 +74,10 @@ class InLabelSearch {
 			$result = $result->getValue();
 		} else {
 			throw new EntitySearchException( $result );
+		}
+
+		if ( $searcher->isReturnRaw() ) {
+			$searcher->processRawReturn( $result, RequestContext::getMain()->getRequest() );
 		}
 
 		return $result;

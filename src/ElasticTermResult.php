@@ -98,10 +98,12 @@ abstract class ElasticTermResult extends BaseResultsType {
 			'matched_fields' => [ 'title.keyword' ]
 		];
 		$labelsName = LabelsField::NAME;
+		$order = $this->highlightSubField === 'plain' ? 'score' : 'none';
 		foreach ( $this->searchLanguageCodes as $code ) {
 			$config['fields']["$labelsName.$code.{$this->highlightSubField}"] = [
 				'type' => 'experimental',
 				'fragmenter' => "none",
+				'order' => $order,
 				'number_of_fragments' => 0,
 				'options' => [
 					'skip_if_last_matched' => true,
@@ -112,6 +114,7 @@ abstract class ElasticTermResult extends BaseResultsType {
 		$config['fields']["$labelsName.*.{$this->highlightSubField}"] = [
 			'type' => 'experimental',
 			'fragmenter' => "none",
+			'order' => $order,
 			'number_of_fragments' => 0,
 			'options' => [
 				'skip_if_last_matched' => true,

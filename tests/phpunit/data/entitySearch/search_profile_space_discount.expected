@@ -163,6 +163,7 @@
                 "labels.de.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -172,6 +173,7 @@
                 "labels.pr.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -181,6 +183,7 @@
                 "labels.*.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,

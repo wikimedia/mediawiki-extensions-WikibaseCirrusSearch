@@ -149,6 +149,7 @@
                 "labels.en.plain": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "score",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -158,6 +159,7 @@
                 "labels.*.plain": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "score",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,

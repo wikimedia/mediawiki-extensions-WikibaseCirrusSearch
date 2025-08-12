@@ -399,6 +399,7 @@
                 "labels.zh.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -408,6 +409,7 @@
                 "labels.zh-hans.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -417,6 +419,7 @@
                 "labels.zh-hant.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -426,6 +429,7 @@
                 "labels.zh-cn.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -435,6 +439,7 @@
                 "labels.zh-tw.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -444,6 +449,7 @@
                 "labels.zh-hk.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -453,6 +459,7 @@
                 "labels.zh-sg.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -462,6 +469,7 @@
                 "labels.zh-mo.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -471,6 +479,7 @@
                 "labels.zh-my.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -480,6 +489,7 @@
                 "labels.en.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,
@@ -489,6 +499,7 @@
                 "labels.*.prefix": {
                     "type": "experimental",
                     "fragmenter": "none",
+                    "order": "none",
                     "number_of_fragments": 0,
                     "options": {
                         "skip_if_last_matched": true,

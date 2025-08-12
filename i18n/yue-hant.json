@@ -5,7 +5,7 @@
 			"Ktchankt"
 		]
 	},
-	"wikibasecirrus-desc": "用嚟使用CirrusSearch功能嘅維基百科擴充程式",
+	"wikibasecirrus-desc": "用緊CirrusSearch功能嘅維基百科擴充程式",
 	"wikibasecirrus-keywordfeature-unknown-language-code": "$1關鍵字包含未知語言代碼：$2",
 	"wikibasecirrus-keywordfeature-too-many-language-codes": "$1關鍵字提供咗太多語言代碼。搜尋提供嘅$3入面嘅$2{{PLURAL:$3|language|語言}}",
 	"wikibasecirrus-inlabel-no-query-provided": "inlabel關鍵字提供咗個空嘅搜尋字串",

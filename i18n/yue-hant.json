@@ -15,7 +15,7 @@
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "用短語評分嚟為搵全文重新評分嘅個人檔案",
 	"wikibasecirrus-rescore-profile-in-label": "預設重新評分設定檔，用嚟按住標籤進行返簡單嘅實體搜尋",
 	"wikibasecirrus-search-bad-entity-type": "壞實體類型：$1",
-	"wikibasecirrus-search-bad-profile-name": "搵得唔好嘅個人檔案名稱：$1",
+	"wikibasecirrus-search-bad-profile-name": "唔啱嘅個人檔案名：$1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "acwb語句關鍵字唔包含任何有效嘅語句",
 	"wikibasecirrus-haslicense-feature-no-valid-arguments": "haslicense關鍵字唔包含任何有效嘅引數",
 	"wikibasecirrus-wbstatementquantity-feature-no-valid-statements": "wb語句數量關鍵字唔包含任何有效嘅語句",

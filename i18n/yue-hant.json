@@ -2,14 +2,15 @@
 	"@metadata": {
 		"authors": [
 			"JeffreyKim",
-			"Ktchankt"
+			"Ktchankt",
+			"Yueman"
 		]
 	},
 	"wikibasecirrus-desc": "用緊CirrusSearch功能嘅維基百科擴充程式",
 	"wikibasecirrus-keywordfeature-unknown-language-code": "$1關鍵字包含未知語言代碼：$2",
 	"wikibasecirrus-keywordfeature-too-many-language-codes": "$1呢個關鍵字畀出太多語言代碼。只係搵$3個畀出嚟嘅{{PLURAL:$3|語言}}入面嘅其中$2個。",
 	"wikibasecirrus-inlabel-no-query-provided": "inlabel關鍵字畀咗個空嘅搵嘢字串",
-	"wikibasecirrus-rescore-profile-prefix": "完成搜索嘅預設重新評分個人檔案",
+	"wikibasecirrus-rescore-profile-prefix": "用喺全文搜尋嘅預設重新評分個人檔案",
 	"wikibasecirrus-rescore-profile-prefix-boost": "透過語句提升，重新評分畀個人檔案，以便完成搜尋",
 	"wikibasecirrus-rescore-profile-fulltext": "全文搜尋嘅預設資源配置文件",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "用短語評分嚟為搵全文重新評分嘅個人檔案",

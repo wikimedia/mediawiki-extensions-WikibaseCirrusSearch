@@ -18,6 +18,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "Rescore-profil for fullføringssøk med påstandsforsterkning",
 	"wikibasecirrus-rescore-profile-fulltext": "Standard rescore-profil for fulltekstsøk",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Rescore-profil for fulltekstsøk med fraseskåring",
+	"wikibasecirrus-rescore-profile-in-label": "Standard rescore-profil for enkelt entitetssøk etter etikett",
 	"wikibasecirrus-search-bad-entity-type": "Ugyldig entitetstype: $1",
 	"wikibasecirrus-search-bad-profile-name": "Ugyldig søkeprofilnavn: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Nøkkelordet haswbstatement inneholder ingen gyldige påstander",

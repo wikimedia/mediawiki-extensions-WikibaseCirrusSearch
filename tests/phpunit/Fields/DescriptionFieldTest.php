@@ -17,7 +17,6 @@ use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
  *
  * @group WikibaseElastic
  * @group Wikibase
- *
  */
 class DescriptionFieldTest extends SearchFieldTestCase {
 	use WikibaseSearchTestCase;

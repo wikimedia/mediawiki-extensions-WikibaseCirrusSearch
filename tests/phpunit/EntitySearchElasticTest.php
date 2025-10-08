@@ -70,7 +70,6 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 			->getConfigFactory()
 			->makeConfig( 'CirrusSearch' );
 		$reflProp = new \ReflectionProperty( $config, 'profileService' );
-		$reflProp->setAccessible( true );
 		$reflProp->setValue( $config, null );
 	}
 

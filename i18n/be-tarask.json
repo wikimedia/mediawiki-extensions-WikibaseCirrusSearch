@@ -10,9 +10,9 @@
 		]
 	},
 	"wikibasecirrus-desc": "Пашырэньне Вікібазы для выкарыстаньня функцыяналу CirrusSearch",
-	"wikibasecirrus-rescore-profile-prefix": "Профіль rescore па змоўчаньні для запаўняльнага пошуку",
+	"wikibasecirrus-rescore-profile-prefix": "Перадвызначаны профіль rescore для запаўняльнага пошуку",
 	"wikibasecirrus-rescore-profile-prefix-boost": "Профіль rescore для запаўняльнага пошуку з падтрымкай сьцьверджаньняў",
-	"wikibasecirrus-rescore-profile-fulltext": "Профіль rescore па змоўчаньні для паўнатэкставага пошуку",
+	"wikibasecirrus-rescore-profile-fulltext": "Перадвызначаны профіль rescore для паўнатэкставага пошуку",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Профіль rescore для паўнатэкставага пошуку з ацэнкай фразаў",
 	"wikibasecirrus-search-bad-entity-type": "Кепскі тып элемэнту: $1",
 	"wikibasecirrus-search-bad-profile-name": "Кепская назва профілю пошуку: $1",

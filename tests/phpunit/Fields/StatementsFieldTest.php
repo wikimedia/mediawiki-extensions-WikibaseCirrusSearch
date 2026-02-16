@@ -96,13 +96,9 @@ class StatementsFieldTest extends MediaWikiIntegrationTestCase {
 	private function getPropertyTypeLookup( array $map ) {
 		$lookup = $this->createMock( PropertyDataTypeLookup::class );
 
-		$lookup->method( 'getDataTypeIdForProperty' )
-			->willReturnCallback( static function ( PropertyId $id ) use ( $map ) {
-				if ( isset( $map[$id->getSerialization()] ) ) {
-					return $map[$id->getSerialization()];
-				}
-				return 'unknown';
-			} );
+		$lookup->method( 'getDataTypeIdForProperty' )->willReturnCallback(
+			static fn ( PropertyId $id ) => $map[$id->getSerialization()] ?? 'unknown'
+		);
 
 		return $lookup;
 	}

@@ -123,8 +123,8 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$this->idParser = $idParser;
 		$this->userLang = $userLang;
 		$this->contentModelMap = $contentModelMap;
-		$this->request = $request ?: new FauxRequest();
-		$this->debugOptions = $options ?: CirrusDebugOptions::fromRequest( $this->request );
+		$this->request = $request ?? new FauxRequest();
+		$this->debugOptions = $options ?? CirrusDebugOptions::fromRequest( $this->request );
 	}
 
 	/**
@@ -180,10 +180,9 @@ class EntitySearchElastic implements EntitySearchHelper {
 		$strictLanguage,
 		?string $profileContext = null
 	) {
-		$profileContext ??= self::CONTEXT_WIKIBASE_PREFIX;
 		$searcher = new WikibaseEntitySearcher( 0, $limit, 'wikibase_prefix', 'wikibase-prefix', $this->debugOptions );
 		$searcher->getSearchContext()->setProfileContext(
-			$profileContext,
+			$profileContext ?? self::CONTEXT_WIKIBASE_PREFIX,
 			[ 'language' => $languageCode ] );
 		$query = $this->getElasticSearchQuery( $text, $languageCode, $entityType, $strictLanguage,
 				$searcher->getSearchContext() );

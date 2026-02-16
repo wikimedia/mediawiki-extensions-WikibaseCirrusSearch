@@ -268,16 +268,14 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 	}
 
 	private function featureWithMocks( $languageChains = null ) {
-		if ( $languageChains === null ) {
-			$languageChains = [
-				'pt-br' => [ 'pt-br', 'pt', 'en' ],
-				'pt' => [ 'pt', 'en' ],
-				'zh' => [
-					'zh', 'zh-hans', 'zh-hant', 'zh-cn', 'zh-tw',
-					'zh-hk', 'zh-sg', 'zh-mo', 'zh-my', 'en'
-				],
-			];
-		}
+		$languageChains ??= [
+			'pt-br' => [ 'pt-br', 'pt', 'en' ],
+			'pt' => [ 'pt', 'en' ],
+			'zh' => [
+				'zh', 'zh-hans', 'zh-hant', 'zh-cn', 'zh-tw',
+				'zh-hk', 'zh-sg', 'zh-mo', 'zh-my', 'en'
+			],
+		];
 
 		$validLanguages = [];
 		foreach ( $languageChains as $lang => $langFallbacks ) {

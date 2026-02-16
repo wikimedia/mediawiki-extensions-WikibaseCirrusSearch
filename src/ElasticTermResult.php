@@ -26,32 +26,16 @@ use Wikibase\Search\Elastic\Fields\LabelsField;
 abstract class ElasticTermResult extends BaseResultsType {
 
 	/**
-	 * List of language codes in the search fallback chain, the first
-	 * is the preferred language.
-	 * @var string[]
-	 */
-	private $searchLanguageCodes;
-
-	/**
-	 * Display fallback chain.
-	 * @var TermLanguageFallbackChain
-	 */
-	private $termFallbackChain;
-	private string $highlightSubField;
-
-	/**
-	 * @param string[] $searchLanguageCodes Language fallback chain for search
-	 * @param TermLanguageFallbackChain $displayFallbackChain Fallback chain for display
+	 * @param string[] $searchLanguageCodes List of language codes in the search fallback chain, the
+	 *  first is the preferred language.
+	 * @param TermLanguageFallbackChain $termFallbackChain Fallback chain for display
 	 * @param string $highlightSubField 'prefix' or 'plain'
 	 */
 	public function __construct(
-		array $searchLanguageCodes,
-		TermLanguageFallbackChain $displayFallbackChain,
-		string $highlightSubField = 'prefix'
+		private readonly array $searchLanguageCodes,
+		private readonly TermLanguageFallbackChain $termFallbackChain,
+		private readonly string $highlightSubField = 'prefix',
 	) {
-		$this->searchLanguageCodes = $searchLanguageCodes;
-		$this->termFallbackChain = $displayFallbackChain;
-		$this->highlightSubField = $highlightSubField;
 	}
 
 	/**

@@ -17,52 +17,28 @@ use Wikibase\Search\Elastic\Fields\LabelsField;
  * Query used to perform completion search on the multilanguage labels field.
  */
 class LabelsCompletionQuery extends AbstractQuery {
-	/**
-	 * @var string the verbatim user query with leading spaces trimmed
-	 */
-	private string $userQuery;
-	/**
-	 * @var string the user query with leading&trailing spaces trimmed
-	 */
-	private string $normalizedQuery;
-	private array $profile;
-	private string $languageCode;
-	private array $searchLanguageCodes;
-	private bool $strictLanguage;
-	private string $contentModel;
-	/**
-	 * @var string|null an id identified in the user query that might match the title field
-	 */
-	private ?string $normalizedId;
 
 	/**
-	 * @param string $userQuery
-	 * @param string $normalizedQuery
+	 * @param string $userQuery The verbatim user query with leading spaces trimmed
+	 * @param string $normalizedQuery The user query with leading&trailing spaces trimmed
 	 * @param array $profile
 	 * @param string $languageCode
 	 * @param array $searchLanguageCodes
 	 * @param bool $strictLanguage
 	 * @param string $contentModel
-	 * @param string|null $normalizedId
+	 * @param string|null $normalizedId An id identified in the user query that might match the
+	 *  title field
 	 */
 	private function __construct(
-		string $userQuery,
-		string $normalizedQuery,
-		array $profile,
-		string $languageCode,
-		array $searchLanguageCodes,
-		bool $strictLanguage,
-		string $contentModel,
-		?string $normalizedId
+		private readonly string $userQuery,
+		private readonly string $normalizedQuery,
+		private readonly array $profile,
+		private readonly string $languageCode,
+		private readonly array $searchLanguageCodes,
+		private readonly bool $strictLanguage,
+		private readonly string $contentModel,
+		private readonly ?string $normalizedId
 	) {
-		$this->normalizedQuery = $normalizedQuery;
-		$this->userQuery = $userQuery;
-		$this->profile = $profile;
-		$this->languageCode = $languageCode;
-		$this->searchLanguageCodes = $searchLanguageCodes;
-		$this->strictLanguage = $strictLanguage;
-		$this->contentModel = $contentModel;
-		$this->normalizedId = $normalizedId;
 	}
 
 	/**

@@ -30,62 +30,25 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	private $requestedEntityType = '';
 
 	/**
-	 * @var string One of the TermIndexEntry::TYPE_... constants, provided on construction time.
-	 */
-	private $termType;
-
-	/**
-	 * @var string
-	 */
-	private $legendMsg;
-
-	/**
-	 * @var string[] List of entity type identifiers the special page should accept, provided on
-	 *  construction time.
-	 */
-	private $acceptableEntityTypes;
-
-	/**
-	 * @var ContentLanguages
-	 */
-	private $termsLanguages;
-
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $entityNamespaceLookup;
-
-	/**
 	 * @param string $name
 	 * @param string $termType One of the TermIndexEntry::TYPE_... constants.
 	 * @param string $legendMsg
-	 * @param string[] $acceptableEntityTypes
+	 * @param string[] $acceptableEntityTypes List of entity type identifiers the special page
+	 *  should accept
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
-		$name,
-		$termType,
-		$legendMsg,
-		array $acceptableEntityTypes,
-		ContentLanguages $termsLanguages,
-		LanguageNameLookup $languageNameLookup,
-		EntityNamespaceLookup $entityNamespaceLookup
+		string $name,
+		private readonly string $termType,
+		private readonly string $legendMsg,
+		private readonly array $acceptableEntityTypes,
+		private readonly ContentLanguages $termsLanguages,
+		private readonly LanguageNameLookup $languageNameLookup,
+		private readonly EntityNamespaceLookup $entityNamespaceLookup,
 	) {
 		parent::__construct( $name );
-
-		$this->termType = $termType;
-		$this->legendMsg = $legendMsg;
-		$this->acceptableEntityTypes = $acceptableEntityTypes;
-		$this->termsLanguages = $termsLanguages;
-		$this->languageNameLookup = $languageNameLookup;
-		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
 	/**
@@ -192,7 +155,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 			'type' => [
 				'name' => 'type',
 				'options' => $entityTypeOptions,
-				'default' => $this->requestedEntityType ?: reset( $this->acceptableEntityTypes ),
+				'default' => $this->requestedEntityType ?: array_first( $this->acceptableEntityTypes ),
 				'type' => 'select',
 				'id' => 'wb-entitieswithoutpage-type',
 				'label-message' => 'wikibasecirrus-entitieswithoutlabel-label-type'

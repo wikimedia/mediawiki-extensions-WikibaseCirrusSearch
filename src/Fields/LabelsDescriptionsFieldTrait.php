@@ -19,25 +19,15 @@ trait LabelsDescriptionsFieldTrait {
 	protected $type;
 
 	/**
-	 * List of available languages
-	 * @var string[]
-	 */
-	private $languages;
-
-	/**
-	 * @var array
-	 */
-	private $stemmingSettings;
-
-	/**
-	 * @param string[] $languages Available languages list.
+	 * @param string[] $languages List of available languages
 	 * @param array $stemmingSettings Stemming config
 	 */
-	public function __construct( array $languages, array $stemmingSettings ) {
-		$this->languages = $languages;
+	public function __construct(
+		private readonly array $languages,
+		private readonly array $stemmingSettings,
+	) {
 		/* @phan-suppress-next-line PhanTraitParentReference, PhanUndeclaredConstantOfClass */
 		parent::__construct( static::NAME, SearchIndexField::INDEX_TYPE_NESTED );
-		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	/**

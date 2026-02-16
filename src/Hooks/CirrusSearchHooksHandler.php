@@ -98,8 +98,6 @@ class CirrusSearchHooksHandler implements
 
 	/**
 	 * Register our cirrus profiles using WikibaseRepo.
-	 *
-	 * @param SearchProfileService $service
 	 */
 	public function onCirrusSearchProfileService( SearchProfileService $service ): void {
 		$config = CirrusSearchConfiguration::getWBCSConfig();

@@ -23,23 +23,19 @@ class WikibaseEntitySearcher extends Searcher {
 	 * @var AbstractQuery
 	 */
 	private $query;
-	private string $syntaxUsed;
-	private string $statsKey;
 
 	public function __construct(
 		int $offset,
 		int $limit,
-		string $syntaxUsed,
-		string $statsKey,
-		?CirrusDebugOptions $options = null
+		private readonly string $syntaxUsed,
+		private readonly string $statsKey,
+		?CirrusDebugOptions $options = null,
 	) {
 		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'CirrusSearch' );
 		/** @var SearchConfig $config */
 		'@phan-var SearchConfig $config';
 		$connection = new Connection( $config );
 		parent::__construct( $connection, $offset, $limit, $config, null, null, false, $options );
-		$this->syntaxUsed = $syntaxUsed;
-		$this->statsKey = $statsKey;
 	}
 
 	/**

@@ -48,34 +48,19 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	private const QUALIFIER_END = ']';
 
 	/**
-	 * @var array List of properties to index, as a flipped array with the property IDs as keys.
+	 * @var array<string,int> List of properties to index, as a flipped array with the property IDs as keys.
 	 */
-	protected $propertyIds;
+	protected array $propertyIds;
 
 	/**
-	 * @var string[]
+	 * @var array<string,int>
 	 */
-	private $indexedTypes;
+	private array $indexedTypes;
 
 	/**
-	 * @var callable[]
+	 * @var array<string,int>
 	 */
-	protected $searchIndexDataFormatters;
-
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyDataTypeLookup;
-
-	/**
-	 * @var DataTypeFactory
-	 */
-	private $dataTypeFactory;
-
-	/**
-	 * @var array
-	 */
-	private $excludedIds;
+	private array $excludedIds;
 
 	/**
 	 * @var ?callable Accepts an EntityDocument and returns an
@@ -98,12 +83,12 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 *      an iterable containing Statement instances to index.
 	 */
 	public function __construct(
-		DataTypeFactory $dataTypeFactory,
-		PropertyDataTypeLookup $propertyDataTypeLookup,
+		private readonly DataTypeFactory $dataTypeFactory,
+		private readonly PropertyDataTypeLookup $propertyDataTypeLookup,
 		array $propertyIds,
 		array $indexedTypes,
 		array $excludedIds,
-		array $searchIndexDataFormatters,
+		private readonly array $searchIndexDataFormatters,
 		?LoggerInterface $logger = null,
 		?callable $statementProvider = null
 	) {
@@ -111,9 +96,6 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 
 		$this->propertyIds = array_flip( $propertyIds );
 		$this->indexedTypes = array_flip( $indexedTypes );
-		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
-		$this->dataTypeFactory = $dataTypeFactory;
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
 		$this->excludedIds = array_flip( $excludedIds );
 		$this->statementProvider = $statementProvider;
 		$this->logger = $logger ?? new NullLogger();

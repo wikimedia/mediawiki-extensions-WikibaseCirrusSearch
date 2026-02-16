@@ -54,28 +54,20 @@ class EntityResult extends Result implements ExtendedResult {
 	 */
 	private $extraDisplay;
 	/**
-	 * Display language
-	 * @var string
-	 */
-	private $displayLanguage;
-	/**
 	 * Original source data
 	 * @var array
 	 */
 	private $sourceData;
 
-	/**
-	 * @param string $displayLanguage
-	 * @param TermLanguageFallbackChain $displayFallbackChain
-	 * @param \Elastica\Result $result
-	 */
-	public function __construct( $displayLanguage, TermLanguageFallbackChain $displayFallbackChain,
-									$result ) {
+	public function __construct(
+		private readonly string $displayLanguage,
+		TermLanguageFallbackChain $displayFallbackChain,
+		\Elastica\Result $result,
+	) {
 		// Let Cirrus\Result class handle the boring stuff
 		parent::__construct( null, $result );
 		// FIXME: null is not nice, but Result doesn't really need it...
 		// Think how to fix this.
-		$this->displayLanguage = $displayLanguage;
 
 		$this->sourceData = $result->getSource();
 		$highlightData = $result->getHighlights();

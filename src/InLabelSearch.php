@@ -16,25 +16,13 @@ use Wikibase\Search\Elastic\Query\InLabelQuery;
  */
 class InLabelSearch {
 
-	private LanguageFallbackChainFactory $languageChainFactory;
-
-	private EntityIdParser $idParser;
-	private array $contentModelMap;
-	private CirrusDebugOptions $debugOptions;
-	private array $stemmingSettings;
-
 	public function __construct(
-		LanguageFallbackChainFactory $languageChainFactory,
-		EntityIdParser $idParser,
-		array $contentModelMap,
-		CirrusDebugOptions $debugOptions,
-		array $stemmingSettings
+		private readonly LanguageFallbackChainFactory $languageChainFactory,
+		private readonly EntityIdParser $idParser,
+		private readonly array $contentModelMap,
+		private readonly CirrusDebugOptions $debugOptions,
+		private readonly array $stemmingSettings,
 	) {
-		$this->languageChainFactory = $languageChainFactory;
-		$this->idParser = $idParser;
-		$this->contentModelMap = $contentModelMap;
-		$this->debugOptions = $debugOptions;
-		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	/**

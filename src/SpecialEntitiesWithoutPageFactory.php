@@ -38,27 +38,6 @@ class SpecialEntitiesWithoutPageFactory {
 	}
 
 	/**
-	 * @var string[]
-	 */
-	private $entityTypes;
-	/**
-	 * @var ContentLanguages
-	 */
-	private $termsLanguages;
-	/**
-	 * @var LanguageNameLookup
-	 */
-	private $languageNameLookup;
-	/**
-	 * @var EntityFactory
-	 */
-	private $entityFactory;
-	/**
-	 * @var EntityNamespaceLookup
-	 */
-	private $entityNamespaceLookup;
-
-	/**
 	 * @param string[] $entityTypes
 	 * @param ContentLanguages $termsLanguages
 	 * @param LanguageNameLookup $languageNameLookup
@@ -66,17 +45,12 @@ class SpecialEntitiesWithoutPageFactory {
 	 * @param EntityNamespaceLookup $entityNamespaceLookup
 	 */
 	public function __construct(
-		array $entityTypes,
-		ContentLanguages $termsLanguages,
-		LanguageNameLookup $languageNameLookup,
-		EntityFactory $entityFactory,
-		EntityNamespaceLookup $entityNamespaceLookup
+		private readonly array $entityTypes,
+		private readonly ContentLanguages $termsLanguages,
+		private readonly LanguageNameLookup $languageNameLookup,
+		private readonly EntityFactory $entityFactory,
+		private readonly EntityNamespaceLookup $entityNamespaceLookup,
 	) {
-		$this->entityTypes = $entityTypes;
-		$this->termsLanguages = $termsLanguages;
-		$this->languageNameLookup = $languageNameLookup;
-		$this->entityFactory = $entityFactory;
-		$this->entityNamespaceLookup = $entityNamespaceLookup;
 	}
 
 	public function createSpecialEntitiesWithoutLabel(): SpecialEntitiesWithoutPage {

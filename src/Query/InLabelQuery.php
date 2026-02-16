@@ -20,36 +20,28 @@ use Wikibase\Search\Elastic\EntitySearchUtils;
  * Query used to perform search on the multilanguage labels field.
  */
 class InLabelQuery extends AbstractQuery {
-	private string $normalizedQuery;
-	private array $profile;
-	private string $languageCode;
-	private array $searchLanguageCodes;
-	private string $contentModel;
-	private QueryParser $queryParser;
-	/**
-	 * @var string|null an id identified in the user query that might match the title field
-	 */
-	private ?string $normalizedId;
-	private array $stemmingSettings;
 
+	/**
+	 * @param string $normalizedQuery
+	 * @param array $profile
+	 * @param string $languageCode
+	 * @param array $searchLanguageCodes
+	 * @param string $contentModel
+	 * @param QueryParser $queryParser
+	 * @param string|null $normalizedId An id identified in the user query that might match the
+	 *  title field
+	 * @param array $stemmingSettings
+	 */
 	private function __construct(
-		string $normalizedQuery,
-		array $profile,
-		string $languageCode,
-		array $searchLanguageCodes,
-		string $contentModel,
-		QueryParser $queryParser,
-		?string $normalizedId,
-		array $stemmingSettings
+		private readonly string $normalizedQuery,
+		private readonly array $profile,
+		private readonly string $languageCode,
+		private readonly array $searchLanguageCodes,
+		private readonly string $contentModel,
+		private readonly QueryParser $queryParser,
+		private readonly ?string $normalizedId,
+		private readonly array $stemmingSettings,
 	) {
-		$this->normalizedQuery = $normalizedQuery;
-		$this->profile = $profile;
-		$this->languageCode = $languageCode;
-		$this->searchLanguageCodes = $searchLanguageCodes;
-		$this->contentModel = $contentModel;
-		$this->queryParser = $queryParser;
-		$this->normalizedId = $normalizedId;
-		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	/**

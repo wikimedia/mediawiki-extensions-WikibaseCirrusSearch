@@ -21,14 +21,12 @@ class WikibaseSearchConfig implements Config {
 	private $globals;
 
 	/**
-	 * Wikibase entitySearch config - for BC.
-	 * @var array
+	 * @param array $wikibaseSettings Wikibase entitySearch config - for backwards compatibility
 	 */
-	private $wikibaseSettings;
-
-	public function __construct( array $wikibaseSettings ) {
+	public function __construct(
+		private readonly array $wikibaseSettings,
+	) {
 		$this->globals = new GlobalVarConfig( self::WIKIBASE_SEARCH_CONFIG_PREFIX );
-		$this->wikibaseSettings = $wikibaseSettings;
 	}
 
 	/**

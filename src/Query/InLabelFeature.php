@@ -29,9 +29,6 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 	/** @var int A limit to the number of fields that can be queried at once */
 	public const MAX_FIELDS = 30;
 
-	/** @var LanguageFallbackChainFactory */
-	private $languageChainFactory;
-
 	/** @var true[] Keyed by known language codes for set membership check */
 	private $languages;
 
@@ -55,8 +52,10 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 	 * @param LanguageFallbackChainFactory $languageChainFactory
 	 * @param string[] $languages list of languages indexed in elastic. Must all be lowercase.
 	 */
-	public function __construct( LanguageFallbackChainFactory $languageChainFactory, $languages ) {
-		$this->languageChainFactory = $languageChainFactory;
+	public function __construct(
+		private readonly LanguageFallbackChainFactory $languageChainFactory,
+		array $languages,
+	) {
 		$this->languages = [];
 		foreach ( $languages as $lang ) {
 			$this->languages[$lang] = true;

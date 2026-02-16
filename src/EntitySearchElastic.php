@@ -72,31 +72,11 @@ class EntitySearchElastic implements EntitySearchHelper {
 	public const STMT_BOOST_PROFILE_REPL = 'functions.*[type=term_boost].params[statement_keywords=_statementBoost_].statement_keywords';
 
 	/**
-	 * @var LanguageFallbackChainFactory
-	 */
-	private $languageChainFactory;
-
-	/**
-	 * @var EntityIdParser
-	 */
-	private $idParser;
-
-	/**
-	 * @var string[]
-	 */
-	private $contentModelMap;
-
-	/**
 	 * Web request context.
 	 * Used for implementing debug features such as cirrusDumpQuery.
 	 * @var WebRequest
 	 */
 	private $request;
-
-	/**
-	 * @var Language User language for display.
-	 */
-	private $userLang;
 
 	/**
 	 * @var CirrusDebugOptions
@@ -106,23 +86,19 @@ class EntitySearchElastic implements EntitySearchHelper {
 	/**
 	 * @param LanguageFallbackChainFactory $languageChainFactory
 	 * @param EntityIdParser $idParser
-	 * @param Language $userLang
-	 * @param array $contentModelMap Maps entity type => content model name
+	 * @param Language $userLang User language for display
+	 * @param array<string,string> $contentModelMap Maps entity type => content model name
 	 * @param WebRequest|null $request Web request context
 	 * @param CirrusDebugOptions|null $options
 	 */
 	public function __construct(
-		LanguageFallbackChainFactory $languageChainFactory,
-		EntityIdParser $idParser,
-		Language $userLang,
-		array $contentModelMap,
+		private readonly LanguageFallbackChainFactory $languageChainFactory,
+		private readonly EntityIdParser $idParser,
+		private readonly Language $userLang,
+		private readonly array $contentModelMap,
 		?WebRequest $request = null,
 		?CirrusDebugOptions $options = null
 	) {
-		$this->languageChainFactory = $languageChainFactory;
-		$this->idParser = $idParser;
-		$this->userLang = $userLang;
-		$this->contentModelMap = $contentModelMap;
 		$this->request = $request ?? new FauxRequest();
 		$this->debugOptions = $options ?? CirrusDebugOptions::fromRequest( $this->request );
 	}

@@ -18,63 +18,32 @@ use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 class StatementProviderFieldDefinitions implements FieldDefinitions {
 
 	/**
-	 * List of properties to index.
-	 * @var string[]
-	 */
-	private $propertyIds;
-
-	/**
-	 * @var callable[]
-	 */
-	private $searchIndexDataFormatters;
-	/**
-	 * @var DataTypeFactory
-	 */
-	private $dataTypeFactory;
-	/**
-	 * @var PropertyDataTypeLookup
-	 */
-	private $propertyDataTypeLookup;
-	/**
-	 * @var array
-	 */
-	private $indexedTypes;
-	/**
-	 * @var array
-	 */
-	private $excludedIds;
-	/**
-	 * @var array
-	 */
-	private $allowedQualifierPropertyIdsForQuantityStatements;
-
-	private ?LoggerInterface $logger;
-
-	/**
 	 * @var ?callable
 	 */
 	private $statementProvider;
 
+	/**
+	 * @param DataTypeFactory $dataTypeFactory
+	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
+	 * @param callable[] $searchIndexDataFormatters
+	 * @param string[] $propertyIds List of properties to index
+	 * @param array $indexedTypes
+	 * @param array $excludedIds
+	 * @param array $allowedQualifierPropertyIdsForQuantityStatements
+	 * @param LoggerInterface|null $logger
+	 * @param callable|null $statementProvider
+	 */
 	public function __construct(
-		DataTypeFactory $dataTypeFactory,
-		PropertyDataTypeLookup $propertyDataTypeLookup,
-		array $searchIndexDataFormatters,
-		array $propertyIds,
-		array $indexedTypes,
-		array $excludedIds,
-		array $allowedQualifierPropertyIdsForQuantityStatements,
-		?LoggerInterface $logger = null,
-		?callable $statementProvider = null
+		private readonly DataTypeFactory $dataTypeFactory,
+		private readonly PropertyDataTypeLookup $propertyDataTypeLookup,
+		private readonly array $searchIndexDataFormatters,
+		private readonly array $propertyIds,
+		private readonly array $indexedTypes,
+		private readonly array $excludedIds,
+		private readonly array $allowedQualifierPropertyIdsForQuantityStatements,
+		private readonly ?LoggerInterface $logger = null,
+		?callable $statementProvider = null,
 	) {
-		$this->propertyIds = $propertyIds;
-		$this->searchIndexDataFormatters = $searchIndexDataFormatters;
-		$this->dataTypeFactory = $dataTypeFactory;
-		$this->propertyDataTypeLookup = $propertyDataTypeLookup;
-		$this->indexedTypes = $indexedTypes;
-		$this->excludedIds = $excludedIds;
-		$this->allowedQualifierPropertyIdsForQuantityStatements =
-			$allowedQualifierPropertyIdsForQuantityStatements;
-		$this->logger = $logger;
 		$this->statementProvider = $statementProvider;
 	}
 

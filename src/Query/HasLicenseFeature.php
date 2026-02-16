@@ -14,7 +14,6 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\MatchQuery;
 use MediaWiki\Config\Config;
 use Wikibase\Search\Elastic\Fields\StatementsField;
-use Wikimedia\Assert\Assert;
 
 /**
  * Handles the search keyword 'haslicense:'
@@ -56,11 +55,6 @@ use Wikimedia\Assert\Assert;
 class HasLicenseFeature extends SimpleKeywordFeature implements FilterQueryFeature {
 
 	/**
-	 * @var array
-	 */
-	private $licenseMapping;
-
-	/**
 	 * @param array $licenseMapping Mapping between licence search strings and wikidata ids
 	 * 	e.g. [
 	 *     'cc-by-sa' => [
@@ -75,9 +69,9 @@ class HasLicenseFeature extends SimpleKeywordFeature implements FilterQueryFeatu
 	 *     ]
 	 * ]
 	 */
-	public function __construct( $licenseMapping ) {
-		Assert::parameterElementType( 'array', $licenseMapping, 'licenseMapping' );
-		$this->licenseMapping = $licenseMapping;
+	public function __construct(
+		private readonly array $licenseMapping,
+	) {
 	}
 
 	/**

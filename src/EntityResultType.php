@@ -12,23 +12,13 @@ use Wikibase\Lib\TermLanguageFallbackChain;
 class EntityResultType extends BaseResultsType {
 
 	/**
-	 * Display fallback chain.
-	 * @var TermLanguageFallbackChain
-	 */
-	private $termFallbackChain;
-	/**
-	 * Display language code
-	 * @var string
-	 */
-	private $displayLanguage;
-
-	/**
 	 * @param string $displayLanguage Display Language code
-	 * @param TermLanguageFallbackChain $displayFallbackChain Fallback chain for display
+	 * @param TermLanguageFallbackChain $termFallbackChain Fallback chain for display
 	 */
-	public function __construct( $displayLanguage, TermLanguageFallbackChain $displayFallbackChain ) {
-		$this->termFallbackChain = $displayFallbackChain;
-		$this->displayLanguage = $displayLanguage;
+	public function __construct(
+		private readonly string $displayLanguage,
+		private readonly TermLanguageFallbackChain $termFallbackChain,
+	) {
 	}
 
 	/**

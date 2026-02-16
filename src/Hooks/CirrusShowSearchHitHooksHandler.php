@@ -26,19 +26,10 @@ use Wikibase\Search\Elastic\EntityResult;
  */
 class CirrusShowSearchHitHooksHandler implements ShowSearchHitHook, ShowSearchHitTitleHook {
 
-	private EntityLinkFormatterFactory $linkFormatterFactory;
-	private EntityIdLookup $entityIdLookup;
-
-	/**
-	 * @param EntityIdLookup $entityIdLookup
-	 * @param EntityLinkFormatterFactory $linkFormatterFactory
-	 */
 	public function __construct(
-		EntityIdLookup $entityIdLookup,
-		EntityLinkFormatterFactory $linkFormatterFactory
+		private readonly EntityIdLookup $entityIdLookup,
+		private readonly EntityLinkFormatterFactory $linkFormatterFactory,
 	) {
-		$this->entityIdLookup = $entityIdLookup;
-		$this->linkFormatterFactory = $linkFormatterFactory;
 	}
 
 	/**

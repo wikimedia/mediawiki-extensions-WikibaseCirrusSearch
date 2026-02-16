@@ -18,27 +18,15 @@ use Wikibase\Repo\WikibaseRepo;
  * @license GPL-2.0-or-later
  */
 class EntitySearchHelperFactory {
-	private EntityIdParser $entityIdParser;
-	private LanguageFallbackChainFactory $languageFallbackChainFactory;
-	private EntityLookup $entityLookup;
-	private TermLookup $termLookup;
-	private array $enabledEntityTypes;
-	private array $contentModelMappings;
 
 	public function __construct(
-		EntityIdParser $entityIdParser,
-		LanguageFallbackChainFactory $languageFallbackChainFactory,
-		EntityLookup $entityLookup,
-		TermLookup $termLookup,
-		array $enabledEntityTypes,
-		array $contentModelMappings
+		private readonly EntityIdParser $entityIdParser,
+		private readonly LanguageFallbackChainFactory $languageFallbackChainFactory,
+		private readonly EntityLookup $entityLookup,
+		private readonly TermLookup $termLookup,
+		private readonly array $enabledEntityTypes,
+		private readonly array $contentModelMappings,
 	) {
-		$this->entityIdParser = $entityIdParser;
-		$this->languageFallbackChainFactory = $languageFallbackChainFactory;
-		$this->entityLookup = $entityLookup;
-		$this->termLookup = $termLookup;
-		$this->enabledEntityTypes = $enabledEntityTypes;
-		$this->contentModelMappings = $contentModelMappings;
 	}
 
 	public static function newFromGlobalState(): self {

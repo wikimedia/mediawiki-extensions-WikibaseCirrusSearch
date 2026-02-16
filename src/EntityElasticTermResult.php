@@ -20,16 +20,13 @@ use Wikibase\Lib\TermLanguageFallbackChain;
  */
 class EntityElasticTermResult extends ElasticTermResult {
 
-	private EntityIdParser $idParser;
-
 	public function __construct(
-		EntityIdParser $idParser,
+		private readonly EntityIdParser $idParser,
 		array $searchLanguageCodes,
 		string $highlightSubField,
-		TermLanguageFallbackChain $displayFallbackChain
+		TermLanguageFallbackChain $displayFallbackChain,
 	) {
 		parent::__construct( $searchLanguageCodes, $displayFallbackChain, $highlightSubField );
-		$this->idParser = $idParser;
 	}
 
 	protected function getTermSearchResult(

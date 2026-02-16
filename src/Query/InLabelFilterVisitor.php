@@ -26,14 +26,13 @@ class InLabelFilterVisitor extends LeafVisitor {
 	private const ALL_LABELS_FIELD = AllLabelsField::NAME . '.plain';
 
 	private AbstractQuery $filterQuery;
-	private string $languageCode;
-	private array $stemmingSettings;
 
-	public function __construct( string $languageCode, array $stemmingSettings ) {
+	public function __construct(
+		private readonly string $languageCode,
+		private readonly array $stemmingSettings,
+	) {
 		parent::__construct();
 		$this->filterQuery = new BoolQuery();
-		$this->languageCode = $languageCode;
-		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	public function getFilterQuery(): AbstractQuery {

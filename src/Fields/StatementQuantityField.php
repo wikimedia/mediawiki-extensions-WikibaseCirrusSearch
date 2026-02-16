@@ -27,11 +27,6 @@ class StatementQuantityField extends StatementsField implements WikibaseIndexFie
 	public const NAME = 'statement_quantity';
 
 	/**
-	 * @var array
-	 */
-	private $allowedQualifierPropertyIds;
-
-	/**
 	 * @param DataTypeFactory $dataTypeFactory
 	 * @param PropertyDataTypeLookup $propertyDataTypeLookup
 	 * @param string[] $propertyIds List of property IDs to index
@@ -49,7 +44,7 @@ class StatementQuantityField extends StatementsField implements WikibaseIndexFie
 		array $indexedTypes,
 		array $excludedIds,
 		array $searchIndexDataFormatters,
-		array $allowedQualifierPropertyIds,
+		private readonly array $allowedQualifierPropertyIds,
 		?LoggerInterface $logger = null
 	) {
 		parent::__construct(
@@ -61,7 +56,6 @@ class StatementQuantityField extends StatementsField implements WikibaseIndexFie
 			$searchIndexDataFormatters,
 			$logger
 		);
-		$this->allowedQualifierPropertyIds = $allowedQualifierPropertyIds;
 	}
 
 	/**

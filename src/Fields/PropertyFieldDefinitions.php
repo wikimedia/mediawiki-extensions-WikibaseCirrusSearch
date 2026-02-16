@@ -14,15 +14,11 @@ use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 class PropertyFieldDefinitions implements FieldDefinitions {
 
 	/**
-	 * @var FieldDefinitions[]
-	 */
-	private $fieldDefinitions;
-
-	/**
 	 * @param FieldDefinitions[] $fieldDefinitions
 	 */
-	public function __construct( array $fieldDefinitions ) {
-		$this->fieldDefinitions = $fieldDefinitions;
+	public function __construct(
+		private readonly array $fieldDefinitions,
+	) {
 	}
 
 	/**

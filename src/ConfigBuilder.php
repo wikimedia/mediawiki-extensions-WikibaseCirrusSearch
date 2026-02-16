@@ -10,27 +10,15 @@ use MediaWiki\Config\Config;
 class ConfigBuilder {
 
 	/**
-	 * @var AnalysisConfigBuilder
-	 */
-	private $builder;
-	/**
-	 * @var string[]
-	 */
-	private $languageList;
-	/**
-	 * @var Config
-	 */
-	private $searchSettings;
-
-	/**
 	 * @param string[] $languageList
 	 * @param Config $searchSettings
 	 * @param AnalysisConfigBuilder $builder
 	 */
-	public function __construct( array $languageList, Config $searchSettings, AnalysisConfigBuilder $builder ) {
-		$this->builder = $builder;
-		$this->languageList = $languageList;
-		$this->searchSettings = $searchSettings;
+	public function __construct(
+		private readonly array $languageList,
+		private readonly Config $searchSettings,
+		private readonly AnalysisConfigBuilder $builder,
+	) {
 	}
 
 	/**

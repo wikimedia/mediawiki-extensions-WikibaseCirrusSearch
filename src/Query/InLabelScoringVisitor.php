@@ -23,11 +23,11 @@ class InLabelScoringVisitor extends LeafVisitor {
 
 	private array $nonNegatedWords = [];
 	private bool $containsPhrase = false;
-	private array $stemmingSettings;
 
-	public function __construct( array $stemmingSettings ) {
+	public function __construct(
+		private readonly array $stemmingSettings,
+	) {
 		parent::__construct( [ BooleanClause::MUST_NOT ] );
-		$this->stemmingSettings = $stemmingSettings;
 	}
 
 	public function buildScoringQuery( array $languageCodes, array $profile ): DisMax {

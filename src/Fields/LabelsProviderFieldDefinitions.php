@@ -14,11 +14,6 @@ use Wikibase\Repo\Search\Fields\FieldDefinitions;
 class LabelsProviderFieldDefinitions implements FieldDefinitions {
 
 	/**
-	 * @var string[]
-	 */
-	private $languageCodes;
-
-	/**
 	 * @var array
 	 */
 	private $stemmingSettings;
@@ -27,8 +22,10 @@ class LabelsProviderFieldDefinitions implements FieldDefinitions {
 	 * @param string[] $languageCodes
 	 * @param ConfigFactory|null $configFactory
 	 */
-	public function __construct( array $languageCodes, ?ConfigFactory $configFactory = null ) {
-		$this->languageCodes = $languageCodes;
+	public function __construct(
+		private readonly array $languageCodes,
+		?ConfigFactory $configFactory = null,
+	) {
 		if ( $configFactory === null ) {
 			$this->stemmingSettings = [];
 		} else {

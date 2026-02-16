@@ -167,26 +167,16 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		$queries = [];
 		$statementStrings = explode( '|', $value );
 		foreach ( $statementStrings as $statementString ) {
-			if ( !$this->isStatementStringValid( $statementString ) ) {
-				// TODO: Add warning to avoid unexpected behaviour
-				continue;
-			}
-			if ( $this->statementContainsOnlyWildcard( $statementString ) ) {
+			if ( $statementString === '*' ) {
 				$queries[] = [
 					'class' => Exists::class,
 					'field' => StatementsField::NAME
 				];
-				continue;
-			}
-			if ( $this->statementContainsPropertyOnly( $statementString ) ) {
-				$queries[] = [
-					'class' => MatchQuery::class,
-					'field' => StatementsField::NAME . '.property',
-					'string' => $statementString,
-				];
-				continue;
-			}
-			if ( $this->statementEndsWithWildcard( $statementString ) ) {
+			} elseif ( !$this->isStatementStringValid( $statementString ) ) {
+				// TODO: Add warning to avoid unexpected behaviour
+			} elseif ( str_contains( $statementString, StatementsField::STATEMENT_SEPARATOR ) &&
+				preg_match( self::PREFIX_QUERY_PATTERN, $statementString )
+			) {
 				$statementString = preg_replace( self::PREFIX_QUERY_PATTERN, '', $statementString );
 				$matchedValue = preg_replace( '/^[^=]+=(.*)$/', '$1', $statementString );
 				if ( mb_strlen( $matchedValue ) < self::MIN_PREFIX_LEN ) {
@@ -201,15 +191,17 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 					'field' => StatementsField::NAME,
 					'string' => $statementString,
 				];
-				continue;
+			} else {
+				$queries[] = [
+					'class' => MatchQuery::class,
+					'field' => str_contains( $statementString, StatementsField::STATEMENT_SEPARATOR )
+						? StatementsField::NAME
+						: StatementsField::NAME . '.property',
+					'string' => $statementString,
+				];
 			}
-			$queries[] = [
-				'class' => MatchQuery::class,
-				'field' => StatementsField::NAME,
-				'string' => $statementString,
-			];
 		}
-		if ( count( $queries ) == 0 ) {
+		if ( !$queries ) {
 			$warningCollector->addWarning(
 				'wikibasecirrus-haswbstatement-feature-no-valid-statements',
 				$key
@@ -235,11 +227,6 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	 * @return bool
 	 */
 	private function isStatementStringValid( $statementString ) {
-		if ( $this->statementContainsOnlyWildcard( $statementString ) ) {
-			// Simpler than integrating into basically unrelated regex
-			return true;
-		}
-
 		//Strip delimiters, anchors and pattern modifiers from NumericPropertyId::PATTERN
 		$propertyIdPattern = preg_replace(
 			'/([^\sa-zA-Z0-9\\\])(\^|\\\A)?(.*?)(\$|\\\z|\\\Z)?\\1[a-zA-Z]*/',
@@ -257,24 +244,6 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 		);
 	}
 
-	private function statementContainsPropertyOnly( string $statementString ): bool {
-		if ( strpos( $statementString, '=' ) === false ) {
-			return true;
-		}
-		return false;
-	}
-
-	private function statementEndsWithWildcard( string $statementString ): bool {
-		if ( preg_match( self::PREFIX_QUERY_PATTERN, $statementString ) ) {
-			return true;
-		}
-		return false;
-	}
-
-	private function statementContainsOnlyWildcard( string $statementString ): bool {
-		return $statementString === '*';
-	}
-
 	/**
 	 * @param KeywordFeatureNode $node
 	 * @param QueryBuildingContext $context
@@ -282,10 +251,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	 */
 	public function getFilterQuery( KeywordFeatureNode $node, QueryBuildingContext $context ) {
 		$statements = $node->getParsedValue();
-		if ( $statements === [] ) {
-			return null;
-		}
-		return $this->combineQueries( $statements );
+		return $statements ? $this->combineQueries( $statements ) : null;
 	}
 
 }

@@ -22,8 +22,8 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 	/** @var int A limit to the number of fields that can be queried at once */
 	private const MAX_FIELDS = 30;
 
-	/** @var true[] Keyed by known language codes for set membership check */
-	private $validLangs;
+	/** @var array<string,int> Keyed by known language codes for set membership check */
+	private array $validLangs;
 
 	/**
 	 * @return string[]
@@ -33,14 +33,10 @@ class HasDataForLangFeature extends SimpleKeywordFeature implements FilterQueryF
 	}
 
 	/**
-	 * HasTermDataFeature constructor.
 	 * @param string[] $languages list of languages indexed in elastic. Must all be lowercase.
 	 */
-	public function __construct( $languages ) {
-		$this->validLangs = [];
-		foreach ( $languages as $lang ) {
-			$this->validLangs[$lang] = true;
-		}
+	public function __construct( array $languages ) {
+		$this->validLangs = array_flip( $languages );
 	}
 
 	/**

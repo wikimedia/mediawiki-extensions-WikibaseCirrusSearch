@@ -29,8 +29,8 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 	/** @var int A limit to the number of fields that can be queried at once */
 	public const MAX_FIELDS = 30;
 
-	/** @var true[] Keyed by known language codes for set membership check */
-	private $languages;
+	/** @var array<string,int> Keyed by known language codes for set membership check */
+	private array $languages;
 
 	/**
 	 * @var array
@@ -56,10 +56,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		private readonly LanguageFallbackChainFactory $languageChainFactory,
 		array $languages,
 	) {
-		$this->languages = [];
-		foreach ( $languages as $lang ) {
-			$this->languages[$lang] = true;
-		}
+		$this->languages = array_flip( $languages );
 	}
 
 	/**

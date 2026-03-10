@@ -122,23 +122,15 @@ final class EntitySearchUtils {
 			return null;
 		}
 
-		$data = $sourceData[$field];
-		$first = reset( $data );
-		if ( is_array( $first ) ) {
+		$labelsData = $sourceData[$field];
+		if ( is_array( array_first( $labelsData ) ) ) {
 			// If we have multiple, like for labels, extract the first one
-			$labels_data = array_map(
-				static function ( $data ) {
-					return $data[0] ?? null;
-				},
-				$data
-			);
-		} else {
-			$labels_data = $data;
+			$labelsData = array_map( static fn ( $data ) => $data[0] ?? null, $labelsData );
 		}
 		// Drop empty ones
-		$labels_data = array_filter( $labels_data );
+		$labelsData = array_filter( $labelsData );
 
-		$preferredValue = $termFallbackChain->extractPreferredValueOrAny( $labels_data );
+		$preferredValue = $termFallbackChain->extractPreferredValueOrAny( $labelsData );
 		if ( $preferredValue ) {
 			return new Term( $preferredValue['language'], $preferredValue['value'] );
 		}

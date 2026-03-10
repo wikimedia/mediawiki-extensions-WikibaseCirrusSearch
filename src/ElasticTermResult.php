@@ -174,7 +174,7 @@ abstract class ElasticTermResult extends BaseResultsType {
 
 	/**
 	 * Extract term, language and type from highlighter results.
-	 * @param array $highlight Data from highlighter
+	 * @param array<string,string[]> $highlight Data from highlighter
 	 * @param array[] $sourceData Data from _source
 	 * @return array Array of: [string $termType, string $languageCode, string $term]
 	 */
@@ -188,9 +188,8 @@ abstract class ElasticTermResult extends BaseResultsType {
 		 * }
 		 */
 		$matchedTermType = 'label';
-		$term = reset( $highlight ); // Take the first one
-		$term = $term[0]; // Highlighter returns array
-		$field = key( $highlight );
+		$field = array_key_first( $highlight );
+		$term = $highlight[$field][0];
 		if ( preg_match( '/^' . preg_quote( LabelsField::NAME ) . "\.([^.]+)\.{$this->highlightSubField}$/", $field, $match ) ) {
 			$langCode = $match[1];
 			if ( preg_match( self::HIGHLIGHT_PATTERN, $term, $termMatch ) ) {

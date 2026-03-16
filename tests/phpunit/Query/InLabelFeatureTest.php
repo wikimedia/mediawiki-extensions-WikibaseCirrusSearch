@@ -335,7 +335,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 		$range = [];
 		while ( $a <= $b ) {
 			$range[] = $prefix . $a . $suffix;
-			$a++;
+			$a = str_increment( $a );
 		}
 		return $range;
 	}

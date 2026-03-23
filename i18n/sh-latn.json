@@ -6,7 +6,7 @@
 		]
 	},
 	"special-entitieswithoutlabel": "Popis entiteta bez oznake",
-	"wikibasecirrus-entitieswithoutlabel-legend": "Pokaži popis entiteta bez oznake",
+	"wikibasecirrus-entitieswithoutlabel-legend": "Preuzmi listu entiteta bez natpisa",
 	"wikibasecirrus-entitieswithoutlabel-label-language": "Kod jezika:",
 	"wikibasecirrus-entitieswithoutlabel-submit": "Pronađite",
 	"wikibasecirrus-entitieswithoutlabel-invalid-language": "\"$1\" nije ispravan jezički kod."

@@ -44,7 +44,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 		return [
 			'invalid' => [
 				'expected' => null,
-				'search string' => 'haslicense:invalid',
+				'term' => 'haslicense:invalid',
 			],
 			'cc-by-sa' => [
 				'expected' => [ 'bool' => [
@@ -62,7 +62,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 						] ],
 					]
 				] ],
-				'search string' => 'haslicense:cc-by-sa',
+				'term' => 'haslicense:cc-by-sa',
 			],
 			'cc-by' => [
 				'expected' => [ 'bool' => [
@@ -80,7 +80,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 						] ],
 					]
 				] ],
-				'search string' => 'haslicense:cc-by',
+				'term' => 'haslicense:cc-by',
 			],
 			'cc-by-sa OR cc-by' => [
 				'expected' => [ 'bool' => [
@@ -108,7 +108,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 						] ],
 					]
 				] ],
-				'search string' => 'haslicense:cc-by-sa|cc-by',
+				'term' => 'haslicense:cc-by-sa|cc-by',
 			],
 			'unrestricted' => [
 				'expected' => [ 'bool' => [
@@ -136,7 +136,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 						] ],
 					]
 				] ],
-				'search string' => 'haslicense:unrestricted',
+				'term' => 'haslicense:unrestricted',
 			],
 			'other' => [
 				'expected' => [ 'bool' => [
@@ -226,7 +226,7 @@ class HasLicenseFeatureTest extends MediaWikiIntegrationTestCase {
 						] ],
 					]
 				] ],
-				'search string' => 'haslicense:other',
+				'term' => 'haslicense:other',
 			],
 		];
 	}

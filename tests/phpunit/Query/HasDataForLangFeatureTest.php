@@ -34,7 +34,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'haslabel:*',
+				'term' => 'haslabel:*',
 			],
 			'(hasdescription) description exists' => [
 				'expected' => [
@@ -48,7 +48,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hasdescription:en'
+				'term' => 'hasdescription:en'
 			],
 			'(hasdescription) multiple languages' => [
 				'expected' => [
@@ -67,7 +67,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hasdescription:zh,ru'
+				'term' => 'hasdescription:zh,ru'
 			],
 			'(hasdescription) all languages' => [
 				'expected' => [
@@ -81,7 +81,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hasdescription:*',
+				'term' => 'hasdescription:*',
 			],
 			'(hasdescription) language is case insensitive' => [
 				'expected' => [
@@ -95,7 +95,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hasdescription:eN',
+				'term' => 'hasdescription:eN',
 			],
 			'(hasdescription) deduplicates language codes' => [
 				'expected' => [
@@ -109,7 +109,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hasdescription:de,de'
+				'term' => 'hasdescription:de,de'
 			],
 			'(haslabel) label exists' => [
 				'expected' => [
@@ -123,7 +123,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'haslabel:en'
+				'term' => 'haslabel:en'
 			],
 			'(haslabel) multiple languages' => [
 				'expected' => [
@@ -142,7 +142,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'haslabel:zh,ru'
+				'term' => 'haslabel:zh,ru'
 			],
 			'(haslabel) language is case insensitive' => [
 				'expected' => [
@@ -156,7 +156,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'haslabel:eN',
+				'term' => 'haslabel:eN',
 			],
 			'(haslabel) deduplicates language codes' => [
 				'expected' => [
@@ -170,7 +170,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'haslabel:de,de'
+				'term' => 'haslabel:de,de'
 			],
 			'(hascaption) label exists' => [
 				'expected' => [
@@ -184,7 +184,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hascaption:en'
+				'term' => 'hascaption:en'
 			],
 			'(hascaption) multiple languages' => [
 				'expected' => [
@@ -203,7 +203,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hascaption:zh,ru'
+				'term' => 'hascaption:zh,ru'
 			],
 			'(hascaption) language is case insensitive' => [
 				'expected' => [
@@ -217,7 +217,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hascaption:eN',
+				'term' => 'hascaption:eN',
 			],
 			'(hascaption) deduplicates language codes' => [
 				'expected' => [
@@ -231,7 +231,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'hascaption:de,de'
+				'term' => 'hascaption:de,de'
 			],
 			'too many languages' => [
 				'expected' => [
@@ -248,7 +248,7 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 						),
 					]
 				],
-				'search string' => 'haslabel:aa,ab,ace,ady,af,ak,als,am,an,ang,ar,arc,arz,as,'
+				'term' => 'haslabel:aa,ab,ace,ady,af,ak,als,am,an,ang,ar,arc,arz,as,'
 								   . 'ast,atj,av,ay,az,azb,ba,bar,bcl,be,bg,bh,de,en,he,ja,ru,zh',
 				'warnings' => [
 					[ 'wikibasecirrus-keywordfeature-too-many-language-codes', 'haslabel', 30, 32 ]
@@ -260,13 +260,13 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider applyProvider
 	 */
-	public function testApply( ?array $expected, $term, array $expectedWarnings = [] ) {
+	public function testApply( ?array $expected, $term, array $warnings = [] ) {
 		$feature = new HasDataForLangFeature( [ 'aa', 'ab', 'ace', 'ady', 'af', 'ak', 'als', 'am',
 												'an', 'ang', 'ar', 'arc', 'arz', 'as', 'ast', 'atj',
 												'av', 'ay', 'az', 'azb', 'ba', 'bar', 'bcl', 'be',
 												'bg', 'bh', 'de', 'en', 'he', 'ja', 'ru', 'zh' ] );
 		$kwAssertions = new KeywordFeatureAssertions( $this );
-		$kwAssertions->assertFilter( $feature, $term, $expected, $expectedWarnings );
+		$kwAssertions->assertFilter( $feature, $term, $expected, $warnings );
 		$kwAssertions->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
 		if ( $expected === null ) {
 			$kwAssertions->assertNoResultsPossible( $feature, $term );
@@ -287,9 +287,9 @@ class HasDataForLangFeatureTest extends \MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider noResultsProvider
 	 */
-	public function testNoResults( $term, $expectedWarnings = [] ) {
+	public function testNoResults( $term, $warnings = [] ) {
 		( new KeywordFeatureAssertions( $this ) )->assertNoResultsPossible(
-			new HasDataForLangFeature( [ 'test' ] ), $term, $expectedWarnings );
+			new HasDataForLangFeature( [ 'test' ] ), $term, $warnings );
 	}
 
 	public static function applyNoDataProvider() {

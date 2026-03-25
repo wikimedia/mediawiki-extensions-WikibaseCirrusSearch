@@ -32,7 +32,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:gift',
+				'term' => 'inlabel:gift',
 			],
 			'incaption alias for WikibaseMediaInfo' => [
 				'expected' => [
@@ -42,7 +42,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'incaption:gift',
+				'term' => 'incaption:gift',
 			],
 			'has @ but no language specified' => [
 				'expected' => [
@@ -52,7 +52,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:gift@',
+				'term' => 'inlabel:gift@',
 			],
 			'language specified as *' => [
 				'expected' => [
@@ -62,7 +62,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:gift@*',
+				'term' => 'inlabel:gift@*',
 			],
 			'* is only accepted on its own' => [
 				'expected' => [
@@ -72,7 +72,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:gift@*,en',
+				'term' => 'inlabel:gift@*,en',
 				'warnings' => [
 					[ 'wikibasecirrus-keywordfeature-unknown-language-code', 'inlabel', '*' ],
 				],
@@ -86,7 +86,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'type' => 'phrase',
 					],
 				],
-				'search string' => 'inlabel:"gift wrap@en"',
+				'term' => 'inlabel:"gift wrap@en"',
 			],
 			'multiple language phrase query' => [
 				'expected' => [
@@ -97,7 +97,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'type' => 'phrase',
 					],
 				],
-				'search string' => 'inlabel:"manifesto futurista@pt-br,pt"',
+				'term' => 'inlabel:"manifesto futurista@pt-br,pt"',
 			],
 			'language is case insensitive' => [
 				'expected' => [
@@ -107,7 +107,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:gift@ZH',
+				'term' => 'inlabel:gift@ZH',
 			],
 			'can specify multiple languages' => [
 				'expected' => [
@@ -117,7 +117,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:colaborativa@pt-br,pt',
+				'term' => 'inlabel:colaborativa@pt-br,pt',
 			],
 			'apply language fallbacks with *' => [
 				'expected' => [
@@ -127,7 +127,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:colaborativa@pt-br*',
+				'term' => 'inlabel:colaborativa@pt-br*',
 			],
 			'apply language fallbacks with * for incaption' => [
 				'expected' => [
@@ -144,7 +144,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'incaption:colaborativa@pt-br*',
+				'term' => 'incaption:colaborativa@pt-br*',
 			],
 			'unknown languages generate warnings' => [
 				'expected' => [
@@ -154,7 +154,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:gift@en,unk',
+				'term' => 'inlabel:gift@en,unk',
 				'warnings' => [
 					[ 'wikibasecirrus-keywordfeature-unknown-language-code', 'inlabel', 'unk' ],
 				],
@@ -167,7 +167,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:colaborativa@pt-br@pt',
+				'term' => 'inlabel:colaborativa@pt-br@pt',
 			],
 			'deduplicates' => [
 				'expected' => [
@@ -177,7 +177,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:colaborativa@pt,pt',
+				'term' => 'inlabel:colaborativa@pt,pt',
 			],
 			'deduplicates language chains as well' => [
 				'expected' => [
@@ -187,7 +187,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:colaborativa@pt-br*,pt*',
+				'term' => 'inlabel:colaborativa@pt-br*,pt*',
 			],
 			'language chain without en' => [
 				'expected' => [
@@ -197,7 +197,7 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 						'operator' => 'and',
 					],
 				],
-				'search string' => 'inlabel:colaborativa@pt-br+',
+				'term' => 'inlabel:colaborativa@pt-br+',
 			],
 		];
 	}
@@ -205,10 +205,10 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider applyProvider
 	 */
-	public function testApply( ?array $expected, $term, array $expectedWarnings = [], $languageChains = null ) {
+	public function testApply( ?array $expected, $term, array $warnings = [], $languageChains = null ) {
 		$feature = $this->featureWithMocks( $languageChains );
 		$kwAssertions = $this->getKWAssertions();
-		$kwAssertions->assertFilter( $feature, $term, $expected, $expectedWarnings );
+		$kwAssertions->assertFilter( $feature, $term, $expected, $warnings );
 		$kwAssertions->assertCrossSearchStrategy( $feature, $term, CrossSearchStrategy::hostWikiOnlyStrategy() );
 		if ( $expected === null ) {
 			$kwAssertions->assertNoResultsPossible( $feature, $term );
@@ -241,9 +241,9 @@ class InLabelFeatureTest extends \MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider noResultsProvider
 	 */
-	public function testNoResults( $term, $expectedWarnings = [] ) {
+	public function testNoResults( $term, $warnings = [] ) {
 		$this->getKWAssertions()->assertNoResultsPossible(
-			$this->featureWithMocks(), $term, $expectedWarnings );
+			$this->featureWithMocks(), $term, $warnings );
 	}
 
 	public function testLimitFieldCount() {

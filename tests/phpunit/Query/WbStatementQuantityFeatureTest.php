@@ -30,7 +30,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 						'eq' => 777,
 					],
 				],
-				'search string' => 'wbstatementquantity:P999=Q888=777',
+				'term' => 'wbstatementquantity:P999=Q888=777',
 			],
 			'single statement with >' => [
 				'expected' => [
@@ -40,7 +40,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 						'gt' => 777,
 					],
 				],
-				'search string' => 'wbstatementquantity:P999=Q888>777',
+				'term' => 'wbstatementquantity:P999=Q888>777',
 			],
 			'single statement with >=' => [
 				'expected' => [
@@ -50,7 +50,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 						'gte' => 777,
 					],
 				],
-				'search string' => 'wbstatementquantity:P999=Q888>=777',
+				'term' => 'wbstatementquantity:P999=Q888>=777',
 			],
 			'single statement with <' => [
 				'expected' => [
@@ -60,7 +60,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 						'lt' => 333,
 					],
 				],
-				'search string' => 'wbstatementquantity:P111=Q222<333',
+				'term' => 'wbstatementquantity:P111=Q222<333',
 			],
 			'single statement with <=' => [
 				'expected' => [
@@ -70,7 +70,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 						'lte' => 333,
 					],
 				],
-				'search string' => 'wbstatementquantity:P111=Q222<=333',
+				'term' => 'wbstatementquantity:P111=Q222<=333',
 			],
 			'multiple statements' => [
 				'expected' => [
@@ -90,7 +90,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 						]
 					]
 				],
-				'search string' => 'wbstatementquantity:P111=Q222<=333|P999=Q888>1',
+				'term' => 'wbstatementquantity:P111=Q222<=333|P999=Q888>1',
 			],
 			'some data invalid' => [
 				'expected' => [
@@ -100,7 +100,7 @@ class WbStatementQuantityFeatureTest extends \MediaWikiIntegrationTestCase {
 						'gt' => 1,
 					],
 				],
-				'search string' => 'wbstatementquantity:INVALID|P999=Q888>1',
+				'term' => 'wbstatementquantity:INVALID|P999=Q888>1',
 			],
 		];
 	}

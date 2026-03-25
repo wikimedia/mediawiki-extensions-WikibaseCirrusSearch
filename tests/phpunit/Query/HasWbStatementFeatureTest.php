@@ -35,7 +35,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						] ]
 					]
 				] ],
-				'search string' => 'haswbstatement:P999=Q888',
+				'term' => 'haswbstatement:P999=Q888',
 			],
 			'single statement string' => [
 				'expected' => [ 'bool' => [
@@ -47,7 +47,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						] ]
 					]
 				] ],
-				'search string' => 'haswbstatement:P999=12345',
+				'term' => 'haswbstatement:P999=12345',
 			],
 			'multiple statements' => [
 				'expected' => [ 'bool' => [
@@ -64,7 +64,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						] ]
 					]
 				] ],
-				'search string' => 'haswbstatement:P999=Q888|P777=someString',
+				'term' => 'haswbstatement:P999=Q888|P777=someString',
 			],
 			'some data invalid' => [
 				'expected' => [ 'bool' => [
@@ -76,11 +76,11 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						] ],
 					]
 				] ],
-				'search string' => 'haswbstatement:INVALID|P999=Q888',
+				'term' => 'haswbstatement:INVALID|P999=Q888',
 			],
 			'all data invalid' => [
 				'expected' => null,
-				'search string' => 'haswbstatement:INVALID',
+				'term' => 'haswbstatement:INVALID',
 			],
 			'property only' => [
 				'expected' => [ 'bool' => [
@@ -92,7 +92,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						] ]
 					]
 				] ],
-				'search string' => 'haswbstatement:P999',
+				'term' => 'haswbstatement:P999',
 			],
 			'property and value' => [
 				'expected' => [ 'bool' => [
@@ -109,7 +109,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						] ]
 					]
 				] ],
-				'search string' => 'haswbstatement:P999|P777=someString',
+				'term' => 'haswbstatement:P999|P777=someString',
 			],
 			'prefix' => [
 				'expected' => [ 'bool' => [
@@ -122,7 +122,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						] ]
 					]
 				] ],
-				'search string' => 'haswbstatement:P999=Q888[P111=*',
+				'term' => 'haswbstatement:P999=Q888[P111=*',
 			],
 			'existence' => [
 				'expected' => [
@@ -130,7 +130,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						'field' => 'statement_keywords'
 					]
 				],
-				'search_string' => 'haswbstatement:*',
+				'term' => 'haswbstatement:*',
 			],
 			'existence short circuits the rest of bool query' => [
 				'expected' => [
@@ -138,7 +138,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						'field' => 'statement_keywords'
 					]
 				],
-				'search_string' => 'haswbstatement:P999=Q888|*',
+				'term' => 'haswbstatement:P999=Q888|*',
 			],
 		];
 	}

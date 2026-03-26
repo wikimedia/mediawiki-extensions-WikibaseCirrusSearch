@@ -98,6 +98,9 @@
 			"description": "Map of licence search strings to wikibase statements."
 		}
 	},
+	"ServiceWiringFiles": [
+		"WikibaseCirrusSearch.ServiceWiring.php"
+	],
 	"ConfigRegistry": {
 		"WikibaseCirrusSearch": "Wikibase\\Search\\Elastic\\WikibaseSearchConfig::newFromGlobals"
 	},

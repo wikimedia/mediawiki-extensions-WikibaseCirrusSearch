@@ -4,6 +4,7 @@
  * Search configs for entity types for use with Wikibase.
  */
 
+use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
@@ -11,22 +12,18 @@ use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\SettingsArray;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntitySearchElastic;
-use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 use Wikibase\Search\Elastic\Fields\DescriptionsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\PropertyFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\StatementProviderFieldDefinitions;
+use Wikibase\Search\Elastic\WikibaseCirrusSearch;
 
 return [
 	'item' => [
 		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
-			$context = new RequestContext();
-			$context->setRequest( $request );
-			$userLanguage = $context->getLanguage();
-
-			return EntitySearchHelperFactory::newFromGlobalState()
-				->newItemPropertySearchHelper( $request, $userLanguage );
+			return WikibaseCirrusSearch::getEntitySearchHelperFactory()
+				->newItemPropertySearchHelper( $request, RequestContext::getMain()->getLanguage() );
 		},
 		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$services = MediaWikiServices::getInstance();
@@ -66,13 +63,9 @@ return [
 			] );
 		},
 		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
-			$context = new RequestContext();
-			$context->setRequest( $request );
-			$userLanguage = $context->getLanguage();
-
 			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
-				EntitySearchHelperFactory::newFromGlobalState()
-				->newItemPropertySearchHelper( $request, $userLanguage ),
+				WikibaseCirrusSearch::getEntitySearchHelperFactory()
+					->newItemPropertySearchHelper( $request, RequestContext::getMain()->getLanguage() ),
 				WikibaseRepo::getPropertyDataTypeLookup()
 			);
 		},

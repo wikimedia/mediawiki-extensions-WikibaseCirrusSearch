@@ -15,6 +15,7 @@ use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Search\Elastic\EntitySearchElastic;
+use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 
 /**
  * @covers \Wikibase\Search\Elastic\EntitySearchElastic
@@ -98,7 +99,12 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 		$mockEntitySearchElastic->method( 'getRankedSearchResults' )
 			->willReturnCallback( $this->makeElasticSearchCallback() );
 
+		$mockFactory = $this->createMock( EntitySearchHelperFactory::class );
+		$mockFactory->method( 'newItemPropertySearchHelper' )
+			->willReturn( $mockEntitySearchElastic );
+
 		$this->setService( 'WikibaseRepo.EntitySearchHelper', $mockEntitySearchElastic );
+		$this->setService( 'WikibaseCirrusSearch.EntitySearchHelperFactory', $mockFactory );
 
 		[ $resultData ] = $this->doApiRequest( [
 			'action' => 'wbsearchentities',
@@ -148,7 +154,7 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 			$this->newLanguageFallbackChainFactory(),
 			$this->idParser,
 			$this->createMock( Language::class ),
-			[ 'item' => 'wikibase-item' ],
+			[ 'item' => 'wikibase-item', 'property' => 'wikibase-property' ],
 			new FauxRequest(),
 			CirrusDebugOptions::forDumpingQueriesInUnitTests()
 		);

@@ -12,7 +12,6 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
 use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\Api\EntitySearchHelper;
-use Wikibase\Repo\WikibaseRepo;
 
 /**
  * @license GPL-2.0-or-later
@@ -27,17 +26,6 @@ class EntitySearchHelperFactory {
 		private readonly array $enabledEntityTypes,
 		private readonly array $contentModelMappings,
 	) {
-	}
-
-	public static function newFromGlobalState(): self {
-		return new self(
-			WikibaseRepo::getEntityIdParser(),
-			WikibaseRepo::getLanguageFallbackChainFactory(),
-			WikibaseRepo::getEntityLookup(),
-			WikibaseRepo::getTermLookup(),
-			WikibaseRepo::getEnabledEntityTypes(),
-			WikibaseRepo::getContentModelMappings()
-		);
 	}
 
 	public function newItemPropertySearchHelper( WebRequest $request, Language $resultLanguage ): EntitySearchHelper {

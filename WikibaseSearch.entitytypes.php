@@ -21,10 +21,6 @@ use Wikibase\Search\Elastic\WikibaseCirrusSearch;
 
 return [
 	'item' => [
-		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
-			return WikibaseCirrusSearch::getEntitySearchHelperFactory()
-				->newItemPropertySearchHelper( $request, RequestContext::getMain()->getLanguage() );
-		},
 		Def::SEARCH_FIELD_DEFINITIONS => static function ( array $languageCodes, SettingsArray $searchSettings ) {
 			$services = MediaWikiServices::getInstance();
 			$configFactory = $services->getConfigFactory();

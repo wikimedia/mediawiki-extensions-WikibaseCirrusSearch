@@ -34,7 +34,6 @@ class WikibaseRepoEntityTypesHookHandlerTest extends MediaWikiIntegrationTestCas
 		$entityTypeDefinitions = [
 			'item' => [
 				EntityTypeDefinitions::CONTENT_MODEL_ID => ItemContent::CONTENT_MODEL_ID,
-				EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK => 'original item callback',
 			],
 			'property' => [
 				EntityTypeDefinitions::CONTENT_MODEL_ID => PropertyContent::CONTENT_MODEL_ID,
@@ -49,9 +48,8 @@ class WikibaseRepoEntityTypesHookHandlerTest extends MediaWikiIntegrationTestCas
 			$entityTypeDefinitions['item'][EntityTypeDefinitions::CONTENT_MODEL_ID] );
 		$this->assertSame( PropertyContent::CONTENT_MODEL_ID,
 			$entityTypeDefinitions['property'][EntityTypeDefinitions::CONTENT_MODEL_ID] );
-		$itemCallback = $entityTypeDefinitions['item'][EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK];
-		$this->assertNotSame( 'original item callback', $itemCallback );
-		$this->assertIsCallable( $itemCallback );
+		$itemSearchFieldDefinitions = $entityTypeDefinitions['item'][EntityTypeDefinitions::SEARCH_FIELD_DEFINITIONS];
+		$this->assertIsCallable( $itemSearchFieldDefinitions );
 		$propertyCallback = $entityTypeDefinitions['property'][EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK];
 		$this->assertNotSame( 'original property callback', $propertyCallback );
 		$this->assertIsCallable( $propertyCallback );

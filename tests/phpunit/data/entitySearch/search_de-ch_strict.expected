@@ -15,7 +15,12 @@
                                         "should": [
                                             {
                                                 "match": {
-                                                    "labels_all.prefix": "Wien"
+                                                    "labels.de-ch.prefix": "Wien"
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels.mul.prefix": "Wien"
                                                 }
                                             }
                                         ]

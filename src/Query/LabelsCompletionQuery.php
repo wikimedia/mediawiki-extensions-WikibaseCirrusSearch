@@ -174,15 +174,26 @@ class LabelsCompletionQuery extends AbstractQuery {
 		$labelsName = LabelsField::NAME;
 		$allLabelsName = AllLabelsField::NAME;
 
+		$languageCode = $this->languageCode;
+		$languageFallback = !$this->strictLanguage;
+
 		$labelsFilter = new BoolQuery();
-		$labelsFilter->addShould( new MatchQuery( "$allLabelsName.prefix", $this->userQuery ) );
-		if ( $this->hasExtraSpace() ) {
-			// still allow a near match when the query has trailing spaces
-			$labelsFilter->addShould(
-				new MatchQuery( "$allLabelsName.near_match_folded", $this->normalizedQuery ) );
+		if ( !$languageFallback ) {
+			$labelsFilter
+				->addShould( new MatchQuery( "$labelsName.{$languageCode}.prefix", $this->userQuery ) )
+				->addShould( new MatchQuery( "$labelsName.mul.prefix", $this->userQuery ) );
+			if ( $this->hasExtraSpace() ) {
+				$labelsFilter->addShould( new MatchQuery( "$labelsName.{$languageCode}.near_match_folded", $this->normalizedQuery ) );
+				$labelsFilter->addShould( new MatchQuery( "$labelsName.mul.near_match_folded", $this->normalizedQuery ) );
+			}
+		} else {
+			$labelsFilter
+				->addShould( new MatchQuery( "$allLabelsName.prefix", $this->userQuery ) );
+			if ( $this->hasExtraSpace() ) {
+				$labelsFilter->addShould( new MatchQuery( "$allLabelsName.near_match_folded", $this->normalizedQuery ) );
+			}
 		}
 
-		$languageCode = $this->languageCode;
 		$profile = $this->profile;
 		// Fields to which query applies exactly as stated, without trailing space trimming
 		$prefixFields = [];
@@ -194,7 +205,7 @@ class LabelsCompletionQuery extends AbstractQuery {
 		$weight = $profile["{$languageCode}-prefix"];
 		$prefixFields[] = [ "labels.{$languageCode}.prefix", $weight ];
 
-		if ( !$this->strictLanguage ) {
+		if ( $languageFallback ) {
 			$nearMatchFields[] = [ "labels_all.near_match_folded", $profile['any'] ];
 			foreach ( $this->searchLanguageCodes as $fallbackCode ) {
 				if ( $fallbackCode === $languageCode ) {
@@ -209,6 +220,11 @@ class LabelsCompletionQuery extends AbstractQuery {
 
 				$prefixFields[] = [ "labels.{$fallbackCode}.prefix", $profile["{$fallbackCode}-prefix"] ];
 			}
+		} elseif ( in_array( "mul", $this->searchLanguageCodes ) ) {
+			// Add "mul" field weights if we run with strict-language and "mul" is a actual fallback
+			$nearMatchFields[] = [ "$labelsName.mul.near_match", $profile["mul-exact"] ];
+			$nearMatchFields[] = [ "$labelsName.mul.near_match_folded", $profile["mul-folded"] ];
+			$prefixFields[] = [ "labels.mul.prefix", $profile["mul-prefix"] ];
 		}
 
 		$dismax = new DisMax();

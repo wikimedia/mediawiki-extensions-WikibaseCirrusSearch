@@ -4,5 +4,19 @@
 	"userLang": "en",
 	"type": "item",
 	"limit": 15,
-	"strictlanguage": true
+	"strictlanguage": true,
+	"profiles": {
+		"wikibase_prefix_querybuilder": {
+			"default-en": {
+				"language-chain": ["en", "mul"],
+				"en-exact": 9,
+				"en-folded": 8,
+				"en-prefix": 7,
+				"mul-exact": 6,
+				"mul-folded": 5,
+				"mul-prefix": 4,
+				"any": 1
+			}
+		}
+	}
 }

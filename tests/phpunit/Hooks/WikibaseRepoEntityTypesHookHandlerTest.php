@@ -37,7 +37,6 @@ class WikibaseRepoEntityTypesHookHandlerTest extends MediaWikiIntegrationTestCas
 			],
 			'property' => [
 				EntityTypeDefinitions::CONTENT_MODEL_ID => PropertyContent::CONTENT_MODEL_ID,
-				EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK => 'original property callback',
 			],
 		];
 		$handler = new WikibaseRepoEntityTypesHookHandler();
@@ -50,9 +49,10 @@ class WikibaseRepoEntityTypesHookHandlerTest extends MediaWikiIntegrationTestCas
 			$entityTypeDefinitions['property'][EntityTypeDefinitions::CONTENT_MODEL_ID] );
 		$itemSearchFieldDefinitions = $entityTypeDefinitions['item'][EntityTypeDefinitions::SEARCH_FIELD_DEFINITIONS];
 		$this->assertIsCallable( $itemSearchFieldDefinitions );
-		$propertyCallback = $entityTypeDefinitions['property'][EntityTypeDefinitions::ENTITY_SEARCH_CALLBACK];
-		$this->assertNotSame( 'original property callback', $propertyCallback );
-		$this->assertIsCallable( $propertyCallback );
+		$propertySearchFieldDefinitions = $entityTypeDefinitions['property'][
+			EntityTypeDefinitions::SEARCH_FIELD_DEFINITIONS
+		];
+		$this->assertIsCallable( $propertySearchFieldDefinitions );
 	}
 
 	public function testKeepsEntityTypeOrder(): void {

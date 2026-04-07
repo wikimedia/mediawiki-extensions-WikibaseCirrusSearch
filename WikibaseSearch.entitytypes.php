@@ -4,9 +4,7 @@
  * Search configs for entity types for use with Wikibase.
  */
 
-use MediaWiki\Context\RequestContext;
 use MediaWiki\MediaWikiServices;
-use MediaWiki\Request\WebRequest;
 use Wikibase\DataModel\Services\Lookup\InProcessCachingDataTypeLookup;
 use Wikibase\Lib\EntityTypeDefinitions as Def;
 use Wikibase\Lib\SettingsArray;
@@ -17,7 +15,6 @@ use Wikibase\Search\Elastic\Fields\ItemFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\LabelsProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\PropertyFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\StatementProviderFieldDefinitions;
-use Wikibase\Search\Elastic\WikibaseCirrusSearch;
 
 return [
 	'item' => [
@@ -57,13 +54,6 @@ return [
 					WikibaseRepo::getLogger( $services )
 				)
 			] );
-		},
-		Def::ENTITY_SEARCH_CALLBACK => static function ( WebRequest $request ) {
-			return new \Wikibase\Repo\Api\PropertyDataTypeSearchHelper(
-				WikibaseCirrusSearch::getEntitySearchHelperFactory()
-					->newItemPropertySearchHelper( $request, RequestContext::getMain()->getLanguage() ),
-				WikibaseRepo::getPropertyDataTypeLookup()
-			);
 		},
 		Def::FULLTEXT_SEARCH_CONTEXT => EntitySearchElastic::CONTEXT_WIKIBASE_FULLTEXT,
 	]

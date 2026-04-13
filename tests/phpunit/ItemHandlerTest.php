@@ -48,7 +48,10 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	 * @see EntityHandlerTestCase::contentProvider
 	 */
 	public static function contentProvider(): array {
-		return [];
+		// providers can't return empty arrays, return something empty to make testSerialization happy
+		// This whole TestCase class should probably be refactored with some re-usable traits instead
+		// of inheritance.
+		return [ [ self::newEntityContent() ] ];
 	}
 
 	/**

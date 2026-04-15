@@ -11,8 +11,14 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "Duck"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "Duck"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -45,20 +51,20 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.prefix": "Duck"
+                                                            "labels_all.near_match_folded": "Duck"
                                                         }
                                                     },
-                                                    "boost": 1.1
+                                                    "boost": 0.001
                                                 }
                                             },
                                             {
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels_all.near_match_folded": "Duck"
+                                                            "labels.en.prefix": "Duck"
                                                         }
                                                     },
-                                                    "boost": 0.001
+                                                    "boost": 1.1
                                                 }
                                             }
                                         ]

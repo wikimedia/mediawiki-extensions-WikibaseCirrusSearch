@@ -11,8 +11,19 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "Wein"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "Wein "
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.near_match_asciifolding": "Wein"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -45,16 +56,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de.prefix": "Wein"
-                                                        }
-                                                    },
-                                                    "boost": 5.6
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels_all.near_match_folded": "Wein"
                                                         }
                                                     },
@@ -79,16 +80,6 @@
                                                         }
                                                     },
                                                     "boost": 5
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.pr.prefix": "Wein"
-                                                        }
-                                                    },
-                                                    "boost": 3.2
                                                 }
                                             },
                                             {

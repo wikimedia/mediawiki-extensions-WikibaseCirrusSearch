@@ -11,8 +11,14 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "Kohle"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "Kohle"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -45,16 +51,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de.prefix": "Kohle"
-                                                        }
-                                                    },
-                                                    "boost": 1.1
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels_all.near_match_folded": "Kohle"
                                                         }
                                                     },
@@ -79,6 +75,16 @@
                                                         }
                                                     },
                                                     "boost": 1.17
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.prefix": "Kohle"
+                                                        }
+                                                    },
+                                                    "boost": 1.1
                                                 }
                                             },
                                             {

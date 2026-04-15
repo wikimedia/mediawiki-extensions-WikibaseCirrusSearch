@@ -11,8 +11,14 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "https:\/\/www.wikidata.org\/wiki\/Q56"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "https:\/\/www.wikidata.org\/wiki\/Q56"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -45,20 +51,20 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.prefix": "https:\/\/www.wikidata.org\/wiki\/Q56"
+                                                            "labels_all.near_match_folded": "https:\/\/www.wikidata.org\/wiki\/Q56"
                                                         }
                                                     },
-                                                    "boost": 1.1
+                                                    "boost": 0.001
                                                 }
                                             },
                                             {
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels_all.near_match_folded": "https:\/\/www.wikidata.org\/wiki\/Q56"
+                                                            "labels.en.prefix": "https:\/\/www.wikidata.org\/wiki\/Q56"
                                                         }
                                                     },
-                                                    "boost": 0.001
+                                                    "boost": 1.1
                                                 }
                                             }
                                         ]

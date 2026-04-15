@@ -15,8 +15,7 @@
 				"en-exact": 6,
 				"en-folded": 5,
 				"en-prefix": 4,
-				"any": 1,
-				"space-discount": 1
+				"any": 1
 			}
 		}
 	}

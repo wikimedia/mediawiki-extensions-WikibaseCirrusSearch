@@ -11,8 +11,19 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "(p128)"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "(p128) "
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.near_match_asciifolding": "(p128)"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -39,16 +50,6 @@
                                                         }
                                                     },
                                                     "boost": 1.6
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.prefix": "(p128)"
-                                                        }
-                                                    },
-                                                    "boost": 0.88
                                                 }
                                             },
                                             {

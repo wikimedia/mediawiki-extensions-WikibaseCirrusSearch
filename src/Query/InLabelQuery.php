@@ -165,7 +165,6 @@ class InLabelQuery extends AbstractQuery {
 				->getFetchLanguageCodes(),
 			'any' => $profile['any'],
 			'tie-breaker' => $profile['tie-breaker'],
-			'space-discount' => $profile['space-discount'] ?? null,
 			"{$languageCode}-exact" => $profile['lang-exact'],
 			"{$languageCode}-folded" => $profile['lang-folded'],
 			"{$languageCode}-tokenized" => $profile['lang-tokenized'],

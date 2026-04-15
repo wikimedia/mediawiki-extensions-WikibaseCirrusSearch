@@ -174,61 +174,50 @@ class LabelsCompletionQuery extends AbstractQuery {
 		$labelsName = LabelsField::NAME;
 		$allLabelsName = AllLabelsField::NAME;
 
-		$labelsFilter = new MatchQuery( "$allLabelsName.prefix", $this->normalizedQuery );
+		$labelsFilter = new BoolQuery();
+		$labelsFilter->addShould( new MatchQuery( "$allLabelsName.prefix", $this->userQuery ) );
+		if ( $this->hasExtraSpace() ) {
+			// still allow a near match when the query has trailing spaces
+			$labelsFilter->addShould(
+				new MatchQuery( "$allLabelsName.near_match_asciifolding", $this->normalizedQuery ) );
+		}
 
 		$languageCode = $this->languageCode;
 		$profile = $this->profile;
-		$fields = [
+		// Fields to which query applies exactly as stated, without trailing space trimming
+		$prefixFields = [];
+		$nearMatchFields = [
 			[ "$labelsName.{$languageCode}.near_match", $profile["{$languageCode}-exact"] ],
 			[ "$labelsName.{$languageCode}.near_match_folded", $profile["{$languageCode}-folded"] ],
 		];
-		// Fields to which query applies exactly as stated, without trailing space trimming
-		$fieldsExact = [];
+
 		$weight = $profile["{$languageCode}-prefix"];
-		if ( $this->hasExtraSpace() && isset( $profile['space-discount'] ) ) {
-			$fields[] =
-				[
-					"labels.{$languageCode}.prefix",
-					$weight * $profile['space-discount'],
-				];
-			$fieldsExact[] = [ "labels.{$languageCode}.prefix", $weight ];
-		} else {
-			$fields[] = [ "labels.{$languageCode}.prefix", $weight ];
-		}
+		$prefixFields[] = [ "labels.{$languageCode}.prefix", $weight ];
 
 		if ( !$this->strictLanguage ) {
-			$fields[] = [ "labels_all.near_match_folded", $profile['any'] ];
+			$nearMatchFields[] = [ "labels_all.near_match_folded", $profile['any'] ];
 			foreach ( $this->searchLanguageCodes as $fallbackCode ) {
 				if ( $fallbackCode === $languageCode ) {
 					continue;
 				}
-				$fields[] = [
+				$nearMatchFields[] = [
 					"labels.{$fallbackCode}.near_match",
 					$profile["{$fallbackCode}-exact"] ];
-				$fields[] = [
+				$nearMatchFields[] = [
 					"labels.{$fallbackCode}.near_match_folded",
 					$profile["{$fallbackCode}-folded"] ];
 
-				$weight = $profile["{$fallbackCode}-prefix"];
-				if ( $this->hasExtraSpace() && isset( $profile['space-discount'] ) ) {
-					$fields[] = [
-						"labels.{$fallbackCode}.prefix",
-						$weight * $profile['space-discount'],
-					];
-					$fieldsExact[] = [ "labels.{$fallbackCode}.prefix", $weight ];
-				} else {
-					$fields[] = [ "labels.{$fallbackCode}.prefix", $weight ];
-				}
+				$prefixFields[] = [ "labels.{$fallbackCode}.prefix", $profile["{$fallbackCode}-prefix"] ];
 			}
 		}
 
 		$dismax = new DisMax();
 		$dismax->setTieBreaker( $profile['tie-breaker'] );
-		foreach ( $fields as $field ) {
+		foreach ( $nearMatchFields as $field ) {
 			$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery( $field[0], $field[1], $this->normalizedQuery ) );
 		}
 
-		foreach ( $fieldsExact as $field ) {
+		foreach ( $prefixFields as $field ) {
 			$dismax->addQuery( EntitySearchUtils::makeConstScoreQuery( $field[0], $field[1], $this->userQuery ) );
 		}
 

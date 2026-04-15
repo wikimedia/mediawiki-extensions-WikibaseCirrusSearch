@@ -11,8 +11,19 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "space age"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "space age "
+                                                }
+                                            },
+                                            {
+                                                "match": {
+                                                    "labels_all.near_match_asciifolding": "space age"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -39,16 +50,6 @@
                                                         }
                                                     },
                                                     "boost": 1.6
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.de-ch.prefix": "space age"
-                                                        }
-                                                    },
-                                                    "boost": 0.88
                                                 }
                                             },
                                             {
@@ -85,16 +86,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de.prefix": "space age"
-                                                        }
-                                                    },
-                                                    "boost": 0.288
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels.en.near_match": "space age"
                                                         }
                                                     },
@@ -109,16 +100,6 @@
                                                         }
                                                     },
                                                     "boost": 1.053
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.en.prefix": "space age"
-                                                        }
-                                                    },
-                                                    "boost": 0.2592
                                                 }
                                             },
                                             {

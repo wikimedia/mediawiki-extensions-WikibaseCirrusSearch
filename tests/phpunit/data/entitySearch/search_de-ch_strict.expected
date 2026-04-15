@@ -11,8 +11,14 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "Wien"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "Wien"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],

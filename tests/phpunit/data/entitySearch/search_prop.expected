@@ -11,8 +11,14 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "p42"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "p42"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -45,20 +51,20 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.en.prefix": "p42"
+                                                            "labels_all.near_match_folded": "p42"
                                                         }
                                                     },
-                                                    "boost": 1.1
+                                                    "boost": 0.001
                                                 }
                                             },
                                             {
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels_all.near_match_folded": "p42"
+                                                            "labels.en.prefix": "p42"
                                                         }
                                                     },
-                                                    "boost": 0.001
+                                                    "boost": 1.1
                                                 }
                                             }
                                         ]

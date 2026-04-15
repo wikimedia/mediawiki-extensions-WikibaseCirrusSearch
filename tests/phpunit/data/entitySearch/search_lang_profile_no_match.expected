@@ -11,8 +11,14 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "Wien"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "Wien"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -45,16 +51,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de.prefix": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 1.1
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels_all.near_match_folded": "Wien"
                                                         }
                                                     },
@@ -79,6 +75,16 @@
                                                         }
                                                     },
                                                     "boost": 1.17
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.prefix": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 1.1
                                                 }
                                             },
                                             {

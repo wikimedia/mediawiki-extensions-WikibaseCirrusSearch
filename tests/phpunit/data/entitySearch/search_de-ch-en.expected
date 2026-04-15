@@ -11,8 +11,14 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "Wien"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "Wien"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -39,16 +45,6 @@
                                                         }
                                                     },
                                                     "boost": 1.6
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.de-ch.prefix": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 1.1
                                                 }
                                             },
                                             {
@@ -85,16 +81,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.de.prefix": "Wien"
-                                                        }
-                                                    },
-                                                    "boost": 0.36
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels.en.near_match": "Wien"
                                                         }
                                                     },
@@ -109,6 +95,26 @@
                                                         }
                                                     },
                                                     "boost": 1.053
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de-ch.prefix": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 1.1
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.de.prefix": "Wien"
+                                                        }
+                                                    },
+                                                    "boost": 0.36
                                                 }
                                             },
                                             {

@@ -11,8 +11,14 @@
                         "bool": {
                             "filter": [
                                 {
-                                    "match": {
-                                        "labels_all.prefix": "\u7236\u985e"
+                                    "bool": {
+                                        "should": [
+                                            {
+                                                "match": {
+                                                    "labels_all.prefix": "\u7236\u985e"
+                                                }
+                                            }
+                                        ]
                                     }
                                 }
                             ],
@@ -39,16 +45,6 @@
                                                         }
                                                     },
                                                     "boost": 1.6
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.zh.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 1.1
                                                 }
                                             },
                                             {
@@ -85,16 +81,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.zh-hans.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 0.36
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels.zh-hant.near_match": "\u7236\u985e"
                                                         }
                                                     },
@@ -109,16 +95,6 @@
                                                         }
                                                     },
                                                     "boost": 1.053
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.zh-hant.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 0.324
                                                 }
                                             },
                                             {
@@ -145,16 +121,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.zh-cn.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 0.2916
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels.zh-tw.near_match": "\u7236\u985e"
                                                         }
                                                     },
@@ -169,16 +135,6 @@
                                                         }
                                                     },
                                                     "boost": 0.85293
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.zh-tw.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 0.26244
                                                 }
                                             },
                                             {
@@ -205,16 +161,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.zh-hk.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 0.236196
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels.zh-sg.near_match": "\u7236\u985e"
                                                         }
                                                     },
@@ -229,16 +175,6 @@
                                                         }
                                                     },
                                                     "boost": 0.6908733
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
-                                                            "labels.zh-sg.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 0.2125764
                                                 }
                                             },
                                             {
@@ -265,16 +201,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.zh-mo.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 0.19131876
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels.zh-my.near_match": "\u7236\u985e"
                                                         }
                                                     },
@@ -295,16 +221,6 @@
                                                 "constant_score": {
                                                     "filter": {
                                                         "match": {
-                                                            "labels.zh-my.prefix": "\u7236\u985e"
-                                                        }
-                                                    },
-                                                    "boost": 0.172186884
-                                                }
-                                            },
-                                            {
-                                                "constant_score": {
-                                                    "filter": {
-                                                        "match": {
                                                             "labels.en.near_match": "\u7236\u985e"
                                                         }
                                                     },
@@ -319,6 +235,96 @@
                                                         }
                                                     },
                                                     "boost": 0.5036466357
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 1.1
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hans.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.36
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hant.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.324
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-cn.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.2916
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-tw.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.26244
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-hk.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.236196
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-sg.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.2125764
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-mo.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.19131876
+                                                }
+                                            },
+                                            {
+                                                "constant_score": {
+                                                    "filter": {
+                                                        "match": {
+                                                            "labels.zh-my.prefix": "\u7236\u985e"
+                                                        }
+                                                    },
+                                                    "boost": 0.172186884
                                                 }
                                             },
                                             {

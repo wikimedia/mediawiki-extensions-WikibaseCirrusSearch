@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
-use SearchEngine;
-use SearchIndexField;
+use MediaWiki\Search\SearchEngine;
+use MediaWiki\Search\SearchIndexField;
 
 /**
  * Trait for code shared between {@link LabelsField} and {@link DescriptionsField}.

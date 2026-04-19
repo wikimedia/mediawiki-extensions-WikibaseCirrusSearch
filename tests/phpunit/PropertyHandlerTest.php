@@ -3,6 +3,7 @@
 namespace Wikibase\Search\Elastic\Tests;
 
 use MediaWiki\Parser\ParserOutput;
+use MediaWiki\Search\SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\EntityId;
 use Wikibase\DataModel\Entity\NumericPropertyId;
@@ -112,7 +113,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 
 	public function testDataForSearchIndex() {
 		$handler = $this->getHandler();
-		$engine = $this->createMock( \SearchEngine::class );
+		$engine = $this->createMock( SearchEngine::class );
 
 		$page = $this->getMockWikiPage( $handler );
 

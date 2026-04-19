@@ -3,12 +3,12 @@
 namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
+use MediaWiki\Search\SearchEngine;
+use MediaWiki\Search\SearchIndexField;
+use MediaWiki\Search\SearchIndexFieldDefinition;
 use OutOfBoundsException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use SearchEngine;
-use SearchIndexField;
-use SearchIndexFieldDefinition;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;

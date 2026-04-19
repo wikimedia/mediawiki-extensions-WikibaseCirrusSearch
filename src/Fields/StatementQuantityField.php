@@ -4,8 +4,8 @@ namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
 use DataValues\UnboundedQuantityValue;
+use MediaWiki\Search\SearchEngine;
 use Psr\Log\LoggerInterface;
-use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Statement\Statement;

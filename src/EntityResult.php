@@ -3,9 +3,9 @@ namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Search\Result;
 use CirrusSearch\Searcher;
-use HtmlArmor;
 use Wikibase\Lib\TermLanguageFallbackChain;
 use Wikibase\Repo\Search\ExtendedResult;
+use Wikimedia\HtmlArmor\HtmlArmor;
 
 /**
  * Single result for entity search.

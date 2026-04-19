@@ -2,9 +2,10 @@
 
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
-use DummySearchIndexFieldDefinition;
+use MediaWiki\Search\DummySearchIndexFieldDefinition;
+use MediaWiki\Search\SearchEngine;
+use MediaWiki\Search\SearchIndexField;
 use MediaWikiIntegrationTestCase;
-use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\Search\Elastic\Fields\WikibaseNumericField;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
@@ -31,7 +32,7 @@ abstract class WikibaseNumericFieldTestCase extends MediaWikiIntegrationTestCase
 
 		$mapping = $field->getMappingField( $searchEngine, get_class( $field ) )
 			->getMapping( $searchEngine );
-		$this->assertEquals( \SearchIndexField::INDEX_TYPE_INTEGER, $mapping['type'] );
+		$this->assertEquals( SearchIndexField::INDEX_TYPE_INTEGER, $mapping['type'] );
 		$this->assertEquals( get_class( $field ), $mapping['name'] );
 	}
 

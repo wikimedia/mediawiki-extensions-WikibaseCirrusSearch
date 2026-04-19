@@ -5,8 +5,8 @@ namespace Wikibase\Search\Elastic\Tests\Fields;
 use CirrusSearch\CirrusSearch;
 use CirrusSearch\SearchConfig;
 use MediaWiki\Registration\ExtensionRegistry;
+use MediaWiki\Search\SearchEngine;
 use MediaWikiIntegrationTestCase;
-use SearchEngine;
 use Wikibase\Search\Elastic\Tests\WikibaseSearchTestCase;
 
 /**

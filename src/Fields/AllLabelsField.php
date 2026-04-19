@@ -2,7 +2,8 @@
 namespace Wikibase\Search\Elastic\Fields;
 
 use CirrusSearch\CirrusSearch;
-use SearchEngine;
+use MediaWiki\Search\SearchEngine;
+use MediaWiki\Search\SearchIndexField;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Term\LabelsProvider;
 
@@ -20,7 +21,7 @@ class AllLabelsField extends TermIndexField implements WikibaseLabelsIndexField 
 	public const NAME = 'labels_all';
 
 	public function __construct() {
-		parent::__construct( static::NAME, \SearchIndexField::INDEX_TYPE_TEXT );
+		parent::__construct( static::NAME, SearchIndexField::INDEX_TYPE_TEXT );
 	}
 
 	/**

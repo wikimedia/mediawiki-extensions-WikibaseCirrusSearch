@@ -2,13 +2,12 @@
 
 namespace Wikibase\Search\Elastic\Tests;
 
-use HtmlArmor;
 use MediaWiki\Context\ContextSource;
 use MediaWiki\Language\RawMessage;
+use MediaWiki\Search\SearchResult;
 use MediaWiki\Specials\SpecialSearch;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use SearchResult;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
@@ -17,6 +16,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntityResult;
 use Wikibase\Search\Elastic\Hooks\CirrusShowSearchHitHooksHandler;
+use Wikimedia\HtmlArmor\HtmlArmor;
 use Wikimedia\TestingAccessWrapper;
 
 /**

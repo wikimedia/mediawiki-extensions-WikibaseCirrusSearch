@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace Wikibase\Search\Elastic\Hooks;
 
-use HtmlArmor;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\Html\Html;
 use MediaWiki\Search\Hook\ShowSearchHitHook;
@@ -15,6 +14,7 @@ use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\Hooks\Formatters\EntityLinkFormatterFactory;
 use Wikibase\Repo\Hooks\ShowSearchHitHandler;
 use Wikibase\Search\Elastic\EntityResult;
+use Wikimedia\HtmlArmor\HtmlArmor;
 
 /**
  * Handler to format entities in the search results

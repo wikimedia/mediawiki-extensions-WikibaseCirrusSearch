@@ -3,8 +3,8 @@
 namespace Wikibase\Search\Elastic\Tests\Fields;
 
 use CirrusSearch\CirrusSearch;
+use MediaWiki\Search\SearchEngine;
 use MediaWikiIntegrationTestCase;
-use SearchEngine;
 use Wikibase\DataModel\Entity\EntityDocument;
 use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\Property;

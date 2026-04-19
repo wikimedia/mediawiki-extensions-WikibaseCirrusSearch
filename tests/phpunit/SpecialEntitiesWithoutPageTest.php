@@ -4,7 +4,7 @@ namespace Wikibase\Search\Elastic\Tests;
 
 use MediaWiki\Request\FauxRequest;
 use MediaWiki\Request\FauxResponse;
-use SpecialPageTestBase;
+use MediaWiki\Tests\Specials\SpecialPageTestBase;
 use Wikibase\Lib\StaticContentLanguages;
 use Wikibase\Lib\TermIndexEntry;
 use Wikibase\Repo\WikibaseRepo;

@@ -5,9 +5,9 @@ namespace Wikibase\Search\Elastic\Fields;
 use CirrusSearch\CirrusSearch;
 use CirrusSearch\Search\TextIndexField;
 use CirrusSearch\SearchConfig;
-use SearchEngine;
-use SearchIndexField;
-use SearchIndexFieldDefinition;
+use MediaWiki\Search\SearchEngine;
+use MediaWiki\Search\SearchIndexField;
+use MediaWiki\Search\SearchIndexFieldDefinition;
 use Wikibase\Repo\Search\Fields\WikibaseIndexField;
 
 /**

@@ -9,13 +9,17 @@ use MediaWiki\Tests\Api\ApiTestCase;
 use Wikibase\DataModel\Entity\BasicEntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParser;
 use Wikibase\DataModel\Entity\EntityIdParsingException;
+use Wikibase\DataModel\Entity\Item;
+use Wikibase\DataModel\Entity\Property;
 use Wikibase\DataModel\Term\Term;
 use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 use Wikibase\Search\Elastic\EntitySearchElastic;
-use Wikibase\Search\Elastic\EntitySearchHelperFactory;
 
 /**
  * @covers \Wikibase\Search\Elastic\EntitySearchElastic
@@ -54,32 +58,39 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 		return [
 			'Exact item ID' => [
 				'Q1',
+				Item::ENTITY_TYPE,
 				[ 'Q1' ]
 			],
 			'Lower case item ID' => [
 				'q2',
+				Item::ENTITY_TYPE,
 				[ 'Q2' ]
 			],
 
 			'Exact property ID' => [
 				'P1',
+				Property::ENTITY_TYPE,
 				[ 'P1' ]
 			],
 			'Lower case property ID' => [
 				'p2',
+				Property::ENTITY_TYPE,
 				[ 'P2' ]
 			],
 
 			'Copy paste with brackets' => [
 				'(Q3)',
+				Item::ENTITY_TYPE,
 				[ 'Q3' ]
 			],
 			'Copy pasted concept URI' => [
 				'http://www.wikidata.org/entity/Q4',
+				Item::ENTITY_TYPE,
 				[ 'Q4' ]
 			],
 			'Copy pasted page URL' => [
 				'https://www.wikidata.org/wiki/Q5',
+				Item::ENTITY_TYPE,
 				[ 'Q5' ]
 			],
 		];
@@ -88,30 +99,36 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 	/**
 	 * @dataProvider provideQueriesForEntityIds
 	 */
-	public function testElasticSearchIntegration( $query, array $expectedIds ) {
+	public function testElasticSearchIntegration( string $query, string $type, array $expectedIds ): void {
 		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 
-		$mockEntitySearchElastic = $this->getMockBuilder( EntitySearchElastic::class )
-				->disableOriginalConstructor()
-				->onlyMethods( [ 'getRankedSearchResults' ] )
-				->getMock();
-
-		$mockEntitySearchElastic->method( 'getRankedSearchResults' )
-			->willReturnCallback( $this->makeElasticSearchCallback() );
-
-		$mockFactory = $this->createMock( EntitySearchHelperFactory::class );
-		$mockFactory->method( 'newItemPropertySearchHelper' )
-			->willReturn( $mockEntitySearchElastic );
-
-		$this->setService( 'WikibaseRepo.EntitySearchHelper', $mockEntitySearchElastic );
-		$this->setService( 'WikibaseCirrusSearch.EntitySearchHelperFactory', $mockFactory );
+		$mockWbSearchEntitiesController = $this->createStub( DispatchingWbSearchEntitiesController::class );
+		$mockWbSearchEntitiesController->method( 'getControllerForEntityType' )
+			->willReturnCallback( $this->makeSearchControllerCallback() );
+		$this->setService( 'WbSearch.DispatchingWbSearchEntitiesController', $mockWbSearchEntitiesController );
 
 		[ $resultData ] = $this->doApiRequest( [
 			'action' => 'wbsearchentities',
 			'language' => 'en',
 			'search' => $query,
+			'type' => $type
 		] );
 		$this->assertSameSearchResults( $resultData, $expectedIds );
+	}
+
+	/**
+	 * Create callback that returns a mock search controller by type
+	 *
+	 * @return \Closure
+	 */
+	private function makeSearchControllerCallback(): \Closure {
+		return function ( $type ) {
+			$mockSearchController = $this->createStub( WbSearchEntitiesController::class );
+			$mockSearchController->method( 'search' )
+				->willReturnCallback( $this->makeSearchResultsCallback( $type ) );
+
+			return $mockSearchController;
+		};
 	}
 
 	/**
@@ -119,17 +136,17 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 	 *
 	 * @return \Closure
 	 */
-	private function makeElasticSearchCallback() {
+	private function makeSearchResultsCallback( string $type ) {
 		$entitySearchElastic = $this->newEntitySearchElastic();
 
-		return function ( $text, $languageCode, $entityType, $limit, $strictLanguage )
-				use ( $entitySearchElastic ) {
+		return function ( WbSearchEntitiesRequest $request )
+				use ( $entitySearchElastic, $type ) {
 			$result = $entitySearchElastic->getRankedSearchResults(
-				$text,
-				$languageCode,
-				$entityType,
-				$limit,
-				$strictLanguage
+				$request->text,
+				$request->searchLanguageCode,
+				$type,
+				$request->limit,
+				$request->strictLanguage
 			);
 			// Transitional, query dumps will always be wrapped in an array
 
@@ -142,7 +159,7 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 				return [];
 			}
 
-			return [ new TermSearchResult( new Term( $languageCode, $matchId ), '', $entityId ) ];
+			return [ new TermSearchResult( new Term( $request->searchLanguageCode, $matchId ), '', $entityId ) ];
 		};
 	}
 

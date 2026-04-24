@@ -6,6 +6,7 @@
 			"Macofe",
 			"Red Winged Duck",
 			"Renessaince",
+			"Ucukor",
 			"Wizardist"
 		]
 	},
@@ -14,7 +15,7 @@
 	"wikibasecirrus-rescore-profile-prefix-boost": "Профіль rescore для запаўняльнага пошуку з падтрымкай сьцьверджаньняў",
 	"wikibasecirrus-rescore-profile-fulltext": "Перадвызначаны профіль rescore для паўнатэкставага пошуку",
 	"wikibasecirrus-rescore-profile-fulltext-phrase": "Профіль rescore для паўнатэкставага пошуку з ацэнкай фразаў",
-	"wikibasecirrus-search-bad-entity-type": "Кепскі тып элемэнту: $1",
+	"wikibasecirrus-search-bad-entity-type": "Кепскі тып існасьці: $1",
 	"wikibasecirrus-search-bad-profile-name": "Кепская назва профілю пошуку: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "ключавое слова haswbstatement ня ўтрымлівае слушных сьцьверджаньняў",
 	"special-entitieswithoutdescription": "Аб’екты без апісаньня",
@@ -25,5 +26,5 @@
 	"wikibasecirrus-entitieswithoutlabel-label-type": "Тып:",
 	"wikibasecirrus-entitieswithoutlabel-submit": "Знайсьці",
 	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» — няслушны код мовы.",
-	"wikibasecirrus-entitieswithoutlabel-invalid-type": "«$1» ня ёсьць слушным тыпам аб’екта."
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "«$1» ня ёсьць слушным тыпам існасьці."
 }

@@ -65,6 +65,16 @@ class StatementProviderFieldDefinitions implements FieldDefinitions {
 			),
 			StatementCountField::NAME => new StatementCountField(),
 		];
+		$fields[StatementTimeField::NAME] = new StatementTimeField(
+			$this->dataTypeFactory,
+			$this->propertyDataTypeLookup,
+			array_diff( $this->propertyIds, $this->excludedIds ),
+			[],
+			[],
+			$this->searchIndexDataFormatters,
+			$this->logger,
+			$this->statementProvider
+		);
 		if ( $this->allowedQualifierPropertyIdsForQuantityStatements ) {
 			$fields[StatementQuantityField::NAME] = new StatementQuantityField(
 				$this->dataTypeFactory,

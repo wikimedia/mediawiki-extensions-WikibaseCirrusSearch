@@ -53,6 +53,10 @@ use Wikibase\Search\Elastic\Fields\StatementsField;
  * Note that NOT ALL STATEMENTS ARE INDEXED. Searching for a statement about a property that has
  * not been indexed will give an empty result set.
  *
+ * Some indexed datatypes, including time values, do not have a search index data formatter for
+ * statement_keywords. For those, only property existence queries such as haswbstatement:P571 are
+ * supported, not value matches such as haswbstatement:P571=2025-01-01.
+ *
  * @uses CirrusSearch
  * @see https://phabricator.wikimedia.org/T190022
  */

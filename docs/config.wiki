@@ -18,3 +18,6 @@
 : Configuration to boost or deboost certain statement values.
 ; WBCSUseStemming
 : Configuration to use stemming analyzer for descriptions in certain languages. Array of two fields: index – use it for indexing, query – use main text field for querying.
+; WBCSAllowedStatementTimeProperties
+: List of statement time properties that are available to query with the <code>wbstatementtime</code> keyword. Properties must also be included in the Wikibase <code>searchIndexProperties</code> config, which allows the property to be included in the CirrusSearch mapping and to be indexed. The mapping should be rebuilt to include the property, and ideally also reindexed, before adding it to <code>WBCSAllowedStatementTimeProperties</code>. A bounded range can be expressed as <code>wbstatementtime:P571&gt;=2020-01-01&lt;2021-01-01</code>.
+: Up to 10 conditions can be combined with <code>|</code>.

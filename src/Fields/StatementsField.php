@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use UnexpectedValueException;
 use Wikibase\DataModel\Entity\EntityDocument;
+use Wikibase\DataModel\Entity\PropertyId;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookup;
 use Wikibase\DataModel\Services\Lookup\PropertyDataTypeLookupException;
 use Wikibase\DataModel\Snak\PropertyValueSnak;
@@ -63,8 +64,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	private array $excludedIds;
 
 	/**
-	 * @var ?callable Accepts an EntityDocument and returns an
-	 *  iterable of Statement instances to index.
+	 * @var callable|null
 	 */
 	private $statementProvider;
 
@@ -79,8 +79,8 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @param string[] $excludedIds List of property IDs to exclude.
 	 * @param callable[] $searchIndexDataFormatters Search formatters, indexed by data type name
 	 * @param ?LoggerInterface $logger
-	 * @param ?callable $statementProvider Callable that accepts an EntityDocument and returns
-	 *      an iterable containing Statement instances to index.
+	 * @param callable|null $statementProvider Accepts an EntityDocument and returns an
+	 *  iterable of Statement instances to index.
 	 */
 	public function __construct(
 		private readonly DataTypeFactory $dataTypeFactory,
@@ -118,7 +118,10 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		return $this;
 	}
 
-	private function getStatements( EntityDocument $entity ): iterable {
+	/**
+	 * @return iterable<Statement>
+	 */
+	protected function getStatements( EntityDocument $entity ): iterable {
 		if ( $this->statementProvider !== null ) {
 			return ( $this->statementProvider )( $entity );
 		}
@@ -128,6 +131,21 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		}
 
 		return [];
+	}
+
+	/**
+	 * @return LoggerInterface
+	 */
+	protected function getLogger(): LoggerInterface {
+		return $this->logger;
+	}
+
+	/**
+	 * @throws PropertyDataTypeLookupException
+	 * @unstable
+	 */
+	protected function getDataTypeIdForProperty( PropertyId $propertyId ): string {
+		return $this->propertyDataTypeLookup->getDataTypeIdForProperty( $propertyId );
 	}
 
 	/**
@@ -188,7 +206,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		 */
 
 		try {
-			$propType ??= $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+			$propType ??= $this->getDataTypeIdForProperty( $snak->getPropertyId() );
 		} catch ( PropertyDataTypeLookupException ) {
 			return null;
 		}
@@ -249,6 +267,22 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 	 * @return null|string
 	 */
 	protected function getWhitelistedSnakAsString( Snak $snak, $guid ) {
+		$propType = $this->getWhitelistedPropType( $snak, $guid );
+		if ( $propType === null ) {
+			return null;
+		}
+
+		return $this->getSnakAsString( $snak, $propType );
+	}
+
+	/**
+	 * Returns the property datatype if the snak is allowed for indexing.
+	 *
+	 * @param Snak $snak
+	 * @param string|null $guid Statement GUID to which this snak belongs
+	 * @return string|null
+	 */
+	protected function getWhitelistedPropType( Snak $snak, $guid ): ?string {
 		if ( !( $this->snakHasKnownValue( $snak ) ) ) {
 			return null;
 		}
@@ -259,7 +293,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		}
 
 		try {
-			$propType = $this->propertyDataTypeLookup->getDataTypeIdForProperty( $snak->getPropertyId() );
+			$propType = $this->getDataTypeIdForProperty( $snak->getPropertyId() );
 		} catch ( PropertyDataTypeLookupException $e ) {
 			// T198091: looks like occasionally we get weird fails on indexing
 			// Log them but do not break indexing other data
@@ -278,7 +312,7 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 			return null;
 		}
 
-		return $this->getSnakAsString( $snak, $propType );
+		return $propType;
 	}
 
 	/**

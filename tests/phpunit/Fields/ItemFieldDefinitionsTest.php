@@ -11,6 +11,7 @@ use Wikibase\Search\Elastic\Fields\SiteLinkCountField;
 use Wikibase\Search\Elastic\Fields\StatementCountField;
 use Wikibase\Search\Elastic\Fields\StatementProviderFieldDefinitions;
 use Wikibase\Search\Elastic\Fields\StatementsField;
+use Wikibase\Search\Elastic\Fields\StatementTimeField;
 
 /**
  * @covers \Wikibase\Search\Elastic\Fields\ItemFieldDefinitions
@@ -33,7 +34,9 @@ class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 			new StatementProviderFieldDefinitions(
 				new DataTypeFactory( [] ),
 				$this->createMock( PropertyDataTypeLookup::class ),
-				[], [], [], [], []
+				[], [], [], [], [],
+				null,
+				null
 			),
 		] );
 
@@ -47,6 +50,9 @@ class ItemFieldDefinitionsTest extends \PHPUnit\Framework\TestCase {
 
 		$this->assertArrayHasKey( 'statement_keywords', $fields );
 		$this->assertInstanceOf( StatementsField::class, $fields['statement_keywords'] );
+
+		$this->assertArrayHasKey( 'statement_time', $fields );
+		$this->assertInstanceOf( StatementTimeField::class, $fields['statement_time'] );
 	}
 
 	private function newLabelsProviderFieldDefinitions( array $languageCodes ) {

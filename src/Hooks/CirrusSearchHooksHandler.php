@@ -25,6 +25,7 @@ use Wikibase\Search\Elastic\Query\HasLicenseFeature;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
 use Wikibase\Search\Elastic\Query\InLabelFeature;
 use Wikibase\Search\Elastic\Query\WbStatementQuantityFeature;
+use Wikibase\Search\Elastic\Query\WbStatementTimeFeature;
 use Wikibase\Search\Elastic\WikibaseSearchConfig;
 use Wikimedia\Assert\Assert;
 
@@ -353,6 +354,9 @@ class CirrusSearchHooksHandler implements
 		}
 		$extraFeatures[] = new HasWbStatementFeature();
 		$extraFeatures[] = new WbStatementQuantityFeature();
+		$extraFeatures[] = new WbStatementTimeFeature(
+			$searchConfig->get( 'AllowedStatementTimeProperties' ) ?: []
+		);
 
 		$licenseMapping = HasLicenseFeature::getConfiguredLicenseMap( $searchConfig );
 		$extraFeatures[] = new HasLicenseFeature( $licenseMapping );

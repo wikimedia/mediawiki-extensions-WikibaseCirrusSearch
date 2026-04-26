@@ -95,6 +95,10 @@
 		"WBCSLicenseMapping": {
 			"value": [],
 			"description": "Map of licence search strings to wikibase statements."
+		},
+		"WBCSAllowedStatementTimeProperties": {
+			"value": [],
+			"description": "Statement time properties that are ready to query with the wbstatementtime keyword. Properties must also be present in searchIndexProperties to be indexed."
 		}
 	},
 	"ServiceWiringFiles": [

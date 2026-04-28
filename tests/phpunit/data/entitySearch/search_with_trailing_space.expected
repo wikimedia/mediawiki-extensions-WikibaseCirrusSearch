@@ -20,7 +20,7 @@
                                             },
                                             {
                                                 "match": {
-                                                    "labels_all.near_match_asciifolding": "Wein"
+                                                    "labels_all.near_match_folded": "Wein"
                                                 }
                                             }
                                         ]

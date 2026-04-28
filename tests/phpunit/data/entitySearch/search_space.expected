@@ -20,7 +20,7 @@
                                             },
                                             {
                                                 "match": {
-                                                    "labels_all.near_match_asciifolding": "space age"
+                                                    "labels_all.near_match_folded": "space age"
                                                 }
                                             }
                                         ]

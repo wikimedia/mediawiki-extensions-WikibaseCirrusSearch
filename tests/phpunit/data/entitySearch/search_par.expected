@@ -20,7 +20,7 @@
                                             },
                                             {
                                                 "match": {
-                                                    "labels_all.near_match_asciifolding": "(p128)"
+                                                    "labels_all.near_match_folded": "(p128)"
                                                 }
                                             }
                                         ]

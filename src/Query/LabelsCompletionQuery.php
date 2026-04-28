@@ -179,7 +179,7 @@ class LabelsCompletionQuery extends AbstractQuery {
 		if ( $this->hasExtraSpace() ) {
 			// still allow a near match when the query has trailing spaces
 			$labelsFilter->addShould(
-				new MatchQuery( "$allLabelsName.near_match_asciifolding", $this->normalizedQuery ) );
+				new MatchQuery( "$allLabelsName.near_match_folded", $this->normalizedQuery ) );
 		}
 
 		$languageCode = $this->languageCode;

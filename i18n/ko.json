@@ -14,12 +14,14 @@
 			"Priviet",
 			"Revi",
 			"SeoJeongHo",
+			"Tensama0415",
 			"YeBoy371",
 			"Ykhwong",
 			"고솜",
 			"아라"
 		]
 	},
+	"wikibasecirrus-desc": "CirrusSearch 기능을 사용하기 위한 Wikibase 확장 기능",
 	"wikibasecirrus-search-bad-entity-type": "잘못된 엔티티 유형: $1",
 	"wikibasecirrus-search-bad-profile-name": "잘못된 검색 프로파일 이름: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "haswbstatement 키워드에 유효한 문장이 포함되어 있지 않습니다",

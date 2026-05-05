@@ -7,8 +7,9 @@ namespace Wikibase\Search\Elastic\Hooks;
 use CirrusSearch\Hooks\CirrusSearchAddQueryFeaturesHook;
 use CirrusSearch\Hooks\CirrusSearchAnalysisConfigHook;
 use CirrusSearch\Hooks\CirrusSearchProfileServiceHook;
+use CirrusSearch\Hooks\CirrusSearchRegisterFullTextQueryClassifiersHook;
 use CirrusSearch\Maintenance\AnalysisConfigBuilder;
-use CirrusSearch\Parser\BasicQueryClassifier;
+use CirrusSearch\Parser\ParsedQueryClassifiersRepository;
 use CirrusSearch\Profile\ArrayProfileRepository;
 use CirrusSearch\Profile\SearchProfileRepositoryTransformer;
 use CirrusSearch\Profile\SearchProfileService;
@@ -18,6 +19,7 @@ use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\ConfigBuilder;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 use Wikibase\Search\Elastic\Fields\StatementsField;
+use Wikibase\Search\Elastic\Query\EntityFullTextQueryClassifier;
 use Wikibase\Search\Elastic\Query\HasDataForLangFeature;
 use Wikibase\Search\Elastic\Query\HasLicenseFeature;
 use Wikibase\Search\Elastic\Query\HasWbStatementFeature;
@@ -32,7 +34,8 @@ use Wikimedia\Assert\Assert;
 class CirrusSearchHooksHandler implements
 	CirrusSearchAnalysisConfigHook,
 	CirrusSearchProfileServiceHook,
-	CirrusSearchAddQueryFeaturesHook
+	CirrusSearchAddQueryFeaturesHook,
+	CirrusSearchRegisterFullTextQueryClassifiersHook
 {
 
 	private const LANGUAGE_SELECTOR_PREFIX = "language_selector_prefix";
@@ -312,8 +315,8 @@ class CirrusSearchHooksHandler implements
 		// In this case since wikibase owns these namespaces we score the routes at 1.0 which discards
 		// any other routes and eventually fails if another extension
 		// tries to own our namespace.
-		// For now we only accept simple bag of words queries but this will change in the future
-		// when query builders will manipulate the parsed query.
+		// T425253: Accept queries classified as ENTITY_FULL_TEXT (words
+		// with optional Wikibase keyword features, but no wildcards/fuzzy/prefix).
 		foreach ( $namespacesForContexts as $profileContext => $namespaces ) {
 			Assert::precondition( is_string( $profileContext ),
 				'$namespacesForContexts keys must be strings and refer to the profile context to use' );
@@ -321,14 +324,24 @@ class CirrusSearchHooksHandler implements
 				$profileContext,
 				1.0,
 				$namespaces,
-				// The wikibase builders only supports simple queries for now
-				[ BasicQueryClassifier::SIMPLE_BAG_OF_WORDS ]
+				[ EntityFullTextQueryClassifier::ENTITY_FULL_TEXT ]
 			);
 		}
 	}
 
 	/**
-	 * Add extra cirrus search query features for wikibase
+	 * Register the EntityFullTextQueryClassifier so that queries
+	 * with Wikibase keyword features (e.g. haswbstatement) are
+	 * classified as suitable for entity fulltext search (T425253).
+	 *
+	 * @param ParsedQueryClassifiersRepository $repository
+	 */
+	public function onCirrusSearchRegisterFullTextQueryClassifiers( ParsedQueryClassifiersRepository $repository ): void {
+		$repository->registerClassifier( new EntityFullTextQueryClassifier() );
+	}
+
+	/**
+	 * Add extra cirrus search query features for wikibase.
 	 *
 	 * @param \CirrusSearch\SearchConfig $config (not used, required by hook)
 	 * @param array &$extraFeatures

@@ -3,6 +3,7 @@
 namespace Wikibase\Search\Elastic;
 
 use CirrusSearch\Extra\Query\TokenCountRouter;
+use CirrusSearch\Parser\FullTextKeywordRegistry;
 use CirrusSearch\Query\FullTextQueryBuilder;
 use CirrusSearch\Search\SearchContext;
 use Elastica\Query\AbstractQuery;
@@ -64,8 +65,24 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @param string $term term to search
 	 */
 	public function build( SearchContext $searchContext, $term ) {
+		// Strip keyword features from the search term (T425253).
+		// Keyword features (e.g. haswbstatement:P31=Q5) add their filters
+		// directly to SearchContext and must be removed from $term so the
+		// entity search query only receives the plain text portion.
+		$features = ( new FullTextKeywordRegistry( $searchContext->getConfig() ) )->getKeywords();
+		foreach ( $features as $feature ) {
+			$term = $feature->apply( $searchContext, $term );
+		}
+		$term = trim( $term );
+
+		$searchContext->addSyntaxUsed( self::ENTITY_FULL_TEXT_MARKER, 10 );
+
+		if ( $term === '' ) {
+			return;
+		}
+
 		$this->buildEntitySearchQuery( $searchContext, $term );
-		// if we did find advanced query, we keep the old setup but change the result type
+
 		// FIXME: make it dispatch by content model
 		$searchContext->setResultsType( new EntityResultType( $this->userLanguage,
 			$this->languageFallbackChainFactory->newFromLanguageCode( $this->userLanguage ) ) );
@@ -86,7 +103,6 @@ class EntityFullTextQueryBuilder implements FullTextQueryBuilder {
 	 * @param string $term Search term
 	 */
 	protected function buildEntitySearchQuery( SearchContext $searchContext, $term ) {
-		$searchContext->addSyntaxUsed( self::ENTITY_FULL_TEXT_MARKER, 10 );
 		/*
 		 * Overall query structure is as follows:
 		 * - Bool with:

@@ -109,6 +109,7 @@
 		"CirrusSearchAnalysisConfig": "CirrusSearchHooksHandler",
 		"CirrusSearchProfileService": "CirrusSearchHooksHandler",
 		"CirrusSearchAddQueryFeatures": "CirrusSearchHooksHandler",
+		"CirrusSearchRegisterFullTextQueryClassifiers": "CirrusSearchHooksHandler",
 		"ShowSearchHit": "CirrusShowSearchHitHooksHandler",
 		"ShowSearchHitTitle": "CirrusShowSearchHitHooksHandler",
 		"WikibaseRepoEntityTypes": "WikibaseRepoEntityTypes",

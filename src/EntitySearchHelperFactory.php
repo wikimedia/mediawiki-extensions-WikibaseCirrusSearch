@@ -30,10 +30,6 @@ class EntitySearchHelperFactory implements EntitySearchHelperFactoryInterface {
 	}
 
 	public function newEntitySearchHelper( string $entityType, Language $language, WebRequest $request ): EntitySearchHelper {
-		return $this->newItemPropertySearchHelper( $request, $language );
-	}
-
-	public function newItemPropertySearchHelper( WebRequest $request, Language $resultLanguage ): EntitySearchHelper {
 		return new CombinedEntitySearchHelper(
 			[
 				new EntityIdSearchHelper(
@@ -41,14 +37,14 @@ class EntitySearchHelperFactory implements EntitySearchHelperFactoryInterface {
 					$this->entityIdParser,
 					new LanguageFallbackLabelDescriptionLookup(
 						$this->termLookup,
-						$this->languageFallbackChainFactory->newFromLanguage( $resultLanguage )
+						$this->languageFallbackChainFactory->newFromLanguage( $language )
 					),
 					$this->enabledEntityTypes
 				),
 				new EntitySearchElastic(
 					$this->languageFallbackChainFactory,
 					$this->entityIdParser,
-					$resultLanguage,
+					$language,
 					$this->contentModelMappings,
 					$request
 				),

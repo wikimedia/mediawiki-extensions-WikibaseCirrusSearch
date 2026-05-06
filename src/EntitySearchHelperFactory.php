@@ -12,11 +12,12 @@ use Wikibase\Lib\Store\LanguageFallbackLabelDescriptionLookup;
 use Wikibase\Repo\Api\CombinedEntitySearchHelper;
 use Wikibase\Repo\Api\EntityIdSearchHelper;
 use Wikibase\Repo\Api\EntitySearchHelper;
+use Wikibase\Repo\Domains\Search\Infrastructure\DataAccess\EntitySearchHelperFactory as EntitySearchHelperFactoryInterface;
 
 /**
  * @license GPL-2.0-or-later
  */
-class EntitySearchHelperFactory {
+class EntitySearchHelperFactory implements EntitySearchHelperFactoryInterface {
 
 	public function __construct(
 		private readonly EntityIdParser $entityIdParser,
@@ -26,6 +27,10 @@ class EntitySearchHelperFactory {
 		private readonly array $enabledEntityTypes,
 		private readonly array $contentModelMappings,
 	) {
+	}
+
+	public function newEntitySearchHelper( string $entityType, Language $language, WebRequest $request ): EntitySearchHelper {
+		return $this->newItemPropertySearchHelper( $request, $language );
 	}
 
 	public function newItemPropertySearchHelper( WebRequest $request, Language $resultLanguage ): EntitySearchHelper {

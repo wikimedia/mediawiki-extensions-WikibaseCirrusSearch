@@ -306,10 +306,11 @@ class StatementsField extends SearchIndexFieldDefinition implements WikibaseInde
 		}
 
 		$config = [
-			'type' => 'text',
+			'type' => 'keyword',
 			'copy_to' => 'all',
-			'analyzer' => 'lowercase_keyword',
+			'normalizer' => 'lowercase_keyword',
 			'norms' => false,
+			'doc_values' => false,
 			'index_options' => 'docs',
 		];
 		// Subfield indexing only property names, so we could do matches

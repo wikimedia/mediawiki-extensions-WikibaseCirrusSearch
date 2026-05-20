@@ -117,12 +117,27 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 						[ 'prefix' => [
 							'statement_keywords' => [
 								'value' => 'P999=Q888[P111=',
-								'rewrite' => 'top_terms_1024',
+								'rewrite' => 'constant_score',
+								'case_insensitive' => true,
 							],
 						] ]
 					]
 				] ],
 				'term' => 'haswbstatement:P999=Q888[P111=*',
+			],
+			'prefix for qualifiers' => [
+				'expected' => [ 'bool' => [
+					'should' => [
+						[ 'prefix' => [
+							'statement_keywords' => [
+								'value' => 'P999=Q888[P111=',
+								'rewrite' => 'constant_score',
+								'case_insensitive' => true,
+							],
+						] ]
+					]
+				] ],
+				'term' => 'haswbstatement:P999=Q888[P111=*]',
 			],
 			'existence' => [
 				'expected' => [
@@ -191,7 +206,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 	 */
 	public function testParseValue( $value, $expected, $warningExpected ) {
 		$feature = new HasWbStatementFeature();
-		$expectedWarnings = $warningExpected ? [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ] : [];
+		$expectedWarnings = $warningExpected ?: [];
 		$kwAssertions = $this->getKWAssertions();
 		$kwAssertions->assertParsedValue( $feature, "haswbstatement:\"$value\"", $expected, $expectedWarnings );
 	}
@@ -201,12 +216,12 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 			'empty value' => [
 				'value' => '',
 				'expected' => [],
-				'warningExpected' => true,
+				'warningExpected' => [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ],
 			],
 			'invalid value' => [
 				'value' => 'xyz=12345',
 				'expected' => [],
-				'warningExpected' => true,
+				'warningExpected' => [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ],
 			],
 			'single value Q-id' => [
 				'value' => 'P999=Q888',
@@ -271,7 +286,7 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 			'invalid property-only' => [
 				'value' => 'P123,abc',
 				'expected' => [],
-				'warningExpected' => true,
+				'warningExpected' => [ [ 'wikibasecirrus-haswbstatement-feature-no-valid-statements', 'haswbstatement' ] ],
 			],
 			'invalid and valid property-only' => [
 				'value' => 'P123,abc|P345',
@@ -294,6 +309,11 @@ class HasWbStatementFeatureTest extends \MediaWikiIntegrationTestCase {
 					],
 				],
 				'warningExpected' => false,
+			],
+			'prefix too short' => [
+				'value' => 'P31=Q*',
+				'expected' => [],
+				'warningExpected' => [ [ 'wikibasecirrus-haswbstatement-feature-prefix-too-short', 'haswbstatement' ] ],
 			],
 			'normal, property-only and prefix search simultaneously' => [
 				'value' => 'P111=Q222|P333|P444=Q555[P666*',

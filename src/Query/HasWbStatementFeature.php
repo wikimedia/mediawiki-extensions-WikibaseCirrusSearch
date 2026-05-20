@@ -57,6 +57,17 @@ use Wikibase\Search\Elastic\Fields\StatementsField;
  * @see https://phabricator.wikimedia.org/T190022
  */
 class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryFeature {
+	/**
+	 * min prefix len accepted for queries that ends with a wildcard
+	 * this will expect at least 2 chars after the equal sign, worstcase is: P31=Q1*
+	 */
+	private const MIN_PREFIX_LEN = 2;
+
+	/**
+	 * Pattern to detect prefix queries, we allow a ] at the end to allow queries like P735=Q12344159[P1545=*]
+	 * to work the same way as P735=Q12344159[P1545=*
+	 */
+	private const PREFIX_QUERY_PATTERN = '/\\*]?$/';
 
 	/**
 	 * @return string[]
@@ -107,7 +118,12 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 					$query['field'] =>
 						[
 							'value' => $query['string'],
-							'rewrite' => 'top_terms_1024'
+							// will scan all matching terms, may be slow but seems to run under
+							// 1sec on wikidata with a very broad prefix.
+							'rewrite' => 'constant_score',
+							// TODO: remove once wikidata has been re-indexed with a normalizer
+							//  for the statement_keyword field.
+							'case_insensitive' => true
 						]
 				] ) );
 			} elseif ( $query['class'] === MatchQuery::class ) {
@@ -171,10 +187,19 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 				continue;
 			}
 			if ( $this->statementEndsWithWildcard( $statementString ) ) {
+				$statementString = preg_replace( self::PREFIX_QUERY_PATTERN, '', $statementString );
+				$matchedValue = preg_replace( '/^[^=]+=(.*)$/', '$1', $statementString );
+				if ( mb_strlen( $matchedValue ) < self::MIN_PREFIX_LEN ) {
+					$warningCollector->addWarning(
+						'wikibasecirrus-haswbstatement-feature-prefix-too-short',
+						$key
+					);
+					return [];
+				}
 				$queries[] = [
 					'class' => Prefix::class,
 					'field' => StatementsField::NAME,
-					'string' => substr( $statementString, 0, strlen( $statementString ) - 1 ),
+					'string' => $statementString,
 				];
 				continue;
 			}
@@ -240,7 +265,7 @@ class HasWbStatementFeature extends SimpleKeywordFeature implements FilterQueryF
 	}
 
 	private function statementEndsWithWildcard( string $statementString ): bool {
-		if ( substr( $statementString, -1 ) == '*' ) {
+		if ( preg_match( self::PREFIX_QUERY_PATTERN, $statementString ) ) {
 			return true;
 		}
 		return false;

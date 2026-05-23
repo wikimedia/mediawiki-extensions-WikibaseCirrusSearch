@@ -2,14 +2,15 @@
 
 namespace Wikibase\Search\Elastic\Tests\Query;
 
-use CirrusSearch\CirrusIntegrationTestCase;
+use CirrusSearch\CirrusTestCaseTrait;
 use Wikibase\Search\Elastic\Query\EntityFullTextQueryClassifier;
 
 /**
  * @covers \Wikibase\Search\Elastic\Query\EntityFullTextQueryClassifier
  * @group CirrusSearch
  */
-class EntityFullTextQueryClassifierTest extends CirrusIntegrationTestCase {
+class EntityFullTextQueryClassifierTest extends \MediaWikiUnitTestCase {
+	use CirrusTestCaseTrait;
 
 	public static function provideQueries() {
 		yield 'simple word' => [ 'foo', [ EntityFullTextQueryClassifier::ENTITY_FULL_TEXT ] ];

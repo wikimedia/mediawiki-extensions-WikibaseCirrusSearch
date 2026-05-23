@@ -16,6 +16,7 @@ use Wikibase\Repo\Content\PropertyContent;
 use Wikibase\Repo\Content\PropertyHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ArrayUtils\ArrayUtils;
 
 /**
  * @covers \Wikibase\Repo\Content\PropertyHandler
@@ -91,7 +92,7 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 	}
 
 	protected static function getEntityTypeDefinitionsConfiguration(): array {
-		return wfArrayPlus2d(
+		return ArrayUtils::arrayPlus2d(
 			require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
 			parent::getEntityTypeDefinitionsConfiguration()
 		);
@@ -105,6 +106,11 @@ class PropertyHandlerTest extends EntityHandlerTestCase {
 		);
 
 		return PropertyContent::newFromProperty( $property );
+	}
+
+	public function testShowMissingEntity() {
+		$this->clearHooks( [ 'ParserAfterParse' ] );
+		parent::testShowMissingEntity();
 	}
 
 	protected function getExpectedSearchIndexFields() {

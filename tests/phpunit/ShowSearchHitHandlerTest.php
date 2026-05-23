@@ -12,6 +12,8 @@ use Wikibase\DataModel\Entity\Item;
 use Wikibase\DataModel\Entity\ItemId;
 use Wikibase\DataModel\SiteLink;
 use Wikibase\DataModel\Snak\PropertyNoValueSnak;
+use Wikibase\Lib\LanguageNameLookup;
+use Wikibase\Lib\LanguageNameLookupFactory;
 use Wikibase\Lib\Store\EntityIdLookup;
 use Wikibase\Repo\WikibaseRepo;
 use Wikibase\Search\Elastic\EntityResult;
@@ -39,6 +41,31 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 	 * - name + description in different language
 	 * - name + description + extra data in different language
 	 */
+
+	protected function setUp(): void {
+		parent::setUp();
+
+		$languageNames = [
+			'ar' => 'Arabic',
+			'de' => 'German',
+			'es' => 'Spanish',
+			'fa' => 'Persian',
+			'he' => 'Hebrew',
+			'ru' => 'Russian',
+		];
+
+		$languageNameLookup = $this->createMock( LanguageNameLookup::class );
+		$languageNameLookup->method( 'getNameForTerms' )
+			->willReturnCallback(
+				static fn ( string $languageCode ) => $languageNames[$languageCode] ?? $languageCode
+			);
+
+		$languageNameLookupFactory = $this->createMock( LanguageNameLookupFactory::class );
+		$languageNameLookupFactory->method( 'getForLanguageCode' )
+			->willReturn( $languageNameLookup );
+
+		$this->setService( 'WikibaseRepo.LanguageNameLookupFactory', $languageNameLookupFactory );
+	}
 
 	public static function showSearchHitProvider(): array {
 		return [

@@ -25,6 +25,7 @@
 	"wikibasecirrus-search-bad-entity-type": "Tipo de entidade incorrectaː $1",
 	"wikibasecirrus-search-bad-profile-name": "Nome de perfil de procura incorrecto: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "A palabra clave \"haswbstatement\" non contén declaracións válidas",
+	"wikibasecirrus-haswbstatement-feature-prefix-too-short": "A palabra clave \"haswbstatement\" contén un prefixo demasiado curto",
 	"wikibasecirrus-haslicense-feature-no-valid-arguments": "A palabra clave \"haslicense\" non contén argumentos válidos",
 	"wikibasecirrus-wbstatementquantity-feature-no-valid-statements": "A palabra clave \"wbstatementquantity\" non contén declaracións válidas",
 	"special-entitieswithoutdescription": "Entidades sen descrición",

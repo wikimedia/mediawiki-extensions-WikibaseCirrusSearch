@@ -16,6 +16,7 @@
 	"wikibasecirrus-search-bad-entity-type": "Mal typo de entitate: $1",
 	"wikibasecirrus-search-bad-profile-name": "Mal nomine de profilo de recerca: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Le parola-clave haswbstatement non contine declarationes valide.",
+	"wikibasecirrus-haswbstatement-feature-prefix-too-short": "Le parola-clave haswbstatement contine un prefixo que es troppo curte",
 	"wikibasecirrus-haslicense-feature-no-valid-arguments": "Le parola-clave \"haslicense\" non contine argumentos valide",
 	"wikibasecirrus-wbstatementquantity-feature-no-valid-statements": "Le parola clave wbstatementquantity non contine declarationes valide.",
 	"special-entitieswithoutdescription": "Entitates sin description",

@@ -19,6 +19,7 @@
 	"wikibasecirrus-search-bad-entity-type": "Onjuist entiteitstype: $1",
 	"wikibasecirrus-search-bad-profile-name": "Foute naam zoekprofiel: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Het sleutelwoord haswbstatement bevat geen geldige verklaringen",
+	"wikibasecirrus-haswbstatement-feature-prefix-too-short": "Het sleutelwoord haswbstatement bevat een voorvoegsel dat te kort is",
 	"wikibasecirrus-haslicense-feature-no-valid-arguments": "Het sleutelwoord haslicense bevat geen geldige argumenten",
 	"wikibasecirrus-wbstatementquantity-feature-no-valid-statements": "Het sleutelwoord wbstatementquantity bevat geen geldige verklaringen",
 	"special-entitieswithoutdescription": "Entiteiten zonder beschrijving",

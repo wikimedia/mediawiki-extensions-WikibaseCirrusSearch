@@ -16,8 +16,8 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\DispatchingWbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 
@@ -41,7 +41,6 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 
 	protected function setUp(): void {
 		parent::setUp();
-		$this->markTestSkipped( 'Temporarily skipped to rename a class' );
 
 		global $wgWBRepoSettings;
 
@@ -103,10 +102,10 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 	public function testElasticSearchIntegration( string $query, string $type, array $expectedIds ): void {
 		$this->markTestSkippedIfExtensionNotLoaded( 'CirrusSearch' );
 
-		$mockWbSearchEntitiesController = $this->createStub( DispatchingWbSearchEntitiesController::class );
-		$mockWbSearchEntitiesController->method( 'getControllerForEntityType' )
+		$mockSearchControllerDispatcher = $this->createStub( WbSearchEntitiesControllerDispatcher::class );
+		$mockSearchControllerDispatcher->method( 'getControllerForEntityType' )
 			->willReturnCallback( $this->makeSearchControllerCallback() );
-		$this->setService( 'WbSearch.DispatchingWbSearchEntitiesController', $mockWbSearchEntitiesController );
+		$this->setService( 'WbSearch.WbSearchEntitiesControllerDispatcher', $mockSearchControllerDispatcher );
 
 		[ $resultData ] = $this->doApiRequest( [
 			'action' => 'wbsearchentities',

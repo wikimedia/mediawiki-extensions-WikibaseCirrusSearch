@@ -21,7 +21,7 @@
 			"Tensama0415"
 		]
 	},
-	"wikibasecirrus-desc": "CirrusSearch 기능을 사용하기 위한 Wikibase 확장 기능",
+	"wikibasecirrus-desc": "CirrusSearch 기능을 사용하기 위한 위키베이스 확장 기능",
 	"wikibasecirrus-keywordfeature-unknown-language-code": "$1 키워드에 알 수 없는 언어 코드가 포함되어 있습니다: $2",
 	"wikibasecirrus-keywordfeature-too-many-language-codes": "$1 키워드에 너무 많은 언어 코드가 제공되었습니다. $3 중 $2개의 {{PLURAL:$3|언어|언어들}}로 검색합니다",
 	"wikibasecirrus-inlabel-no-query-provided": "inlabel 키워드에 빈 검색 문자열이 제공되었습니다",

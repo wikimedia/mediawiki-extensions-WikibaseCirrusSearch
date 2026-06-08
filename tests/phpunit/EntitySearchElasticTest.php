@@ -79,8 +79,6 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 	 * @param string $expected
 	 */
 	public function testSearchElastic( $params, $expected ) {
-		$this->markTestSkipped();
-
 		$this->resetGlobalSearchConfig();
 		if ( isset( $params['profiles'] ) ) {
 			$this->overrideProfiles( $params['profiles'] );

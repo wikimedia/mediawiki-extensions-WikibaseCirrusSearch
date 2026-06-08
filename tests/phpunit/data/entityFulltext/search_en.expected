@@ -150,9 +150,22 @@
             "minimum_should_match": 1,
             "filter": [
                 {
-                    "terms": {
-                        "namespace": [
-                            0
+                    "bool": {
+                        "must": [
+                            {
+                                "terms": {
+                                    "namespace": [
+                                        0
+                                    ]
+                                }
+                            }
+                        ],
+                        "must_not": [
+                            {
+                                "term": {
+                                    "page_type": "redirect"
+                                }
+                            }
                         ]
                     }
                 }

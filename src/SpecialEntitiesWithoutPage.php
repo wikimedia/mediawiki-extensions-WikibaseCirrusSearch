@@ -196,7 +196,7 @@ class SpecialEntitiesWithoutPage extends SpecialWikibaseQueryPage {
 	}
 
 	/**
-	 * @inheritDoc
+	 * @return Title
 	 */
 	protected function getTitleForNavigation() {
 		return $this->getPageTitle( $this->requestedLanguageCode . '/' . $this->requestedEntityType );

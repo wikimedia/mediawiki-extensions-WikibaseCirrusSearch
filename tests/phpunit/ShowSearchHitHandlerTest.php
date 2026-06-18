@@ -308,7 +308,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 		$extract = '<span>extract</span>';
 		$redirect = $section = $score = $size = $date = $related = $html = '';
 		$searchResult = $this->createMock( SearchResult::class );
-		$searchResult->method( 'getTitle' )->willReturn( Title::newFromText( 'Test', NS_TALK ) );
+		$searchResult->method( 'getTitle' )->willReturn( Title::makeTitle( NS_TALK, 'Test' ) );
 		$this->getShowSearchHitHandler( [], [] )->onShowSearchHit(
 			$searchPage,
 			$searchResult,
@@ -370,7 +370,7 @@ class ShowSearchHitHandlerTest extends MediaWikiIntegrationTestCase {
 			'getEntityLink', [
 				$searchPage->getContext(),
 				$searchResult,
-				Title::newFromText( 'Q1' ),
+				Title::makeTitle( NS_MAIN, 'Q1' ),
 				&$title,
 				&$attributes,
 				$displayLanguage,

@@ -19,6 +19,7 @@ use Wikibase\Repo\Content\ItemContent;
 use Wikibase\Repo\Content\ItemHandler;
 use Wikibase\Repo\Tests\Content\EntityHandlerTestCase;
 use Wikibase\Repo\WikibaseRepo;
+use Wikimedia\ArrayUtils\ArrayUtils;
 
 /**
  * @covers \Wikibase\Repo\Content\ItemHandler
@@ -105,7 +106,7 @@ class ItemHandlerTest extends EntityHandlerTestCase {
 	}
 
 	protected static function getEntityTypeDefinitionsConfiguration(): array {
-		return wfArrayPlus2d(
+		return ArrayUtils::arrayPlus2d(
 			require __DIR__ . '/../../WikibaseSearch.entitytypes.php',
 			parent::getEntityTypeDefinitionsConfiguration()
 		);

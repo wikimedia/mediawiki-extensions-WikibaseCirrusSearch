@@ -42,6 +42,7 @@
 	"wikibasecirrus-search-bad-entity-type": "نوع كيان غير صالح: $1",
 	"wikibasecirrus-search-bad-profile-name": "اسم بحث غير صالح: $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "الكلمة الأساسية haswbstatement لا تحتوي على بيانات صالحة",
+	"wikibasecirrus-haswbstatement-feature-prefix-too-short": "تحتوي الكلمة المفتاحية haswbstatement على بادئة قصيرة جدًا",
 	"wikibasecirrus-haslicense-feature-no-valid-arguments": "لا تحتوي الكلمة الأساسية haslicense على أي وسيطات صالحة",
 	"wikibasecirrus-wbstatementquantity-feature-no-valid-statements": "الكلمة الأساسية wbstatementquantity لا تحتوي على عبارات صالحة",
 	"special-entitieswithoutdescription": "كائنات بلا وصف",

@@ -16,7 +16,7 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\PaginatingWbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesResponse;
@@ -124,7 +124,7 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 	 */
 	private function makeSearchControllerCallback(): \Closure {
 		return function ( $type ) {
-			$mockSearchController = $this->createStub( PaginatingWbSearchEntitiesController::class );
+			$mockSearchController = $this->createStub( WbSearchEntitiesController::class );
 			$mockSearchController->method( 'search' )
 				->willReturnCallback( $this->makeSearchResultsCallback( $type ) );
 

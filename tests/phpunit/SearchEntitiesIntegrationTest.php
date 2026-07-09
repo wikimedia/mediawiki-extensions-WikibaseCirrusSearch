@@ -16,9 +16,10 @@ use Wikibase\Lib\ContentLanguages;
 use Wikibase\Lib\Interactors\TermSearchResult;
 use Wikibase\Lib\LanguageFallbackChainFactory;
 use Wikibase\Lib\TermLanguageFallbackChain;
-use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesController;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\PaginatingWbSearchEntitiesController;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesControllerDispatcher;
 use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesRequest;
+use Wikibase\Repo\Domains\Search\Infrastructure\Controllers\WbSearchEntitiesResponse;
 use Wikibase\Search\Elastic\EntitySearchElastic;
 
 /**
@@ -123,7 +124,7 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 	 */
 	private function makeSearchControllerCallback(): \Closure {
 		return function ( $type ) {
-			$mockSearchController = $this->createStub( WbSearchEntitiesController::class );
+			$mockSearchController = $this->createStub( PaginatingWbSearchEntitiesController::class );
 			$mockSearchController->method( 'search' )
 				->willReturnCallback( $this->makeSearchResultsCallback( $type ) );
 
@@ -156,10 +157,13 @@ class SearchEntitiesIntegrationTest extends ApiTestCase {
 			try {
 				$entityId = $this->idParser->parse( $matchId );
 			} catch ( EntityIdParsingException $ex ) {
-				return [];
+				return new WbSearchEntitiesResponse( [], false );
 			}
 
-			return [ new TermSearchResult( new Term( $request->searchLanguageCode, $matchId ), '', $entityId ) ];
+			return new WbSearchEntitiesResponse(
+				[ new TermSearchResult( new Term( $request->searchLanguageCode, $matchId ), '', $entityId ) ],
+				false
+			);
 		};
 	}
 

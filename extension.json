@@ -18,82 +18,81 @@
 	"TestAutoloadNamespaces": {
 		"Wikibase\\Search\\Elastic\\Tests\\": "tests/phpunit/"
 	},
-	"config_prefix": "wgWBCS",
 	"@note": "The values below are mirrors of old Wikibase values. TODO: once Wikibase values are gone, put proper defaults here.",
 	"config": {
-		"UseCirrus": {
+		"WBCSUseCirrus": {
 			"value": null,
 			"description": "Use CirrusSearch (ElasticSearch) for searching"
 		},
-		"PrefixSearchProfile": {
+		"WBCSPrefixSearchProfile": {
 			"value": null,
 			"description": "Default label scoring profile name, for prefix search. See profiles in config/EntityPrefixSearchProfiles.php"
 		},
-		"PrefixSearchProfiles": {
+		"WBCSPrefixSearchProfiles": {
 			"value": null,
 			"description": "Field weight profiles. These profiles specify relative weights of label fields for different languages, e.g. exact language match vs. fallback language match."
 		},
-		"FulltextSearchProfile": {
+		"WBCSFulltextSearchProfile": {
 			"value": null,
 			"description": "Default profile name for fulltext search. See profiles in config/EntitySearchProfiles.php"
 		},
-		"FulltextSearchProfiles": {
+		"WBCSFulltextSearchProfiles": {
 			"value": null,
 			"description": "Profile definitions for fulltext search."
 		},
-		"InLabelSearchProfile": {
+		"WBCSInLabelSearchProfile": {
 			"value": null,
 			"description": "Default profile name for simple entity search by label. See profiles in config/EntityInLabelSearchProfiles.php"
 		},
-		"InLabelSearchProfiles": {
+		"WBCSInLabelSearchProfiles": {
 			"value": null,
 			"description": "Profile definitions for simple entity search by label."
 		},
-		"DefaultPrefixRescoreProfile": {
+		"WBCSDefaultPrefixRescoreProfile": {
 			"value": null,
 			"description": "Default rescore profile for prefix search."
 		},
-		"DefaultFulltextRescoreProfile": {
+		"WBCSDefaultFulltextRescoreProfile": {
 			"value": null,
 			"description": "Default rescore profile for prefix search."
 		},
-		"DefaultInLabelRescoreProfile": {
+		"WBCSDefaultInLabelRescoreProfile": {
 			"value": null,
 			"description": "Default rescore profile for simple entity search by label."
 		},
-		"RescoreProfiles": {
+		"WBCSRescoreProfiles": {
 			"value": null,
 			"description": "Rescore profile definitions holder."
 		},
-		"RescoreFunctionChains": {
+		"WBCSRescoreFunctionChains": {
 			"value": null,
 			"description": "Rescore function chain definitions holder."
 		},
-		"LanguageSelectorRescoreProfile": {
+		"WBCSLanguageSelectorRescoreProfile": {
 			"value": null,
 			"description": "Default rescore profile to use in the language selector context"
 		},
-		"LanguageSelectorPrefixSearchProfile": {
+		"WBCSLanguageSelectorPrefixSearchProfile": {
 			"value": null,
 			"description": "Default query builder profile to use in the language selector context"
 		},
-		"LanguageSelectorStatementBoost": {
+		"WBCSLanguageSelectorStatementBoost": {
 			"value": [],
 			"description": "Type (de)boosts for rescoring functions in the language selector context"
 		},
-		"LanguageSelectorRescoreFunctionChains": {
+		"WBCSLanguageSelectorRescoreFunctionChains": {
 			"value": [],
 			"description": "Function chains profiles used by the language selector context"
 		},
-		"StatementBoost": {
+		"WBCSStatementBoost": {
 			"value": [],
 			"description": "Type (de)boosts for rescoring functions."
 		},
-		"UseStemming": {
+		"WBCSUseStemming": {
 			"value": [],
 			"description": "List of languages that we want to have stemming analyzers."
 		},
-		"LicenseMapping": {
+		"WBCSLicenseMapping": {
 			"value": [],
 			"description": "Map of licence search strings to wikibase statements."
 		}

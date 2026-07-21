@@ -20,7 +20,7 @@ Configurations
 --------------
 
 Please see the description of available configuration options in docs/config.wiki. All variables are stored in
-globals with wgWBCS prefix, e.g. wgWBCSUseCirrus.
+globals with wg prefix, e.g. wgWBCSUseCirrus.
 
 Development
 -----------

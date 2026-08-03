@@ -71,6 +71,7 @@
 	"wikibasecirrus-search-bad-entity-type": "Type d’entité incorrect : $1",
 	"wikibasecirrus-search-bad-profile-name": "Nom de profil recherché incorrect : $1",
 	"wikibasecirrus-haswbstatement-feature-no-valid-statements": "Le mot-clé « haswbstatement » ne contient aucune déclaration valide",
+	"wikibasecirrus-haswbstatement-feature-prefix-too-short": "Le mot-clé haswbstatement contient un préfixe trop court",
 	"wikibasecirrus-haslicense-feature-no-valid-arguments": "le mot-clé ''haslicense'' n’a aucun argument valide",
 	"wikibasecirrus-wbstatementquantity-feature-no-valid-statements": "Le mot-clé « wbstatementquantity » ne contient aucune déclaration valide",
 	"special-entitieswithoutdescription": "Entités sans description",

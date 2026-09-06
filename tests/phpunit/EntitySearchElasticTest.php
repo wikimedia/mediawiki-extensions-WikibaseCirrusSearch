@@ -66,7 +66,7 @@ class EntitySearchElasticTest extends MediaWikiIntegrationTestCase {
 		// For whatever reason the mediawiki test suite reuses the same config
 		// objects for the entire test. This breaks caches inside the cirrus
 		// SearchConfig, so reset them as necessary.
-		$config = \MediaWiki\MediaWikiServices::getInstance()
+		$config = $this->getServiceContainer()
 			->getConfigFactory()
 			->makeConfig( 'CirrusSearch' );
 		$reflProp = new \ReflectionProperty( $config, 'profileService' );

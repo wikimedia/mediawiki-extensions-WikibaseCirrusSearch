@@ -32,10 +32,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 	/** @var array<string,int> Keyed by known language codes for set membership check */
 	private array $languages;
 
-	/**
-	 * @var array
-	 */
-	private static $FIELDS_PER_KEYWORD = [
+	private const FIELDS_PER_KEYWORD = [
 		// query both label and description time for the sanitizer
 		// to catch up (ref T226722)
 		'incaption' => [
@@ -199,8 +196,8 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 		WarningCollector $warningCollector
 	) {
 		$isPhrase = $quotedValue !== $value;
-		Assert::precondition( isset( self::$FIELDS_PER_KEYWORD[$key] ), "Must have the list of fields for $key defined" );
-		$allLabelFields = self::$FIELDS_PER_KEYWORD[$key]['all_fields'];
+		Assert::precondition( isset( self::FIELDS_PER_KEYWORD[$key] ), "Must have the list of fields for $key defined" );
+		$allLabelFields = self::FIELDS_PER_KEYWORD[$key]['all_fields'];
 		if ( strlen( $value ) === 0 ) {
 			$warningCollector->addWarning(
 				'wikibasecirrus-inlabel-no-query-provided' );
@@ -238,7 +235,7 @@ class InLabelFeature extends SimpleKeywordFeature implements FilterQueryFeature 
 				'phrase' => $isPhrase,
 			];
 		}
-		$fieldsToUse = self::$FIELDS_PER_KEYWORD[$key]['fields'];
+		$fieldsToUse = self::FIELDS_PER_KEYWORD[$key]['fields'];
 		$fields = $this->parseLanguages( $fieldsToUse, $languages, $warningCollector );
 		if ( count( $fields ) > self::MAX_FIELDS ) {
 			$warningCollector->addWarning(

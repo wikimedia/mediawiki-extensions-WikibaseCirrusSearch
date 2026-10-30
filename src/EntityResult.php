@@ -60,7 +60,7 @@ class EntityResult extends Result implements ExtendedResult {
 	private $sourceData;
 
 	public function __construct(
-		private readonly string $displayLanguage,
+		string $displayLanguage,
 		TermLanguageFallbackChain $displayFallbackChain,
 		\Elastica\Result $result,
 	) {

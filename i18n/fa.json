@@ -13,6 +13,7 @@
 			"Dalba",
 			"Ebraminio",
 			"Huji",
+			"LProfo",
 			"Ladsgroup",
 			"Mahan",
 			"Mahdiz",
@@ -37,5 +38,5 @@
 	"wikibasecirrus-entitieswithoutlabel-label-type": "نوع:",
 	"wikibasecirrus-entitieswithoutlabel-submit": "یافتن",
 	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» یک کد زبان نامعتبر است.",
-	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" به دلیل نوع ورودی قابل پذیرش نیست"
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "«$1» یک گونهٔ هستار معتبر نیست."
 }

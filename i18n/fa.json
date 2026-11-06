@@ -25,7 +25,8 @@
 			"Taha",
 			"Zolo",
 			"ZxxZxxZ",
-			"درفش کاویانی"
+			"درفش کاویانی",
+			"LProfo"
 		]
 	},
 	"wikibasecirrus-search-bad-entity-type": "نوع موجود بد: $1",
@@ -37,5 +38,5 @@
 	"wikibasecirrus-entitieswithoutlabel-label-type": "نوع:",
 	"wikibasecirrus-entitieswithoutlabel-submit": "یافتن",
 	"wikibasecirrus-entitieswithoutlabel-invalid-language": "«$1» یک کد زبان نامعتبر است.",
-	"wikibasecirrus-entitieswithoutlabel-invalid-type": "\"$1\" به دلیل نوع ورودی قابل پذیرش نیست"
+	"wikibasecirrus-entitieswithoutlabel-invalid-type": "«$1» یک گونهٔ هستار معتبر نیست."
 }
